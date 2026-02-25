@@ -1,0 +1,516 @@
+{
+  "practices": [
+    {
+      "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "title": "El Cartero de Datos",
+      "slug": "data-classification-game",
+      "description": "Aprende a clasificar información según su nivel de sensibilidad. Arrastra y suelta diferentes tipos de datos en las categorías correctas: Público, Confidencial, Privado y Restringido.",
+      "practice_type": "data_classification",
+      "difficulty": "intermediate",
+      "estimated_time": 10,
+      "scenario_data": {
+        "instructions": "Arrastra cada elemento de información hacia la categoría de clasificación correcta. La clasificación adecuada de datos es fundamental para la protección de la información.",
+        "learning_objectives": [
+          "Identificar diferentes niveles de clasificación de datos",
+          "Aplicar criterios de sensibilidad a la información",
+          "Comprender las implicaciones de seguridad de cada categoría",
+          "Desarrollar criterios consistentes para clasificación de datos"
+        ],
+        "game_config": {
+          "time_limit": 300,
+          "min_score_to_pass": 70,
+          "items_to_classify": [
+            {
+              "id": "item_1",
+              "name": "Foto personal de vacaciones",
+              "description": "Imagen compartida en redes sociales",
+              "correct_category": "publico",
+              "points": 10
+            },
+            {
+              "id": "item_2", 
+              "name": "Manual de usuario del software",
+              "description": "Documentación técnica disponible para clientes",
+              "correct_category": "publico",
+              "points": 10
+            },
+            {
+              "id": "item_3",
+              "name": "Lista de precios internos",
+              "description": "Costos de productos para uso interno",
+              "correct_category": "confidencial",
+              "points": 15
+            },
+            {
+              "id": "item_4",
+              "name": "Estrategia de marketing Q2",
+              "description": "Plan estratégico del próximo trimestre",
+              "correct_category": "confidencial", 
+              "points": 15
+            },
+            {
+              "id": "item_5",
+              "name": "Número de cédula personal",
+              "description": "Documento de identidad nacional",
+              "correct_category": "privado",
+              "points": 20
+            },
+            {
+              "id": "item_6",
+              "name": "Historial médico personal",
+              "description": "Registros de salud del empleado",
+              "correct_category": "privado",
+              "points": 20
+            },
+            {
+              "id": "item_7",
+              "name": "Algoritmo de seguridad propietario",
+              "description": "Código fuente de sistema de encriptación",
+              "correct_category": "restringido",
+              "points": 25
+            },
+            {
+              "id": "item_8",
+              "name": "Estados financieros pre-auditoría",
+              "description": "Información financiera no publicada",
+              "correct_category": "restringido",
+              "points": 25
+            }
+          ],
+          "categories": [
+            {
+              "id": "publico",
+              "name": "Público",
+              "description": "Información que puede compartirse libremente",
+              "color": "#22c55e",
+              "examples": ["Manuales públicos", "Información de marketing", "Comunicados de prensa"]
+            },
+            {
+              "id": "confidencial", 
+              "name": "Confidencial",
+              "description": "Información sensible para uso interno",
+              "color": "#f59e0b",
+              "examples": ["Estrategias internas", "Planes de negocio", "Listas de precios"]
+            },
+            {
+              "id": "privado",
+              "name": "Privado", 
+              "description": "Información personal identificable",
+              "color": "#ef4444",
+              "examples": ["Datos personales", "Información médica", "Documentos de identidad"]
+            },
+            {
+              "id": "restringido",
+              "name": "Restringido",
+              "description": "Información crítica de máxima seguridad",
+              "color": "#7c3aed", 
+              "examples": ["Algoritmos propietarios", "Información financiera", "Secretos comerciales"]
+            }
+          ]
+        }
+      },
+      "learning_objectives": [
+        "Identificar diferentes niveles de clasificación de datos",
+        "Aplicar criterios de sensibilidad a la información", 
+        "Comprender las implicaciones de seguridad de cada categoría"
+      ],
+      "success_criteria": {
+        "min_score": 70,
+        "time_bonus_threshold": 240,
+        "perfect_classification_bonus": 50
+      },
+      "feedback_responses": {
+        "correct": [
+          "¡Excelente! Has clasificado correctamente este tipo de información.",
+          "¡Correcto! Esta clasificación protege adecuadamente la información.",
+          "¡Muy bien! Has aplicado correctamente los criterios de clasificación."
+        ],
+        "incorrect": [
+          "Incorrecto. Esta información requiere un nivel de protección diferente.",
+          "No exactamente. Considera la sensibilidad y el impacto de esta información.",
+          "Revisa los criterios de clasificación para este tipo de datos."
+        ],
+        "hints": [
+          "¿Qué pasaría si esta información se hace pública?",
+          "¿Quién debería tener acceso a esta información?",
+          "¿Cuál sería el impacto si se comprometiera?",
+          "¿Esta información está regulada por alguna ley?"
+        ]
+      },
+      "featured": true,
+      "status": "published",
+      "date_created": "2026-02-24T06:00:00.000Z",
+      "date_updated": "2026-02-24T06:00:00.000Z",
+      "exercises": [
+        {
+          "title": "Clasificación Básica de Datos",
+          "description": "Clasifica 8 elementos de información en sus categorías correctas",
+          "type": "data_classification"
+        },
+        {
+          "title": "Desafío de Clasificación Avanzada", 
+          "description": "Casos más complejos que requieren análisis detallado",
+          "type": "data_classification"
+        }
+      ]
+    },
+    {
+      "id": "e58ed763-928c-4155-bee9-fdbaaadc15f3",
+      "title": "El Auditor - Blue Team Defense",
+      "slug": "network-defense-game", 
+      "description": "Defiende la red corporativa colocando estratégicamente controles de seguridad. Analiza las vulnerabilidades y despliega firewalls, IDS y otras defensas en los puntos críticos del diagrama de red.",
+      "practice_type": "network_defense",
+      "difficulty": "intermediate",
+      "estimated_time": 12,
+      "scenario_data": {
+        "instructions": "Analiza el diagrama de red y coloca los controles de seguridad en las posiciones estratégicas para mitigar las amenazas identificadas. Cada herramienta tiene capacidades específicas.",
+        "learning_objectives": [
+          "Identificar puntos vulnerables en arquitecturas de red",
+          "Seleccionar controles de seguridad apropiados",
+          "Colocar defensas en ubicaciones estratégicas",
+          "Comprender la defensa en profundidad"
+        ],
+        "game_config": {
+          "time_limit": 420,
+          "min_score_to_pass": 75,
+          "network_diagram": {
+            "width": 800,
+            "height": 600,
+            "background": "network_topology.svg"
+          },
+          "security_tools": [
+            {
+              "id": "firewall",
+              "name": "Firewall de Red",
+              "description": "Filtra tráfico basado en reglas de red",
+              "capabilities": ["packet_filtering", "port_blocking", "ip_blocking"],
+              "placement_zones": ["perimeter", "internal_segment"],
+              "points": 20
+            },
+            {
+              "id": "ids",
+              "name": "Sistema de Detección de Intrusos", 
+              "description": "Monitorea tráfico sospechoso y ataques",
+              "capabilities": ["intrusion_detection", "traffic_analysis", "alert_generation"],
+              "placement_zones": ["dmz", "internal_network", "critical_servers"],
+              "points": 25
+            },
+            {
+              "id": "waf",
+              "name": "Web Application Firewall",
+              "description": "Protege aplicaciones web de ataques",
+              "capabilities": ["sql_injection_protection", "xss_protection", "http_filtering"],
+              "placement_zones": ["web_servers", "dmz"],
+              "points": 20
+            },
+            {
+              "id": "antivirus",
+              "name": "Antivirus Corporativo",
+              "description": "Protege endpoints contra malware",
+              "capabilities": ["malware_detection", "real_time_scanning", "quarantine"],
+              "placement_zones": ["workstations", "servers"],
+              "points": 15
+            },
+            {
+              "id": "vpn_gateway",
+              "name": "VPN Gateway", 
+              "description": "Acceso remoto seguro a la red",
+              "capabilities": ["encrypted_tunnel", "authentication", "remote_access"],
+              "placement_zones": ["perimeter", "remote_access"],
+              "points": 20
+            }
+          ],
+          "threat_scenarios": [
+            {
+              "id": "external_attack",
+              "name": "Ataque Externo",
+              "description": "Intento de acceso no autorizado desde Internet",
+              "attack_vector": "perimeter",
+              "requires_mitigation": ["firewall", "ids"],
+              "points": 30
+            },
+            {
+              "id": "web_attack",
+              "name": "Ataque a Aplicación Web",
+              "description": "Inyección SQL y XSS en servidor web", 
+              "attack_vector": "web_servers",
+              "requires_mitigation": ["waf", "ids"],
+              "points": 25
+            },
+            {
+              "id": "malware_infection",
+              "name": "Infección de Malware",
+              "description": "Propagación de virus en estaciones de trabajo",
+              "attack_vector": "workstations",
+              "requires_mitigation": ["antivirus", "firewall"],
+              "points": 20
+            },
+            {
+              "id": "insider_threat", 
+              "name": "Amenaza Interna",
+              "description": "Empleado accediendo a datos no autorizados",
+              "attack_vector": "internal_network",
+              "requires_mitigation": ["ids", "firewall"],
+              "points": 25
+            }
+          ],
+          "placement_zones": [
+            {
+              "id": "perimeter",
+              "name": "Perímetro de Red",
+              "x": 100, "y": 100, "width": 150, "height": 80,
+              "accepts": ["firewall", "vpn_gateway"]
+            },
+            {
+              "id": "dmz", 
+              "name": "Zona Desmilitarizada",
+              "x": 300, "y": 200, "width": 200, "height": 100,
+              "accepts": ["waf", "ids"]
+            },
+            {
+              "id": "internal_network",
+              "name": "Red Interna", 
+              "x": 550, "y": 350, "width": 180, "height": 120,
+              "accepts": ["ids", "firewall"]
+            },
+            {
+              "id": "web_servers",
+              "name": "Servidores Web",
+              "x": 320, "y": 320, "width": 160, "height": 60,
+              "accepts": ["waf", "antivirus"]
+            },
+            {
+              "id": "workstations", 
+              "name": "Estaciones de Trabajo",
+              "x": 600, "y": 500, "width": 150, "height": 60,
+              "accepts": ["antivirus"]
+            }
+          ]
+        }
+      },
+      "learning_objectives": [
+        "Identificar puntos vulnerables en arquitecturas de red",
+        "Seleccionar controles de seguridad apropiados",
+        "Colocar defensas en ubicaciones estratégicas"
+      ],
+      "success_criteria": {
+        "min_score": 75,
+        "all_threats_mitigated": true,
+        "efficient_placement_bonus": 40
+      },
+      "feedback_responses": {
+        "correct": [
+          "¡Excelente colocación! Esta defensa mitiga efectivamente la amenaza.",
+          "¡Correcto! Has posicionado la herramienta en el lugar estratégico ideal.",
+          "¡Muy bien! Esta configuración fortalece significativamente la seguridad."
+        ],
+        "incorrect": [
+          "Esta ubicación no es la más efectiva para esta herramienta.",
+          "Considera dónde esta defensa tendría mayor impacto.",
+          "Revisa las capacidades de esta herramienta y las amenazas a mitigar."
+        ],
+        "hints": [
+          "¿Dónde se origina la amenaza que quieres prevenir?",
+          "¿Qué tipo de tráfico necesita monitorear esta herramienta?",
+          "¿Esta defensa puede detectar el tipo de ataque esperado?",
+          "¿La ubicación permite interceptar el tráfico malicioso?"
+        ]
+      },
+      "featured": true,
+      "status": "published", 
+      "date_created": "2026-02-24T06:00:00.000Z",
+      "date_updated": "2026-02-24T06:00:00.000Z",
+      "exercises": [
+        {
+          "title": "Defensa Perimetral Básica",
+          "description": "Protege la red contra ataques externos básicos",
+          "type": "network_defense"
+        },
+        {
+          "title": "Defensa en Profundidad",
+          "description": "Implementa múltiples capas de seguridad contra amenazas complejas", 
+          "type": "network_defense"
+        },
+        {
+          "title": "Respuesta a Incidentes",
+          "description": "Coloca controles para detectar y responder a incidentes activos",
+          "type": "network_defense"
+        }
+      ]
+    },
+    {
+      "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      "title": "Password Tetris Builder",
+      "slug": "password-builder-game",
+      "description": "Construye contraseñas seguras combinando estratégicamente diferentes componentes. Añade palabras, números y símbolos para crear credenciales robustas mientras cumples todos los requisitos de seguridad.",
+      "practice_type": "password_builder",
+      "difficulty": "intermediate", 
+      "estimated_time": 8,
+      "scenario_data": {
+        "instructions": "Construye una contraseña segura seleccionando y combinando componentes de diferentes tipos. Cada componente añade fortaleza, pero debes balancear seguridad con memorabilidad.",
+        "learning_objectives": [
+          "Comprender los elementos de una contraseña fuerte",
+          "Balancear seguridad con usabilidad",
+          "Aplicar técnicas de construcción de contraseñas",
+          "Evaluar la fortaleza de diferentes combinaciones"
+        ],
+        "game_config": {
+          "time_limit": 240,
+          "min_score_to_pass": 80,
+          "target_strength": 100,
+          "building_blocks": {
+            "words": [
+              {"id": "casa", "value": "Casa", "strength": 15, "type": "word"},
+              {"id": "sol", "value": "Sol", "strength": 12, "type": "word"},
+              {"id": "libro", "value": "Libro", "strength": 18, "type": "word"},
+              {"id": "ciudad", "value": "Ciudad", "strength": 20, "type": "word"},
+              {"id": "montana", "value": "Montaña", "strength": 22, "type": "word"},
+              {"id": "oceano", "value": "Océano", "strength": 20, "type": "word"}
+            ],
+            "numbers": [
+              {"id": "2024", "value": "2024", "strength": 8, "type": "number"},
+              {"id": "123", "value": "123", "strength": 4, "type": "number"},
+              {"id": "456", "value": "456", "strength": 4, "type": "number"}, 
+              {"id": "789", "value": "789", "strength": 4, "type": "number"},
+              {"id": "2026", "value": "2026", "strength": 8, "type": "number"},
+              {"id": "42", "value": "42", "strength": 6, "type": "number"}
+            ],
+            "symbols": [
+              {"id": "exclamation", "value": "!", "strength": 10, "type": "symbol"},
+              {"id": "at", "value": "@", "strength": 12, "type": "symbol"},
+              {"id": "hash", "value": "#", "strength": 12, "type": "symbol"},
+              {"id": "dollar", "value": "$", "strength": 12, "type": "symbol"},
+              {"id": "percent", "value": "%", "strength": 14, "type": "symbol"},
+              {"id": "ampersand", "value": "&", "strength": 14, "type": "symbol"},
+              {"id": "asterisk", "value": "*", "strength": 10, "type": "symbol"}
+            ],
+            "modifiers": [
+              {"id": "uppercase", "name": "Convertir a Mayúsculas", "strength_multiplier": 1.2, "applies_to": ["word"]},
+              {"id": "reverse", "name": "Invertir Orden", "strength_multiplier": 1.15, "applies_to": ["word", "number"]},
+              {"id": "leet_speak", "name": "Leet Speak (a→@, e→3)", "strength_multiplier": 1.3, "applies_to": ["word"]}
+            ]
+          },
+          "requirements": [
+            {
+              "id": "min_length",
+              "name": "Mínimo 8 caracteres",
+              "description": "La contraseña debe tener al menos 8 caracteres",
+              "check": "length >= 8",
+              "points": 20,
+              "required": true
+            },
+            {
+              "id": "has_uppercase", 
+              "name": "Al menos 1 mayúscula",
+              "description": "Debe contener al menos una letra mayúscula",
+              "check": "has_uppercase",
+              "points": 15,
+              "required": true
+            },
+            {
+              "id": "has_number",
+              "name": "Al menos 1 número", 
+              "description": "Debe contener al menos un dígito numérico",
+              "check": "has_number", 
+              "points": 15,
+              "required": true
+            },
+            {
+              "id": "has_symbol",
+              "name": "Al menos 1 símbolo",
+              "description": "Debe contener al menos un carácter especial",
+              "check": "has_symbol",
+              "points": 20,
+              "required": true
+            },
+            {
+              "id": "no_dictionary",
+              "name": "No palabras de diccionario completas",
+              "description": "Evitar palabras comunes sin modificar",
+              "check": "not_in_dictionary",
+              "points": 10,
+              "required": false
+            },
+            {
+              "id": "no_sequential",
+              "name": "Sin secuencias obvias",
+              "description": "Evitar 123, abc, qwerty",
+              "check": "no_sequences", 
+              "points": 10,
+              "required": false
+            }
+          ],
+          "scoring": {
+            "base_points": 50,
+            "length_bonus": 5,
+            "complexity_multiplier": 1.5,
+            "creativity_bonus": 20,
+            "speed_bonus_threshold": 180
+          }
+        }
+      },
+      "learning_objectives": [
+        "Comprender los elementos de una contraseña fuerte",
+        "Balancear seguridad con usabilidad", 
+        "Aplicar técnicas de construcción de contraseñas"
+      ],
+      "success_criteria": {
+        "min_score": 80,
+        "all_required_met": true,
+        "creativity_bonus": 20
+      },
+      "feedback_responses": {
+        "correct": [
+          "¡Excelente! Este componente fortalece significativamente tu contraseña.",
+          "¡Buena elección! Has mejorado la complejidad de manera inteligente.",
+          "¡Correcto! Esta combinación hace la contraseña más segura."
+        ],
+        "incorrect": [
+          "Este componente podría hacer tu contraseña más predecible.",
+          "Considera si esta elección realmente añade seguridad.",
+          "Hay opciones más seguras disponibles para este tipo de componente."
+        ],
+        "hints": [
+          "¿Esta combinación sería fácil de adivinar?",
+          "¿Puedes hacer esta parte menos predecible?",
+          "¿Qué modificadores podrían fortalecer este componente?",
+          "¿Es fácil de recordar pero difícil de adivinar?"
+        ]
+      },
+      "featured": true,
+      "status": "published",
+      "date_created": "2026-02-24T06:00:00.000Z", 
+      "date_updated": "2026-02-24T06:00:00.000Z",
+      "exercises": [
+        {
+          "title": "Constructor Básico de Contraseñas",
+          "description": "Aprende los fundamentos creando contraseñas simples pero seguras",
+          "type": "password_builder"
+        },
+        {
+          "title": "Desafío de Complejidad",
+          "description": "Crea contraseñas que cumplan requisitos corporativos estrictos", 
+          "type": "password_builder"
+        }
+      ]
+    }
+  ],
+  "practice_categories_relationships": [
+    {
+      "practices_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "practice_categories_id": "550e8400-e29b-41d4-a716-446655440105"
+    },
+    {
+      "practices_id": "e58ed763-928c-4155-bee9-fdbaaadc15f3", 
+      "practice_categories_id": "550e8400-e29b-41d4-a716-446655440104"
+    },
+    {
+      "practices_id": "e58ed763-928c-4155-bee9-fdbaaadc15f3",
+      "practice_categories_id": "550e8400-e29b-41d4-a716-446655440106"
+    },
+    {
+      "practices_id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      "practice_categories_id": "550e8400-e29b-41d4-a716-446655440102"
+    }
+  ]
+}

@@ -1,0 +1,2627 @@
+[
+	{
+		"description": "Se ha descubierto una brecha de seguridad que expuso datos personales de 500,000 clientes. Las autoridades y medios están presionando por respuestas.",
+		"practice_type": "incident_response",
+		"slug": "violacion-masiva-datos-personales",
+		"title": "Violación Masiva de Datos Personales",
+		"difficulty": "advanced",
+		"estimated_time": 18,
+		"scenario_data": {
+			"crisis_title": "🔴 VIOLACIÓN DE DATOS CONFIRMADA",
+			"crisis_description": "Tu equipo de seguridad acaba de confirmar una brecha que expuso una base de datos completa con información personal. Los datos están siendo vendidos en foros de la dark web. Los medios ya están haciendo preguntas.",
+			"crisis_details": [
+				"👥 Afectados: 500,000 registros de clientes",
+				"📋 Datos expuestos: Nombres, emails, teléfonos, direcciones, algunos SSN",
+				"🕐 Tiempo de exposición: Estimado 2-3 semanas",
+				"🌐 Datos en venta: Confirmado en 3 foros underground",
+				"📺 Presión mediática: TV local solicitando declaraciones"
+			],
+			"decisions": [
+				{
+					"id": "immediate_disclosure",
+					"text": "Divulgar inmediatamente toda la información públicamente",
+					"consequence": "partially_correct",
+					"explanation": "⚠️ PARCIALMENTE CORRECTO: La transparencia es importante, pero divulgar todo inmediatamente sin un plan puede causar pánico. Mejor coordinar con equipo legal y comunicaciones.",
+					"points": 10
+				},
+				{
+					"id": "contain_and_assess",
+					"text": "Contener la brecha y evaluar el alcance completo primero",
+					"consequence": "correct",
+					"explanation": "✅ CORRECTO: Antes de comunicar, debes entender completamente qué se comprometió, cómo y cuándo. Esto permite una respuesta más efectiva y creíble.",
+					"points": 25
+				},
+				{
+					"id": "deny_everything",
+					"text": "Negar la brecha hasta tener más información",
+					"consequence": "incorrect",
+					"explanation": "❌ INCORRECTO: Negar una brecha confirmada es ilegal en muchas jurisdicciones y destruye la confianza. Las leyes requieren notificación oportuna.",
+					"points": 0
+				},
+				{
+					"id": "notify_authorities_users",
+					"text": "Notificar simultáneamente a autoridades y usuarios afectados",
+					"consequence": "correct",
+					"explanation": "✅ CORRECTO: Las regulaciones como GDPR y leyes estatales requieren notificación oportuna. Notificar simultáneamente muestra responsabilidad y cumplimiento.",
+					"points": 25
+				}
+			]
+		},
+		"learning_objectives": null,
+		"success_criteria": null,
+		"feedback_responses": null,
+		"featured": false,
+		"status": "published",
+		"date_created": "2026-02-24T03:11:54.661Z",
+		"date_updated": "2026-02-24T05:04:09.515Z",
+		"exercises": null,
+		"id": "1c396f69-c7ba-4d62-9091-81117b344db4",
+		"practice_category": []
+	},
+	{
+		"description": "Tu sitio de e-commerce está bajo un ataque DDoS masivo durante el Black Friday. Los ingresos se están perdiendo cada minuto que el sitio está caído.",
+		"practice_type": "incident_response",
+		"slug": "ataque-ddos-masivo-black-friday",
+		"title": "Ataque DDoS Masivo en Black Friday",
+		"difficulty": "intermediate",
+		"estimated_time": 15,
+		"scenario_data": {
+			"crisis_title": "🔥 ATAQUE DDoS EN PROGRESO - BLACK FRIDAY",
+			"crisis_description": "Es Black Friday, 11:30 AM. Tu sitio web está recibiendo 50x el tráfico normal pero los patrones muestran un ataque DDoS coordinado. El sitio está caído. Los clientes no pueden comprar. Las redes sociales están explotando con quejas.",
+			"crisis_details": [
+				"📊 Tráfico: 2.5M requests/segundo (normal: 50K/segundo)",
+				"💸 Pérdida estimada: $50,000 por minuto offline",
+				"📱 Redes sociales: #SitioAbajo trending, clientes furiosos",
+				"🌍 Origen del ataque: Botnets distribuidas globalmente",
+				"⏰ Tiempo crítico: Competencia aprovechando tu downtime"
+			],
+			"decisions": [
+				{
+					"id": "block_all_traffic",
+					"text": "Bloquear todo el tráfico hasta que pase el ataque",
+					"consequence": "incorrect",
+					"explanation": "❌ INCORRECTO: Bloquear todo el tráfico significa cero ventas en tu día más importante. Necesitas una solución que filtre el tráfico malicioso pero permita clientes legítimos.",
+					"points": 0
+				},
+				{
+					"id": "activate_ddos_protection",
+					"text": "Activar servicios de protección DDoS y CDN inmediatamente",
+					"consequence": "correct",
+					"explanation": "✅ CORRECTO: Los servicios anti-DDoS como Cloudflare o AWS Shield pueden filtrar tráfico malicioso mientras permiten usuarios legítimos. Es la respuesta estándar.",
+					"points": 25
+				},
+				{
+					"id": "scale_infrastructure",
+					"text": "Escalar masivamente la infraestructura para absorber el ataque",
+					"consequence": "partially_correct",
+					"explanation": "⚠️ PARCIALMENTE CORRECTO: Escalar puede ayudar con tráfico legítimo, pero un DDoS verdadero saturará cualquier infraestructura. Necesitas filtrado, no solo más capacidad.",
+					"points": 15
+				},
+				{
+					"id": "communicate_publicly",
+					"text": "Comunicar públicamente que estás bajo ataque y trabajando en ello",
+					"consequence": "correct",
+					"explanation": "✅ CORRECTO: La transparencia durante crisis mantiene la confianza del cliente. Explica la situación y proporciona actualizaciones regulares sobre el progreso.",
+					"points": 20
+				}
+			]
+		},
+		"learning_objectives": null,
+		"success_criteria": null,
+		"feedback_responses": null,
+		"featured": false,
+		"status": "published",
+		"date_created": "2026-02-24T03:11:54.677Z",
+		"date_updated": "2026-02-24T05:04:09.551Z",
+		"exercises": null,
+		"id": "296c0a46-4592-4f86-bae4-9e306a4c9f5f",
+		"practice_category": []
+	},
+	{
+		"description": "Test your knowledge of cybersecurity fundamentals with this comprehensive 15-question quiz covering security basics, best practices, incident response, and compliance.",
+		"practice_type": "quiz_knowledge",
+		"slug": "cybersecurity-fundamentals-quiz",
+		"title": "Cybersecurity Fundamentals Quiz",
+		"difficulty": "intermediate",
+		"estimated_time": 12,
+		"scenario_data": {
+			"total_questions": 15,
+			"passing_score": 70,
+			"categories": [
+				"Security Basics",
+				"Best Practices",
+				"Incident Response",
+				"Compliance & Regulations"
+			],
+			"questions": [
+				{
+					"id": "q1",
+					"category": "Security Basics",
+					"difficulty": "beginner",
+					"points": 1,
+					"question": "¿Cuál es la principal diferencia entre malware y ransomware?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "El ransomware es más peligroso que el malware"
+						},
+						{
+							"id": "b",
+							"text": "El ransomware cifra archivos y exige un rescate por la clave de descifrado"
+						},
+						{
+							"id": "c",
+							"text": "No hay diferencia, son términos sinónimos"
+						},
+						{
+							"id": "d",
+							"text": "El malware solo afecta a sistemas Windows"
+						}
+					],
+					"correct_answer": "b",
+					"explanation": "✅ **Correcto**: El ransomware es un tipo específico de malware que cifra archivos del usuario y exige un rescate (generalmente en criptomonedas) para proporcionar la clave de descifrado. Mientras que malware es un término general para software malicioso."
+				},
+				{
+					"id": "q2",
+					"category": "Security Basics",
+					"difficulty": "beginner",
+					"points": 1,
+					"question": "¿Qué es el phishing?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Un tipo de firewall avanzado"
+						},
+						{
+							"id": "b",
+							"text": "Una técnica para obtener información confidencial haciéndose pasar por una entidad confiable"
+						},
+						{
+							"id": "c",
+							"text": "Un protocolo de cifrado de emails"
+						},
+						{
+							"id": "d",
+							"text": "Una herramienta de monitoreo de red"
+						}
+					],
+					"correct_answer": "b",
+					"explanation": "✅ **Correcto**: El phishing es una técnica de ingeniería social donde los atacantes se hacen pasar por entidades confiables (bancos, servicios online) para obtener información confidencial como contraseñas, datos bancarios o información personal."
+				},
+				{
+					"id": "q3",
+					"category": "Security Basics",
+					"difficulty": "beginner",
+					"points": 1,
+					"question": "La autenticación de dos factores (2FA) siempre requiere algo que 'sabes' y algo que 'tienes'.",
+					"type": "true_false",
+					"options": [
+						{
+							"id": "true",
+							"text": "Verdadero"
+						},
+						{
+							"id": "false",
+							"text": "Falso"
+						}
+					],
+					"correct_answer": "true",
+					"explanation": "✅ **Correcto**: La autenticación de dos factores se basa en dos de tres factores: algo que sabes (contraseña), algo que tienes (teléfono, token), y algo que eres (biometría). Típicamente combina conocimiento + posesión."
+				},
+				{
+					"id": "q4",
+					"category": "Best Practices",
+					"difficulty": "intermediate",
+					"points": 2,
+					"question": "¿Cuál de las siguientes contraseñas es MÁS segura?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Password123!"
+						},
+						{
+							"id": "b",
+							"text": "P@ssw0rd2024"
+						},
+						{
+							"id": "c",
+							"text": "CafeCon3AzucarYMuchaCrem@"
+						},
+						{
+							"id": "d",
+							"text": "Qx9#mK2$cN8@"
+						}
+					],
+					"correct_answer": "c",
+					"explanation": "✅ **Correcto**: Las frases de contraseña largas son más seguras que contraseñas cortas complejas. 'CafeCon3AzucarYMuchaCrem@' es larga, memorable y tiene 26 caracteres con símbolos, siendo más fuerte contra ataques de fuerza bruta."
+				},
+				{
+					"id": "q5",
+					"category": "Best Practices",
+					"difficulty": "intermediate",
+					"points": 2,
+					"question": "¿Con qué frecuencia se deben actualizar los sistemas operativos y software?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Solo cuando hay problemas de funcionamiento"
+						},
+						{
+							"id": "b",
+							"text": "Una vez al año durante mantenimiento programado"
+						},
+						{
+							"id": "c",
+							"text": "Tan pronto como estén disponibles las actualizaciones de seguridad"
+						},
+						{
+							"id": "d",
+							"text": "Cada 6 meses es suficiente"
+						}
+					],
+					"correct_answer": "c",
+					"explanation": "✅ **Correcto**: Las actualizaciones de seguridad deben aplicarse tan pronto como sea posible. Los atacantes explotan vulnerabilidades conocidas rápidamente, y retrasar las actualizaciones deja sistemas expuestos a ataques."
+				},
+				{
+					"id": "q6",
+					"category": "Best Practices",
+					"difficulty": "beginner",
+					"points": 1,
+					"question": "Es seguro usar WiFi público para acceder a cuentas bancarias si el sitio web tiene HTTPS.",
+					"type": "true_false",
+					"options": [
+						{
+							"id": "true",
+							"text": "Verdadero"
+						},
+						{
+							"id": "false",
+							"text": "Falso"
+						}
+					],
+					"correct_answer": "false",
+					"explanation": "❌ **Falso**: Aunque HTTPS protege el tráfico, las redes WiFi públicas son inseguras. Pueden tener ataques man-in-the-middle, redes falsas, o malware. Es mejor usar datos móviles o una VPN para actividades sensibles."
+				},
+				{
+					"id": "q7",
+					"category": "Security Basics",
+					"difficulty": "intermediate",
+					"points": 2,
+					"question": "¿Qué es el 'principio de menor privilegio' en ciberseguridad?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Dar a los usuarios solo los permisos mínimos necesarios para realizar su trabajo"
+						},
+						{
+							"id": "b",
+							"text": "Restringir el acceso físico a servidores críticos"
+						},
+						{
+							"id": "c",
+							"text": "Usar cifrado solo en datos altamente confidenciales"
+						},
+						{
+							"id": "d",
+							"text": "Limitar el número de administradores de sistema"
+						}
+					],
+					"correct_answer": "a",
+					"explanation": "✅ **Correcto**: El principio de menor privilegio establece que usuarios y sistemas deben tener solo los permisos mínimos necesarios para realizar sus funciones. Esto limita el daño potencial si una cuenta es comprometida."
+				},
+				{
+					"id": "q8",
+					"category": "Incident Response",
+					"difficulty": "intermediate",
+					"points": 2,
+					"question": "Si sospechas que tu computadora está infectada con malware, ¿cuál debe ser tu PRIMERA acción?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Reiniciar la computadora para 'limpiarla'"
+						},
+						{
+							"id": "b",
+							"text": "Desconectarla de la red e internet inmediatamente"
+						},
+						{
+							"id": "c",
+							"text": "Ejecutar un antivirus completo"
+						},
+						{
+							"id": "d",
+							"text": "Cambiar todas las contraseñas guardadas"
+						}
+					],
+					"correct_answer": "b",
+					"explanation": "✅ **Correcto**: Desconectar de la red previene que el malware se communique con servidores externos, robe más datos, o se propague a otros dispositivos. Esta es la primera prioridad antes de cualquier remediación."
+				},
+				{
+					"id": "q9",
+					"category": "Incident Response",
+					"difficulty": "advanced",
+					"points": 3,
+					"question": "Tu empresa sufre una violación de datos. ¿Cuánto tiempo tienes legalmente para notificar a las autoridades bajo GDPR?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "24 horas"
+						},
+						{
+							"id": "b",
+							"text": "72 horas"
+						},
+						{
+							"id": "c",
+							"text": "7 días"
+						},
+						{
+							"id": "d",
+							"text": "30 días"
+						}
+					],
+					"correct_answer": "b",
+					"explanation": "✅ **Correcto**: Bajo GDPR, las organizaciones deben notificar a la autoridad supervisora dentro de 72 horas de tener conocimiento de una violación de datos, a menos que sea poco probable que resulte en riesgo para los derechos de las personas."
+				},
+				{
+					"id": "q10",
+					"category": "Best Practices",
+					"difficulty": "intermediate",
+					"points": 2,
+					"question": "¿Cuál es la mejor práctica para el uso de gestores de contraseñas?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Usarlos solo para cuentas importantes como banca"
+						},
+						{
+							"id": "b",
+							"text": "Usarlos para todas las cuentas y generar contraseñas únicas y fuertes"
+						},
+						{
+							"id": "c",
+							"text": "Usarlos como respaldo, pero recordar las contraseñas principales"
+						},
+						{
+							"id": "d",
+							"text": "Usarlos solo en computadoras personales, no en dispositivos móviles"
+						}
+					],
+					"correct_answer": "b",
+					"explanation": "✅ **Correcto**: Los gestores de contraseñas deben usarse para todas las cuentas, generando contraseñas únicas y fuertes. Esto previene ataques de reutilización de credenciales y mejora significativamente la seguridad general."
+				},
+				{
+					"id": "q11",
+					"category": "Security Basics",
+					"difficulty": "beginner",
+					"points": 1,
+					"question": "Un firewall puede prevenir completamente todos los ataques de malware.",
+					"type": "true_false",
+					"options": [
+						{
+							"id": "true",
+							"text": "Verdadero"
+						},
+						{
+							"id": "false",
+							"text": "Falso"
+						}
+					],
+					"correct_answer": "false",
+					"explanation": "❌ **Falso**: Los firewalls son importantes pero no pueden prevenir todos los ataques de malware. No protegen contra phishing, malware en descargas legítimas, dispositivos USB infectados, o ataques que usan puertos permitidos."
+				},
+				{
+					"id": "q12",
+					"category": "Compliance & Regulations",
+					"difficulty": "advanced",
+					"points": 3,
+					"question": "¿Cuál de los siguientes NO es uno de los pilares de la seguridad de la información (Triada CIA)?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Confidencialidad (Confidentiality)"
+						},
+						{
+							"id": "b",
+							"text": "Integridad (Integrity)"
+						},
+						{
+							"id": "c",
+							"text": "Disponibilidad (Availability)"
+						},
+						{
+							"id": "d",
+							"text": "Autenticidad (Authenticity)"
+						}
+					],
+					"correct_answer": "d",
+					"explanation": "✅ **Correcto**: La tríada CIA consiste en Confidencialidad, Integridad y Disponibilidad. Aunque la Autenticidad es importante en seguridad, no forma parte de la tríada clásica CIA que es fundamental en ciberseguridad."
+				},
+				{
+					"id": "q13",
+					"category": "Best Practices",
+					"difficulty": "intermediate",
+					"points": 2,
+					"question": "¿Cuál es la forma más segura de conectarse a tu red doméstica cuando estás fuera de casa?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Abrir puerto 22 (SSH) en tu router y conectarte directamente"
+						},
+						{
+							"id": "b",
+							"text": "Usar una VPN configurada en tu router o dispositivo de red doméstico"
+						},
+						{
+							"id": "c",
+							"text": "Usar TeamViewer o software de acceso remoto similar"
+						},
+						{
+							"id": "d",
+							"text": "Configurar port forwarding para los servicios que necesitas"
+						}
+					],
+					"correct_answer": "b",
+					"explanation": "✅ **Correcto**: Una VPN proporciona un túnel seguro y cifrado a tu red doméstica. Es más seguro que abrir puertos específicos o usar software de terceros, ya que toda la comunicación está cifrada y autenticada."
+				},
+				{
+					"id": "q14",
+					"category": "Incident Response",
+					"difficulty": "advanced",
+					"points": 3,
+					"question": "En el contexto de respuesta a incidentes, ¿qué significa 'containment'?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Documentar toda la evidencia del incidente"
+						},
+						{
+							"id": "b",
+							"text": "Notificar a las autoridades y stakeholders"
+						},
+						{
+							"id": "c",
+							"text": "Aislar sistemas afectados para prevenir propagación del ataque"
+						},
+						{
+							"id": "d",
+							"text": "Restaurar sistemas desde backups limpios"
+						}
+					],
+					"correct_answer": "c",
+					"explanation": "✅ **Correcto**: 'Containment' (contención) es la fase donde se aíslan los sistemas afectados para prevenir que el ataque se propague a otros sistemas. Es crítico para limitar el daño antes de proceder con erradicación y recuperación."
+				},
+				{
+					"id": "q15",
+					"category": "Compliance & Regulations",
+					"difficulty": "intermediate",
+					"points": 2,
+					"question": "¿Qué tipo de información requiere típicamente el nivel más alto de protección en una organización?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Información públicamente disponible en el sitio web"
+						},
+						{
+							"id": "b",
+							"text": "Datos personales de empleados y clientes (PII/PHI)"
+						},
+						{
+							"id": "c",
+							"text": "Información de marketing y ventas"
+						},
+						{
+							"id": "d",
+							"text": "Políticas y procedimientos internos"
+						}
+					],
+					"correct_answer": "b",
+					"explanation": "✅ **Correcto**: Los datos personales identificables (PII) y de salud protegida (PHI) requieren el más alto nivel de protección debido a regulaciones como GDPR, HIPAA, y las graves consecuencias de su exposición para individuos y organizaciones."
+				}
+			],
+			"scoring_criteria": {
+				"excellent": {
+					"min_score": 90,
+					"message": "🏆 ¡Excelente! Tienes un conocimiento sólido de ciberseguridad. Estás bien preparado para identificar y manejar amenazas de seguridad."
+				},
+				"good": {
+					"min_score": 80,
+					"message": "✅ ¡Muy bien! Tienes una buena base en ciberseguridad. Revisa las áreas donde fallaste para fortalecer tu conocimiento."
+				},
+				"passing": {
+					"min_score": 70,
+					"message": "📚 Aprobado. Tienes conocimientos básicos, pero hay áreas importantes que debes reforzar. Considera tomar cursos adicionales."
+				},
+				"needs_improvement": {
+					"min_score": 0,
+					"message": "🚨 Necesitas mejorar significativamente tu conocimiento en ciberseguridad. Te recomendamos estudiar los fundamentos antes de continuar."
+				}
+			}
+		},
+		"learning_objectives": null,
+		"success_criteria": null,
+		"feedback_responses": null,
+		"featured": false,
+		"status": "published",
+		"date_created": "2026-02-24T04:02:56.297Z",
+		"date_updated": "2026-02-24T05:04:09.565Z",
+		"exercises": null,
+		"id": "332e8e3c-4660-49c8-b40f-cb895f112651",
+		"practice_category": []
+	},
+	{
+		"description": "Un ransomware ha cifrado sistemas críticos de tu empresa. Cada decisión cuenta para minimizar el impacto y recuperar las operaciones.",
+		"practice_type": "incident_response",
+		"slug": "crisis-ransomware-corporativo",
+		"title": "Crisis de Ransomware Corporativo",
+		"difficulty": "advanced",
+		"estimated_time": 20,
+		"scenario_data": {
+			"crisis_title": "🚨 ALERTA CRÍTICA: RANSOMWARE DETECTADO",
+			"crisis_description": "Son las 3:47 AM. Los sistemas de monitoreo han detectado actividad sospechosa. Múltiples servidores están mostrando archivos cifrados con extensión .crypted. Los usuarios no pueden acceder a sistemas críticos. El ransomware está activo y propagándose.",
+			"crisis_details": [
+				"⚠️ Sistemas afectados: 40% de servidores principales",
+				"📊 Datos cifrados: Sistema de facturación, base de datos clientes",
+				"💰 Demanda: $2.5M en Bitcoin en 72 horas",
+				"📧 Contacto atacante: recovery@darkcrypt.onion",
+				"⏰ TIEMPO CRÍTICO: Cada minuto cuenta"
+			],
+			"decisions": [
+				{
+					"id": "isolate_systems",
+					"text": "Aislar inmediatamente todos los sistemas de la red",
+					"consequence": "correct",
+					"explanation": "✅ CORRECTO: El aislamiento rápido previene la propagación del ransomware a sistemas no afectados. Esta es la primera prioridad en cualquier incident de ransomware.",
+					"points": 25
+				},
+				{
+					"id": "contact_attackers",
+					"text": "Contactar inmediatamente a los atacantes para negociar",
+					"consequence": "incorrect",
+					"explanation": "❌ INCORRECTO: Nunca contactes a los atacantes como primera acción. Esto puede indicar desesperación y empeorar las condiciones. Primero debes evaluar y contener la situación.",
+					"points": 0
+				},
+				{
+					"id": "restart_systems",
+					"text": "Reiniciar todos los sistemas para 'limpiar' el ransomware",
+					"consequence": "incorrect",
+					"explanation": "❌ INCORRECTO: Reiniciar puede propagar más el ransomware o destruir evidencia forense crítica. Nunca reinicies sin aislar primero.",
+					"points": 0
+				},
+				{
+					"id": "notify_authorities",
+					"text": "Notificar inmediatamente a autoridades y equipo de respuesta",
+					"consequence": "correct",
+					"explanation": "✅ CORRECTO: La notificación temprana a autoridades (FBI, CISA) y tu equipo de respuesta es crucial. Pueden ofrecer asistencia técnica y legal inmediata.",
+					"points": 20
+				}
+			]
+		},
+		"learning_objectives": null,
+		"success_criteria": null,
+		"feedback_responses": null,
+		"featured": false,
+		"status": "published",
+		"date_created": "2026-02-24T03:11:54.646Z",
+		"date_updated": "2026-02-24T05:04:09.605Z",
+		"exercises": null,
+		"id": "49dadc7b-86f9-412c-9b6c-771499742514",
+		"practice_category": []
+	},
+	{
+		"description": "Configura tu router doméstico de manera segura. Aprende las mejores prácticas para proteger tu red WiFi y dispositivos conectados contra intrusiones y ataques.",
+		"practice_type": "settings_configuration",
+		"slug": "router-security-configuration-audit",
+		"title": "Router Security Configuration Audit",
+		"difficulty": "advanced",
+		"estimated_time": 20,
+		"scenario_data": {
+			"scenarios": [
+				{
+					"title": "🏠 Configuración Inicial de Router Doméstico",
+					"description": "Acabas de comprar un router WiFi nuevo para tu casa. Configuras los ajustes de seguridad iniciales para proteger tu red doméstica de intrusos y crear una base segura para todos tus dispositivos.",
+					"context": "Los routers vienen con configuraciones inseguras por defecto. Una configuración apropiada es crítica porque el router es el gateway de toda tu red doméstica.",
+					"settings": [
+						{
+							"id": "default_password",
+							"name": "🔐 Cambiar contraseña de administrador por defecto",
+							"description": "Cambiar 'admin/admin' por una contraseña fuerte única",
+							"should_enable": true,
+							"category": "Critical",
+							"explanation": "✅ CRÍTICO: Las contraseñas por defecto son públicamente conocidas. Atacantes pueden acceder completamente a tu router y red si no cambias esto inmediatamente."
+						},
+						{
+							"id": "wps_disable",
+							"name": "📵 Deshabilitar WPS (WiFi Protected Setup)",
+							"description": "Desactivar el botón/función WPS para conexión rápida",
+							"should_enable": true,
+							"category": "Security",
+							"explanation": "✅ RECOMENDADO: WPS tiene vulnerabilidades conocidas que permiten ataques de fuerza bruta. Es más seguro conectar dispositivos manualmente con la contraseña WiFi."
+						},
+						{
+							"id": "wifi_encryption",
+							"name": "🔒 Configurar cifrado WiFi WPA3 (o WPA2 si no disponible)",
+							"description": "Usar el protocolo de cifrado más fuerte disponible",
+							"should_enable": true,
+							"category": "Essential",
+							"explanation": "✅ ESENCIAL: WPA3 es el estándar más seguro actual. Si no está disponible, usa WPA2. Nunca uses WEP (obsoleto) o dejes la red abierta."
+						},
+						{
+							"id": "ssid_broadcast",
+							"name": "📡 Ocultar nombre de red WiFi (SSID)",
+							"description": "No mostrar el nombre de tu red en la lista de WiFi disponibles",
+							"should_enable": false,
+							"category": "Security Theater",
+							"explanation": "❌ INNECESARIO: Ocultar SSID no brinda seguridad real - las redes son fácilmente detectables con herramientas básicas. Solo causa inconvenencia para uso legítimo."
+						},
+						{
+							"id": "remote_management",
+							"name": "🌐 Habilitar gestión remota via internet",
+							"description": "Permitir acceso al panel de administración desde internet",
+							"should_enable": false,
+							"category": "High Risk",
+							"explanation": "🚨 RIESGOSO: Expone tu router a ataques desde internet. Solo habilitar si absolutamente necesario y con VPN/autenticación extra fuerte."
+						},
+						{
+							"id": "guest_network",
+							"name": "👥 Crear red WiFi para invitados",
+							"description": "Red separada para visitantes sin acceso a dispositivos principales",
+							"should_enable": true,
+							"category": "Best Practice",
+							"explanation": "✅ RECOMENDADO: Aísla dispositivos de invitados de tu red principal. Previene acceso accidental o malicioso a tus dispositivos personales."
+						},
+						{
+							"id": "firmware_updates",
+							"name": "🔄 Habilitar actualizaciones automáticas de firmware",
+							"description": "Permitir que el router se actualice automáticamente",
+							"should_enable": true,
+							"category": "Security",
+							"explanation": "✅ CRÍTICO: Las actualizaciones corrigen vulnerabilidades de seguridad. Los routers son objetivos frecuentes y las actualizaciones automáticas son esenciales."
+						},
+						{
+							"id": "upnp_disable",
+							"name": "📵 Deshabilitar UPnP (Universal Plug and Play)",
+							"description": "Desactivar configuración automática de puertos para dispositivos",
+							"should_enable": true,
+							"category": "Security",
+							"explanation": "✅ RECOMENDADO: UPnP puede abrir puertos automáticamente, creando vulnerabilidades. Configura port forwarding manualmente solo cuando necesario."
+						},
+						{
+							"id": "mac_filtering",
+							"name": "🏷️ Habilitar filtrado por dirección MAC",
+							"description": "Solo permitir dispositivos específicos conectarse por MAC address",
+							"should_enable": false,
+							"category": "Security Theater",
+							"explanation": "❌ MANTENIMIENTO ALTO: Las MACs son fácilmente falsificables y el filtrado requiere mantenimiento constant. Una contraseña WiFi fuerte es más efectiva."
+						}
+					],
+					"passing_score": 85
+				},
+				{
+					"title": "🔧 Configuración Avanzada de Seguridad",
+					"description": "Tu router básico ya está configurado. Ahora implementas características avanzadas de seguridad para máxima protección contra amenazas sofisticadas y monitoreo de la actividad de red.",
+					"context": "Configuraciones avanzadas ofrecen protección adicional pero pueden requerir más mantenimiento. Es importante balancear seguridad con usabilidad.",
+					"settings": [
+						{
+							"id": "firewall_enable",
+							"name": "🛡️ Activar firewall SPI (Stateful Packet Inspection)",
+							"description": "Activar firewall que inspecciona conexiones de entrada",
+							"should_enable": true,
+							"category": "Essential",
+							"explanation": "✅ ESENCIAL: El firewall SPI bloquea conexiones no solicitadas desde internet mientras permite respuestas legítimas. Protección fundamental contra intrusiones."
+						},
+						{
+							"id": "dns_security",
+							"name": "🌐 Configurar DNS seguro (Cloudflare, Quad9, etc.)",
+							"description": "Usar servidores DNS que bloquean dominios maliciosos",
+							"should_enable": true,
+							"category": "Security",
+							"explanation": "✅ RECOMENDADO: DNS seguros (1.1.1.1, 9.9.9.9) bloquean automáticamente sitios de phishing y malware, agregando una capa extra de protección."
+						},
+						{
+							"id": "dos_protection",
+							"name": "🛡️ Activar protección contra ataques DoS",
+							"description": "Detectar y bloquear ataques de denegación de servicio",
+							"should_enable": true,
+							"category": "Security",
+							"explanation": "✅ RECOMENDADO: Protege contra ataques que intentan saturar tu connection internet o router. Especialmente importante si tienes IP estática."
+						},
+						{
+							"id": "access_logging",
+							"name": "📊 Habilitar registro de acceso y conexiones",
+							"description": "Mantener logs de qué dispositivos se conectan y cuándo",
+							"should_enable": true,
+							"category": "Monitoring",
+							"explanation": "✅ ÚTIL: Te permite detectar conexiones no autorizadas y monitorear actividad inusual. Revisa logs regularmente para seguridad."
+						},
+						{
+							"id": "port_scan_detection",
+							"name": "🔍 Detectar escaneos de puertos",
+							"description": "Alertar cuando alguien escanea puertos de tu red",
+							"should_enable": true,
+							"category": "Security",
+							"explanation": "✅ RECOMENDADO: Los escaneos de puertos suelen preceder ataques. La detección temprana permite tomar medidas preventivas."
+						},
+						{
+							"id": "bandwidth_monitoring",
+							"name": "📈 Monitoreo de ancho de banda por dispositivo",
+							"description": "Rastrear cuánto internet usa cada dispositivo conectado",
+							"should_enable": true,
+							"category": "Monitoring",
+							"explanation": "✅ ÚTIL: Te ayuda a identificar dispositivos comprometidos que usan ancho de banda excesivo (botnets, malware, etc.)"
+						},
+						{
+							"id": "time_restrictions",
+							"name": "⏰ Configurar restricciones horarias de internet",
+							"description": "Limitar acceso a internet en ciertos horarios para ciertos dispositivos",
+							"should_enable": false,
+							"category": "Parental Control",
+							"explanation": "⚠️ OPCIONAL: Útil para control parental pero no necesario para seguridad básica. Puede ser inconveniente para uso normal de adultos."
+						},
+						{
+							"id": "content_filtering",
+							"name": "🚫 Activar filtrado de contenido web",
+							"description": "Bloquear categorías de sitios web (adulto, malware, phishing)",
+							"should_enable": true,
+							"category": "Security",
+							"explanation": "✅ RECOMENDADO: Bloquea automáticamente sitios maliciosos conocidos. Agrega protección extra especialmente para usuarios menos técnicos en la red."
+						},
+						{
+							"id": "vpn_server",
+							"name": "🔐 Habilitar servidor VPN en el router",
+							"description": "Permettir conexiones VPN desde el exterior a tu red doméstica",
+							"should_enable": false,
+							"category": "Advanced",
+							"explanation": "⚠️ AVANZADO: Útil para acceso seguro desde el exterior pero requiere configuración experta. Mal configurado puede crear vulnerabilidades serias."
+						}
+					],
+					"passing_score": 80
+				}
+			]
+		},
+		"learning_objectives": null,
+		"success_criteria": null,
+		"feedback_responses": null,
+		"featured": false,
+		"status": "published",
+		"date_created": "2026-02-24T04:29:55.120Z",
+		"date_updated": "2026-02-24T05:04:09.632Z",
+		"exercises": null,
+		"id": "58facaf7-63b2-41a4-9056-ffd63c8666c9",
+		"practice_category": []
+	},
+	{
+		"description": "Master the art of identifying and defending against social engineering attacks through realistic conversation analysis. Learn to spot red flags, manipulation techniques, and develop appropriate responses to protect yourself and your organization.",
+		"practice_type": "social_engineering",
+		"slug": "social-engineering-detection",
+		"title": "Social Engineering Detection",
+		"difficulty": "intermediate",
+		"estimated_time": 15,
+		"scenario_data": {
+			"instructions": "Analiza las siguientes conversaciones e identifica las técnicas de ingeniería social utilizadas por los atacantes.",
+			"learning_objectives": [
+				"Reconocer técnicas comunes de ingeniería social",
+				"Identificar red flags en conversaciones sospechosas",
+				"Aprender respuestas apropiadas ante intentos de manipulación"
+			],
+			"conversations": [
+				{
+					"id": 1,
+					"title": "Llamada de Soporte Técnico Falso",
+					"context": "Recibes una llamada inesperada durante horario laboral",
+					"scenario_type": "phone_call",
+					"messages": [
+						{
+							"speaker": "caller",
+							"name": "Agente de IT",
+							"message": "Buenos días, habla Miguel del departamento de IT. Tenemos un problema urgente con su cuenta de correo.",
+							"timestamp": "09:15",
+							"is_suspicious": true
+						},
+						{
+							"speaker": "user",
+							"name": "Empleado",
+							"message": "¿Qué tipo de problema? No he recibido ningún aviso.",
+							"timestamp": "09:15",
+							"is_suspicious": false
+						},
+						{
+							"speaker": "caller",
+							"name": "Agente de IT",
+							"message": "Su cuenta ha sido comprometida. Necesito que me dé su contraseña actual para resetearla inmediatamente, o perderá todos sus emails en 10 minutos.",
+							"timestamp": "09:16",
+							"is_suspicious": true
+						},
+						{
+							"speaker": "user",
+							"name": "Empleado",
+							"message": "Eso suena muy urgente... ¿No pueden hacer el reset desde su sistema?",
+							"timestamp": "09:16",
+							"is_suspicious": false
+						},
+						{
+							"speaker": "caller",
+							"name": "Agente de IT",
+							"message": "Lamentablemente no, hay un fallo en el servidor principal. Solo necesito que me confirme su contraseña y usuario. Es procedimiento estándar.",
+							"timestamp": "09:17",
+							"is_suspicious": true
+						}
+					],
+					"techniques_present": [
+						"urgency",
+						"authority_impersonation",
+						"password_request",
+						"threat_intimidation",
+						"technical_jargon"
+					],
+					"red_flags": [
+						"Llamada inesperada solicitando credenciales",
+						"Creación de urgencia artificial (10 minutos)",
+						"Solicitud directa de contraseña",
+						"Amenaza de pérdida de datos",
+						"No ofrece alternativas de verificación"
+					],
+					"explanation": "Esta es una técnica clásica de vishing (phishing por teléfono). El atacante se hace pasar por IT, crea urgencia falsa y solicita credenciales directamente.",
+					"correct_response": "Colgar inmediatamente y contactar al departamento de IT por los canales oficiales para verificar si realmente hay algún problema.",
+					"difficulty": "beginner"
+				},
+				{
+					"id": 2,
+					"title": "Mensaje de WhatsApp del 'CEO'",
+					"context": "Recibes un mensaje inesperado en WhatsApp",
+					"scenario_type": "instant_message",
+					"messages": [
+						{
+							"speaker": "sender",
+							"name": "Carlos Rodríguez (CEO)",
+							"message": "Hola, soy Carlos, el CEO. Estoy en una reunión importante y mi asistente no está disponible.",
+							"timestamp": "16:45",
+							"is_suspicious": true
+						},
+						{
+							"speaker": "user",
+							"name": "Empleado",
+							"message": "Hola señor Rodríguez, ¿en qué puedo ayudarle?",
+							"timestamp": "16:46",
+							"is_suspicious": false
+						},
+						{
+							"speaker": "sender",
+							"name": "Carlos Rodríguez (CEO)",
+							"message": "Necesito que hagas una transferencia urgente de $15,000 a un proveedor. Te envío los datos por privado. Es confidencial, no comentes con nadie del equipo financiero.",
+							"timestamp": "16:47",
+							"is_suspicious": true
+						},
+						{
+							"speaker": "user",
+							"name": "Empleado",
+							"message": "¿No debería pasar por el proceso normal de aprobaciones?",
+							"timestamp": "16:48",
+							"is_suspicious": false
+						},
+						{
+							"speaker": "sender",
+							"name": "Carlos Rodríguez (CEO)",
+							"message": "No hay tiempo, la reunión es para cerrar un contrato millonario. Confío en tu discreción. Envíame confirmación cuando esté hecho.",
+							"timestamp": "16:49",
+							"is_suspicious": true
+						}
+					],
+					"techniques_present": [
+						"authority_impersonation",
+						"urgency",
+						"confidentiality_manipulation",
+						"financial_fraud",
+						"bypass_procedures"
+					],
+					"red_flags": [
+						"Contacto por canal no oficial (WhatsApp personal)",
+						"Solicitud de transferencia de dinero",
+						"Pedido de saltarse procedimientos normales",
+						"Enfasis en confidencialidad/secreto",
+						"Presión por urgencia en decisiones financieras"
+					],
+					"explanation": "Esta es una técnica de 'CEO Fraud' o 'Business Email Compromise'. El atacante se hace pasar por un ejecutivo para solicitar transferencias fraudulentas.",
+					"correct_response": "No realizar ninguna transferencia. Verificar la identidad del CEO llamándolo directamente a su número oficial o contactando a su asistente.",
+					"difficulty": "intermediate"
+				},
+				{
+					"id": 3,
+					"title": "Email de Recursos Humanos",
+					"context": "Recibes un email aparentemente de RRHH sobre actualización de datos",
+					"scenario_type": "email",
+					"messages": [
+						{
+							"speaker": "sender",
+							"name": "RRHH - Maria González",
+							"message": "Estimado empleado: Por nuevas regulaciones, necesitamos actualizar su información personal en nuestro sistema.",
+							"timestamp": "08:30",
+							"is_suspicious": true
+						},
+						{
+							"speaker": "sender",
+							"name": "RRHH - Maria González",
+							"message": "Debe completar el formulario adjunto con: número de seguro social, datos bancarios, y contraseña del sistema. Enviar antes del viernes o su nómina podría verse afectada.",
+							"timestamp": "08:30",
+							"is_suspicious": true
+						},
+						{
+							"speaker": "user",
+							"name": "Empleado",
+							"message": "[Empleado considera si responder al email con sus datos personales]",
+							"timestamp": "08:45",
+							"is_suspicious": false
+						}
+					],
+					"techniques_present": [
+						"spoofed_identity",
+						"urgency",
+						"data_harvesting",
+						"official_pretense",
+						"consequence_threat"
+					],
+					"red_flags": [
+						"Solicitud de datos altamente sensibles por email",
+						"Amenaza sutil sobre afectación de nómina",
+						"Deadline artificial creando presión",
+						"Solicitud de contraseña del sistema",
+						"No hay proceso de verificación alternativo ofrecido"
+					],
+					"explanation": "Phishing dirigido haciéndose pasar por RRHH. Busca obtener datos personales y credenciales usando la autoridad percibida del departamento de recursos humanos.",
+					"correct_response": "No proporcionar ningún dato. Contactar directamente a RRHH por teléfono o en persona para verificar la legitimidad de la solicitud.",
+					"difficulty": "beginner"
+				},
+				{
+					"id": 4,
+					"title": "Visita Presencial de 'Auditor'",
+					"context": "Una persona se presenta en tu oficina como auditor externo",
+					"scenario_type": "in_person",
+					"messages": [
+						{
+							"speaker": "visitor",
+							"name": "Inspector Sánchez",
+							"message": "Buenos días, soy el inspector Sánchez de la auditoría externa programada. ¿Podría mostrarme su estación de trabajo?",
+							"timestamp": "14:00",
+							"is_suspicious": true
+						},
+						{
+							"speaker": "user",
+							"name": "Empleado",
+							"message": "No tenía conocimiento de ninguna auditoría hoy. ¿Tiene alguna identificación?",
+							"timestamp": "14:01",
+							"is_suspicious": false
+						},
+						{
+							"speaker": "visitor",
+							"name": "Inspector Sánchez",
+							"message": "[Muestra una credencial que parece oficial] Claro, aquí está. Es una auditoría sorpresa, por eso no fueron notificados. Necesito verificar que están cumpliendo con las políticas de seguridad.",
+							"timestamp": "14:02",
+							"is_suspicious": true
+						},
+						{
+							"speaker": "user",
+							"name": "Empleado",
+							"message": "¿Qué necesita revisar exactamente?",
+							"timestamp": "14:03",
+							"is_suspicious": false
+						},
+						{
+							"speaker": "visitor",
+							"name": "Inspector Sánchez",
+							"message": "Solo necesito que inicie sesión en su computadora para verificar los controles de acceso. También debo fotografiar las pantallas para el reporte. Es procedimiento estándar.",
+							"timestamp": "14:04",
+							"is_suspicious": true
+						}
+					],
+					"techniques_present": [
+						"physical_pretexting",
+						"authority_impersonation",
+						"fake_credentials",
+						"surprise_element",
+						"access_request"
+					],
+					"red_flags": [
+						"Auditoría 'sorpresa' no comunicada previamente",
+						"Solicitud de acceso directo a computadora personal",
+						"Pedido de iniciar sesión en presencia de extraño",
+						"Fotografías de pantallas con información sensible",
+						"No hay protocolo de verificación con supervisores"
+					],
+					"explanation": "Pretexting físico donde el atacante se hace pasar por auditor para obtener acceso físico y visual a sistemas y credenciales.",
+					"correct_response": "No permitir acceso. Solicitar verificación a través de su supervisor o el departamento de seguridad antes de proporcionar cualquier acceso.",
+					"difficulty": "advanced"
+				},
+				{
+					"id": 5,
+					"title": "Llamada de 'Emergencia Familiar'",
+					"context": "Recibes una llamada urgente sobre un familiar",
+					"scenario_type": "phone_call",
+					"messages": [
+						{
+							"speaker": "caller",
+							"name": "Dr. Martínez",
+							"message": "¿Es usted Juan Pérez? Soy el Dr. Martínez del Hospital San José. Su hermana María ha tenido un accidente grave.",
+							"timestamp": "11:20",
+							"is_suspicious": true
+						},
+						{
+							"speaker": "user",
+							"name": "Juan Pérez",
+							"message": "¿Qué? ¿Está bien? ¿Qué pasó?",
+							"timestamp": "11:20",
+							"is_suspicious": false
+						},
+						{
+							"speaker": "caller",
+							"name": "Dr. Martínez",
+							"message": "Está estable pero necesita cirugía urgente. El seguro requiere verificación inmediata. Necesito que me confirme su número de seguro social y el de ella para proceder.",
+							"timestamp": "11:21",
+							"is_suspicious": true
+						},
+						{
+							"speaker": "user",
+							"name": "Juan Pérez",
+							"message": "Esto es terrible... ¿no pueden verificar eso directamente con el seguro?",
+							"timestamp": "11:22",
+							"is_suspicious": false
+						},
+						{
+							"speaker": "caller",
+							"name": "Dr. Martínez",
+							"message": "El sistema está caído y cada minuto cuenta. Si no podemos verificar en los próximos 5 minutos, tendré que transferirla a un hospital público donde la atención será limitada.",
+							"timestamp": "11:23",
+							"is_suspicious": true
+						}
+					],
+					"techniques_present": [
+						"emotional_manipulation",
+						"urgency",
+						"authority_impersonation",
+						"family_exploitation",
+						"data_harvesting"
+					],
+					"red_flags": [
+						"Solicitud de datos sensibles durante emergencia emocional",
+						"Presión extrema de tiempo artificialmente creada",
+						"No ofrece alternativas para verificación",
+						"Uso de información familiar para crear credibilidad",
+						"Amenaza de consecuencias graves si no coopera"
+					],
+					"explanation": "Técnica de 'emergency scam' que explota emociones familiares para obtener información personal. Muy efectiva porque la víctima está bajo estrés emocional.",
+					"correct_response": "Colgar inmediatamente y contactar directamente al hospital o a la familia para verificar la situación real antes de proporcionar cualquier información.",
+					"difficulty": "advanced"
+				}
+			],
+			"available_techniques": [
+				{
+					"id": "urgency",
+					"name": "Creación de Urgencia",
+					"description": "Presionar por respuesta o acción inmediata sin tiempo para reflexionar",
+					"icon": "⏰"
+				},
+				{
+					"id": "authority_impersonation",
+					"name": "Impersonación de Autoridad",
+					"description": "Hacerse pasar por personal autorizado (IT, CEO, doctor, etc.)",
+					"icon": "👔"
+				},
+				{
+					"id": "password_request",
+					"name": "Solicitud de Credenciales",
+					"description": "Pedir contraseñas, usuarios o información de acceso directamente",
+					"icon": "🔑"
+				},
+				{
+					"id": "threat_intimidation",
+					"name": "Intimidación y Amenazas",
+					"description": "Amenazar con consecuencias negativas si no se coopera",
+					"icon": "⚠️"
+				},
+				{
+					"id": "emotional_manipulation",
+					"name": "Manipulación Emocional",
+					"description": "Explotar emociones como miedo, urgencia o preocupación familiar",
+					"icon": "😰"
+				},
+				{
+					"id": "technical_jargon",
+					"name": "Jerga Técnica",
+					"description": "Usar términos técnicos para sonar legítimo y confundir",
+					"icon": "💻"
+				},
+				{
+					"id": "confidentiality_manipulation",
+					"name": "Manipulación de Confidencialidad",
+					"description": "Pedir secreto o discreción para evitar verificación",
+					"icon": "🤫"
+				},
+				{
+					"id": "financial_fraud",
+					"name": "Fraude Financiero",
+					"description": "Solicitar transferencias o información bancaria",
+					"icon": "💳"
+				},
+				{
+					"id": "physical_pretexting",
+					"name": "Pretexto Físico",
+					"description": "Crear historias falsas para obtener acceso físico",
+					"icon": "🚪"
+				},
+				{
+					"id": "data_harvesting",
+					"name": "Recolección de Datos",
+					"description": "Obtener información personal o corporativa sensible",
+					"icon": "📋"
+				},
+				{
+					"id": "spoofed_identity",
+					"name": "Identidad Falsa",
+					"description": "Suplantar la identidad de personas o departamentos legítimos",
+					"icon": "🎭"
+				},
+				{
+					"id": "official_pretense",
+					"name": "Pretexto Oficial",
+					"description": "Usar procesos aparentemente oficiales para ganar credibilidad",
+					"icon": "📄"
+				},
+				{
+					"id": "consequence_threat",
+					"name": "Amenaza de Consecuencias",
+					"description": "Amenazar con resultados negativos si no se actúa inmediatamente",
+					"icon": "⛔"
+				},
+				{
+					"id": "bypass_procedures",
+					"name": "Eludir Procedimientos",
+					"description": "Solicitar saltarse procesos normales de verificación",
+					"icon": "🔄"
+				},
+				{
+					"id": "fake_credentials",
+					"name": "Credenciales Falsas",
+					"description": "Mostrar identificaciones o certificados falsificados",
+					"icon": "🆔"
+				},
+				{
+					"id": "surprise_element",
+					"name": "Elemento Sorpresa",
+					"description": "Presentarse de imprevisto para evitar preparación de la víctima",
+					"icon": "⚡"
+				},
+				{
+					"id": "access_request",
+					"name": "Solicitud de Acceso",
+					"description": "Pedir acceso a sistemas, instalaciones o información restringida",
+					"icon": "🔐"
+				},
+				{
+					"id": "family_exploitation",
+					"name": "Explotación Familiar",
+					"description": "Usar información o situaciones familiares para manipular",
+					"icon": "👨‍👩‍👧‍👦"
+				}
+			],
+			"scoring": {
+				"max_score": 5,
+				"passing_score": 3,
+				"points_per_correct": 1
+			}
+		},
+		"learning_objectives": [
+			"Reconocer técnicas comunes de ingeniería social en diferentes contextos",
+			"Identificar red flags en comunicaciones sospechosas",
+			"Desarrollar respuestas apropiadas ante intentos de manipulación",
+			"Comprender la psicología detrás de los ataques de ingeniería social"
+		],
+		"success_criteria": {
+			"min_correct_answers": 3,
+			"total_questions": 5,
+			"understanding_required": true
+		},
+		"feedback_responses": {
+			"correct": [
+				"¡Excelente! Has identificado correctamente las técnicas de manipulación.",
+				"Muy bien, tu análisis es preciso y muestra buen entendimiento.",
+				"Correcto! Reconocer estos patrones te protegerá en situaciones reales."
+			],
+			"incorrect": [
+				"No exactamente. Revisa los red flags en la conversación nuevamente.",
+				"Hay técnicas de manipulación que no has identificado. Analiza más detalladamente.",
+				"Esta respuesta necesita más análisis. Observa el comportamiento del atacante."
+			],
+			"hints": [
+				"Observa si hay presión de tiempo artificial",
+				"¿Se está haciendo pasar por alguien con autoridad?",
+				"¿Está solicitando información que nunca deberías compartir?",
+				"¿Te está pidiendo saltarte procesos normales de verificación?"
+			]
+		},
+		"featured": true,
+		"status": "published",
+		"date_created": "2026-02-24T01:16:58.987Z",
+		"date_updated": "2026-02-24T05:04:09.650Z",
+		"exercises": [
+			{
+				"title": "Identificación de Técnicas de Ingeniería Social",
+				"description": "Analiza conversaciones reales y identifica las técnicas de manipulación utilizadas",
+				"type": "social_engineering_analysis"
+			}
+		],
+		"id": "5e3c3280-9abf-45d6-8a25-6bb76ba5e5db",
+		"practice_category": []
+	},
+	{
+		"description": "Aprende a configurar correctamente los ajustes de privacidad y seguridad en diferentes plataformas. Practica tomando las decisiones correctas para proteger tu privacidad digital y mejorar tu postura de seguridad.",
+		"practice_type": "settings_configuration",
+		"slug": "security-settings-configuration",
+		"title": "Configuración de Ajustes de Seguridad",
+		"difficulty": "intermediate",
+		"estimated_time": 12,
+		"scenario_data": {
+			"instructions": "Para cada escenario, selecciona los ajustes apropiados para maximizar la seguridad y la privacidad. Elige si activar o desactivar cada ajuste basándote en las mejores prácticas de seguridad.",
+			"learning_objectives": [
+				"Configurar los ajustes del navegador para una privacidad y seguridad óptimas",
+				"Aplicar correctamente los ajustes de seguridad de Windows",
+				"Gestionar eficazmente los ajustes de privacidad en redes sociales",
+				"Comprender las implicaciones de seguridad de las diferentes opciones de configuración"
+			],
+			"scenarios": [
+				{
+					"id": 1,
+					"title": "Configuración de Privacidad del Navegador",
+					"context": "Estás configurando un nuevo navegador Chrome para una navegación segura. Configura los siguientes ajustes de privacidad y seguridad:",
+					"category": "browser_privacy",
+					"description": "Configura los ajustes del navegador Chrome para protegerte contra el rastreo, el malware y las violaciones de privacidad, manteniendo la usabilidad.",
+					"settings": [
+						{
+							"id": "block_third_party_cookies",
+							"name": "Bloquear cookies de terceros",
+							"description": "Evita que los sitios web instalen cookies que puedan rastrearte a través de diferentes sitios",
+							"should_enable": true,
+							"explanation": "¡Correcto! Bloquear las cookies de terceros evita el rastreo entre sitios y protege tu privacidad al navegar. Esta es una de las medidas de privacidad más efectivas.",
+							"category": "privacy",
+							"impact": "high"
+						},
+						{
+							"id": "save_passwords",
+							"name": "Ofrecer guardar contraseñas",
+							"description": "Permitir que Chrome guarde y autocomplete contraseñas para los sitios web",
+							"should_enable": false,
+							"explanation": "Incorrecto. Aunque es conveniente, los gestores de contraseñas de los navegadores son menos seguros que los gestores de contraseñas dedicados. Usa un gestor de contraseñas dedicado en su lugar.",
+							"category": "security",
+							"impact": "medium"
+						},
+						{
+							"id": "safe_browsing",
+							"name": "Navegación Segura (Protección Mejorada)",
+							"description": "Activa la protección mejorada de Google contra sitios y descargas peligrosas",
+							"should_enable": true,
+							"explanation": "¡Correcto! La Navegación Segura mejorada proporciona protección en tiempo real contra phishing, malware y descargas peligrosas.",
+							"category": "security",
+							"impact": "high"
+						},
+						{
+							"id": "location_sharing",
+							"name": "Preguntar antes de acceder a la ubicación",
+							"description": "Requerir permiso antes de que los sitios web puedan acceder a tu ubicación",
+							"should_enable": true,
+							"explanation": "¡Correcto! Exige siempre permiso explícito para el acceso a la ubicación. Esto evita que los sitios web rastreen tu ubicación física sin tu consentimiento.",
+							"category": "privacy",
+							"impact": "high"
+						},
+						{
+							"id": "notification_permissions",
+							"name": "Preguntar antes de enviar notificaciones",
+							"description": "Requerir permiso antes de que los sitios web puedan enviar notificaciones push",
+							"should_enable": true,
+							"explanation": "¡Correcto! Requerir permiso evita las notificaciones de spam y te da control sobre qué sitios pueden interrumpirte.",
+							"category": "privacy",
+							"impact": "medium"
+						},
+						{
+							"id": "javascript_enabled",
+							"name": "JavaScript activado",
+							"description": "Permitir que los sitios web ejecuten código JavaScript",
+							"should_enable": true,
+							"explanation": "¡Correcto! Aunque JavaScript puede plantear riesgos de seguridad, desactivarlo por completo rompe la mayoría de los sitios web modernos. Es mejor utilizar otras medidas de seguridad.",
+							"category": "functionality",
+							"impact": "low"
+						}
+					]
+				},
+				{
+					"id": 2,
+					"title": "Configuración de Seguridad de Windows",
+					"context": "Estás configurando la seguridad en una computadora Windows nueva. Configura estos ajustes de seguridad esenciales:",
+					"category": "os_security",
+					"description": "Configura las funciones de seguridad de Windows 10/11 para protegerte contra malware, accesos no autorizados y vulnerabilidades de seguridad.",
+					"settings": [
+						{
+							"id": "windows_defender",
+							"name": "Protección en tiempo real de Windows Defender",
+							"description": "Activa el escaneo en tiempo real en busca de malware y amenazas",
+							"should_enable": true,
+							"explanation": "¡Correcto! La protección en tiempo real es esencial para detectar y bloquear el malware cuando intenta instalarse o ejecutarse en tu sistema.",
+							"category": "security",
+							"impact": "high"
+						},
+						{
+							"id": "automatic_updates",
+							"name": "Instalar actualizaciones automáticamente",
+							"description": "Permitir que Windows descargue e instale actualizaciones de seguridad automáticamente",
+							"should_enable": true,
+							"explanation": "¡Correcto! Las actualizaciones automáticas garantizan que recibas los parches de seguridad críticos rápidamente, reduciendo tu exposición a vulnerabilidades conocidas.",
+							"category": "security",
+							"impact": "high"
+						},
+						{
+							"id": "uac_control",
+							"name": "Control de Cuentas de Usuario (UAC)",
+							"description": "Mostrar notificaciones cuando las aplicaciones intenten realizar cambios en el equipo",
+							"should_enable": true,
+							"explanation": "¡Correcto! El UAC proporciona una capa de seguridad importante al requerir confirmación para los cambios en el sistema, ayudando a evitar que el malware realice modificaciones no autorizadas.",
+							"category": "security",
+							"impact": "high"
+						},
+						{
+							"id": "windows_firewall",
+							"name": "Firewall de Windows Defender",
+							"description": "Activa la protección de firewall para las conexiones de red",
+							"should_enable": true,
+							"explanation": "¡Correcto! El firewall bloquea conexiones de red no autorizadas y proporciona una protección esencial contra ataques basados en la red.",
+							"category": "security",
+							"impact": "high"
+						},
+						{
+							"id": "remote_desktop",
+							"name": "Habilitar Escritorio Remoto",
+							"description": "Permitir que otras computadoras se conecten a esta PC de forma remota",
+							"should_enable": false,
+							"explanation": "¡Correcto! El Escritorio Remoto debe estar desactivado a menos que sea específicamente necesario, ya que crea un punto de entrada potencial para los atacantes.",
+							"category": "security",
+							"impact": "medium"
+						},
+						{
+							"id": "file_extensions",
+							"name": "Ocultar extensiones para tipos de archivo conocidos",
+							"description": "No mostrar extensiones de archivo para archivos con tipos reconocidos",
+							"should_enable": false,
+							"explanation": "¡Correcto! Mostrar las extensiones de archivo ayuda a identificar archivos potencialmente peligrosos como 'documento.pdf.exe', que podría ser malware disfrazado de PDF.",
+							"category": "security",
+							"impact": "medium"
+						},
+						{
+							"id": "admin_approval_mode",
+							"name": "Modo de aprobación de administrador para la cuenta de Administrador integrada",
+							"description": "Requerir avisos de UAC incluso para la cuenta de Administrador integrada",
+							"should_enable": true,
+							"explanation": "¡Correcto! Esto asegura que incluso las cuentas de administrador pasen por los avisos de UAC, proporcionando una mejor seguridad contra ataques de escalada de privilegios.",
+							"category": "security",
+							"impact": "medium"
+						}
+					]
+				},
+				{
+					"id": 3,
+					"title": "Ajustes de Privacidad en Redes Sociales",
+					"context": "Estás revisando tus ajustes de privacidad de Facebook para proteger tu información personal. Configura estas opciones de privacidad:",
+					"category": "social_media_privacy",
+					"description": "Configura los ajustes de privacidad de Facebook para controlar quién puede ver tu información y cómo se utilizan tus datos para publicidad.",
+					"settings": [
+						{
+							"id": "profile_visibility",
+							"name": "Permitir búsqueda de perfil por correo/teléfono",
+							"description": "Permitir que las personas encuentren tu perfil usando tu dirección de correo electrónico o número de teléfono",
+							"should_enable": false,
+							"explanation": "¡Correcto! Desactivar esto evita que extraños encuentren tu perfil a través de filtraciones de datos o bases de datos de números de teléfono.",
+							"category": "privacy",
+							"impact": "high"
+						},
+						{
+							"id": "friend_suggestions",
+							"name": "Permitir que Facebook te sugiera como amigo basándose en los contactos",
+							"description": "Dejar que Facebook sugiera tu perfil a personas que tienen tu información de contacto",
+							"should_enable": false,
+							"explanation": "¡Correcto! Esto evita que Facebook revele tu presencia a personas que puedan haber obtenido tu información de contacto sin tu consentimiento.",
+							"category": "privacy",
+							"impact": "medium"
+						},
+						{
+							"id": "location_tracking",
+							"name": "Rastreo de ubicación",
+							"description": "Permitir que Facebook rastree tu ubicación para registros (check-ins) y amigos cercanos",
+							"should_enable": false,
+							"explanation": "¡Correcto! El rastreo de ubicación crea un perfil detallado de tus movimientos y hábitos. Desactívalo a menos que uses específicamente las funciones de ubicación.",
+							"category": "privacy",
+							"impact": "high"
+						},
+						{
+							"id": "face_recognition",
+							"name": "Reconocimiento facial",
+							"description": "Permitir que Facebook te reconozca en fotos y sugiera etiquetas",
+							"should_enable": false,
+							"explanation": "¡Correcto! El reconocimiento facial crea un perfil biométrico y puede usarse para identificarte en fotos que no consentiste compartir.",
+							"category": "privacy",
+							"impact": "high"
+						},
+						{
+							"id": "ad_data_usage",
+							"name": "Usar datos de socios para anuncios",
+							"description": "Permitir que Facebook use datos de otras empresas para mostrarte anuncios personalizados",
+							"should_enable": false,
+							"explanation": "¡Correcto! Esto evita que Facebook combine tu perfil con fuentes de datos externas, reduciendo la publicidad dirigida y la recopilación de datos.",
+							"category": "privacy",
+							"impact": "medium"
+						},
+						{
+							"id": "two_factor_auth",
+							"name": "Autenticación de dos factores",
+							"description": "Requerir una segunda forma de verificación al iniciar sesión",
+							"should_enable": true,
+							"explanation": "¡Correcto! La autenticación de dos factores mejora significativamente la seguridad de la cuenta al requerir algo que sabes (contraseña) y algo que tienes (teléfono).",
+							"category": "security",
+							"impact": "high"
+						},
+						{
+							"id": "post_visibility_default",
+							"name": "Visibilidad de publicaciones por defecto: Público",
+							"description": "Hacer que las nuevas publicaciones sean visibles para todos por defecto",
+							"should_enable": false,
+							"explanation": "¡Correcto! Elige 'Amigos' o ajustes más restrictivos por defecto. Siempre puedes hacer pública una publicación específica, pero lo privado por defecto es más seguro.",
+							"category": "privacy",
+							"impact": "medium"
+						}
+					]
+				}
+			],
+			"scoring": {
+				"max_score": 20,
+				"passing_score": 14,
+				"points_per_setting": 1,
+				"bonus_points": {
+					"all_high_impact_correct": 2,
+					"perfect_scenario": 1
+				}
+			},
+			"categories": [
+				{
+					"id": "privacy",
+					"name": "Protección de Privacidad",
+					"description": "Ajustes que controlan cómo se recopila y comparte tu información personal",
+					"icon": "🔒"
+				},
+				{
+					"id": "security",
+					"name": "Mejora de la Seguridad",
+					"description": "Ajustes que protegen contra malware, ataques y accesos no autorizados",
+					"icon": "🛡️"
+				},
+				{
+					"id": "functionality",
+					"name": "Equilibrio de Funcionalidad",
+					"description": "Ajustes que equilibran la seguridad con la usabilidad y las funciones",
+					"icon": "⚖️"
+				}
+			]
+		},
+		"learning_objectives": [
+			"Configurar los ajustes del navegador para una privacidad y seguridad óptimas",
+			"Aplicar correctamente los ajustes de seguridad de Windows",
+			"Gestionar eficazmente los ajustes de privacidad en redes sociales",
+			"Comprender las implicaciones de seguridad de las diferentes opciones de configuración",
+			"Equilibrar la seguridad con la usabilidad en las configuraciones del sistema"
+		],
+		"success_criteria": {
+			"min_correct_settings": 14,
+			"total_settings": 20,
+			"understanding_required": true,
+			"high_impact_settings_weight": 2
+		},
+		"feedback_responses": {
+			"correct": [
+				"¡Excelente! Has configurado esta opción correctamente para mejorar tu seguridad.",
+				"¡Correcto! Esta configuración te ayudará a proteger tu privacidad.",
+				"¡Muy bien! Has tomado la decisión de seguridad adecuada."
+			],
+			"incorrect": [
+				"No exactamente. Esta configuración podría comprometer tu privacidad o seguridad.",
+				"Incorrecto. Revisa por qué esta opción no es la más segura.",
+				"Esta configuración no es óptima para tu protección. Aprende por qué."
+			],
+			"hints": [
+				"Piensa en qué información estás compartiendo y con quién",
+				"Considera si esta configuración te expone a riesgos de seguridad",
+				"¿Esta opción te da más control o menos control sobre tu información?",
+				"¿Los beneficios de conveniencia superan los riesgos de seguridad?"
+			]
+		},
+		"featured": true,
+		"status": "published",
+		"date_created": "2026-02-24T02:12:24.891Z",
+		"date_updated": "2026-02-24T05:04:09.678Z",
+		"exercises": [
+			{
+				"title": "Configuración de Ajustes de Seguridad",
+				"description": "Configura los ajustes de privacidad y seguridad en diferentes plataformas para una protección óptima",
+				"type": "settings_configuration"
+			}
+		],
+		"id": "77050f4e-a965-4d6a-a17f-f1956012a598",
+		"practice_category": []
+	},
+	{
+		"description": "Una campaña sofisticada de spear-phishing ha comprometido las credenciales de varios ejecutivos C-level. Los atacantes tienen acceso a emails corporativos y están intentando transferencias fraudulentas.",
+		"practice_type": "incident_response",
+		"slug": "campana-phishing-dirigida-ejecutivos",
+		"title": "Campaña de Phishing Dirigida a Ejecutivos",
+		"difficulty": "intermediate",
+		"estimated_time": 16,
+		"scenario_data": {
+			"crisis_title": "🎣 SPEAR-PHISHING EXITOSO - EJECUTIVOS COMPROMETIDOS",
+			"crisis_description": "Tu CEO acaba de reportar emails sospechosos enviados desde su cuenta. La investigación revela que 4 ejecutivos C-level cayeron en una campaña de spear-phishing. Los atacantes están enviando emails de transferencias bancarias falsas a finanzas.",
+			"crisis_details": [
+				"👥 Comprometidos: CEO, CFO, CTO, VP Sales (4 cuentas ejecutivas)",
+				"📧 Actividad maliciosa: 23 emails fraudulentos enviados internamente",
+				"💰 Intento de fraude: Solicitudes de transferencia por $1.2M",
+				"🏦 Estado bancario: Finanzas ha pausado todas las transferencias",
+				"🔍 Campaña: Emails altamente personalizados usando información pública"
+			],
+			"decisions": [
+				{
+					"id": "reset_all_executive_passwords",
+					"text": "Resetear inmediatamente todas las contraseñas ejecutivas",
+					"consequence": "correct",
+					"explanation": "✅ CORRECTO: Cambiar contraseñas comprometidas inmediatamente previene acceso continuo. Debe ser la primera acción técnica para contener la brecha.",
+					"points": 25
+				},
+				{
+					"id": "alert_all_employees",
+					"text": "Alertar a todos los empleados sobre emails fraudulentos",
+					"consequence": "correct",
+					"explanation": "✅ CORRECTO: Una alerta rápida a toda la empresa previene que empleados actúen en emails fraudulentos. La comunicación interna rápida es crucial.",
+					"points": 20
+				},
+				{
+					"id": "investigate_quietly",
+					"text": "Investigar discretamente sin alertar a la organización",
+					"consequence": "incorrect",
+					"explanation": "❌ INCORRECTO: Con emails fraudulentos ya circulando internamente, el silencio puede resultar en pérdidas financieras. Se necesita comunicación inmediata.",
+					"points": 0
+				},
+				{
+					"id": "enable_mfa_immediately",
+					"text": "Habilitar MFA obligatorio para todas las cuentas ejecutivas",
+					"consequence": "correct",
+					"explanation": "✅ CORRECTO: MFA previene acceso futuro incluso con credenciales comprometidas. Es una medida de seguridad crítica post-incidente.",
+					"points": 25
+				}
+			]
+		},
+		"learning_objectives": null,
+		"success_criteria": null,
+		"feedback_responses": null,
+		"featured": false,
+		"status": "published",
+		"date_created": "2026-02-24T03:11:54.696Z",
+		"date_updated": "2026-02-24T05:04:09.695Z",
+		"exercises": null,
+		"id": "93786930-4906-43bc-85e9-105dcb33e2b8",
+		"practice_category": []
+	},
+	{
+		"description": "Aprende a identificar correos electrónicos de phishing analizando un aviso de seguridad de PayPal sospechoso.",
+		"practice_type": "email_analysis",
+		"slug": "phishing-email-detection",
+		"title": "Desafío de Detección de Correos de Phishing",
+		"difficulty": "beginner",
+		"estimated_time": 5,
+		"scenario_data": null,
+		"learning_objectives": [
+			"Identificar técnicas de suplantación de dominio (payp4l vs paypal)",
+			"Reconocer tácticas basadas en la urgencia y el miedo",
+			"Verificar la autenticidad del remitente antes de actuar",
+			"Analizar URLs y dominios sospechosos",
+			"Entender los patrones de comunicación legítimos frente a los de phishing"
+		],
+		"success_criteria": {
+			"correct_identification": true,
+			"minimum_red_flags_found": 2,
+			"time_limit_seconds": 300
+		},
+		"feedback_responses": {
+			"legitimate": {
+				"correct": false,
+				"title": "Incorrecto - Este es un correo de Phishing",
+				"message": "Este correo contiene varias señales de alerta que indican que es un intento de phishing. El dominio 'payp4l.com' no es el dominio real de PayPal, y las tácticas de urgencia están diseñadas para que actúes sin pensar.",
+				"red_flags_explanation": [
+					"❌ Dominio mal escrito: 'payp4l.com' en lugar de 'paypal.com'",
+					"❌ Tácticas de urgencia: Fecha límite falsa de 24 horas",
+					"❌ Enlace sospechoso: Dirige a un dominio falso",
+					"❌ Saludo genérico: Falta de personalización"
+				]
+			},
+			"suspicious": {
+				"correct": true,
+				"title": "¡Excelente! Has identificado el correo de Phishing",
+				"message": "Has identificado correctamente que se trata de un correo de phishing. ¡Buen trabajo detectando las señales de alerta!",
+				"red_flags_explanation": [
+					"✅ Dominio mal escrito: Notaste 'payp4l.com' vs 'paypal.com'",
+					"✅ Tácticas de urgencia: Reconociste la presión de la fecha límite falsa",
+					"✅ Enlace sospechoso: Identificaste el dominio de verificación falso",
+					"✅ Saludo genérico: Notaste la falta de personalización"
+				]
+			},
+			"unsure": {
+				"correct": false,
+				"title": "Este correo es, de hecho, sospechoso",
+				"message": "En caso de duda, ¡siempre es mejor ser cauteloso! Este correo es definitivamente un intento de phishing. Esto es lo que debes buscar:",
+				"red_flags_explanation": [
+					"🔍 Revisa el dominio cuidadosamente: 'payp4l.com' tiene un número 4 en lugar de la 'a'",
+					"🔍 Las empresas reales no crean plazos urgentes por correo electrónico",
+					"🔍 Pasa el cursor sobre los enlaces para ver a dónde van realmente",
+					"🔍 Los correos legítimos usan tu nombre real, no 'estimado cliente'"
+				]
+			}
+		},
+		"featured": true,
+		"status": "published",
+		"date_created": "2026-02-23T23:54:51.453Z",
+		"date_updated": "2026-02-24T05:04:09.714Z",
+		"exercises": [
+			{
+				"id": 1,
+				"title": "Suspensión de cuenta de PayPal",
+				"difficulty": "beginner",
+				"estimated_time": 5,
+				"email": {
+					"from": "security@payp4l.com",
+					"from_display": "Equipo de Seguridad de PayPal",
+					"subject": "URGENTE: Cuenta suspendida - Verifíquela ahora",
+					"timestamp": "Hoy, 2:47 PM",
+					"body": "Estimado cliente:\n\nSu cuenta de PayPal ha sido suspendida debido a actividad sospechosa. Para restaurar el acceso, por favor verifique su identidad de inmediato.\n\nHaga clic aquí para verificar: https://payp4l-security.com/verify\n\nSi no realiza la verificación en un plazo de 24 horas, la cuenta se cerrará de forma permanente.\n\nEquipo de Seguridad de PayPal"
+				},
+				"options": [
+					{
+						"id": "reply",
+						"text": "Responder pidiendo más información"
+					},
+					{
+						"id": "click_link",
+						"text": "Hacer clic en el enlace de verificación"
+					},
+					{
+						"id": "report_phishing",
+						"text": "Reportar como phishing y eliminar"
+					},
+					{
+						"id": "forward",
+						"text": "Reenviar a un amigo para pedir consejo"
+					}
+				],
+				"feedback_responses": {
+					"reply": {
+						"is_correct": false,
+						"title": "Incorrecto - No respondas",
+						"message": "Responder confirma que tu correo está activo y puede dar lugar a más intentos de phishing.",
+						"explanation": "Nunca respondas a correos sospechosos. Esto confirma a los estafadores que tu cuenta está activa."
+					},
+					"click_link": {
+						"is_correct": false,
+						"title": "¡Opción peligrosa!",
+						"message": "Este enlace lleva a un sitio falso de PayPal diseñado para robar tus credenciales.",
+						"explanation": "Nota que el dominio es 'payp4l.com' (con el número 4) en lugar de 'paypal.com'. Verifica siempre los dominios con cuidado."
+					},
+					"report_phishing": {
+						"is_correct": true,
+						"title": "¡Excelente elección!",
+						"message": "Identificaste correctamente este correo de phishing y tomaste la acción adecuada.",
+						"explanation": "Señales clave: dominio mal escrito (payp4l), tácticas de urgencia y enlace de verificación sospechoso."
+					},
+					"forward": {
+						"is_correct": false,
+						"title": "No reenvíes correos de phishing",
+						"message": "Reenviarlo propaga el intento de phishing a otros y podría comprometer su seguridad.",
+						"explanation": "En lugar de reenviarlo, reporta el correo a tu departamento de IT o a tu proveedor de correo."
+					}
+				}
+			},
+			{
+				"id": 2,
+				"title": "Alerta de Seguridad de Bank of America",
+				"difficulty": "intermediate",
+				"estimated_time": 6,
+				"email": {
+					"from": "security-alerts@bank0famerica.com",
+					"from_display": "Seguridad de Bank of America",
+					"subject": "Alerta de Seguridad: Se detectó un inicio de sesión desde un nuevo dispositivo",
+					"timestamp": "Hoy, 11:23 AM",
+					"body": "Estimado cliente:\n\nDetectamos un inicio de sesión desde un dispositivo no reconocido en Nigeria a las 3:42 AM EST.\n\nDispositivo: PC Windows\nUbicación: Lagos, Nigeria\nIP: 197.210.76.45\n\nSi no fue usted, asegure su cuenta de inmediato:\nhttps://secure-boa.verification-center.net/login\n\nServicio al Cliente de Bank of America"
+				},
+				"options": [
+					{
+						"id": "panic_click",
+						"text": "Hacer clic inmediatamente en el enlace de seguridad"
+					},
+					{
+						"id": "call_bank",
+						"text": "Llamar al banco directamente usando el número de mi tarjeta"
+					},
+					{
+						"id": "ignore",
+						"text": "Ignorar el correo por completo"
+					},
+					{
+						"id": "check_account",
+						"text": "Iniciar sesión en mi cuenta a través del sitio web oficial"
+					}
+				],
+				"feedback_responses": {
+					"panic_click": {
+						"is_correct": false,
+						"title": "¡No actúes en pánico!",
+						"message": "El enlace va a un sitio falso de Bank of America diseñado para robar tus credenciales de acceso.",
+						"explanation": "Nota el dominio sospechoso: 'secure-boa.verification-center.net' no es el dominio oficial de Bank of America."
+					},
+					"call_bank": {
+						"is_correct": true,
+						"title": "¡Práctica de seguridad perfecta!",
+						"message": "Llamar al banco directamente es la forma más segura de verificar si esta alerta es legítima.",
+						"explanation": "Usa siempre la información de contacto de fuentes oficiales (tu tarjeta, sitio web oficial) en lugar de la información en correos sospechosos."
+					},
+					"ignore": {
+						"is_correct": false,
+						"title": "No ignores, pero tampoco hagas clic",
+						"message": "Aunque no hacer clic es bueno, deberías verificar si tu cuenta está realmente comprometida.",
+						"explanation": "El enfoque correcto es verificar la seguridad de tu cuenta a través de canales oficiales, no ignorar las amenazas potenciales por completo."
+					},
+					"check_account": {
+						"is_correct": true,
+						"title": "¡Buena práctica de seguridad!",
+						"message": "Iniciar sesión a través del sitio web oficial es una forma segura de verificar el estado de tu cuenta.",
+						"explanation": "Al ir directamente al sitio oficial de Bank of America, puedes verificar si hay alertas de seguridad reales."
+					}
+				}
+			},
+			{
+				"id": 3,
+				"title": "Aviso de expiración de Microsoft 365",
+				"difficulty": "advanced",
+				"estimated_time": 7,
+				"email": {
+					"from": "no-reply@microsoft-office365.com",
+					"from_display": "Microsoft Office 365",
+					"subject": "Tu suscripción a Microsoft 365 expira en 3 días",
+					"timestamp": "Ayer, 4:15 PM",
+					"body": "Hola:\n\nTu suscripción a Microsoft 365 expirará el 15 de marzo de 2024.\n\nPara evitar la interrupción del servicio, por favor renueva tu suscripción:\n\nRenovar Suscripción: https://microsoft-office365.com/renew?user=john.doe@company.com\n\nDetalles de la Suscripción:\n- Plan: Microsoft 365 Business Premium\n- Usuarios: 25\n- Renovación automática: Desactivada\n\nGracias,\nEquipo de Soporte de Microsoft"
+				},
+				"options": [
+					{
+						"id": "renew_immediately",
+						"text": "Hacer clic en renovar para evitar la interrupción del servicio"
+					},
+					{
+						"id": "verify_admin",
+						"text": "Consultar con el administrador de IT sobre el estado de la suscripción"
+					},
+					{
+						"id": "microsoft_account",
+						"text": "Iniciar sesión directamente en el Centro de Administración de Microsoft"
+					},
+					{
+						"id": "delete_suspicious",
+						"text": "Eliminar por sospechoso - esto parece falso"
+					}
+				],
+				"feedback_responses": {
+					"renew_immediately": {
+						"is_correct": false,
+						"title": "¡Esto podría ser Phishing!",
+						"message": "Este correo tiene algunos elementos que parecen legítimos, pero el dominio es sospechoso.",
+						"explanation": "Aunque 'microsoft-office365.com' parece oficial, Microsoft suele usar los dominios 'office.com' o 'microsoft.com'. Verifica siempre a través de canales oficiales."
+					},
+					"verify_admin": {
+						"is_correct": true,
+						"title": "¡Excelente seguridad en equipo!",
+						"message": "Consultar con tu administrador de IT es la mejor práctica para suscripciones empresariales.",
+						"explanation": "Los administradores de IT gestionan las suscripciones de la empresa y pueden verificar de inmediato si este aviso es legítimo."
+					},
+					"microsoft_account": {
+						"is_correct": true,
+						"title": "¡Gran práctica de seguridad!",
+						"message": "Iniciar sesión en el Centro de Administración oficial de Microsoft es la forma más segura de verificar el estado de la suscripción.",
+						"explanation": "Los servicios oficiales de Microsoft mostrarán el estado real de tu suscripción y las fechas de vencimiento."
+					},
+					"delete_suspicious": {
+						"is_correct": false,
+						"title": "Buen instinto, pero verifica primero",
+						"message": "Aunque ser cauteloso es bueno, este correo podría ser realmente legítimo.",
+						"explanation": "Algunos elementos parecen auténticos. El mejor enfoque es verificar a través de canales oficiales antes de eliminar avisos importantes."
+					}
+				}
+			}
+		],
+		"id": "b46c84ed-1b66-4aaa-bd0f-9510d311b4c4",
+		"practice_category": []
+	},
+	{
+		"description": "Aprende a identificar URLs maliciosas y técnicas de phishing común. Evalúa 12 URLs reales y desarrolla tu ojo para detectar links sospechosos.",
+		"practice_type": "quiz_knowledge",
+		"slug": "url-security-assessment-quiz",
+		"title": "URL Security Assessment Quiz",
+		"difficulty": "beginner",
+		"estimated_time": 8,
+		"scenario_data": {
+			"total_questions": 12,
+			"passing_score": 75,
+			"categories": [
+				"URL Analysis",
+				"Domain Security",
+				"Phishing Detection",
+				"Safe Browsing"
+			],
+			"questions": [
+				{
+					"id": "q1",
+					"category": "Phishing Detection",
+					"difficulty": "beginner",
+					"points": 1,
+					"question": "¿Cuál de estas URLs de 'PayPal' es MÁS sospechosa?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "https://www.paypal.com/signin"
+						},
+						{
+							"id": "b",
+							"text": "http://paypal-security-update.tk/urgent"
+						},
+						{
+							"id": "c",
+							"text": "https://secure.paypal.com/webapps/mpp/home"
+						},
+						{
+							"id": "d",
+							"text": "https://business.paypal.com/signup"
+						}
+					],
+					"correct_answer": "b",
+					"explanation": "✅ **Correcto**: Esta URL tiene múltiples red flags: usa HTTP (no seguro), dominio .tk (top-level domain gratuito común en phishing), y contiene 'urgent' para crear presión psicológica."
+				},
+				{
+					"id": "q2",
+					"category": "Domain Security",
+					"difficulty": "intermediate",
+					"points": 2,
+					"question": "¿Qué técnica de phishing utiliza la URL 'arnazon.com' en lugar de 'amazon.com'?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Typosquatting"
+						},
+						{
+							"id": "b",
+							"text": "Subdomain spoofing"
+						},
+						{
+							"id": "c",
+							"text": "Homograph attack"
+						},
+						{
+							"id": "d",
+							"text": "URL shortening"
+						}
+					],
+					"correct_answer": "a",
+					"explanation": "✅ **Correcto**: Typosquatting es registrar dominios con errores tipográficos comunes para capturar usuarios que escriben mal las URLs legítimas. 'arnazon.com' vs 'amazon.com' es un ejemplo clásico."
+				},
+				{
+					"id": "q3",
+					"category": "URL Analysis",
+					"difficulty": "beginner",
+					"points": 1,
+					"question": "Una URL que comienza con HTTP (sin S) nunca debe usarse para actividades sensibles.",
+					"type": "true_false",
+					"options": [
+						{
+							"id": "true",
+							"text": "Verdadero"
+						},
+						{
+							"id": "false",
+							"text": "Falso"
+						}
+					],
+					"correct_answer": "true",
+					"explanation": "✅ **Correcto**: HTTP no cifra los datos en tránsito, haciéndolos vulnerables a interceptación. Siempre verifica que sitios sensibles (banca, compras, login) usen HTTPS (con el candado verde)."
+				},
+				{
+					"id": "q4",
+					"category": "Phishing Detection",
+					"difficulty": "advanced",
+					"points": 3,
+					"question": "¿Cuál es el problema principal con esta URL: 'https://secure-bankofamerica.phishing-example.com/login'?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "No usa HTTPS"
+						},
+						{
+							"id": "b",
+							"text": "El verdadero dominio es 'phishing-example.com', no 'bankofamerica'"
+						},
+						{
+							"id": "c",
+							"text": "Tiene demasiados subdominios"
+						},
+						{
+							"id": "d",
+							"text": "La palabra 'secure' es sospechosa"
+						}
+					],
+					"correct_answer": "b",
+					"explanation": "✅ **Correcto**: En URLs, se lee de derecha a izquierda. El dominio real es 'phishing-example.com' y todo lo anterior son subdominios. Aunque contenga 'bankofamerica', NO es el sitio oficial del banco."
+				},
+				{
+					"id": "q5",
+					"category": "Safe Browsing",
+					"difficulty": "intermediate",
+					"points": 2,
+					"question": "¿Cuál es la forma MÁS segura de acceder a tu cuenta bancaria online?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Hacer clic en enlaces de emails del banco"
+						},
+						{
+							"id": "b",
+							"text": "Buscar el banco en Google y hacer clic en el primer resultado"
+						},
+						{
+							"id": "c",
+							"text": "Escribir directamente la URL oficial en el navegador"
+						},
+						{
+							"id": "d",
+							"text": "Usar enlaces guardados en redes sociales"
+						}
+					],
+					"correct_answer": "c",
+					"explanation": "✅ **Correcto**: Escribir directamente la URL oficial elimina riesgos de phishing por email, resultados de búsqueda maliciosos o enlaces comprometidos en redes sociales. Es la práctica más segura."
+				},
+				{
+					"id": "q6",
+					"category": "Domain Security",
+					"difficulty": "beginner",
+					"points": 1,
+					"question": "Los acortadores de URL (bit.ly, tinyurl) siempre son seguros de usar.",
+					"type": "true_false",
+					"options": [
+						{
+							"id": "true",
+							"text": "Verdadero"
+						},
+						{
+							"id": "false",
+							"text": "Falso"
+						}
+					],
+					"correct_answer": "false",
+					"explanation": "❌ **Falso**: Los acortadores ocultan la URL real, haciéndolos perfectos para ataques. Atacantes pueden esconder URLs maliciosas detrás de links cortos. Siempre verifica dónde te llevan antes de hacer clic."
+				},
+				{
+					"id": "q7",
+					"category": "URL Analysis",
+					"difficulty": "intermediate",
+					"points": 2,
+					"question": "¿Qué indica un certificado SSL válido en una página web?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "El sitio web es completamente seguro y confiable"
+						},
+						{
+							"id": "b",
+							"text": "Los datos entre tu navegador y el servidor están cifrados"
+						},
+						{
+							"id": "c",
+							"text": "El sitio no puede tener malware"
+						},
+						{
+							"id": "d",
+							"text": "La empresa que opera el sitio es legítima"
+						}
+					],
+					"correct_answer": "b",
+					"explanation": "✅ **Correcto**: SSL/TLS solo garantiza cifrado entre navegador y servidor. NO garantiza que el sitio sea legítimo, libre de malware o que la empresa sea confiable. Sitios maliciosos también pueden tener SSL válido."
+				},
+				{
+					"id": "q8",
+					"category": "Phishing Detection",
+					"difficulty": "advanced",
+					"points": 3,
+					"question": "¿Cuál de estos dominios es más peligroso para una víctima de phishing de Microsoft?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "microsft.com (falta 'o')"
+						},
+						{
+							"id": "b",
+							"text": "microsoft-security.org"
+						},
+						{
+							"id": "c",
+							"text": "мicrosoft.com (primera letra es cirílica)"
+						},
+						{
+							"id": "d",
+							"text": "microsofthelp.net"
+						}
+					],
+					"correct_answer": "c",
+					"explanation": "✅ **Correcto**: Este es un ataque de homógrafo donde caracteres de diferentes alfabetos se ven idénticos. La 'м' cirílica parece igual que la 'm' latina, haciendo la URL visualmente idéntica a 'microsoft.com' pero técnicamente diferente."
+				},
+				{
+					"id": "q9",
+					"category": "Safe Browsing",
+					"difficulty": "beginner",
+					"points": 1,
+					"question": "¿Qué debes hacer antes de introducir credenciales en cualquier sitio web?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Verificar que la URL sea correcta y tenga HTTPS"
+						},
+						{
+							"id": "b",
+							"text": "Asegurarte de que el sitio tenga muchos anuncios"
+						},
+						{
+							"id": "c",
+							"text": "Comprobar si el sitio pide información personal adicional"
+						},
+						{
+							"id": "d",
+							"text": "Verificar si el sitio tiene redes sociales"
+						}
+					],
+					"correct_answer": "a",
+					"explanation": "✅ **Correcto**: Siempre verificar la URL correcta y HTTPS antes de introducir credenciales. El candado verde indica conexión cifrada, pero también debes confirmar que estás en el dominio oficial correcto."
+				},
+				{
+					"id": "q10",
+					"category": "Domain Security",
+					"difficulty": "intermediate",
+					"points": 2,
+					"question": "¿Cuál de estos TLDs (Top Level Domains) es más probable que se use en ataques de phishing?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": ".com"
+						},
+						{
+							"id": "b",
+							"text": ".org"
+						},
+						{
+							"id": "c",
+							"text": ".tk"
+						},
+						{
+							"id": "d",
+							"text": ".edu"
+						}
+					],
+					"correct_answer": "c",
+					"explanation": "✅ **Correcto**: .tk (Tokelau) es gratuito y no requiere verificación de identidad, haciéndolo popular entre atacantes. Aunque .com también puede usarse para phishing, .tk tiene una concentración desproporcionadamente alta de sitios maliciosos."
+				},
+				{
+					"id": "q11",
+					"category": "URL Analysis",
+					"difficulty": "advanced",
+					"points": 3,
+					"question": "Una URL como 'https://legitimate-site.com@malicious-site.com/login' te llevará a:",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "legitimate-site.com"
+						},
+						{
+							"id": "b",
+							"text": "malicious-site.com"
+						},
+						{
+							"id": "c",
+							"text": "Una página de error"
+						},
+						{
+							"id": "d",
+							"text": "Ambos sitios simultáneamente"
+						}
+					],
+					"correct_answer": "b",
+					"explanation": "✅ **Correcto**: En URLs, el símbolo '@' indica autenticación. Todo antes del '@' se interpreta como credenciales y se ignora visualmente. La URL real es 'malicious-site.com'. Esta técnica engaña mostrando un dominio legítimo antes del '@'."
+				},
+				{
+					"id": "q12",
+					"category": "Safe Browsing",
+					"difficulty": "intermediate",
+					"points": 2,
+					"question": "¿Cuál es la mejor práctica al recibir un email urgente pidiendo 'verificar tu cuenta inmediatamente'?",
+					"type": "multiple_choice",
+					"options": [
+						{
+							"id": "a",
+							"text": "Hacer clic en el enlace inmediatamente para evitar problemas"
+						},
+						{
+							"id": "b",
+							"text": "Acceder al sitio oficial por separado e investigar la supuesta urgencia"
+						},
+						{
+							"id": "c",
+							"text": "Responder al email pidiendo más información"
+						},
+						{
+							"id": "d",
+							"text": "Reenviar el email a amigos para pedir consejo"
+						}
+					],
+					"correct_answer": "b",
+					"explanation": "✅ **Correcto**: La urgencia es una táctica psicológica común en phishing. Siempre accede al sitio oficial independientemente (escribiendo la URL directamente) para verificar si realmente hay un problema con tu cuenta."
+				}
+			],
+			"scoring_criteria": {
+				"excellent": {
+					"min_score": 90,
+					"message": "🔍 ¡Excelente! Tienes un ojo excepcional para detectar URLs maliciosas. Tu navegación web es muy segura."
+				},
+				"good": {
+					"min_score": 80,
+					"message": "✅ ¡Muy bien! Identificas bien la mayoría de amenazas URL. Revisa los casos que fallaste para perfeccionar tu técnica."
+				},
+				"passing": {
+					"min_score": 75,
+					"message": "📚 Aprobado. Tienes conocimientos básicos de seguridad URL, pero practica más para detectar ataques sofisticados."
+				},
+				"needs_improvement": {
+					"min_score": 0,
+					"message": "🚨 Necesitas mejorar significativamente. URLs maliciosas representan una amenaza real - estudia más sobre phishing y navegación segura."
+				}
+			}
+		},
+		"learning_objectives": null,
+		"success_criteria": null,
+		"feedback_responses": null,
+		"featured": false,
+		"status": "published",
+		"date_created": "2026-02-24T04:29:55.095Z",
+		"date_updated": "2026-02-24T05:04:09.733Z",
+		"exercises": null,
+		"id": "cff3b6d1-2a31-446c-9a03-55dfc96e5426",
+		"practice_category": []
+	},
+	{
+		"description": "Un empleado de TI con privilegios administrativos está exfiltrando datos confidenciales. Acaba de ser detectado por tu sistema de monitoreo, pero sigue activo en la red.",
+		"practice_type": "incident_response",
+		"slug": "amenaza-interna-empleado-rogue",
+		"title": "Amenaza Interna: Empleado Rogue",
+		"difficulty": "advanced",
+		"estimated_time": 22,
+		"scenario_data": {
+			"crisis_title": "🎯 AMENAZA INTERNA DETECTADA - EMPLEADO ACTIVO",
+			"crisis_description": "Tu sistema de análisis de comportamiento ha detectado que John Smith (Admin TI) está copiando masivamente archivos confidenciales a dispositivos externos. Tiene acceso administrativo completo y conoce los sistemas íntimamente. Todavía está en línea.",
+			"crisis_details": [
+				"👤 Empleado: John Smith, Admin TI Senior (5 años en empresa)",
+				"📂 Datos accedidos: Propiedad intelectual, contratos, datos financieros",
+				"💾 Volumen: 2.3TB copiados en las últimas 72 horas",
+				"🔑 Privilegios: Acceso administrativo completo a toda la infraestructura",
+				"⚠️ Estado: Actualmente en línea, sesión activa"
+			],
+			"decisions": [
+				{
+					"id": "confront_immediately",
+					"text": "Confrontar inmediatamente al empleado en persona",
+					"consequence": "incorrect",
+					"explanation": "❌ INCORRECTO: Confrontar directamente puede alertar al empleado y acelerar la exfiltración, o causar sabotaje de sistemas. Primero debes preservar evidencia y contener.",
+					"points": 0
+				},
+				{
+					"id": "disable_access_quietly",
+					"text": "Deshabilitar discretamente su acceso y preservar evidencia",
+					"consequence": "correct",
+					"explanation": "✅ CORRECTO: Deshabilitar acceso sin alertar al empleado permite preservar evidencia forense y prevenir más daño. Es la práctica estándar para amenazas internas activas.",
+					"points": 25
+				},
+				{
+					"id": "monitor_and_gather",
+					"text": "Continuar monitoreando para reunir más evidencia",
+					"consequence": "risky",
+					"explanation": "⚠️ RIESGOSO: Aunque reunir evidencia es importante, permitir exfiltración continua puede resultar en más daño. El riesgo supera los beneficios potenciales de evidencia adicional.",
+					"points": 10
+				},
+				{
+					"id": "involve_legal_hr",
+					"text": "Involucrar inmediatamente a legal, HR y aplicación de la ley",
+					"consequence": "correct",
+					"explanation": "✅ CORRECTO: Las amenazas internas requieren coordinación cuidadosa entre TI, legal, HR y posiblemente aplicación de la ley para manejo apropiado y preservación de evidencia.",
+					"points": 25
+				}
+			]
+		},
+		"learning_objectives": null,
+		"success_criteria": null,
+		"feedback_responses": null,
+		"featured": false,
+		"status": "published",
+		"date_created": "2026-02-24T03:11:54.687Z",
+		"date_updated": "2026-02-24T05:04:09.751Z",
+		"exercises": null,
+		"id": "d6d495d7-6fa9-4f1e-84de-fa738ffb4b48",
+		"practice_category": []
+	},
+	{
+		"description": "Evalúa la fortaleza de las contraseñas según los criterios de seguridad.",
+		"practice_type": "password_strength",
+		"slug": "password-strength-evaluation",
+		"title": "Evaluación de Contraseñas",
+		"difficulty": null,
+		"estimated_time": null,
+		"scenario_data": {
+			"instructions": "Evalúa la fortaleza de las siguientes contraseñas según los criterios de seguridad.",
+			"criteria": {
+				"min_length": 8,
+				"require_uppercase": true,
+				"require_lowercase": true,
+				"require_numbers": true,
+				"require_special_chars": true,
+				"no_common_patterns": true,
+				"no_personal_info": true
+			},
+			"test_passwords": [
+				{
+					"id": 1,
+					"password": "password123",
+					"is_secure": false,
+					"issues": [
+						"Es una contraseña muy común",
+						"No contiene caracteres especiales",
+						"No tiene mayúsculas"
+					],
+					"score": 2,
+					"explanation": "Esta contraseña es muy débil porque usa una palabra común seguida de números consecutivos."
+				},
+				{
+					"id": 2,
+					"password": "MyS3cur3P@ssw0rd!",
+					"is_secure": true,
+					"strengths": [
+						"Tiene más de 8 caracteres",
+						"Contiene mayúsculas y minúsculas",
+						"Incluye números y caracteres especiales",
+						"No es un patrón común"
+					],
+					"score": 5,
+					"explanation": "Excelente! Esta contraseña cumple con todos los criterios de seguridad."
+				},
+				{
+					"id": 3,
+					"password": "12345678",
+					"is_secure": false,
+					"issues": [
+						"Solo contiene números",
+						"Es un patrón muy predecible",
+						"No tiene letras ni caracteres especiales"
+					],
+					"score": 1,
+					"explanation": "Muy insegura. Los números consecutivos son extremadamente fáciles de adivinar."
+				}
+			],
+			"interaction_type": "password_evaluation",
+			"scoring": {
+				"max_score": 5,
+				"passing_score": 4,
+				"criteria_points": {
+					"length": 1,
+					"uppercase": 1,
+					"lowercase": 1,
+					"numbers": 1,
+					"special_chars": 1,
+					"no_common": 1,
+					"complexity": 1
+				}
+			}
+		},
+		"learning_objectives": [
+			"Identificar características de contraseñas seguras",
+			"Reconocer patrones inseguros comunes",
+			"Aplicar criterios de seguridad para contraseñas"
+		],
+		"success_criteria": {
+			"min_correct_answers": 2,
+			"total_questions": 3,
+			"understanding_required": true
+		},
+		"feedback_responses": {
+			"correct": [
+				"¡Excelente! Has identificado correctamente la fortaleza de esta contraseña.",
+				"Muy bien, tu evaluación es acertada."
+			],
+			"incorrect": [
+				"No exactamente. Revisa los criterios de seguridad nuevamente.",
+				"Analiza cada elemento de la contraseña según los parámetros establecidos."
+			],
+			"hints": [
+				"Verifica si cumple con la longitud mínima",
+				"¿Contiene mayúsculas, minúsculas, números y símbolos?",
+				"¿Es un patrón común o predecible?"
+			]
+		},
+		"featured": true,
+		"status": "published",
+		"date_created": "2026-02-24T00:38:33.395Z",
+		"date_updated": "2026-02-24T05:04:09.764Z",
+		"exercises": [
+			{
+				"title": "Evaluación de Contraseñas",
+				"description": "Determina qué contraseñas son seguras y cuáles no",
+				"type": "password_strength_check"
+			}
+		],
+		"id": "e0d3f7d4-df35-4a8c-8739-cea509029d44",
+		"practice_category": []
+	},
+	{
+		"description": "Evalúa y configura permisos de aplicaciones móviles de manera segura. Aprende a identificar permisos riesgosos y proteger tu privacidad en iOS y Android.",
+		"practice_type": "settings_configuration",
+		"slug": "mobile-app-permissions-security-audit",
+		"title": "Mobile App Permissions Security Audit",
+		"difficulty": "intermediate",
+		"estimated_time": 15,
+		"scenario_data": {
+			"scenarios": [
+				{
+					"title": "📱 Auditoría de App de Linterna",
+					"description": "Has instalado una nueva app de linterna gratuita en tu Android. Revisa los permisos solicitados y determina cuáles son apropiados y cuáles representan riesgos de privacidad.",
+					"context": "Una app de linterna básica debería solo necesitar acceso a la cámara/flash. Permisos adicionales pueden indicar recolección de datos o malware.",
+					"settings": [
+						{
+							"id": "camera_permission",
+							"name": "📷 Acceso a cámara (para controlar el flash)",
+							"description": "Permite que la app use el flash de la cámara como linterna",
+							"should_enable": true,
+							"category": "Essential",
+							"explanation": "✅ APROPIADO: Una app de linterna necesita acceso a la cámara para controlar el flash/LED. Este es el único permiso esencial para esta funcionalidad."
+						},
+						{
+							"id": "contacts_permission",
+							"name": "📞 Acceso a contactos",
+							"description": "Leer la lista de contactos del dispositivo",
+							"should_enable": false,
+							"category": "Suspicious",
+							"explanation": "🚨 RIESGOSO: Una linterna NO necesita acceder a tus contactos. Esto indica recolección de datos personal o posible malware. Denegar inmediatamente."
+						},
+						{
+							"id": "location_permission",
+							"name": "📍 Acceso a ubicación (GPS)",
+							"description": "Conocer tu ubicación geográfica precisa",
+							"should_enable": false,
+							"category": "Suspicious",
+							"explanation": "🚨 RIESGOSO: Una linterna básica no necesita saber tu ubicación. Este permiso permite rastreo y violación de privacidad."
+						},
+						{
+							"id": "phone_permission",
+							"name": "📱 Acceso a teléfono (llamadas y SMS)",
+							"description": "Leer información del teléfono y realizar llamadas",
+							"should_enable": false,
+							"category": "Critical Risk",
+							"explanation": "🚨 CRÍTICO: Permite interceptar llamadas, leer SMS, y hacer llamadas costosas. Completamente inapropiado para una linterna. Indica malware probable."
+						},
+						{
+							"id": "storage_permission",
+							"name": "💾 Acceso a almacenamiento",
+							"description": "Leer y escribir archivos en el dispositivo",
+							"should_enable": false,
+							"category": "Questionable",
+							"explanation": "⚠️ CUESTIONABLE: Una linterna podría necesitar almacenar preferencias simples, pero acceso completo a archivos es excesivo y riesgoso."
+						},
+						{
+							"id": "microphone_permission",
+							"name": "🎤 Acceso a micrófono",
+							"description": "Grabar audio desde el micrófono",
+							"should_enable": false,
+							"category": "Critical Risk",
+							"explanation": "🚨 CRÍTICO: Permite espionaje de conversaciones y violación severa de privacidad. Absolutamente inapropiado para una aplicación de linterna."
+						},
+						{
+							"id": "network_permission",
+							"name": "🌐 Acceso a internet",
+							"description": "Conectarse a internet y enviar/recibir datos",
+							"should_enable": false,
+							"category": "Questionable",
+							"explanation": "⚠️ CUESTIONABLE: Una linterna offline no necesita internet. Si permite internet, debe explicar claramente por qué (actualizaciones, anuncios, etc.)."
+						}
+					],
+					"passing_score": 85
+				},
+				{
+					"title": "📲 Configuración de App de Redes Sociales",
+					"description": "Configuras los permisos de una nueva app de redes sociales. Determina qué permisos son legítimos para la funcionalidad básica y cuáles puedes denegar para proteger tu privacidad.",
+					"context": "Las apps de redes sociales necesitan varios permisos para funcionalidad completa, pero algunos son opcionales y puedes negarlos sin afectar características esenciales.",
+					"settings": [
+						{
+							"id": "camera_social",
+							"name": "📷 Acceso a cámara",
+							"description": "Tomar fotos y videos directamente en la app",
+							"should_enable": true,
+							"category": "Core Feature",
+							"explanation": "✅ APROPIADO: Característica central de redes sociales es compartir fotos/videos. Puedes otorgarlo solo cuando uses la cámara ('Preguntar cada vez')."
+						},
+						{
+							"id": "gallery_social",
+							"name": "🖼️ Acceso a galería de fotos",
+							"description": "Seleccionar fotos y videos existentes para compartir",
+							"should_enable": true,
+							"category": "Core Feature",
+							"explanation": "✅ APROPIADO: Esencial para compartir contenido existente. En configuraciones modernas, puedes seleccionar fotos específicas sin dar acceso completo."
+						},
+						{
+							"id": "contacts_social",
+							"name": "📞 Acceso a contactos",
+							"description": "Encontrar amigos que ya usan la plataforma",
+							"should_enable": false,
+							"category": "Privacy Risk",
+							"explanation": "⚠️ OPCIONAL: Aunque conveniente para encontrar amigos, permite que la app suba tu lista completa de contactos. Puedes buscar amigos manualmente para proteger privacidad."
+						},
+						{
+							"id": "location_social",
+							"name": "📍 Acceso a ubicación",
+							"description": "Permitir geolocalización en publicaciones",
+							"should_enable": false,
+							"category": "Privacy Risk",
+							"explanation": "⚠️ OPCIONAL: Útil para check-ins pero revela patrones de movimiento. Puedes agregar ubicación manualmente cuando desees sin dar acceso automático."
+						},
+						{
+							"id": "microphone_social",
+							"name": "🎤 Acceso a micrófono",
+							"description": "Grabar audio para videos y llamadas de voz",
+							"should_enable": true,
+							"category": "Core Feature",
+							"explanation": "✅ APROPIADO: Necesario para videos con audio y funciones de comunicación por voz. Otorgar solo cuando uses estas características."
+						},
+						{
+							"id": "notifications_social",
+							"name": "🔔 Enviar notificaciones",
+							"description": "Alertas de nuevos mensajes, likes, comentarios",
+							"should_enable": true,
+							"category": "Essential",
+							"explanation": "✅ RECOMENDADO: Importante para comunicación oportuna, pero puedes configurar qué tipos de notificaciones recibir en settings internos de la app."
+						},
+						{
+							"id": "calendar_social",
+							"name": "📅 Acceso a calendario",
+							"description": "Crear eventos y recordatorios de funciones sociales",
+							"should_enable": false,
+							"category": "Unnecessary",
+							"explanation": "❌ INNECESARIO: La mayoría de users no necesitan que redes sociales accedan al calendario. Puedes agregar eventos manualmente si es necesario."
+						},
+						{
+							"id": "phone_calls_social",
+							"name": "☎️ Realizar llamadas telefónicas",
+							"description": "Hacer llamadas directamente desde la app",
+							"should_enable": false,
+							"category": "Unnecessary",
+							"explanation": "❌ INNECESARIO: A menos que sea una app específica de comunicación (WhatsApp, Telegram), las redes sociales no necesitan hacer llamadas directas."
+						}
+					],
+					"passing_score": 85
+				},
+				{
+					"title": "🎮 Auditoría de Juego Móvil Gratuito",
+					"description": "Instalas un juego móvil gratuito popular que incluye compras in-app. Configura los permisos de manera que puedas jugar mientras proteges tu información personal y financiera.",
+					"context": "Los juegos gratuitos a menudo monetizan a través de anuncios y recolección de datos. Algunos permisos son legítimos para funcionalidad del juego, otros son para monetización agresiva.",
+					"settings": [
+						{
+							"id": "storage_game",
+							"name": "💾 Acceso a almacenamiento",
+							"description": "Guardar progreso del juego y configuraciones",
+							"should_enable": true,
+							"category": "Essential",
+							"explanation": "✅ ESENCIAL: Los juegos necesitan guardar tu progreso, configuraciones, y recursos descargados. Sin esto perderías todo el progreso."
+						},
+						{
+							"id": "network_game",
+							"name": "🌐 Acceso a internet",
+							"description": "Conectarse para multijugador, actualizaciones, y anuncios",
+							"should_enable": true,
+							"category": "Core Feature",
+							"explanation": "✅ NECESARIO: Para características online, actualizaciones, y sincronizar progreso. También permite anuncios que financian el juego gratuito."
+						},
+						{
+							"id": "contacts_game",
+							"name": "📞 Acceso a contactos",
+							"description": "Invitar amigos al juego desde tu lista de contactos",
+							"should_enable": false,
+							"category": "Privacy Risk",
+							"explanation": "🚨 RIESGOSO: Permite acceso completo a contactos para marketing. Puedes invitar amigos manual usando otras apps de comunicación."
+						},
+						{
+							"id": "camera_game",
+							"name": "📷 Acceso a cámara",
+							"description": "Tomar selfies para avatar o funciones AR del juego",
+							"should_enable": false,
+							"category": "Optional",
+							"explanation": "⚠️ OPCIONAL: A menos que sea un juego AR específico, la cámara es innecesaria. Puedes usar avatares predeterminados."
+						},
+						{
+							"id": "location_game",
+							"name": "📍 Acceso a ubicación",
+							"description": "Funciones basadas en ubicación y anuncios localizados",
+							"should_enable": false,
+							"category": "Privacy Risk",
+							"explanation": "🚨 RIESGOSO: Principalmente para anuncios geo-dirigidos y analytics. Raramente esencial para gameplay básico."
+						},
+						{
+							"id": "phone_info_game",
+							"name": "📱 Información del dispositivo",
+							"description": "Leer modelo, versión OS, identificadores únicos",
+							"should_enable": false,
+							"category": "Privacy Risk",
+							"explanation": "🚨 RIESGOSO: Usado para fingerprinting y tracking entre apps. No es esencial para funcionalidad del juego."
+						},
+						{
+							"id": "vibration_game",
+							"name": "📳 Control de vibración",
+							"description": "Hacer vibrar el dispositivo para efectos del juego",
+							"should_enable": true,
+							"category": "Game Experience",
+							"explanation": "✅ APROPIADO: Mejora la experiencia de juego con feedback táctil. Es un permiso de bajo riesgo y mejora inmersión."
+						},
+						{
+							"id": "in_app_purchase",
+							"name": "💳 Realizar compras in-app",
+							"description": "Comprar moneda virtual, mejoras, y contenido premium",
+							"should_enable": false,
+							"category": "Financial Risk",
+							"explanation": "⚠️ CUIDADO: Permite compras con un clic. Mejor deshabilitar y activar manualmente cuando realmente quieras comprar algo específico."
+						}
+					],
+					"passing_score": 80
+				}
+			]
+		},
+		"learning_objectives": null,
+		"success_criteria": null,
+		"feedback_responses": null,
+		"featured": false,
+		"status": "published",
+		"date_created": "2026-02-24T04:29:55.107Z",
+		"date_updated": "2026-02-24T05:04:09.777Z",
+		"exercises": null,
+		"id": "edaecfec-2453-43bc-8001-5c9613704546",
+		"practice_category": []
+	}
+]

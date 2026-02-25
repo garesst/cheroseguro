@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "directus": "11.14.1",
+  "vendor": "postgres",
+  "data": {
+    "practice_categories": [
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440100",
+        "name": "Email Security",
+        "slug": "email-security",
+        "description": "Learn to identify phishing emails, analyze suspicious content, and protect against email-based cyber attacks.",
+        "icon": "📧",
+        "color": "#3B82F6",
+        "is_featured": true,
+        "display_order": 1
+      },
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440101", 
+        "name": "Social Engineering",
+        "slug": "social-engineering",
+        "description": "Understand psychological manipulation tactics used by cybercriminals and learn defensive strategies.",
+        "icon": "👥",
+        "color": "#EF4444",
+        "is_featured": true,
+        "display_order": 2
+      },
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440102",
+        "name": "Password Security",
+        "slug": "password-security", 
+        "description": "Master password creation, management, and authentication security best practices.",
+        "icon": "🔐",
+        "color": "#10B981",
+        "is_featured": true,
+        "display_order": 3
+      },
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440103",
+        "name": "Network Security",
+        "slug": "network-security",
+        "description": "Learn about WiFi security, network monitoring, URL analysis, and safe browsing practices.",
+        "icon": "🌐",
+        "color": "#8B5CF6",
+        "is_featured": false,
+        "display_order": 4
+      },
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440104",
+        "name": "Malware Defense",
+        "slug": "malware-defense",
+        "description": "Identify and defend against viruses, ransomware, and other malicious software threats.",
+        "icon": "🛡️",
+        "color": "#F59E0B",
+        "is_featured": false,
+        "display_order": 5
+      },
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440105",
+        "name": "Privacy Protection",
+        "slug": "privacy-protection",
+        "description": "Protect personal data, configure security settings, and maintain digital privacy.",
+        "icon": "🔒",
+        "color": "#6366F1",
+        "is_featured": false,
+        "display_order": 6
+      },
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440106",
+        "name": "Incident Response",
+        "slug": "incident-response", 
+        "description": "Learn how to respond to cybersecurity incidents, manage crises, and coordinate recovery efforts.",
+        "icon": "🚨",
+        "color": "#DC2626",
+        "is_featured": true,
+        "display_order": 7
+      },
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440107",
+        "name": "Knowledge Assessment",
+        "slug": "knowledge-assessment",
+        "description": "Test and validate your cybersecurity knowledge with comprehensive quizzes and assessments.",
+        "icon": "📝",
+        "color": "#7C3AED",
+        "is_featured": false,
+        "display_order": 8
+      }
+    ],
+    "practices_practice_categories": [
+      {
+        "id": 1,
+        "practices_id": "1c396f69-c7ba-4d62-9091-81117b344db4",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440105"
+      },
+      {
+        "id": 2,
+        "practices_id": "1c396f69-c7ba-4d62-9091-81117b344db4",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440106"
+      },
+      {
+        "id": 3,
+        "practices_id": "296c0a46-4592-4f86-bae4-9e306a4c9f5f",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440103"
+      },
+      {
+        "id": 4,
+        "practices_id": "296c0a46-4592-4f86-bae4-9e306a4c9f5f",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440106"
+      },
+      {
+        "id": 5,
+        "practices_id": "332e8e3c-4660-49c8-b40f-cb895f112651",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440107"
+      },
+      {
+        "id": 6,
+        "practices_id": "49dadc7b-86f9-412c-9b6c-771499742514",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440104"
+      },
+      {
+        "id": 7,
+        "practices_id": "49dadc7b-86f9-412c-9b6c-771499742514",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440106"
+      },
+      {
+        "id": 8,
+        "practices_id": "58facaf7-63b2-41a4-9056-ffd63c8666c9",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440103"
+      },
+      {
+        "id": 9,
+        "practices_id": "5e3c3280-9abf-45d6-8a25-6bb76ba5e5db",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440101"
+      },
+      {
+        "id": 10,
+        "practices_id": "77050f4e-a965-4d6a-a17f-f1956012a598",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440105"
+      },
+      {
+        "id": 11,
+        "practices_id": "93786930-4906-43bc-85e9-105dcb33e2b8",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440100"
+      },
+      {
+        "id": 12,
+        "practices_id": "93786930-4906-43bc-85e9-105dcb33e2b8",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440101"
+      },
+      {
+        "id": 13,
+        "practices_id": "93786930-4906-43bc-85e9-105dcb33e2b8",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440106"
+      },
+      {
+        "id": 14,
+        "practices_id": "b46c84ed-1b66-4aaa-bd0f-9510d311b4c4",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440100"
+      },
+      {
+        "id": 15,
+        "practices_id": "cff3b6d1-2a31-446c-9a03-55dfc96e5426",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440107"
+      },
+      {
+        "id": 16,
+        "practices_id": "cff3b6d1-2a31-446c-9a03-55dfc96e5426",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440103"
+      },
+      {
+        "id": 17,
+        "practices_id": "d6d495d7-6fa9-4f1e-84de-fa738ffb4b48",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440101"
+      },
+      {
+        "id": 18,
+        "practices_id": "d6d495d7-6fa9-4f1e-84de-fa738ffb4b48",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440105"
+      },
+      {
+        "id": 19,
+        "practices_id": "d6d495d7-6fa9-4f1e-84de-fa738ffb4b48",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440106"
+      },
+      {
+        "id": 20,
+        "practices_id": "e0d3f7d4-df35-4a8c-8739-cea509029d44",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440102"
+      },
+      {
+        "id": 21,
+        "practices_id": "edaecfec-2453-43bc-8001-5c9613704546",
+        "practice_categories_id": "550e8400-e29b-41d4-a716-446655440105"
+      }
+    ]
+  }
+}
