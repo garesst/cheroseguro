@@ -8,14 +8,14 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 
 const emailStack = [
-  { id: 1, from: "verify@paypa1-confirm.com", subject: "Verify Your Account Now", isPhishing: true },
-  { id: 2, from: "shipping@amazon.com", subject: "Your Delivery is On The Way", isPhishing: false },
-  { id: 3, from: "security@bankofamerica-secure.net", subject: "Confirm Your Identity", isPhishing: true },
-  { id: 4, from: "noreply@github.com", subject: "New Sign-in Activity", isPhishing: false },
-  { id: 5, from: "alerts@appIe-id.com", subject: "Unusual Activity Detected", isPhishing: true },
-  { id: 6, from: "support@netflix-account.net", subject: "Update Payment Method", isPhishing: true },
-  { id: 7, from: "notifications@slack.com", subject: "You've Been Added to a Workspace", isPhishing: false },
-  { id: 8, from: "no-reply@microsoft-verify.com", subject: "Complete Security Verification", isPhishing: true },
+  { id: 1, from: "verify@paypa1-confirm.com", subject: "Verifica Tu Cuenta Ahora", isPhishing: true },
+  { id: 2, from: "shipping@amazon.com", subject: "Tu Entrega Está en Camino", isPhishing: false },
+  { id: 3, from: "security@bankofamerica-secure.net", subject: "Confirma Tu Identidad", isPhishing: true },
+  { id: 4, from: "noreply@github.com", subject: "Nueva Actividad de Inicio de Sesión", isPhishing: false },
+  { id: 5, from: "alerts@appIe-id.com", subject: "Actividad Inusual Detectada", isPhishing: true },
+  { id: 6, from: "support@netflix-account.net", subject: "Actualiza Método de Pago", isPhishing: true },
+  { id: 7, from: "notifications@slack.com", subject: "Has Sido Agregado a un Espacio de Trabajo", isPhishing: false },
+  { id: 8, from: "no-reply@microsoft-verify.com", subject: "Completa Verificación de Seguridad", isPhishing: true },
 ]
 
 interface PhishingSwipeProps {
@@ -61,29 +61,29 @@ export function PhishingSwipe({ onGameOver }: PhishingSwipeProps) {
           <div className="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
             <Star className="h-8 w-8 text-primary" />
           </div>
-          <CardTitle className="text-3xl">Stack Complete!</CardTitle>
+          <CardTitle className="text-3xl">¡Pila Completada!</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <Card className="bg-muted/50">
               <CardContent className="pt-6">
                 <div className="text-3xl font-bold text-primary">{finalScore}</div>
-                <div className="text-sm text-muted-foreground">Points</div>
+                <div className="text-sm text-muted-foreground">Puntos</div>
               </CardContent>
             </Card>
             <Card className="bg-muted/50">
               <CardContent className="pt-6">
                 <div className="text-3xl font-bold text-secondary">{percentage}%</div>
-                <div className="text-sm text-muted-foreground">Accuracy</div>
+                <div className="text-sm text-muted-foreground">Precisión</div>
               </CardContent>
             </Card>
           </div>
           <p className="text-sm text-muted-foreground">
             {percentage === 100
-              ? "Perfect score! You're a phishing master!"
+              ? "¡Puntuación perfecta! ¡Eres un maestro anti-phishing!"
               : percentage >= 75
-                ? "Great job! Keep practicing to be flawless."
-                : "Good try! Review phishing indicators to improve."}
+                ? "¡Buen trabajo! Sigue practicando para ser impecable."
+                : "¡Buen intento! Revisa los indicadores de phishing para mejorar."}
           </p>
         </CardContent>
       </Card>
@@ -147,12 +147,12 @@ export function PhishingSwipe({ onGameOver }: PhishingSwipeProps) {
                   {feedback === "correct" ? (
                     <>
                       <CheckCircle2 className="h-6 w-6 text-green-600 mx-auto mb-1" />
-                      <div className="text-sm font-semibold text-green-600">Correct!</div>
+                      <div className="text-sm font-semibold text-green-600">¡Correcto!</div>
                     </>
                   ) : (
                     <>
                       <XCircle className="h-6 w-6 text-red-600 mx-auto mb-1" />
-                      <div className="text-sm font-semibold text-red-600">Incorrect</div>
+                      <div className="text-sm font-semibold text-red-600">Incorrecto</div>
                     </>
                   )}
                 </div>
@@ -172,7 +172,7 @@ export function PhishingSwipe({ onGameOver }: PhishingSwipeProps) {
             onClick={() => handleSwipe(true)}
           >
             <CheckCircle2 className="mr-2 h-5 w-5" />
-            Legit
+            Legítimo
           </Button>
           <Button
             size="lg"
@@ -181,7 +181,7 @@ export function PhishingSwipe({ onGameOver }: PhishingSwipeProps) {
             onClick={() => handleSwipe(false)}
           >
             <XCircle className="mr-2 h-5 w-5" />
-            Scam
+            Estafa
           </Button>
         </div>
       ) : null}

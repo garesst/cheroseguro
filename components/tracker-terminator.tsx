@@ -206,7 +206,7 @@ export function TrackerTerminator() {
             </p>
           </CardHeader>
           <CardContent className="flex justify-center gap-2">
-            <Button onClick={resetGame}>Play Again</Button>
+            <Button onClick={resetGame}>Jugar de Nuevo</Button>
           </CardContent>
         </Card>
       )}

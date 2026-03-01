@@ -8,37 +8,37 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 const scamMessages = [
   {
     id: 1,
-    text: "Send me your verification code NOW!!!",
-    safeResponses: ["Block this user", "Report the message", "Close the chat"],
-    dangerousResponses: ["Send code", "Ask for details", "Verify account"],
+    text: "¡Envíame tu código de verificación AHORA!",
+    safeResponses: ["Bloquear este usuario", "Reportar el mensaje", "Cerrar el chat"],
+    dangerousResponses: ["Enviar código", "Pedir detalles", "Verificar cuenta"],
     safeOption: 0,
   },
   {
     id: 2,
-    text: "You won $1,000,000!!! Click here to claim your prize 🎁",
-    safeResponses: ["Ignore and report", "Delete message", "Block immediately"],
-    dangerousResponses: ["Click the link", "Reply with info", "Send payment"],
+    text: "¡¡¡Ganaste $1,000,000!!! Haz clic aquí para reclamar tu premio 🎁",
+    safeResponses: ["Ignorar y reportar", "Eliminar mensaje", "Bloquear inmediatamente"],
+    dangerousResponses: ["Hacer clic en el enlace", "Responder con información", "Enviar pago"],
     safeOption: 0,
   },
   {
     id: 3,
-    text: "Your account has been compromised! Confirm password immediately!",
-    safeResponses: ["Contact official support", "Don't reply", "Report suspicious"],
-    dangerousResponses: ["Send password", "Confirm details", "Click link"],
+    text: "¡Tu cuenta ha sido comprometida! ¡Confirma tu contraseña inmediatamente!",
+    safeResponses: ["Contactar soporte oficial", "No responder", "Reportar sospechoso"],
+    dangerousResponses: ["Enviar contraseña", "Confirmar detalles", "Hacer clic en enlace"],
     safeOption: 0,
   },
   {
     id: 4,
-    text: "We need your social security number to update your profile 🔒",
-    safeResponses: ["Report to admin", "Leave conversation", "Flag as spam"],
-    dangerousResponses: ["Send SSN", "Verify with info", "Confirm account"],
+    text: "Necesitamos tu número de seguro social para actualizar tu perfil 🔒",
+    safeResponses: ["Reportar al admin", "Abandonar conversación", "Marcar como spam"],
+    dangerousResponses: ["Enviar NSS", "Verificar con información", "Confirmar cuenta"],
     safeOption: 0,
   },
   {
     id: 5,
-    text: "Click here for exclusive banking offer just for you!",
-    safeResponses: ["Decline offer", "Block sender", "Report fraud"],
-    dangerousResponses: ["Click link", "Reply yes", "Enter details"],
+    text: "¡Haz clic aquí para una oferta bancaria exclusiva solo para ti!",
+    safeResponses: ["Rechazar oferta", "Bloquear remitente", "Reportar fraude"],
+    dangerousResponses: ["Hacer clic en enlace", "Responder sí", "Ingresar detalles"],
     safeOption: 0,
   },
 ]
@@ -87,7 +87,7 @@ export function ScamSpotter() {
     const isSafe = currentMessage.safeResponses.includes(response)
 
     if (isSafe) {
-      setFeedback({ type: "correct", message: "Excellent! You avoided the scam! 🛡️" })
+      setFeedback({ type: "correct", message: "¡Excelente! ¡Evitaste la estafa! 🛡️" })
       setScore(score + 50)
 
       setTimeout(() => {
@@ -99,7 +99,7 @@ export function ScamSpotter() {
         }
       }, 2000)
     } else {
-      setFeedback({ type: "incorrect", message: "Oh no! You fell for the scam! 😱" })
+      setFeedback({ type: "incorrect", message: "¡Oh no! ¡Caíste en la estafa! 😱" })
       setTimeout(() => {
         setGameOver(true)
       }, 2000)
@@ -121,29 +121,29 @@ export function ScamSpotter() {
       <div className="w-full space-y-6">
         <Card>
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl">Scam Spotter</CardTitle>
+            <CardTitle className="text-2xl">Detector de Estafas</CardTitle>
             <p className="text-muted-foreground mt-2">
-              A scammer is trying to trick you in a live chat. You have 5 seconds to choose the safe response for each
-              message. Survive 5 rounds without falling for the scam!
+              Un estafador está tratando de engañarte en un chat en vivo. Tienes 5 segundos para elegir la respuesta segura para cada
+              mensaje. ¡Sobrevive 5 rondas sin caer en la estafa!
             </p>
           </CardHeader>
           <CardContent className="flex justify-center">
             <Button size="lg" onClick={() => setGameStarted(true)}>
-              Start Game
+              Iniciar Juego
             </Button>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>How to Play</CardTitle>
+            <CardTitle>Cómo Jugar</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
-            <p>• Read the incoming scam message carefully</p>
-            <p>• You have 5 seconds to choose the safe response</p>
-            <p>• Choose a safe option to survive and earn points</p>
-            <p>• Choosing a dangerous option ends the game immediately</p>
-            <p>• Survive all 5 rounds to win!</p>
+            <p>• Lee el mensaje de estafa entrante cuidadosamente</p>
+            <p>• Tienes 5 segundos para elegir la respuesta segura</p>
+            <p>• Elige una opción segura para sobrevivir y ganar puntos</p>
+            <p>• Elegir una opción peligrosa termina el juego inmediatamente</p>
+            <p>• ¡Sobrevive las 5 rondas para ganar!</p>
           </CardContent>
         </Card>
       </div>
@@ -155,7 +155,7 @@ export function ScamSpotter() {
       {/* Game Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-semibold">Round: {round + 1}/5</h3>
+          <h3 className="text-lg font-semibold">Ronda: {round + 1}/5</h3>
           <div className="w-48 h-2 bg-muted rounded-full mt-2 overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-primary to-secondary transition-all"
@@ -165,14 +165,14 @@ export function ScamSpotter() {
         </div>
         <div className="text-right">
           <p className="text-3xl font-bold text-primary">{score}</p>
-          <p className="text-sm text-muted-foreground">Points</p>
+          <p className="text-sm text-muted-foreground">Puntos</p>
         </div>
       </div>
 
       {/* Chat Interface */}
       <Card className="border-2 border-muted-foreground/20 bg-black">
         <CardHeader className="bg-slate-900 border-b border-slate-700 pb-3">
-          <p className="text-xs text-slate-400">ScammerBot is typing...</p>
+          <p className="text-xs text-slate-400">EstafadorBot está escribiendo...</p>
         </CardHeader>
         <CardContent className="pt-6 pb-4 space-y-4 min-h-40">
           {/* Scammer message */}
@@ -205,7 +205,7 @@ export function ScamSpotter() {
       {/* Response Options - shuffled each round */}
       <Card>
         <CardContent className="pt-6 space-y-3">
-          <p className="text-sm font-semibold text-muted-foreground">Choose your response:</p>
+          <p className="text-sm font-semibold text-muted-foreground">Elige tu respuesta:</p>
           <div className="grid grid-cols-1 gap-3">
             {shuffledOptions.map((option, index) => (
               <Button
@@ -248,7 +248,7 @@ export function ScamSpotter() {
           <CardContent className="pt-6 text-center">
             <div className="flex items-center justify-center gap-2">
               <XCircle className="h-6 w-6 text-red-600" />
-              <p className="text-red-600 font-semibold">Time's up! You didn't respond in time.</p>
+              <p className="text-red-600 font-semibold">¡Se acabó el tiempo! No respondiste a tiempo.</p>
             </div>
           </CardContent>
         </Card>
@@ -258,15 +258,15 @@ export function ScamSpotter() {
       {gameOver && (
         <Card className={round === scamMessages.length ? "border-green-500 bg-green-50" : "border-blue-500 bg-blue-50"}>
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl">{round === scamMessages.length ? "🎉 You Win!" : "Game Over"}</CardTitle>
+            <CardTitle className="text-2xl">{round === scamMessages.length ? "🎉 ¡Ganaste!" : "Fin del Juego"}</CardTitle>
             <p className="text-muted-foreground mt-2">
               {round === scamMessages.length
-                ? `Excellent! You survived all 5 scam attempts! Final Score: ${score}`
-                : `You made it through ${round} rounds. Final Score: ${score}`}
+                ? `¡Excelente! ¡Sobreviviste a los 5 intentos de estafa! Puntuación Final: ${score}`
+                : `Llegaste hasta la ronda ${round}. Puntuación Final: ${score}`}
             </p>
           </CardHeader>
           <CardContent className="flex justify-center gap-2">
-            <Button onClick={resetGame}>Play Again</Button>
+            <Button onClick={resetGame}>Jugar de Nuevo</Button>
           </CardContent>
         </Card>
       )}

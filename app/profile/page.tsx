@@ -10,37 +10,37 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 
 const achievements = [
-  { id: 1, title: "First Steps", description: "Completed your first article", icon: BookOpen, earned: true },
-  { id: 2, title: "Phishing Expert", description: "100% accuracy in Phishing Defender", icon: Shield, earned: true },
-  { id: 3, title: "Speed Reader", description: "Read 10 articles", icon: Target, earned: false },
-  { id: 4, title: "Simulation Master", description: "Complete all simulations", icon: Target, earned: false },
-  { id: 5, title: "High Score", description: "Score 10,000+ in any game", icon: Trophy, earned: true },
-  { id: 6, title: "Dedicated Learner", description: "7-day learning streak", icon: Award, earned: false },
+  { id: 1, title: "Primeros Pasos", description: "Completaste tu primer artículo", icon: BookOpen, earned: true },
+  { id: 2, title: "Experto en Phishing", description: "100% de precisión en Defensor de Phishing", icon: Shield, earned: true },
+  { id: 3, title: "Lector Veloz", description: "Leíste 10 artículos", icon: Target, earned: false },
+  { id: 4, title: "Maestro de Simulaciones", description: "Completa todas las simulaciones", icon: Target, earned: false },
+  { id: 5, title: "Puntuación Alta", description: "Obtén 10,000+ puntos en cualquier juego", icon: Trophy, earned: true },
+  { id: 6, title: "Estudiante Dedicado", description: "Racha de aprendizaje de 7 días", icon: Award, earned: false },
 ]
 
 const recentActivity = [
   {
     type: "game",
-    title: "Completed Phishing Defender",
+    title: "Completado Defensor de Phishing",
     score: 800,
-    date: "2 hours ago",
+    date: "hace 2 horas",
   },
   {
     type: "article",
-    title: "Read: Understanding Phishing Attacks",
-    date: "1 day ago",
+    title: "Leído: Entendiendo Ataques de Phishing",
+    date: "hace 1 día",
   },
   {
     type: "simulation",
-    title: "Completed Phishing Email Detection",
-    score: "6/8 correct",
-    date: "2 days ago",
+    title: "Completada Detección de Emails de Phishing",
+    score: "6/8 correctos",
+    date: "hace 2 días",
   },
   {
     type: "game",
-    title: "Played Password Builder",
+    title: "Jugado Constructor de Contraseñas",
     score: 8750,
-    date: "3 days ago",
+    date: "hace 3 días",
   },
 ]
 
@@ -64,23 +64,23 @@ export default function ProfilePage() {
                     <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
                       <div className="flex items-center gap-2">
                         <Mail className="h-4 w-4" />
-                        <span>john.doe@example.com</span>
+                        <span>juan.perez@ejemplo.com</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4" />
-                        <span>Joined January 2025</span>
+                        <span>Se unió en Enero 2025</span>
                       </div>
                     </div>
                     <div className="flex flex-wrap items-center gap-2">
                       <Badge variant="secondary" className="gap-1">
                         <Star className="h-3 w-3" />
-                        Level 3 Learner
+                        Nivel 3 Estudiante
                       </Badge>
-                      <Badge variant="outline">3 Achievements</Badge>
+                      <Badge variant="outline">3 Logros</Badge>
                     </div>
                   </div>
 
-                  <Button variant="outline">Edit Profile</Button>
+                  <Button variant="outline">Editar Perfil</Button>
                 </div>
               </CardContent>
             </Card>
@@ -95,7 +95,7 @@ export default function ProfilePage() {
                     </div>
                     <div>
                       <div className="text-2xl font-bold">12</div>
-                      <div className="text-sm text-muted-foreground">Articles Read</div>
+                      <div className="text-sm text-muted-foreground">Artículos Leídos</div>
                     </div>
                   </div>
                 </CardContent>
@@ -109,7 +109,7 @@ export default function ProfilePage() {
                     </div>
                     <div>
                       <div className="text-2xl font-bold">4/6</div>
-                      <div className="text-sm text-muted-foreground">Simulations</div>
+                      <div className="text-sm text-muted-foreground">Simulaciones</div>
                     </div>
                   </div>
                 </CardContent>
@@ -123,7 +123,7 @@ export default function ProfilePage() {
                     </div>
                     <div>
                       <div className="text-2xl font-bold">8</div>
-                      <div className="text-sm text-muted-foreground">Games Played</div>
+                      <div className="text-sm text-muted-foreground">Juegos Jugados</div>
                     </div>
                   </div>
                 </CardContent>
@@ -137,7 +137,7 @@ export default function ProfilePage() {
                     </div>
                     <div>
                       <div className="text-2xl font-bold">15,230</div>
-                      <div className="text-sm text-muted-foreground">Top Score</div>
+                      <div className="text-sm text-muted-foreground">Mejor Puntaje</div>
                     </div>
                   </div>
                 </CardContent>
@@ -147,22 +147,22 @@ export default function ProfilePage() {
             {/* Tabs Content */}
             <Tabs defaultValue="progress" className="w-full">
               <TabsList className="grid w-full max-w-md grid-cols-3">
-                <TabsTrigger value="progress">Progress</TabsTrigger>
-                <TabsTrigger value="achievements">Achievements</TabsTrigger>
-                <TabsTrigger value="activity">Activity</TabsTrigger>
+                <TabsTrigger value="progress">Progreso</TabsTrigger>
+                <TabsTrigger value="achievements">Logros</TabsTrigger>
+                <TabsTrigger value="activity">Actividad</TabsTrigger>
               </TabsList>
 
               <TabsContent value="progress" className="mt-6 space-y-6">
                 {/* Learning Progress */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>Learning Progress</CardTitle>
-                    <CardDescription>Track your progress across all learning areas</CardDescription>
+                    <CardTitle>Progreso de Aprendizaje</CardTitle>
+                    <CardDescription>Rastrea tu progreso en todas las áreas de aprendizaje</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium">Phishing Detection</span>
+                        <span className="text-sm font-medium">Detección de Phishing</span>
                         <span className="text-sm text-muted-foreground">85%</span>
                       </div>
                       <Progress value={85} className="h-2" />
@@ -170,7 +170,7 @@ export default function ProfilePage() {
 
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium">Password Security</span>
+                        <span className="text-sm font-medium">Seguridad de Contraseñas</span>
                         <span className="text-sm text-muted-foreground">70%</span>
                       </div>
                       <Progress value={70} className="h-2" />
@@ -178,7 +178,7 @@ export default function ProfilePage() {
 
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium">Social Engineering</span>
+                        <span className="text-sm font-medium">Ingeniería Social</span>
                         <span className="text-sm text-muted-foreground">60%</span>
                       </div>
                       <Progress value={60} className="h-2" />
@@ -186,7 +186,7 @@ export default function ProfilePage() {
 
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium">Safe Browsing</span>
+                        <span className="text-sm font-medium">Navegación Segura</span>
                         <span className="text-sm text-muted-foreground">45%</span>
                       </div>
                       <Progress value={45} className="h-2" />
@@ -197,8 +197,8 @@ export default function ProfilePage() {
                 {/* Skill Recommendations */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>Recommended Next Steps</CardTitle>
-                    <CardDescription>Continue building your security knowledge</CardDescription>
+                    <CardTitle>Próximos Pasos Recomendados</CardTitle>
+                    <CardDescription>Continúa construyendo tu conocimiento en seguridad</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex items-center justify-between p-3 rounded-lg border">
@@ -207,12 +207,12 @@ export default function ProfilePage() {
                           <Target className="h-5 w-5 text-secondary" />
                         </div>
                         <div>
-                          <div className="font-medium">Complete Mobile Security Simulation</div>
-                          <div className="text-sm text-muted-foreground">Strengthen your mobile safety skills</div>
+                          <div className="font-medium">Completa Simulación de Seguridad Móvil</div>
+                          <div className="text-sm text-muted-foreground">Fortalece tus habilidades de seguridad móvil</div>
                         </div>
                       </div>
                       <Button size="sm" asChild>
-                        <Link href="/practice/mobile-security">Start</Link>
+                        <Link href="/practice/mobile-security">Iniciar</Link>
                       </Button>
                     </div>
 
@@ -222,12 +222,12 @@ export default function ProfilePage() {
                           <BookOpen className="h-5 w-5 text-primary" />
                         </div>
                         <div>
-                          <div className="font-medium">Read About Data Backups</div>
-                          <div className="text-sm text-muted-foreground">Learn to protect your important files</div>
+                          <div className="font-medium">Lee Sobre Respaldos de Datos</div>
+                          <div className="text-sm text-muted-foreground">Aprende a proteger tus archivos importantes</div>
                         </div>
                       </div>
                       <Button size="sm" variant="outline" asChild>
-                        <Link href="/learn/data-backups">Read</Link>
+                        <Link href="/learn/data-backups">Leer</Link>
                       </Button>
                     </div>
                   </CardContent>
@@ -237,9 +237,9 @@ export default function ProfilePage() {
               <TabsContent value="achievements" className="mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Achievements</CardTitle>
+                    <CardTitle>Logros</CardTitle>
                     <CardDescription>
-                      {achievements.filter((a) => a.earned).length} of {achievements.length} unlocked
+                      {achievements.filter((a) => a.earned).length} de {achievements.length} desbloqueados
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -261,7 +261,7 @@ export default function ProfilePage() {
                             <div className="text-xs text-muted-foreground">{achievement.description}</div>
                             {achievement.earned && (
                               <Badge variant="secondary" className="mt-3">
-                                Unlocked
+                                Desbloqueado
                               </Badge>
                             )}
                           </CardContent>
@@ -275,8 +275,8 @@ export default function ProfilePage() {
               <TabsContent value="activity" className="mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Recent Activity</CardTitle>
-                    <CardDescription>Your latest learning actions</CardDescription>
+                    <CardTitle>Actividad Reciente</CardTitle>
+                    <CardDescription>Tus últimas acciones de aprendizaje</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
@@ -305,7 +305,7 @@ export default function ProfilePage() {
                             <div className="font-medium">{activity.title}</div>
                             {activity.score && (
                               <div className="text-sm text-muted-foreground">
-                                Score:{" "}
+                                Puntuación:{" "}
                                 {typeof activity.score === "number" ? activity.score.toLocaleString() : activity.score}
                               </div>
                             )}

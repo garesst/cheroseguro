@@ -299,7 +299,7 @@ export function SpotTheClone() {
             ) : (
               <div className="flex items-center justify-center gap-2">
                 <AlertCircle className="h-5 w-5 text-red-600" />
-                <span className="font-semibold text-red-600">Try again - not a difference</span>
+                <span className="font-semibold text-red-600">Intenta de nuevo - no es una diferencia</span>
               </div>
             )}
           </CardContent>

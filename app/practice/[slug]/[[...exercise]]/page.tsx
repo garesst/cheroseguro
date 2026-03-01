@@ -125,8 +125,8 @@ function PracticeRenderer({ practice, exerciseNumber, totalExercises }: {
       return (
         <Card className="p-8 text-center">
           <CardContent>
-            <h3 className="text-xl font-semibold mb-2">Unknown Practice Type</h3>
-            <p className="text-muted-foreground">This practice type is not yet supported.</p>
+            <h3 className="text-xl font-semibold mb-2">Tipo de práctica desconocido</h3>
+            <p className="text-muted-foreground">Este tipo de práctica aún no está soportado.</p>
           </CardContent>
         </Card>
       )
@@ -185,7 +185,7 @@ export default async function PracticePage({ params }: PracticePageProps) {
             <Button variant="ghost" size="sm" className="mb-6" asChild>
               <Link href="/practice">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Practices
+                Volver a prácticas
               </Link>
             </Button>
 
@@ -196,7 +196,7 @@ export default async function PracticePage({ params }: PracticePageProps) {
                 <Badge variant="outline">{practice.practice_type.replace('_', ' ')}</Badge>
                 {hasMultipleExercises && (
                   <Badge variant="default">
-                    Exercise {exerciseNumber} of {totalExercises}
+                    Ejercicio {exerciseNumber} de {totalExercises}
                   </Badge>
                 )}
               </div>
@@ -213,16 +213,16 @@ export default async function PracticePage({ params }: PracticePageProps) {
               <div className="flex items-center gap-6 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  <span>{hasMultipleExercises ? currentExercise.estimated_time : practice.estimated_time} minutes</span>
+                  <span>{hasMultipleExercises ? currentExercise.estimated_time : practice.estimated_time} min</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Target className="h-4 w-4" />
-                  <span>{practice.learning_objectives?.length || 0} objectives</span>
+                  <span>{practice.learning_objectives?.length || 0} objetivos</span>
                 </div>
                 {hasMultipleExercises && (
                   <div className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4" />
-                    <span>Part {exerciseNumber} of {totalExercises}</span>
+                    <span>Parte {exerciseNumber} de {totalExercises}</span>
                   </div>
                 )}
               </div>

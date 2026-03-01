@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { CheckCircle2, XCircle, Mail, ArrowRight, RotateCcw, AlertTriangle, Clock, Target } from "lucide-react"
+import { CheckCircle2, XCircle, Mail, ArrowRight, RotateCcw, AlertTriangle, Clock, Target, Trophy } from "lucide-react"
+import { usePracticeProgress } from "@/hooks/use-practice-progress"
 
 interface EmailAnalysisPracticeProps {
   practice: any
@@ -26,10 +27,22 @@ export function EmailAnalysisPractice({
   const [isCompleted, setIsCompleted] = useState(false)
   const router = useRouter()
 
+  // Progress tracking
+  const { 
+    completePracticeExercise, 
+    getPracticeProgress, 
+    isExerciseCompleted 
+  } = usePracticeProgress()
+
   // Get email data - handle both single exercise and multi-exercise formats
   const emails = practice.exercises && practice.exercises.length > 1 
     ? practice.exercises.map((ex: any) => ex.email).filter(Boolean)
     : [practice.currentExercise?.email || practice.scenario_data?.email].filter(Boolean)
+
+  // Check if this exercise was already completed
+  const exerciseId = `exercise_${exerciseNumber}`
+  const isAlreadyCompleted = isExerciseCompleted(practice.slug, exerciseId)
+  const practiceProgress = getPracticeProgress(practice.slug)
   
   const currentEmail = emails[currentEmailIndex]
   const currentExercise = practice.exercises && practice.exercises.length > 1
@@ -53,6 +66,17 @@ export function EmailAnalysisPractice({
       setCurrentEmailIndex(currentEmailIndex + 1)
       setShowFeedback(false)
     } else {
+      // All emails completed - register the final result
+      const finalScore = calculateScore()
+      const passed = finalScore >= 70
+      
+      completePracticeExercise(
+        practice.slug,
+        exerciseId,
+        finalScore,
+        passed
+      )
+      
       setIsCompleted(true)
     }
   }
@@ -86,15 +110,15 @@ export function EmailAnalysisPractice({
     if (!feedback) {
       return {
         isCorrect: false,
-        title: "Answer Recorded",
-        message: `You selected: "${selectedOption?.text || selectedAnswer}"`,
-        explanation: "Unable to provide detailed feedback for this option."
+        title: "Respuesta Registrada",
+        message: `Seleccionaste: "${selectedOption?.text || selectedAnswer}"`,
+        explanation: "No se puede proporcionar feedback detallado para esta opción."
       }
     }
 
     return {
       isCorrect: feedback.is_correct,
-      title: feedback.is_correct ? "¡Correct!" : "Incorrect",
+      title: feedback.is_correct ? "¡Correcto!" : "Incorrecto",
       message: feedback.message,
       explanation: feedback.explanation
     }
@@ -102,19 +126,37 @@ export function EmailAnalysisPractice({
 
   if (!hasStarted) {
     return (
+      <div className="space-y-6">
+        {/* Progress indicator if already completed */}
+        {isAlreadyCompleted && (
+          <Card className="bg-green-50 border-green-200 border-2">
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-3">
+                <Trophy className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
+                <div>
+                  <h4 className="font-semibold text-green-900">¡Ya Completado!</h4>
+                  <p className="text-sm text-green-700">
+                    Has completado esta práctica. Tu puntuación: {practiceProgress.exercises[exerciseId]?.score || 0}%
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
       <Card>
         <CardHeader>
           <div className="flex items-center gap-3 mb-2">
             <Mail className="h-5 w-5 text-blue-600" />
-            <CardTitle className="text-xl">Email Security Analysis</CardTitle>
+            <CardTitle className="text-xl">Análisis de Seguridad de Correos</CardTitle>
           </div>
           <CardDescription>
-            Learn to identify phishing emails and security threats
+            Aprende a identificar correos de phishing y amenazas de seguridad
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">What you'll learn:</h3>
+            <h3 className="font-semibold text-lg">Lo que aprenderás:</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {practice.learning_objectives?.map((objective: any, index: number) => (
                 <li key={index} className="flex items-start gap-2">
@@ -129,21 +171,21 @@ export function EmailAnalysisPractice({
             <div className="flex items-center gap-3 p-3 bg-muted rounded-lg">
               <Clock className="h-5 w-5 text-blue-600" />
               <div>
-                <p className="font-medium text-sm">Estimated Time</p>
-                <p className="text-xs text-muted-foreground">{practice.estimated_time} minutes</p>
+                <p className="font-medium text-sm">Tiempo Estimado</p>
+                <p className="text-xs text-muted-foreground">{practice.estimated_time} minutos</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-3 bg-muted rounded-lg">
               <Target className="h-5 w-5 text-green-600" />
               <div>
-                <p className="font-medium text-sm">Emails to Analyze</p>
-                <p className="text-xs text-muted-foreground">{emails.length} email{emails.length > 1 ? 's' : ''}</p>
+                <p className="font-medium text-sm">Correos a Analizar</p>
+                <p className="text-xs text-muted-foreground">{emails.length} correo{emails.length > 1 ? 's' : ''}</p>
               </div>
             </div>
           </div>
           
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Red Flags to Watch For:</h3>
+            <h3 className="font-semibold text-lg">Señales de Alerta a Vigilar:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
               {currentExercise?.red_flags?.map((flag: any, index: number) => (
                 <div key={index} className="flex items-start gap-2 p-2 bg-orange-50 border border-orange-200 rounded">
@@ -155,7 +197,7 @@ export function EmailAnalysisPractice({
                 </div>
               )) || (
                 <div className="col-span-2 text-center text-muted-foreground">
-                  <p>Look for suspicious sender addresses, urgent language, and unexpected requests for personal information.</p>
+                  <p>Busca direcciones de remitente sospechosas, lenguaje urgente y solicitudes inesperadas de información personal.</p>
                 </div>
               )}
             </div>
@@ -167,12 +209,13 @@ export function EmailAnalysisPractice({
               className="w-full"
               onClick={handleStartPractice}
             >
-              Start Email Analysis
+              Iniciar Análisis de Correos
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </CardContent>
       </Card>
+      </div>
     )
   }
 
@@ -192,22 +235,22 @@ export function EmailAnalysisPractice({
               )}
             </div>
             <CardTitle className="text-2xl">
-              {passed ? "Analysis Complete!" : "Keep Learning"}
+              {passed ? "¡Análisis Completado!" : "Sigue Aprendiendo"}
             </CardTitle>
             <CardDescription>
-              You scored {score.toFixed(0)}% ({userAnswers.filter((answer, index) => {
+              Obtuviste {score.toFixed(0)}% ({userAnswers.filter((answer, index) => {
                 const exerciseData = practice.exercises && practice.exercises.length > 1
                   ? practice.exercises[index] 
                   : practice.currentExercise
                 const feedback = exerciseData?.feedback_responses?.[answer]
                 return feedback && feedback.is_correct
-              }).length} out of {emails.length} correct)
+              }).length} de {emails.length} correctas)
             </CardDescription>
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-4">
-            <h3 className="font-semibold">Review:</h3>
+            <h3 className="font-semibold">Revisión:</h3>
             {emails.map((email: any, index: number) => {
               const exerciseData = practice.exercises && practice.exercises.length > 1
                 ? practice.exercises[index] 
@@ -232,7 +275,7 @@ export function EmailAnalysisPractice({
                     </div>
                   </div>
                   <Badge variant={isCorrect ? "default" : "destructive"}>
-                    {isCorrect ? "Correct" : "Incorrect"}
+                    {isCorrect ? "Correcto" : "Incorrecto"}
                   </Badge>
                 </div>
               )
@@ -246,13 +289,13 @@ export function EmailAnalysisPractice({
               onClick={handleTryAgain}
             >
               <RotateCcw className="mr-2 h-4 w-4" />
-              Try Again
+              Intentar de Nuevo
             </Button>
             <Button 
               className="flex-1"
               onClick={() => router.push('/practice')}
             >
-              Continue Learning
+              Continuar Aprendiendo
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -265,7 +308,7 @@ export function EmailAnalysisPractice({
     return (
       <Card>
         <CardContent className="text-center py-8">
-          <p>No email data available for this analysis.</p>
+          <p>No hay datos de correos disponibles para este análisis.</p>
         </CardContent>
       </Card>
     )
@@ -278,17 +321,17 @@ export function EmailAnalysisPractice({
       <CardHeader>
         <div className="flex justify-between items-start mb-4">
           <CardTitle className="text-xl">
-            Email {currentEmailIndex + 1} of {emails.length}
+            Correo {currentEmailIndex + 1} de {emails.length}
           </CardTitle>
           <Badge variant="outline">
-            {Math.round(progress)}% Complete
+            {Math.round(progress)}% Completado
           </Badge>
         </div>
         <Progress value={progress} className="w-full" />
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-4">
-          <h3 className="font-semibold">Analyze this email:</h3>
+          <h3 className="font-semibold">Analiza este correo:</h3>
           
           {/* Email Display */}
           <div className="border rounded-lg p-4 bg-muted/20">
@@ -314,7 +357,7 @@ export function EmailAnalysisPractice({
           {!showFeedback && (
             <div className="space-y-4">
               <p className="text-muted-foreground">
-                What is your assessment of this email?
+                ¿Cuál es tu evaluación de este correo?
               </p>
               <div className="grid gap-3">
                 {currentExercise?.options?.map((option: any) => (
@@ -348,7 +391,7 @@ export function EmailAnalysisPractice({
               
               {feedback.explanation && (
                 <div className="bg-white/50 p-3 rounded border text-sm">
-                  <p className="font-medium mb-1">Explanation:</p>
+                  <p className="font-medium mb-1">Explicación:</p>
                   <p>{feedback.explanation}</p>
                 </div>
               )}
@@ -357,7 +400,7 @@ export function EmailAnalysisPractice({
                 className="w-full mt-4"
                 onClick={handleNextEmail}
               >
-                {currentEmailIndex < emails.length - 1 ? "Next Email" : "Complete Analysis"}
+                {currentEmailIndex < emails.length - 1 ? "Siguiente Correo" : "Completar Análisis"}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>

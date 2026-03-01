@@ -285,7 +285,7 @@ export function RansomwareWarRoom() {
                 <Link href="/play">Back to Games</Link>
               </Button>
               <Button className="flex-1" onClick={startGame}>
-                Try Again
+                Intentar de Nuevo
               </Button>
             </div>
           </CardContent>

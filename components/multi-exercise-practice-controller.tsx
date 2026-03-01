@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { AlertCircle, CheckCircle2, XCircle, Clock, Target, ArrowRight, ArrowLeft, RotateCcw } from "lucide-react"
+import { AlertCircle, CheckCircle2, XCircle, Clock, Target, ArrowRight, ArrowLeft, RotateCcw, Trophy } from "lucide-react"
+import { usePracticeProgress } from "@/hooks/use-practice-progress"
 
 interface MultiExercisePracticeControllerProps {
   practice: any
@@ -24,9 +25,21 @@ export function MultiExercisePracticeController({
   const [showFeedback, setShowFeedback] = useState(false)
   const router = useRouter()
 
+  // Progress tracking
+  const { 
+    completePracticeExercise, 
+    getPracticeProgress, 
+    isExerciseCompleted 
+  } = usePracticeProgress()
+
   // Get current exercise data
   const currentExercise = practice.currentExercise
   const hasMultipleExercises = totalExercises > 1
+
+  // Check if this exercise was already completed
+  const exerciseId = `exercise_${exerciseNumber}`
+  const isCompleted = isExerciseCompleted(practice.slug, exerciseId)
+  const practiceProgress = getPracticeProgress(practice.slug)
 
   const handleStartPractice = () => {
     setHasStarted(true)
@@ -41,6 +54,21 @@ export function MultiExercisePracticeController({
     
     setSelectedOption(optionId);
     setShowFeedback(true);
+    
+    // Track progress
+    const feedback = currentExercise?.feedback_responses?.[optionId]
+    
+    if (feedback) {
+      const isCorrect = feedback.is_correct
+      const score = isCorrect ? 100 : 50 // Full points for correct, partial for attempt
+      
+      completePracticeExercise(
+        practice.slug,
+        exerciseId,
+        score,
+        isCorrect
+      )
+    }
   }
 
   const handleTryAgain = () => {
@@ -67,6 +95,23 @@ export function MultiExercisePracticeController({
   if (!hasStarted) {
     return (
       <div className="space-y-6">
+        {/* Progress indicator if already completed */}
+        {isCompleted && (
+          <Card className="bg-green-50 border-green-200 border-2">
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-3">
+                <Trophy className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
+                <div>
+                  <h4 className="font-semibold text-green-900">Exercise {exerciseNumber} Completed!</h4>
+                  <p className="text-sm text-green-700">
+                    You've completed this exercise. Your score: {practiceProgress.exercises[exerciseId]?.score || 0}%
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Learning Objectives - Only show on first exercise */}
         {exerciseNumber === 1 && practice.learning_objectives && practice.learning_objectives.length > 0 && (
           <Card className="bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
@@ -295,7 +340,7 @@ export function MultiExercisePracticeController({
               <div className="flex flex-wrap gap-2">
                 <Button variant="outline" onClick={handleTryAgain}>
                   <RotateCcw className="mr-2 h-4 w-4" />
-                  Try Again
+                  Intentar de Nuevo
                 </Button>
                 
                 {/* Navigation buttons for multiple exercises */}

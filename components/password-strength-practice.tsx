@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { CheckCircle2, XCircle, Eye, EyeOff, Lock, ArrowRight, RotateCcw } from "lucide-react"
+import { CheckCircle2, XCircle, Eye, EyeOff, Lock, ArrowRight, RotateCcw, Trophy } from "lucide-react"
+import { usePracticeProgress } from "@/hooks/use-practice-progress"
 
 interface PasswordStrengthPracticeProps {
   practice: any
@@ -26,6 +27,18 @@ export function PasswordStrengthPractice({
   const [showFeedback, setShowFeedback] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const router = useRouter()
+
+  // Progress tracking
+  const { 
+    completePracticeExercise, 
+    getPracticeProgress, 
+    isExerciseCompleted 
+  } = usePracticeProgress()
+
+  // Check if this exercise was already completed
+  const exerciseId = `exercise_${exerciseNumber}`
+  const isAlreadyCompleted = isExerciseCompleted(practice.slug, exerciseId)
+  const practiceProgress = getPracticeProgress(practice.slug)
 
   // Get password data from scenario_data
   const scenarioData = practice.scenario_data
@@ -50,7 +63,17 @@ export function PasswordStrengthPractice({
       setShowFeedback(false)
       setShowPassword(false)
     } else {
-      // Practice completed
+      // Practice completed - register the result
+      const finalScore = calculateScore()
+      const passed = finalScore >= (scenarioData?.scoring?.passing_score || 70)
+      
+      completePracticeExercise(
+        practice.slug,
+        exerciseId,
+        finalScore,
+        passed
+      )
+      
       setIsCompleted(true)
     }
   }
@@ -88,19 +111,37 @@ export function PasswordStrengthPractice({
 
   if (!hasStarted) {
     return (
-      <Card>
+      <div className="space-y-6">
+        {/* Progress indicator if already completed */}
+        {isAlreadyCompleted && (
+          <Card className="bg-green-50 border-green-200 border-2">
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-3">
+                <Trophy className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
+                <div>
+                  <h4 className="font-semibold text-green-900">¡Ya Completado!</h4>
+                  <p className="text-sm text-green-700">
+                    Has completado esta práctica. Tu puntuación: {practiceProgress.exercises[exerciseId]?.score || 0}%
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        <Card>
         <CardHeader>
           <div className="flex items-center gap-3 mb-2">
             <Lock className="h-5 w-5 text-blue-600" />
-            <CardTitle className="text-xl">Password Strength Analysis</CardTitle>
+            <CardTitle className="text-xl">Análisis de Fuerza de Contraseñas</CardTitle>
           </div>
           <CardDescription>
-            Evaluate password security based on established criteria
+            Evalúa la seguridad de contraseñas basándote en criterios establecidos
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">What you'll learn:</h3>
+            <h3 className="font-semibold text-lg">Lo que aprenderás:</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {practice.learning_objectives?.map((objective: any, index: number) => (
                 <li key={index} className="flex items-start gap-2">
@@ -112,12 +153,12 @@ export function PasswordStrengthPractice({
           </div>
           
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Security Criteria:</h3>
+            <h3 className="font-semibold text-lg">Criterios de Seguridad:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
               {scenarioData?.criteria && Object.entries(scenarioData.criteria).map(([key, value]: [string, any]) => (
                 <div key={key} className="flex items-center gap-2 p-2 bg-muted rounded">
                   <CheckCircle2 className="h-4 w-4 text-green-600" />
-                  <span className="capitalize">{key.replace('_', ' ')}: {String(value)}</span>
+                  <span className="capitalize">{key.replaceAll('_', ' ')}</span>
                 </div>
               ))}
             </div>
@@ -129,12 +170,13 @@ export function PasswordStrengthPractice({
               className="w-full"
               onClick={handleStartPractice}
             >
-              Start Password Analysis
+              Iniciar Análisis de Contraseñas
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </CardContent>
       </Card>
+      </div>
     )
   }
 
@@ -154,16 +196,16 @@ export function PasswordStrengthPractice({
               )}
             </div>
             <CardTitle className="text-2xl">
-              {passed ? "Practice Completed!" : "Keep Practicing"}
+              {passed ? "¡Práctica Completada!" : "Sigue Practicando"}
             </CardTitle>
             <CardDescription>
-              You scored {score.toFixed(0)}% ({userAnswers.filter((answer, index) => answer === testPasswords[index].is_secure).length} out of {testPasswords.length} correct)
+              Obtuviste {score.toFixed(0)}% ({userAnswers.filter((answer, index) => answer === testPasswords[index].is_secure).length} de {testPasswords.length} correctas)
             </CardDescription>
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-4">
-            <h3 className="font-semibold">Review:</h3>
+            <h3 className="font-semibold">Revisión:</h3>
             {testPasswords.map((password: any, index: number) => {
               const userAnswer = userAnswers[index]
               const isCorrect = userAnswer === password.is_secure
@@ -181,7 +223,7 @@ export function PasswordStrengthPractice({
                     </code>
                   </div>
                   <Badge variant={password.is_secure ? "default" : "destructive"}>
-                    {password.is_secure ? "Secure" : "Not Secure"}
+                    {password.is_secure ? "Segura" : "No Segura"}
                   </Badge>
                 </div>
               )
@@ -195,13 +237,13 @@ export function PasswordStrengthPractice({
               onClick={handleTryAgain}
             >
               <RotateCcw className="mr-2 h-4 w-4" />
-              Try Again
+              Intentar de Nuevo
             </Button>
             <Button 
               className="flex-1"
               onClick={() => router.push('/practice')}
             >
-              Continue Learning
+              Continuar Aprendiendo
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -214,7 +256,7 @@ export function PasswordStrengthPractice({
     return (
       <Card>
         <CardContent className="text-center py-8">
-          <p>No password data available for this practice.</p>
+          <p>No hay datos de contraseñas disponibles para esta práctica.</p>
         </CardContent>
       </Card>
     )
@@ -227,17 +269,17 @@ export function PasswordStrengthPractice({
       <CardHeader>
         <div className="flex justify-between items-start mb-4">
           <CardTitle className="text-xl">
-            Password {currentPasswordIndex + 1} of {testPasswords.length}
+            Contraseña {currentPasswordIndex + 1} de {testPasswords.length}
           </CardTitle>
           <Badge variant="outline">
-            {Math.round(progress)}% Complete
+            {Math.round(progress)}% Completado
           </Badge>
         </div>
         <Progress value={progress} className="w-full" />
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-4">
-          <h3 className="font-semibold">Evaluate this password:</h3>
+          <h3 className="font-semibold">Evalúa esta contraseña:</h3>
           
           <div className="flex items-center gap-3 p-4 bg-muted rounded-lg">
             <code className="text-lg font-mono flex-1">
@@ -255,7 +297,7 @@ export function PasswordStrengthPractice({
           {!showFeedback && (
             <div className="space-y-4">
               <p className="text-muted-foreground">
-                Is this password secure according to the established criteria?
+                ¿Esta contraseña es segura según los criterios establecidos?
               </p>
               <div className="flex gap-3">
                 <Button 
@@ -264,7 +306,7 @@ export function PasswordStrengthPractice({
                   className="flex-1"
                 >
                   <CheckCircle2 className="mr-2 h-4 w-4" />
-                  Secure
+                  Segura
                 </Button>
                 <Button 
                   onClick={() => handleAnswer(false)} 
@@ -272,7 +314,7 @@ export function PasswordStrengthPractice({
                   className="flex-1"
                 >
                   <XCircle className="mr-2 h-4 w-4" />
-                  Not Secure
+                  No Segura
                 </Button>
               </div>
             </div>
@@ -296,7 +338,7 @@ export function PasswordStrengthPractice({
               {feedback.details && (
                 <div className="space-y-2">
                   <p className="text-sm font-medium">
-                    {currentPassword.is_secure ? "Strengths:" : "Issues:"}
+                    {currentPassword.is_secure ? "Fortalezas:" : "Problemas:"}
                   </p>
                   <ul className="text-xs space-y-1">
                     {feedback.details.map((item: any, index: number) => (
@@ -313,7 +355,7 @@ export function PasswordStrengthPractice({
                 className="w-full mt-4"
                 onClick={handleNextPassword}
               >
-                {currentPasswordIndex < testPasswords.length - 1 ? "Next Password" : "Complete Practice"}
+                {currentPasswordIndex < testPasswords.length - 1 ? "Siguiente Contraseña" : "Completar Práctica"}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>

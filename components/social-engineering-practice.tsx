@@ -147,12 +147,12 @@ export function SocialEngineeringPractice({
             <CardTitle className="text-xl">Social Engineering Detection</CardTitle>
           </div>
           <CardDescription>
-            Learn to identify manipulation techniques and defend against social engineering attacks
+            Aprendera a identificar técnicas de manipulación y defenderse contra ataques de ingeniería social
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">What you'll learn:</h3>
+            <h3 className="font-semibold text-lg">Qué aprenderás:</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {practice.learning_objectives?.map((objective: any, index: number) => (
                 <li key={index} className="flex items-start gap-2">
@@ -167,21 +167,21 @@ export function SocialEngineeringPractice({
             <div className="flex items-center gap-3 p-3 bg-muted rounded-lg">
               <Clock className="h-5 w-5 text-blue-600" />
               <div>
-                <p className="font-medium text-sm">Estimated Time</p>
-                <p className="text-xs text-muted-foreground">{practice.estimated_time} minutes</p>
+                <p className="font-medium text-sm">Tiempo estimado</p>
+                <p className="text-xs text-muted-foreground">{practice.estimated_time} minutos</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-3 bg-muted rounded-lg">
               <Target className="h-5 w-5 text-green-600" />
               <div>
-                <p className="font-medium text-sm">Scenarios to Analyze</p>
-                <p className="text-xs text-muted-foreground">{conversations.length} conversation{conversations.length > 1 ? 's' : ''}</p>
+                <p className="font-medium text-sm">Escenarios a analizar</p>
+                <p className="text-xs text-muted-foreground">{conversations.length} conversación{conversations.length > 1 ? 'nes' : ''}</p>
               </div>
             </div>
           </div>
           
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Common Social Engineering Techniques:</h3>
+            <h3 className="font-semibold text-lg">écnicas comunes de ingeniería social:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm max-h-64 overflow-y-auto">
               {availableTechniques.slice(0, 8).map((technique: any, index: number) => (
                 <div key={index} className="flex items-start gap-2 p-2 bg-orange-50 border border-orange-200 rounded">
@@ -194,7 +194,7 @@ export function SocialEngineeringPractice({
               ))}
             </div>
             <p className="text-xs text-muted-foreground text-center">
-              And {availableTechniques.length - 8} more techniques to identify...
+              Y {availableTechniques.length - 8} técnicas más para identificar...
             </p>
           </div>
 
@@ -204,7 +204,7 @@ export function SocialEngineeringPractice({
               className="w-full"
               onClick={handleStartPractice}
             >
-              Start Social Engineering Analysis
+              Iniciar Análisis de Ingeniería Social
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -229,16 +229,16 @@ export function SocialEngineeringPractice({
               )}
             </div>
             <CardTitle className="text-2xl">
-              {passed ? "Analysis Complete!" : "Keep Learning"}
+              {passed ? "¡Análisis Completado!" : "Sigue Aprendiendo"}
             </CardTitle>
             <CardDescription>
-              You scored {score.toFixed(0)}% in identifying social engineering techniques
+              Tu puntuación fue de {score.toFixed(0)}% en la identificación de técnicas de ingeniería social
             </CardDescription>
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-4">
-            <h3 className="font-semibold">Review:</h3>
+            <h3 className="font-semibold">Resumen:</h3>
             {conversations.map((conversation: any, index: number) => {
               const userTechniques = userAnswers[index] || []
               const correctTechniques = conversation.techniques_present || []
@@ -259,7 +259,7 @@ export function SocialEngineeringPractice({
                         <p className="font-medium text-sm">"{conversation.title}"</p>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        {correctlyIdentified} of {correctTechniques.length} techniques identified
+                        {correctlyIdentified} de {correctTechniques.length} técnicas identificadas
                       </p>
                     </div>
                   </div>
@@ -278,13 +278,13 @@ export function SocialEngineeringPractice({
               onClick={handleTryAgain}
             >
               <RotateCcw className="mr-2 h-4 w-4" />
-              Try Again
+              Intentar de Nuevo
             </Button>
             <Button 
               className="flex-1"
               onClick={() => router.push('/practice')}
             >
-              Continue Learning
+              Continuar Aprendiendo
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -297,7 +297,7 @@ export function SocialEngineeringPractice({
     return (
       <Card>
         <CardContent className="text-center py-8">
-          <p>No conversation data available for this analysis.</p>
+          <p>No se encuentran datos de conversación disponibles para este análisis.</p>
         </CardContent>
       </Card>
     )
@@ -310,10 +310,10 @@ export function SocialEngineeringPractice({
       <CardHeader>
         <div className="flex justify-between items-start mb-4">
           <CardTitle className="text-xl">
-            Scenario {currentConversationIndex + 1} of {conversations.length}
+            Escenario {currentConversationIndex + 1} de {conversations.length}
           </CardTitle>
           <Badge variant="outline">
-            {Math.round(progress)}% Complete
+            {Math.round(progress)}% Completado
           </Badge>
         </div>
         <Progress value={progress} className="w-full" />
@@ -356,9 +356,9 @@ export function SocialEngineeringPractice({
           {!showFeedback && (
             <div className="space-y-4">
               <div>
-                <h4 className="font-semibold mb-3">Which social engineering techniques do you identify in this conversation?</h4>
+                <h4 className="font-semibold mb-3">¿Qué técnicas de ingeniería social identificas en esta conversación?</h4>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Select all techniques that you think are being used by the attacker:
+                  Selecciona todas las técnicas que crees que están siendo utilizadas por el atacante:
                 </p>
               </div>
               
@@ -389,7 +389,7 @@ export function SocialEngineeringPractice({
                 onClick={handleSubmitAnalysis}
                 disabled={selectedTechniques.length === 0}
               >
-                Submit Analysis ({selectedTechniques.length} technique{selectedTechniques.length !== 1 ? 's' : ''} selected)
+                Enviar Análisis ({selectedTechniques.length} técnica{selectedTechniques.length !== 1 ? 's' : ''} seleccionada)
               </Button>
             </div>
           )}
@@ -411,7 +411,7 @@ export function SocialEngineeringPractice({
               
               {feedback.correctlyIdentified.length > 0 && (
                 <div className="mb-3">
-                  <p className="text-sm font-medium text-green-700 mb-2">✅ Correctly Identified:</p>
+                  <p className="text-sm font-medium text-green-700 mb-2">✅ Identificadas Correctamente:</p>
                   <div className="flex flex-wrap gap-1">
                     {feedback.correctlyIdentified.map((techniqueId: string) => {
                       const technique = getTechniqueByIdInfo(techniqueId)
@@ -427,7 +427,7 @@ export function SocialEngineeringPractice({
 
               {feedback.missed.length > 0 && (
                 <div className="mb-3">
-                  <p className="text-sm font-medium text-red-700 mb-2">❌ Missing:</p>
+                  <p className="text-sm font-medium text-red-700 mb-2">❌ Faltantes:</p>
                   <div className="flex flex-wrap gap-1">
                     {feedback.missed.map((techniqueId: string) => {
                       const technique = getTechniqueByIdInfo(techniqueId)
@@ -443,7 +443,7 @@ export function SocialEngineeringPractice({
 
               {feedback.incorrectlyIdentified.length > 0 && (
                 <div className="mb-3">
-                  <p className="text-sm font-medium text-orange-700 mb-2">⚠️ Incorrectly Identified:</p>
+                  <p className="text-sm font-medium text-orange-700 mb-2">⚠️ Identificadas Incorrectamente:</p>
                   <div className="flex flex-wrap gap-1">
                     {feedback.incorrectlyIdentified.map((techniqueId: string) => {
                       const technique = getTechniqueByIdInfo(techniqueId)
@@ -459,11 +459,11 @@ export function SocialEngineeringPractice({
               
               <div className="bg-white/50 p-3 rounded border text-sm space-y-2">
                 <div>
-                  <p className="font-medium mb-1">Explanation:</p>
+                  <p className="font-medium mb-1">Explicación:</p>
                   <p>{feedback.explanation}</p>
                 </div>
                 <div>
-                  <p className="font-medium mb-1">Correct Response:</p>
+                  <p className="font-medium mb-1">Respuesta Correcta:</p>
                   <p>{feedback.correctResponse}</p>
                 </div>
               </div>
@@ -472,7 +472,7 @@ export function SocialEngineeringPractice({
                 className="w-full mt-4"
                 onClick={handleNextConversation}
               >
-                {currentConversationIndex < conversations.length - 1 ? "Next Scenario" : "Complete Analysis"}
+                {currentConversationIndex < conversations.length - 1 ? "Siguiente Escenario" : "Análisis Completo"}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>

@@ -2,16 +2,17 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { siteName } from "@/lib/config"
 import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "CyberGuard Academy - Learn Cybersecurity Awareness",
+  title: `${siteName} - Aprende Concienciación en Ciberseguridad`,
   description:
-    "An educational platform focused on cybersecurity literacy through interactive content, simulations, and games. Learn to protect yourself online.",
-  generator: "v0.app",
+    "Una plataforma educativa enfocada en alfabetización en ciberseguridad a través de contenido interactivo, simulaciones y juegos. Aprende a protegerte en línea.",
+  generator: "chero seguro",
 }
 
 export default function RootLayout({
@@ -20,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className={`font-sans antialiased`}>
         {children}
         <Analytics />

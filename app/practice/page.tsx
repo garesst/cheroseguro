@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { PracticeProgressBar } from "@/components/practice-progress-bar"
+import { PracticeCardProgress } from "@/components/practice-card-progress"
 import { getPractices, getFeaturedPractices, getPages, getPracticeCategories, getFeaturedPracticeCategories } from "@/lib/directus"
 
 const practiceTypeIcons = {
@@ -46,17 +48,29 @@ export default async function PracticePage() {
             <div className="mx-auto max-w-4xl">
               <div className="space-y-4 mb-8">
                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-balance">
-                  {practicePage?.title || "Practice Cybersecurity"}
+                  {practicePage?.title}
                 </h1>
                 <p className="text-lg text-muted-foreground leading-relaxed text-balance">
-                  {practicePage?.description || "Put your knowledge to the test with interactive simulations and practical exercises designed to reinforce your cybersecurity skills."}
+                  {practicePage?.description}
                 </p>
               </div>
 
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input placeholder="Search practices..." className="pl-9" />
+                <Input placeholder="Buscar prácticas..." className="pl-9" />
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Progress Bar Section */}
+        <section className="pb-12">
+          <div className="container mx-auto">
+            <div className="mx-auto max-w-4xl">
+              <PracticeProgressBar 
+                availablePractices={practices.length}
+                showDetailedStats={true}
+              />
             </div>
           </div>
         </section>
@@ -65,11 +79,11 @@ export default async function PracticePage() {
         {featuredPractices.length > 0 && (
           <section className="pb-12">
             <div className="container mx-auto">
-              <div className="mx-auto max-w-4xl">
+              <div className="mx-auto max-w-6xl">
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold mb-2">Featured Practices</h2>
+                  <h2 className="text-2xl font-bold mb-2">Prácticas destacadas</h2>
                   <p className="text-muted-foreground">
-                    Start with these recommended cybersecurity simulations
+                    Inicia tu aprendizaje con estas prácticas seleccionadas por su relevancia y calidad. Perfectas para empezar o para profundizar en temas específicos.
                   </p>
                 </div>
 
@@ -94,7 +108,7 @@ export default async function PracticePage() {
                               </Badge>
                               {hasMultipleExercises && (
                                 <Badge variant="secondary" className="text-xs">
-                                  {exerciseCount} exercises
+                                  {exerciseCount} ejercicios
                                 </Badge>
                               )}
                               {/* Show category badges */}
@@ -116,20 +130,24 @@ export default async function PracticePage() {
                           <CardDescription className="line-clamp-2 mb-4">
                             {practice.description}
                           </CardDescription>
+                          
+                          {/* Progress indicator */}
+                          <PracticeCardProgress 
+                            practiceSlug={practice.slug}
+                            totalExercises={exerciseCount}
+                            className="mb-3"
+                          />
+                          
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-4 text-xs text-muted-foreground">
                               <div className="flex items-center gap-1">
                                 <Clock className="h-3 w-3" />
                                 {practice.estimated_time}m
                               </div>
-                              <div className="flex items-center gap-1">
-                                <Target className="h-3 w-3" />
-                                {practice.learning_objectives?.length || 0} objectives
-                              </div>
                             </div>
                             <Button variant="outline" size="sm" asChild>
                               <Link href={`/practice/${practice.slug}`}>
-                                Start
+                                Empezar
                                 <ArrowRight className="ml-1 h-3 w-3" />
                               </Link>
                             </Button>
@@ -149,15 +167,15 @@ export default async function PracticePage() {
           <div className="container mx-auto">
             <div className="mx-auto max-w-6xl">
               <div className="mb-8">
-                <h2 className="text-2xl font-bold mb-2">All Practices</h2>
+                <h2 className="text-2xl font-bold mb-2">Todas las prácticas</h2>
                 <p className="text-muted-foreground">
-                  Choose from different types of cybersecurity simulations
+                  Elige entre diferentes tipos de simulaciones de ciberseguridad
                 </p>
               </div>
 
               <Tabs defaultValue="all" className="space-y-6">
                 <TabsList className="grid w-full grid-cols-6">
-                  <TabsTrigger value="all">All</TabsTrigger>
+                  <TabsTrigger value="all">Todas</TabsTrigger>
                   {featuredCategories.slice(0, 5).map((category) => (
                     <TabsTrigger key={category.id} value={category.id} className="flex items-center gap-1">
                       <span>{category.icon}</span>
@@ -188,7 +206,7 @@ export default async function PracticePage() {
                                 </Badge>
                                 {hasMultipleExercises && (
                                   <Badge variant="secondary" className="text-xs">
-                                    {exerciseCount} exercises
+                                    {exerciseCount} ejercicios
                                   </Badge>
                                 )}
                                 {/* Show category badges */}
@@ -208,6 +226,14 @@ export default async function PracticePage() {
                             <CardDescription className="line-clamp-3 mb-4">
                               {practice.description}
                             </CardDescription>
+                            
+                            {/* Progress indicator */}
+                            <PracticeCardProgress 
+                              practiceSlug={practice.slug}
+                              totalExercises={exerciseCount}
+                              className="mb-3"
+                            />
+                            
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-3">
                                 <div className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -227,7 +253,7 @@ export default async function PracticePage() {
                               </div>
                               <Button variant="outline" size="sm" asChild>
                                 <Link href={`/practice/${practice.slug}`}>
-                                  Start
+                                  Empezar
                                 </Link>
                               </Button>
                             </div>
@@ -269,8 +295,8 @@ export default async function PracticePage() {
                         if (filteredPractices.length === 0) {
                           return (
                             <div className="col-span-full text-center py-8 text-muted-foreground">
-                              <p>No practices found for this category yet.</p>
-                              <p className="text-sm mt-2">Check back soon for new content!</p>
+                              <p>No hay prácticas disponibles para esta categoría aún.</p>
+                              <p className="text-sm mt-2">Vuelve pronto para contenido nuevo!</p>
                             </div>
                           )
                         }
@@ -295,7 +321,7 @@ export default async function PracticePage() {
                                     </Badge>
                                     {hasMultipleExercises && (
                                       <Badge variant="secondary" className="text-xs">
-                                        {exerciseCount} exercises
+                                        {exerciseCount} ejercicios
                                       </Badge>
                                     )}
                                   </div>
@@ -304,6 +330,14 @@ export default async function PracticePage() {
                                 <CardDescription className="line-clamp-3 mb-4">
                                   {practice.description}
                                 </CardDescription>
+                                
+                                {/* Progress indicator */}
+                                <PracticeCardProgress 
+                                  practiceSlug={practice.slug}
+                                  totalExercises={exerciseCount}
+                                  className="mb-3"
+                                />
+                                
                                 <div className="flex items-center justify-between mb-4">
                                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
                                     <Clock className="h-3 w-3" />
@@ -312,7 +346,7 @@ export default async function PracticePage() {
                                 </div>
                                 <Button className="w-full" asChild>
                                   <Link href={`/practice/${practice.slug}`}>
-                                    Start Practice
+                                    Empezar prácticas
                                     <ArrowRight className="ml-2 h-4 w-4" />
                                   </Link>
                                 </Button>

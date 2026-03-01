@@ -21,6 +21,7 @@ interface PracticeExercises {
   exercises?: Array<{
     type: string
     title: string
+    descrip?: string
     href: string
   }>
 }
@@ -237,10 +238,10 @@ function ArticleContentRenderer({
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <BookOpen className="h-5 w-5" />
-                    {segment.data.title || "Practice What You've Learned"}
+                    {segment.data.title}
                   </CardTitle>
                   <CardDescription>
-                    Test your knowledge with these interactive exercises and games.
+                    {segment.data.exercises[0]?.descrip || "Practica lo aprendido con estos ejercicios."}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -291,11 +292,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
       <main className="flex-1">
         <article className="w-full py-12">
-          <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">\n            {/* Back Button */}
+          <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8"> {/* Back Button */}
             <Button variant="ghost" size="sm" className="mb-6" asChild>
               <Link href="/learn">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Learn
+                Volver a Aprendizaje
               </Link>
             </Button>
 
@@ -317,11 +318,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <div className="flex items-center gap-6 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  <span>{article.reading_time} min read</span>
+                  <span>{article.reading_time} min de lectura</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <BookOpen className="h-4 w-4" />
-                  <span>Last updated: {lastUpdated}</span>
+                  <span>Última actualización: {lastUpdated}</span>
                 </div>
               </div>
             </div>
@@ -340,7 +341,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <Button variant="outline" size="lg" asChild>
                 <Link href="/learn">
                   <ArrowLeft className="mr-2 h-5 w-5" />
-                  Back to Learn
+                  Volver a Aprendizaje
                 </Link>
               </Button>
               
@@ -352,7 +353,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             {/* Related Articles */}
             {relatedArticles.length > 0 && (
               <div className="mt-12">
-                <h2 className="text-2xl font-bold mb-6">Related Articles</h2>
+                <h2 className="text-2xl font-bold mb-6">Artículos relacionados</h2>
                 <div className="grid gap-4">
                   {relatedArticles.map((relatedArticle) => (
                     <Card key={relatedArticle.id} className="hover:border-primary/50 transition-all">
@@ -374,7 +375,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                           </div>
                           <Button variant="ghost" size="sm" asChild>
                             <Link href={`/learn/${relatedArticle.slug}`}>
-                              Read
+                              Leer más
                             </Link>
                           </Button>
                         </div>

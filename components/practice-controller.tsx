@@ -1,10 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { AlertCircle, CheckCircle2, XCircle, Clock, Target, ArrowRight } from "lucide-react"
+import { AlertCircle, CheckCircle2, XCircle, Clock, Target, ArrowRight, Trophy } from "lucide-react"
+import { usePracticeProgress } from "@/hooks/use-practice-progress"
 
 interface PracticeControllerProps {
   practice: any
@@ -14,6 +15,18 @@ export function PracticeController({ practice }: PracticeControllerProps) {
   const [hasStarted, setHasStarted] = useState(false)
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const [showFeedback, setShowFeedback] = useState(false)
+  
+  // Progress tracking
+  const { 
+    completePracticeExercise, 
+    getPracticeProgress, 
+    isExerciseCompleted 
+  } = usePracticeProgress()
+
+  // Check if this exercise was already completed
+  const exerciseId = practice.id || 'main_exercise'
+  const isCompleted = isExerciseCompleted(practice.slug, exerciseId)
+  const practiceProgress = getPracticeProgress(practice.slug)
 
   const handleStartPractice = () => {
     setHasStarted(true)
@@ -39,6 +52,23 @@ export function PracticeController({ practice }: PracticeControllerProps) {
     
     setSelectedOption(optionId);
     setShowFeedback(true);
+
+    // Track progress
+    const feedback = practice.scenario_data?.feedback_responses?.[optionId] ||
+                    practice.feedback_responses?.[optionId] ||
+                    practice.scenario_data?.feedback?.[optionId];
+    
+    if (feedback) {
+      const isCorrect = feedback.is_correct
+      const score = isCorrect ? 100 : 50 // Full points for correct, partial for attempt
+      
+      completePracticeExercise(
+        practice.slug,
+        exerciseId,
+        score,
+        isCorrect
+      )
+    }
   }
 
   const handleTryAgain = () => {
@@ -49,6 +79,23 @@ export function PracticeController({ practice }: PracticeControllerProps) {
   if (!hasStarted) {
     return (
       <div className="space-y-6">
+        {/* Progress indicator if already completed */}
+        {isCompleted && (
+          <Card className="bg-green-50 border-green-200 border-2">
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-3">
+                <Trophy className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
+                <div>
+                  <h4 className="font-semibold text-green-900">Already Completed!</h4>
+                  <p className="text-sm text-green-700">
+                    You've completed this practice. Your score: {practiceProgress.exercises[exerciseId]?.score || 0}%
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Learning Objectives */}
         {practice.learning_objectives && practice.learning_objectives.length > 0 && (
           <Card className="bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
@@ -218,7 +265,7 @@ export function PracticeController({ practice }: PracticeControllerProps) {
               
               <div className="flex gap-2">
                 <Button variant="outline" onClick={handleTryAgain}>
-                  Try Again
+                  Intentar de Nuevo
                 </Button>
                 <Button onClick={() => window.location.href = "/practice"}>
                   Back to Practices

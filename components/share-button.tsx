@@ -19,7 +19,7 @@ export function ShareButton({ title, description }: ShareButtonProps) {
         }).catch(console.error);
       } else if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(window.location.href).then(() => {
-          alert('Link copied to clipboard!');
+          alert('Link copiado al portapapeles!');
         }).catch(console.error);
       } else {
         // Fallback for older browsers or localhost
@@ -33,11 +33,11 @@ export function ShareButton({ title, description }: ShareButtonProps) {
         textArea.select();
         try {
           document.execCommand('copy');
-          alert('Link copied to clipboard!');
+          alert('Link copiado al portapapeles!');
         } catch (err) {
           console.error('Unable to copy to clipboard:', err);
           // Last resort: show URL to user
-          prompt('Copy this link:', window.location.href);
+          prompt('Copiar este enlace:', window.location.href);
         }
         document.body.removeChild(textArea);
       }
@@ -47,7 +47,7 @@ export function ShareButton({ title, description }: ShareButtonProps) {
   return (
     <Button variant="outline" size="lg" onClick={handleShare}>
       <Share2 className="mr-2 h-5 w-5" />
-      Share Article
+      Compartir artículo
     </Button>
   )
 }

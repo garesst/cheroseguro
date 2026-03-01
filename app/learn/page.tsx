@@ -32,16 +32,16 @@ export default async function LearnPage() {
             <div className="mx-auto max-w-4xl">
               <div className="space-y-4 mb-8">
                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-balance">
-                  {learnPage?.title || "Learn Cybersecurity"}
+                  {learnPage?.title}
                 </h1>
                 <p className="text-lg text-muted-foreground leading-relaxed text-balance">
-                  {learnPage?.description || "Explore our library of easy-to-understand articles and guides. Start with the basics or dive into specific topics that interest you."}
+                  {learnPage?.description}
                 </p>
               </div>
 
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input placeholder="Search articles..." className="pl-9" />
+                <Input placeholder="Buscar artículos..." className="pl-9" />
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@ export default async function LearnPage() {
         <section className="pb-12">
           <div className="container mx-auto">
             <div className="mx-auto max-w-4xl">
-              <h2 className="text-2xl font-bold mb-6">Featured Articles</h2>
+              <h2 className="text-2xl font-bold mb-6">Artículos destacados</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 {featuredArticles.map((article) => (
                   <Card key={article.id} className="hover:border-primary/50 transition-all hover:shadow-md">
@@ -69,11 +69,11 @@ export default async function LearnPage() {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <Clock className="h-4 w-4" />
-                          <span>{article.reading_time} min read</span>
+                          <span>{article.reading_time} min</span>
                         </div>
                         <Button variant="ghost" size="sm" asChild>
                           <Link href={`/learn/${article.slug}`}>
-                            Read More <ArrowRight className="ml-2 h-4 w-4" />
+                            Leer más <ArrowRight className="ml-2 h-4 w-4" />
                           </Link>
                         </Button>
                       </div>
@@ -90,10 +90,11 @@ export default async function LearnPage() {
           <div className="container mx-auto">
             <div className="mx-auto max-w-4xl">
               <Tabs defaultValue="all" className="w-full">
-                <TabsList className="grid w-full max-w-md grid-cols-3">
-                  <TabsTrigger value="all">All</TabsTrigger>
-                  <TabsTrigger value="beginner">Beginner</TabsTrigger>
-                  <TabsTrigger value="intermediate">Intermediate</TabsTrigger>
+                <TabsList className="grid w-full max-w-md grid-cols-4">
+                  <TabsTrigger value="all">Todos</TabsTrigger>
+                  <TabsTrigger value="beginner">Principiante</TabsTrigger>
+                  <TabsTrigger value="intermediate">Intermedio</TabsTrigger>
+                  <TabsTrigger value="advanced">Avanzado</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="all" className="mt-6 space-y-4">
@@ -118,7 +119,7 @@ export default async function LearnPage() {
                             </div>
                             <Button variant="outline" size="sm" asChild>
                               <Link href={`/learn/${article.slug}`}>
-                                Read <ArrowRight className="ml-2 h-4 w-4" />
+                                Leer más <ArrowRight className="ml-2 h-4 w-4" />
                               </Link>
                             </Button>
                           </div>

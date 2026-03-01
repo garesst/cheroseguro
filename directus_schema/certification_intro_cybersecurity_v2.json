@@ -1,0 +1,1054 @@
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "status": "published",
+    "title": "Certificación en Introducción a la Ciberseguridad",
+    "slug": "intro-ciberseguridad",
+    "certification_code": "CCS-INTRO",
+    "certification_level": "level_1",
+    "description": "<p>Esta certificación valida tus conocimientos fundamentales en ciberseguridad mediante un examen de 50 preguntas de opción múltiple.</p><p><strong>Temas cubiertos:</strong></p><ul><li>Detección de Phishing y Correos Maliciosos (24%)</li><li>Seguridad de Contraseñas y Autenticación (20%)</li><li>Ingeniería Social y Manipulación (20%)</li><li>Seguridad de Redes e Internet (16%)</li><li>Respuesta a Incidentes (20%)</li></ul><p><strong>Formato del examen:</strong> 50 preguntas seleccionadas aleatoriamente | 45 minutos | 75% para aprobar</p>",
+    "passing_score": 75,
+    "time_limit_minutes": 45,
+    "featured": true,
+    "validity_months": 12,
+    "renewal_required": true,
+    "certificate_template": "ccs_intro_template.pdf",
+    "total_questions_per_exam": 50,
+    "randomize_questions": true,
+    "version": "2.0",
+    "prerequisites": {
+      "required_practices": [],
+      "required_certifications": [],
+      "description": "No se requieren conocimientos previos. Ideal para principiantes."
+    },
+    "question_pool": {
+      "phishing_detection": {
+        "title": "Detección de Phishing y Correos Maliciosos",
+        "questions_to_select": 12,
+        "weight": 24,
+        "questions": [
+          {
+            "id": "phish_001",
+            "text": "Analiza el siguiente correo electrónico. ¿Cuál es la señal MÁS clara de que este es un intento de phishing?",
+            "image": "/images/cert/phishing-email-bank.png",
+            "image_alt": "Correo de banco solicitando verificación urgente",
+            "type": "single_choice",
+            "difficulty": "easy",
+            "points": 2,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "El logo del banco está desactualizado"
+              },
+              {
+                "id": "opt_b",
+                "text": "El dominio del remitente es 'banc0nacional.com' (usa '0' en lugar de 'o')"
+              },
+              {
+                "id": "opt_c",
+                "text": "El correo no tiene firma digital"
+              },
+              {
+                "id": "opt_d",
+                "text": "El mensaje está en español"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "El dominio 'banc0nacional.com' usa un cero (0) en lugar de la letra 'o', una técnica común de phishing llamada 'typosquatting'. Los bancos legítimos siempre usan sus dominios oficiales sin variaciones."
+          },
+          {
+            "id": "phish_002",
+            "text": "¿Cuál de estos dominios es más probable que sea legítimo para PayPal?",
+            "type": "single_choice",
+            "difficulty": "easy",
+            "points": 2,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "paypa1.com"
+              },
+              {
+                "id": "opt_b",
+                "text": "paypal.com"
+              },
+              {
+                "id": "opt_c",
+                "text": "paypal-secure.net"
+              },
+              {
+                "id": "opt_d",
+                "text": "paypal-verification.com"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "paypal.com es el dominio oficial. Las variaciones como paypa1.com (con '1'), paypal-secure.net o paypal-verification.com son técnicas de phishing. Las empresas legítimas usan su dominio principal sin agregados de 'seguridad' o 'verificación'."
+          },
+          {
+            "id": "phish_003",
+            "text": "Recibes un correo de 'Soporte de Amazon' pidiendo actualizar tu método de pago. ¿Cuál es la MEJOR forma de proceder?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Hacer clic en el enlace del correo para actualizar rápidamente"
+              },
+              {
+                "id": "opt_b",
+                "text": "Responder al correo pidiendo más información"
+              },
+              {
+                "id": "opt_c",
+                "text": "Ir directamente al sitio de Amazon escribiendo la URL en el navegador y revisar tu cuenta"
+              },
+              {
+                "id": "opt_d",
+                "text": "Llamar al número de teléfono que aparece en el correo"
+              }
+            ],
+            "correct_answer": "opt_c",
+            "explanation": "NUNCA uses enlaces en correos sospechosos. Siempre ve directamente al sitio web escribiendo la URL oficial en tu navegador y revisa tu cuenta desde ahí. Esto evita caer en sitios falsos de phishing."
+          },
+          {
+            "id": "phish_004",
+            "text": "¿Qué técnica de phishing se muestra en esta captura donde el atacante intenta crear urgencia?",
+            "image": "/images/cert/phishing-urgency-example.png",
+            "image_alt": "Correo electrónico con mensaje 'ÚLTIMA OPORTUNIDAD - 24 HORAS'",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Pretexting"
+              },
+              {
+                "id": "opt_b",
+                "text": "Urgency manipulation (manipulación de urgencia)"
+              },
+              {
+                "id": "opt_c",
+                "text": "Baiting"
+              },
+              {
+                "id": "opt_d",
+                "text": "Quid pro quo"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "La manipulación de urgencia es una técnica donde los atacantes crean presión de tiempo artificial ('24 horas', 'última oportunidad') para que tomes decisiones rápidas sin pensar. Las empresas legítimas rara vez ponen límites de tiempo tan ajustados."
+          },
+          {
+            "id": "phish_005",
+            "text": "Identificas TODAS las señales de phishing en este correo corporativo:",
+            "image": "/images/cert/phishing-multiple-flags.png",
+            "image_alt": "Correo de IT solicitando actualización de credenciales",
+            "type": "multiple_choice",
+            "difficulty": "hard",
+            "points": 3,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Dominio externo (empresa-temp-mail.com) en lugar del dominio corporativo"
+              },
+              {
+                "id": "opt_b",
+                "text": "Solicita descargar un 'certificado' de un enlace acortado (bit.ly)"
+              },
+              {
+                "id": "opt_c",
+                "text": "Amenaza con consecuencias ('debe completarse antes de las 6:00 PM')"
+              },
+              {
+                "id": "opt_d",
+                "text": "El remitente pide responder al correo en lugar de usar canales oficiales"
+              },
+              {
+                "id": "opt_e",
+                "text": "El saludo es genérico ('Hola') en lugar de tu nombre"
+              }
+            ],
+            "correct_answers": ["opt_a", "opt_b", "opt_c", "opt_d"],
+            "explanation": "Este correo presenta 4 señales críticas: (1) dominio externo no corporativo, (2) enlace acortado sospechoso para 'certificados', (3) urgencia artificial con deadline, y (4) solicita respuesta por email. El IT legítimo usa portales oficiales y canales de soporte. El saludo genérico es sospechoso pero no tan crítico como las otras señales."
+          },
+          {
+            "id": "phish_006",
+            "text": "¿Qué es 'spear phishing' y en qué se diferencia del phishing regular?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Es phishing que solo ataca a empresas, no a individuos"
+              },
+              {
+                "id": "opt_b",
+                "text": "Es phishing dirigido a una persona específica usando información personal sobre ella"
+              },
+              {
+                "id": "opt_c",
+                "text": "Es phishing que usa múltiples canales (email + SMS)"
+              },
+              {
+                "id": "opt_d",
+                "text": "Es phishing más peligroso porque incluye malware"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "Spear phishing es un ataque dirigido y personalizado contra una persona específica, usando información investigada sobre ella (nombre, cargo, proyectos, etc.). Es más efectivo que el phishing masivo genérico porque parece más legítimo al incluir detalles personales."
+          },
+          {
+            "id": "phish_007",
+            "text": "Miras el código fuente HTML de un correo sospechoso. El texto muestra 'www.amazon.com' pero el enlace real (<a href=>) apunta a 'amaz0n-verify.net'. ¿Qué técnica es esta?",
+            "type": "single_choice",
+            "difficulty": "hard",
+            "points": 3,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "URL Spoofing (falsificación de URL)"
+              },
+              {
+                "id": "opt_b",
+                "text": "Domain Hijacking"
+              },
+              {
+                "id": "opt_c",
+                "text": "DNS Poisoning"
+              },
+              {
+                "id": "opt_d",
+                "text": "Man-in-the-Middle"
+              }
+            ],
+            "correct_answer": "opt_a",
+            "explanation": "URL Spoofing es cuando el texto visible de un enlace es diferente a su destino real. Esto engaña a usuarios que ven 'amazon.com' pero realmente hacen clic hacia un sitio malicioso. Siempre revisa URLs antes de hacer clic (hover sobre el enlace)."
+          },
+          {
+            "id": "phish_008",
+            "text": "¿Cuál de estas es una señal de que un sitio web es seguro para ingresar información sensible?",
+            "type": "single_choice",
+            "difficulty": "easy",
+            "points": 2,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "El sitio tiene muchos anuncios publicitarios"
+              },
+              {
+                "id": "opt_b",
+                "text": "La URL comienza con 'https://' y muestra un candado en el navegador"
+              },
+              {
+                "id": "opt_c",
+                "text": "El sitio tiene colores similares a la marca original"
+              },
+              {
+                "id": "opt_d",
+                "text": "El sitio pide poca información"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "HTTPS (el 's' es por 'secure') y el candado indican que la conexión está encriptada. Sin embargo, esto NO garantiza que el sitio sea legítimo - los sitios de phishing también pueden usar HTTPS. Siempre verifica también el dominio correcto."
+          },
+          {
+            "id": "phish_009",
+            "text": "Observa este correo electrónico. ¿Qué detalle gramatical/lingüístico sugiere que podría ser phishing?",
+            "image": "/images/cert/phishing-grammar-errors.png",
+            "image_alt": "Correo con errores de español como 'completado el verificación'",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Usa lenguaje formal"
+              },
+              {
+                "id": "opt_b",
+                "text": "Tiene errores gramaticales evidentes ('el verificación' en lugar de 'la verificación')"
+              },
+              {
+                "id": "opt_c",
+                "text": "Usa términos técnicos"
+              },
+              {
+                "id": "opt_d",
+                "text": "Es muy largo"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "Los correos de phishing frecuentemente tienen errores gramaticales o traducciones automáticas mal hechas porque muchos atacantes no son hablantes nativos del idioma. Empresas legítimas revisan cuidadosamente sus comunicaciones."
+          },
+          {
+            "id": "phish_010",
+            "text": "¿Qué es 'whaling' en el contexto de phishing?",
+            "type": "single_choice",
+            "difficulty": "hard",
+            "points": 3,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Phishing masivo que envía millones de correos"
+              },
+              {
+                "id": "opt_b",
+                "text": "Phishing dirigido específicamente a ejecutivos de alto nivel (CEOs, CFOs)"
+              },
+              {
+                "id": "opt_c",
+                "text": "Phishing que usa técnicas de ingeniería social muy avanzadas"
+              },
+              {
+                "id": "opt_d",
+                "text": "Phishing que roba grandes cantidades de dinero"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "Whaling (caza de ballenas) es un tipo de spear phishing dirigido específicamente a ejecutivos de alto nivel. Estos ataques son muy sofisticados porque los atacantes investigan profundamente a sus objetivos de alto valor para crear mensajes extremadamente convincentes."
+          },
+          {
+            "id": "phish_011",
+            "text": "Tu jefe te envía un email urgente pidiendo comprar tarjetas de regalo y enviarle los códigos. ¿Cuál es la acción MÁS segura?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Comprar las tarjetas inmediatamente porque es urgente"
+              },
+              {
+                "id": "opt_b",
+                "text": "Verificar directamente con tu jefe por otro medio (teléfono, en persona) antes de proceder"
+              },
+              {
+                "id": "opt_c",
+                "text": "Responder al email pidiendo más detalles"
+              },
+              {
+                "id": "opt_d",
+                "text": "Ignorar el email"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "Esta es una táctica común de 'Business Email Compromise' (BEC). Los atacantes comprometen o falsifican cuentas de ejecutivos para pedir tarjetas de regalo o transferencias. SIEMPRE verifica solicitudes inusuales o urgentes usando un canal diferente al correo."
+          },
+          {
+            "id": "phish_012",
+            "text": "Examina el header del email en la imagen. ¿Qué inconsistencia indica phishing?",
+            "image": "/images/cert/email-header-spoofing.png",
+            "image_alt": "Header de email donde 'From' muestra support@microsoft.com pero 'Return-Path' muestra attacker@malicious.com",
+            "type": "single_choice",
+            "difficulty": "hard",
+            "points": 3,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "El campo 'Subject' está en mayúsculas"
+              },
+              {
+                "id": "opt_b",
+                "text": "El 'From' y 'Return-Path' muestran dominios diferentes (microsoft.com vs malicious.com)"
+              },
+              {
+                "id": "opt_c",
+                "text": "El email tiene un 'Reply-To' definido"
+              },
+              {
+                "id": "opt_d",
+                "text": "La fecha del email es reciente"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "El 'From' puede ser falsificado fácilmente, pero el 'Return-Path' revela el servidor real de origen. Si estos dominios no coinciden (especialmente si el Return-Path es sospechoso), es una señal fuerte de email spoofing. Los usuarios avanzados deben revisar headers completos de emails sospechosos."
+          },
+          {
+            "id": "phish_013",
+            "text": "Has reportado un email de phishing al equipo de seguridad. ¿Qué NO deberías hacer con el email?",
+            "type": "single_choice",
+            "difficulty": "easy",
+            "points": 2,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Reenviarlo (forward) a otros para advertirles"
+              },
+              {
+                "id": "opt_b",
+                "text": "Eliminarlo después de reportarlo"
+              },
+              {
+                "id": "opt_c",
+                "text": "Marcar al remitente como spam"
+              },
+              {
+                "id": "opt_d",
+                "text": "Documentar cuándo lo recibiste"
+              }
+            ],
+            "correct_answer": "opt_a",
+            "explanation": "NO reenvíes emails de phishing a otros, incluso con buenas intenciones. Esto puede propagar el ataque y algunos usuarios pueden hacer clic accidentalmente en los enlaces. Deja que el equipo de seguridad maneje las advertencias de forma oficial y controlada."
+          },
+          {
+            "id": "phish_014",
+            "text": "¿Qué es 'vishing'?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Phishing a través de videollamadas"
+              },
+              {
+                "id": "opt_b",
+                "text": "Phishing a través de llamadas telefónicas de voz (voice phishing)"
+              },
+              {
+                "id": "opt_c",
+                "text": "Phishing visual usando imágenes engañosas"
+              },
+              {
+                "id": "opt_d",
+                "text": "Phishing muy sofisticado y difícil de detectar"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "Vishing (voice + phishing) son ataques de phishing realizados por teléfono. Los atacantes llaman haciéndose pasar por soporte técnico, bancos, o agencias gubernamentales para obtener información sensible o acceso a sistemas."
+          },
+          {
+            "id": "phish_015",
+            "text": "¿Cuál es la diferencia entre 'phishing' y 'smishing'?",
+            "type": "single_choice",
+            "difficulty": "easy",
+            "points": 2,
+            "category": "phishing_detection",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Phishing usa email, smishing usa mensajes SMS/texto"
+              },
+              {
+                "id": "opt_b",
+                "text": "No hay diferencia, son sinónimos"
+              },
+              {
+                "id": "opt_c",
+                "text": "Phishing es más peligroso que smishing"
+              },
+              {
+                "id": "opt_d",
+                "text": "Smishing solo ataca smartphones, phishing ataca computadoras"
+              }
+            ],
+            "correct_answer": "opt_a",
+            "explanation": "Smishing (SMS + phishing) son ataques de phishing realizados a través de mensajes de texto SMS. Usan las mismas técnicas que el phishing por email pero explotan la inmediatez y confianza que las personas tienen en los mensajes de texto."
+          }
+        ]
+      },
+      "password_security": {
+        "title": "Seguridad de Contraseñas y Autenticación",
+        "questions_to_select": 10,
+        "weight": 20,
+        "questions": [
+          {
+            "id": "pass_001",
+            "text": "¿Cuál de las siguientes contraseñas es la MÁS segura?",
+            "type": "single_choice",
+            "difficulty": "easy",
+            "points": 2,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Password123!"
+              },
+              {
+                "id": "opt_b",
+                "text": "MiNombre2024"
+              },
+              {
+                "id": "opt_c",
+                "text": "qwerty987654"
+              },
+              {
+                "id": "opt_d",
+                "text": "T8$mK@9pL#vN2xQ!"
+              }
+            ],
+            "correct_answer": "opt_d",
+            "explanation": "T8$mK@9pL#vN2xQ! es la más segura porque: (1) tiene más de 14 caracteres, (2) combina mayúsculas, minúsculas, números y símbolos, (3) no sigue patrones predecibles, (4) no contiene palabras de diccionario ni información personal."
+          },
+          {
+            "id": "pass_002",
+            "text": "Mira esta configuración de cuenta. ¿Qué deberías mejorar PRIMERO?",
+            "image": "/images/cert/account-settings-weak.png",
+            "image_alt": "Captura de configuración mostrando 2FA desactivado y contraseña corta",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Cambiar el nombre de usuario"
+              },
+              {
+                "id": "opt_b",
+                "text": "Activar la autenticación de dos factores (2FA)"
+              },
+              {
+                "id": "opt_c",
+                "text": "Cambiar el email de recuperación"
+              },
+              {
+                "id": "opt_d",
+                "text": "Actualizar la foto de perfil"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "La autenticación de dos factores (2FA) es la mejora de seguridad más importante. Incluso con una contraseña débil, 2FA hace extremadamente difícil que un atacante acceda a tu cuenta porque necesita también tu segundo factor (teléfono, app autenticadora, etc.)."
+          },
+          {
+            "id": "pass_003",
+            "text": "¿Cuál es la longitud MÍNIMA recomendada para una contraseña segura en 2026?",
+            "type": "single_choice",
+            "difficulty": "easy",
+            "points": 2,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "6 caracteres"
+              },
+              {
+                "id": "opt_b",
+                "text": "8 caracteres"
+              },
+              {
+                "id": "opt_c",
+                "text": "12 caracteres"
+              },
+              {
+                "id": "opt_d",
+                "text": "16+ caracteres"
+              }
+            ],
+            "correct_answer": "opt_d",
+            "explanation": "Con la potencia computacional actual, se recomienda un mínimo de 16 caracteres para contraseñas. Mientras más larga, más tiempo tardan los ataques de fuerza bruta. Considera usar 'passphrases' (frases de contraseña) largas y memorables."
+          },
+          {
+            "id": "pass_004",
+            "text": "¿Qué es un 'gestor de contraseñas' (password manager) y por qué es recomendable?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Una aplicación que genera y almacena de forma segura todas tus contraseñas únicas"
+              },
+              {
+                "id": "opt_b",
+                "text": "Un servicio que comparte tus contraseñas con sitios web automáticamente"
+              },
+              {
+                "id": "opt_c",
+                "text": "Una función del navegador para recordar contraseñas"
+              },
+              {
+                "id": "opt_d",
+                "text": "Un archivo de texto donde guardas tus contraseñas"
+              }
+            ],
+            "correct_answer": "opt_a",
+            "explanation": "Un gestor de contraseñas es una aplicación especializada que: (1) genera contraseñas fuertes y únicas para cada sitio, (2) las almacena encriptadas, (3) solo requiere que recuerdes una contraseña maestra. Esto te permite usar contraseñas diferentes y seguras sin tener que memorizarlas todas."
+          },
+          {
+            "id": "pass_005",
+            "text": "¿Con qué frecuencia deberías cambiar tus contraseñas según las mejores prácticas actuales?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Cada semana"
+              },
+              {
+                "id": "opt_b",
+                "text": "Solo cuando hay sospecha de compromiso o brecha de seguridad"
+              },
+              {
+                "id": "opt_c",
+                "text": "Cada mes"
+              },
+              {
+                "id": "opt_d",
+                "text": "Nunca, si es suficientemente fuerte"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "Las recomendaciones actuales (NIST) dicen que NO necesitas cambiar contraseñas periódicamente SI son fuertes y únicas. Solo cámbialas cuando: (1) hay sospecha de compromiso, (2) se reporta una brecha de datos del servicio, o (3) compartiste la contraseña accidentalmente. Cambios frecuentes forzados llevan a contraseñas más débiles."
+          },
+          {
+            "id": "pass_006",
+            "text": "¿Qué factores puede incluir la autenticación multifactor (MFA)? Selecciona TODOS los correctos:",
+            "type": "multiple_choice",
+            "difficulty": "medium",
+            "points": 3,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Algo que SABES (contraseña, PIN)"
+              },
+              {
+                "id": "opt_b",
+                "text": "Algo que TIENES (teléfono, token físico)"
+              },
+              {
+                "id": "opt_c",
+                "text": "Algo que ERES (huella digital, reconocimiento facial)"
+              },
+              {
+                "id": "opt_d",
+                "text": "Algo que RECUERDAS de tu infancia"
+              },
+              {
+                "id": "opt_e",
+                "text": "DÓNDE ESTÁS (geolocalización, IP conocida)"
+              }
+            ],
+            "correct_answers": ["opt_a", "opt_b", "opt_c", "opt_e"],
+            "explanation": "La autenticación multifactor puede incluir: (1) Conocimiento (contraseñas, PINs), (2) Posesión (teléfono, token USB), (3) Biometría (huella, cara, iris), (4) Ubicación (geolocalización, redes conocidas). Recuerdos personales son preguntas de seguridad tradicionales pero no son un factor moderno de MFA."
+          },
+          {
+            "id": "pass_007",
+            "text": "¿Es seguro usar la misma contraseña para múltiples sitios web si es muy compleja (ej: 'X9$k@mP2!vL8zQ3#')?",
+            "type": "single_choice",
+            "difficulty": "easy",
+            "points": 2,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Sí, porque es muy compleja y difícil de adivinar"
+              },
+              {
+                "id": "opt_b",
+                "text": "No, porque si un sitio es comprometido, todas tus cuentas estarán en riesgo"
+              },
+              {
+                "id": "opt_c",
+                "text": "Sí, pero solo para sitios poco importantes"
+              },
+              {
+                "id": "opt_d",
+                "text": "Depende de cuántos sitios usen la misma contraseña"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "NUNCA reutilices contraseñas, sin importar qué tan complejas sean. Cuando un sitio sufre una brecha de seguridad, los atacantes inmediatamente prueban esas credenciales en otros sitios populares (credential stuffing). Una contraseña única por sitio aísla el daño a una sola cuenta."
+          },
+          {
+            "id": "pass_008",
+            "text": "Observa este prompt de autenticación. ¿Qué tipo de factor MFA se está usando?",
+            "image": "/images/cert/authenticator-app-prompt.png",
+            "image_alt": "Pantalla mostrando código TOTP de 6 dígitos de Google Authenticator",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "SMS-based OTP (código por mensaje)"
+              },
+              {
+                "id": "opt_b",
+                "text": "TOTP - Time-based One-Time Password (app autenticadora)"
+              },
+              {
+                "id": "opt_c",
+                "text": "Biométrico"
+              },
+              {
+                "id": "opt_d",
+                "text": "Hardware token (llave física)"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "Google Authenticator y apps similares generan códigos TOTP (Time-based One-Time Password) que cambian cada 30 segundos. Es más seguro que SMS (que puede ser interceptado) y no requiere hardware adicional más allá de tu smartphone."
+          },
+          {
+            "id": "pass_009",
+            "text": "¿Cuál de estos métodos de 2FA es considerado el MÁS seguro?",
+            "type": "single_choice",
+            "difficulty": "hard",
+            "points": 3,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Código por SMS"
+              },
+              {
+                "id": "opt_b",
+                "text": "App autenticadora (Google Authenticator, Authy)"
+              },
+              {
+                "id": "opt_c",
+                "text": "Llave de seguridad física (YubiKey, Google Titan)"
+              },
+              {
+                "id": "opt_d",
+                "text": "Código por email"
+              }
+            ],
+            "correct_answer": "opt_c",
+            "explanation": "Las llaves de seguridad físicas (FIDO2/U2F como YubiKey) son el método más seguro porque: (1) son inmunes a phishing (verifican el dominio real), (2) no pueden ser interceptadas remotamente, (3) requieren posesión física. Apps autenticadoras son el segundo mejor, SMS es vulnerable a SIM swapping, y email es el menos seguro."
+          },
+          {
+            "id": "pass_010",
+            "text": "¿Qué es 'SIM swapping' y cómo afecta la seguridad de SMS-based 2FA?",
+            "type": "single_choice",
+            "difficulty": "hard",
+            "points": 3,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Es cuando cambias voluntariamente de operador telefónico"
+              },
+              {
+                "id": "opt_b",
+                "text": "Es cuando un atacante convence a tu operador de transferir tu número a su SIM, interceptando tus SMS"
+              },
+              {
+                "id": "opt_c",
+                "text": "Es una técnica para clonar tarjetas SIM"
+              },
+              {
+                "id": "opt_d",
+                "text": "Es un método para aumentar la seguridad de tu teléfono"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "SIM swapping es un ataque donde el criminal engaña al operador telefónico (mediante ingeniería social o complicidad interna) para transferir tu número a una SIM que ellos controlan. Esto les permite recibir tus códigos SMS de 2FA. Por esto se recomienda usar apps autenticadoras en lugar de SMS cuando sea posible."
+          },
+          {
+            "id": "pass_011",
+            "text": "¿Cuál es la principal desventaja de usar 'preguntas de seguridad' como método de recuperación de cuenta?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": "2",
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Son difíciles de recordar"
+              },
+              {
+                "id": "opt_b",
+                "text": "Las respuestas suelen ser información pública o fácil de obtener en redes sociales"
+              },
+              {
+                "id": "opt_c",
+                "text": "Toman mucho tiempo para configurar"
+              },
+              {
+                "id": "opt_d",
+                "text": "No son compatibles con todos los navegadores"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "Las preguntas de seguridad tradicionales ('¿Ciudad donde naciste?', '¿Nombre de tu mascota?') son débiles porque: (1) las respuestas son frecuentemente públicas en redes sociales, (2) pueden ser adivinadas por conocidos, (3) no cambian con el tiempo. Si debes usarlas, considera dar respuestas falsas pero memorables."
+          },
+          {
+            "id": "pass_012",
+            "text": "¿Qué significa que una contraseña haya aparecido en una 'brecha de datos' (data breach)?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Que alguien ha adivinado tu contraseña"
+              },
+              {
+                "id": "opt_b",
+                "text": "Que la contraseña fue expuesta cuando un sitio web fue hackeado y sus bases de datos robadas"
+              },
+              {
+                "id": "opt_c",
+                "text": "Que tu computadora tiene un virus"
+              },
+              {
+                "id": "opt_d",
+                "text": "Que compartiste tu contraseña accidentalmente"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "Una brecha de datos ocurre cuando hackers comprometen un sitio web y roban bases de datos con credenciales de usuarios. Estas contraseñas son luego vendidas o publicadas. Puedes verificar si tus credenciales han sido comprometidas en sitios como 'Have I Been Pwned' (haveibeenpwned.com)."
+          },
+          {
+            "id": "pass_013",
+            "text": "¿Cuál es la mejor práctica para compartir temporalmente una contraseña con un colega?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Enviársela por email"
+              },
+              {
+                "id": "opt_b",
+                "text": "Escribirla en un papel y dárselo en persona"
+              },
+              {
+                "id": "opt_c",
+                "text": "Usar una herramienta de compartición segura (como un gestor de contraseñas compartido) y cambiar la contraseña después"
+              },
+              {
+                "id": "opt_d",
+                "text": "Enviársela por WhatsApp"
+              }
+            ],
+            "correct_answer": "opt_c",
+            "explanation": "La forma más segura es: (1) usar herramientas diseñadas para compartir secretos (gestores de contraseñas con compartición, OneTimeSecret.com), (2) cambiar la contraseña después de que ya no sea necesario compartirla. NUNCA envíes contraseñas por email, chat o mensajes porque quedan registradas permanentemente."
+          },
+          {
+            "id": "pass_014",
+            "text": "Tu navegador ofrece 'autocompletar contraseñas'. ¿Es seguro usar esta función?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "No, nunca es seguro"
+              },
+              {
+                "id": "opt_b",
+                "text": "Sí, pero solo si tu dispositivo está protegido con contraseña/PIN y usas un navegador moderno con encriptación"
+              },
+              {
+                "id": "opt_c",
+                "text": "Solo es seguro en tu computadora personal, nunca en dispositivos públicos"
+              },
+              {
+                "id": "opt_d",
+                "text": "Es igualmente seguro que un gestor de contraseñas dedicado"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "El autocompletado de navegadores modernos (Chrome, Firefox, Safari, Edge) es razonablemente seguro SI: (1) tu dispositivo está bloqueado con contraseña/PIN, (2) usas la sincronización encriptada del navegador. Sin embargo, gestores de contraseñas dedicados ofrecen características adicionales de seguridad y son generalmente preferibles para cuentas críticas."
+          },
+          {
+            "id": "pass_015",
+            "text": "¿Qué es un ataque de 'credential stuffing'?",
+            "type": "single_choice",
+            "difficulty": "hard",
+            "points": 3,
+            "category": "password_security",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Cuando un atacante prueba contraseñas comunes contra muchas cuentas"
+              },
+              {
+                "id": "opt_b",
+                "text": "Cuando un atacante usa credenciales robadas de un sitio para intentar acceder a otros sitios donde el usuario puede haber reutilizado la misma contraseña"
+              },
+              {
+                "id": "opt_c",
+                "text": "Cuando un atacante adivina contraseñas basándose en información personal"
+              },
+              {
+                "id": "opt_d",
+                "text": "Cuando un atacante roba credenciales mediante phishing"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "Credential stuffing usa credenciales previamente robadas (username:password) de brechas de datos y las prueba automáticamente en muchos otros sitios populares. Es extremadamente efectivo porque las personas reutilizan contraseñas. La defensa principal es: usar contraseñas únicas para cada sitio."
+          }
+        ]
+      },
+      "social_engineering": {
+        "title": "Ingeniería Social y Manipulación",
+        "questions_to_select": 10,
+        "weight": 20,
+        "questions": [
+          {
+            "id": "social_001",
+            "text": "Lee esta conversación de chat. ¿Qué técnicas de ingeniería social se están usando? Selecciona TODAS las correctas:",
+            "image": "/images/cert/chat-social-engineering.png",
+            "image_alt": "Chat donde alguien se hace pasar por TI urgente solicitando credenciales",
+            "type": "multiple_choice",
+            "difficulty": "hard",
+            "points": 3,
+            "category": "social_engineering",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Autoridad (se hace pasar por IT/autoridad técnica)"
+              },
+              {
+                "id": "opt_b",
+                "text": "Urgencia ('necesitamos esto inmediatamente')"
+              },
+              {
+                "id": "opt_c",
+                "text": "Miedo (amenaza con consecuencias si no actúas)"
+              },
+              {
+                "id": "opt_d",
+                "text": "Confianza (pretende ser alguien que debería tener acceso)"
+              }
+            ],
+            "correct_answers": ["opt_a", "opt_b", "opt_c", "opt_d"],
+            "explanation": "Este ataque usa las 4 técnicas más comunes de ingeniería social: (1) Autoridad falsificada (IT), (2) Urgencia artificial, (3) Miedo a consecuencias, (4) Intento de crear confianza. Los IT legítimos NUNCA piden contraseñas por chat."
+          },
+          {
+            "id": "social_002",
+            "text": "¿Qué es 'pretexting' en el contexto de ingeniería social?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "social_engineering",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Crear urgencia falsa para presionar a la víctima"
+              },
+              {
+                "id": "opt_b",
+                "text": "Inventar un escenario o identidad falsa para ganar confianza y obtener información"
+              },
+              {
+                "id": "opt_c",
+                "text": "Hacer preguntas casuales para obtener información"
+              },
+              {
+                "id": "opt_d",
+                "text": "Usar mensajes de texto para atacar"
+              }
+            ],
+            "correct_answer": "opt_b",
+            "explanation": "Pretexting es crear un escenario fabricado (un 'pretexto') para engañar a la víctima. Por ejemplo, el atacante se hace pasar por un técnico de IT, proveedor, o colega para que la víctima baje la guardia y comparta información o acceso."
+          },
+          {
+            "id": "social_003",
+            "text": "Un extraño te llama diciendo ser de 'Microsoft Security' y que tu computadora tiene virus. ¿Qué debes hacer?",
+            "type": "single_choice",
+            "difficulty": "easy",
+            "points": 2,
+            "category": "social_engineering",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Seguir sus instrucciones para limpiar tu computadora"
+              },
+              {
+                "id": "opt_b",
+                "text": "Darles acceso remoto para que revisen tu sistema"
+              },
+              {
+                "id": "opt_c",
+                "text": "Colgar inmediatamente - Microsoft NUNCA llama proactivamente"
+              },
+              {
+                "id": "opt_d",
+                "text": "Pagar por el servicio de limpieza que ofrecen"
+              }
+            ],
+            "correct_answer": "opt_c",
+            "explanation": "Esta es una estafa clásica de soporte técnico. Microsoft, Apple, Google y otras empresas tecnológicas legítimas NUNCA llaman sin previo aviso para informar problemas. Los atacantes usan esto para instalar malware o robar información/dinero. Siempre cuelga inmediatamente."
+          },
+          {
+            "id": "social_004",
+            "text": "¿Qué es 'tailgating' o 'piggybacking' en seguridad física?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "social_engineering",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Cuando alguien sin autorización sigue a una persona autorizada para entrar a un área restringida"
+              },
+              {
+                "id": "opt_b",
+                "text": "Cuando alguien espía tu pantalla por detrás"
+              },
+              {
+                "id": "opt_c",
+                "text": "Cuando alguien te sigue en redes sociales"
+              },
+              {
+                "id": "opt_d",
+                "text": "Cuando un atacante usa tu conexión WiFi"
+              }
+            ],
+            "correct_answer": "opt_a",
+            "explanation": "Tailgating/piggybacking es cuando una persona no autorizada sigue a alguien autorizado a través de una puerta segura (ej: aprovechando que alguien mantiene la puerta abierta cortésmente). La defensa es política estricta: cada persona debe usar su propia credencial, incluso si parece descortés."
+          },
+          {
+            "id": "social_005",
+            "text": "¿Qué es 'baiting' en ingeniería social?",
+            "type": "single_choice",
+            "difficulty": "medium",
+            "points": 2,
+            "category": "social_engineering",
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Dejar un dispositivo infectado (ej: USB) en un lugar donde la víctima lo encuentre y use por curiosidad"
+              },
+              {
+                "id": "opt_b",
+                "text": "Ofrecer algo gratis por internet para robar información"
+              },
+              {
+                "id": "opt_c",
+                "text": "Ambas A y B son formas de baiting"
+              },
+              {
+                "id": "opt_d",
+                "text": "Enviar mensajes ofensivos para provocar una respuesta"
+              }
+            ],
+            "correct_answer": "opt_c",
+            "explanation": "Baiting (cebo) explota la curiosidad y codicia humanas. Incluye: (1) dispositivos físicos infectados (USB con 'Nómina 2026' dejado en el parking), (2) ofertas digitales tentadoras ('Descarga gratis Photoshop!'). En ambos casos, la víctima muerde el anzuelo voluntariamente."
+          }
+        ]
+      }
+    },
+    "date_created": "2026-02-25T10:00:00Z",
+    "date_updated": "2026-02-25T10:00:00Z"
+  }
+]

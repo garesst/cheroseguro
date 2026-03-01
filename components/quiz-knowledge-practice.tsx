@@ -449,7 +449,7 @@ export function QuizKnowledgePractice({
           <div className="flex gap-4 justify-center pt-6">
             <Button onClick={handleTryAgain} variant="outline">
               <RotateCcw className="mr-2 h-4 w-4" />
-              Try Again
+              Intentar de Nuevo
             </Button>
             <Button onClick={() => router.push('/practice')} variant="default">
               More Practices

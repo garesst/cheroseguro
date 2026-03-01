@@ -480,3 +480,336 @@ export async function getPracticesByCategorySlug(categorySlug: string): Promise<
     return []
   }
 }
+
+// ============= CERTIFICATIONS =============
+
+export interface QuestionOption {
+  id: string
+  text: string
+}
+
+export interface Question {
+  id: string
+  text: string
+  image?: string
+  image_alt?: string
+  type: 'single_choice' | 'multiple_choice' | 'ordering' | 'true_false'
+  difficulty: 'easy' | 'medium' | 'hard'
+  points: number
+  category: string
+  options?: QuestionOption[]
+  items?: { id: string; text: string }[] // Para tipo ordering
+  correct_answer?: string // Para single_choice y true_false
+  correct_answers?: string[] // Para multiple_choice
+  correct_order?: string[] // Para ordering
+  explanation: string
+}
+
+export interface QuestionTopic {
+  title: string
+  questions_to_select: number
+  weight: number
+  questions: Question[]
+}
+
+export interface QuestionPool {
+  [topicKey: string]: QuestionTopic
+}
+
+export interface CertificationPrerequisites {
+  required_practices: string[]
+  required_certifications: string[]
+  description: string
+}
+
+export interface CertificationFromAPI {
+  id: string
+  status: 'draft' | 'published' | 'archived'
+  title: string
+  slug: string
+  certification_code: string
+  certification_level: 'level_1' | 'level_2' | 'level_3' | 'level_4'
+  description: string
+  passing_score: number
+  time_limit_minutes: number
+  total_questions_per_exam: number
+  randomize_questions: boolean
+  version: string
+  question_pool: QuestionPool
+  prerequisites: CertificationPrerequisites
+  certificate_template: string
+  validity_months: number
+  renewal_required: boolean
+  featured: boolean
+  date_created: string
+  date_updated: string
+}
+
+// Selected questions for an exam instance
+export interface SelectedQuestion extends Question {
+  topic: string
+}
+
+export interface ExamQuestions {
+  questions: SelectedQuestion[]
+  totalPoints: number
+  topicBreakdown: {
+    [topicKey: string]: {
+      title: string
+      count: number
+      points: number
+    }
+  }
+}
+
+// Legacy interface for backward compatibility (deprecated)
+export interface CertificationExercise {
+  id: number
+  exercise_type: string
+  title: string
+  weight: number
+  description: string
+  [key: string]: any
+}
+
+// Get all certifications
+export async function getCertificationsList(): Promise<CertificationFromAPI[]> {
+  try {
+    const response = await fetch(`${DIRECTUS_URL}/items/certifications?filter[status][_eq]=published&sort=-featured,certification_level,date_created`, {
+      next: { revalidate: 3600 }
+    })
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    return data.data || []
+  } catch (error) {
+    console.error('Error fetching certifications:', error)
+    return []
+  }
+}
+
+// Get certification by slug
+export async function getCertificationBySlug(slug: string): Promise<CertificationFromAPI | null> {
+  try {
+    const response = await fetch(`${DIRECTUS_URL}/items/certifications?filter[slug][_eq]=${slug}&filter[status][_eq]=published`, {
+      cache: 'no-store' // Don't cache to get fresh data
+    })
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    return data.data?.[0] || null
+  } catch (error) {
+    console.error(`Error fetching certification ${slug}:`, error)
+    return null
+  }
+}
+
+// Get featured certifications
+export async function getFeaturedCertifications(): Promise<CertificationFromAPI[]> {
+  try {
+    const response = await fetch(`${DIRECTUS_URL}/items/certifications?filter[featured][_eq]=true&filter[status][_eq]=published&sort=certification_level&limit=6`, {
+      next: { revalidate: 3600 }
+    })
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    return data.data || []
+  } catch (error) {
+    console.error('Error fetching featured certifications:', error)
+    return []
+  }
+}
+
+// ============= QUESTION SELECTION FUNCTIONS =============
+
+/**
+ * Selects random questions from the question pool for an exam
+ */
+export function selectQuestionsForExam(certification: CertificationFromAPI): ExamQuestions {
+  const selectedQuestions: SelectedQuestion[] = []
+  const topicBreakdown: { [key: string]: { title: string; count: number; points: number } } = {}
+  let totalPoints = 0
+
+  // Get all topics from the question pool
+  const topics = Object.entries(certification.question_pool)
+
+  for (const [topicKey, topic] of topics) {
+    const questionsToSelect = Math.min(topic.questions_to_select, topic.questions.length)
+    
+    // Shuffle questions in this topic
+    const shuffledQuestions = [...topic.questions].sort(() => Math.random() - 0.5)
+    
+    // Select the required number of questions
+    const selectedFromTopic = shuffledQuestions.slice(0, questionsToSelect)
+    
+    // Add topic information to each question
+    const questionsWithTopic: SelectedQuestion[] = selectedFromTopic.map(q => ({
+      ...q,
+      topic: topicKey
+    }))
+    
+    selectedQuestions.push(...questionsWithTopic)
+    
+    // Calculate points for this topic
+    const topicPoints = selectedFromTopic.reduce((sum, q) => sum + q.points, 0)
+    totalPoints += topicPoints
+    
+    topicBreakdown[topicKey] = {
+      title: topic.title,
+      count: questionsToSelect,
+      points: topicPoints
+    }
+  }
+
+  // Shuffle all selected questions if randomization is enabled
+  if (certification.randomize_questions) {
+    selectedQuestions.sort(() => Math.random() - 0.5)
+  }
+
+  // Ensure we don't exceed the total questions limit
+  const finalQuestions = selectedQuestions.slice(0, certification.total_questions_per_exam)
+
+  return {
+    questions: finalQuestions,
+    totalPoints,
+    topicBreakdown
+  }
+}
+
+/**
+ * Calculates the score for completed exam answers
+ */
+export function calculateExamScore(
+  examQuestions: ExamQuestions,
+  userAnswers: { [questionId: string]: string | string[] }
+): {
+  score: number
+  percentage: number
+  correctAnswers: number
+  totalQuestions: number
+  topicScores: { [topicKey: string]: { correct: number; total: number; percentage: number } }
+} {
+  let correctAnswers = 0
+  let earnedPoints = 0
+  const topicScores: { [topicKey: string]: { correct: number; total: number; percentage: number } } = {}
+
+  // Initialize topic scores
+  for (const [topicKey, breakdown] of Object.entries(examQuestions.topicBreakdown)) {
+    topicScores[topicKey] = { correct: 0, total: 0, percentage: 0 }
+  }
+
+  // Check each question
+  for (const question of examQuestions.questions) {
+    const userAnswer = userAnswers[question.id]
+    let isCorrect = false
+
+    // Check answer based on question type
+    switch (question.type) {
+      case 'single_choice':
+      case 'true_false':
+        isCorrect = userAnswer === question.correct_answer
+        break
+      
+      case 'multiple_choice':
+        if (Array.isArray(userAnswer) && question.correct_answers) {
+          // All correct answers must be selected, no extra answers
+          isCorrect = userAnswer.length === question.correct_answers.length &&
+                     userAnswer.every(answer => question.correct_answers!.includes(answer))
+        }
+        break
+      
+      case 'ordering':
+        if (Array.isArray(userAnswer) && question.correct_order) {
+          isCorrect = JSON.stringify(userAnswer) === JSON.stringify(question.correct_order)
+        }
+        break
+    }
+
+    if (isCorrect) {
+      correctAnswers++
+      earnedPoints += question.points
+      topicScores[question.topic].correct++
+    }
+    
+    topicScores[question.topic].total++
+  }
+
+  // Calculate topic percentages
+  for (const topicKey of Object.keys(topicScores)) {
+    const topic = topicScores[topicKey]
+    topic.percentage = topic.total > 0 ? Math.round((topic.correct / topic.total) * 100) : 0
+  }
+
+  const percentage = examQuestions.totalPoints > 0 ? Math.round((earnedPoints / examQuestions.totalPoints) * 100) : 0
+
+  return {
+    score: earnedPoints,
+    percentage,
+    correctAnswers,
+    totalQuestions: examQuestions.questions.length,
+    topicScores
+  }
+}
+
+// Get certifications by level
+export async function getCertificationsByLevel(level: string): Promise<CertificationFromAPI[]> {
+  try {
+    const response = await fetch(`${DIRECTUS_URL}/items/certifications?filter[certification_level][_eq]=${level}&filter[status][_eq]=published&sort=date_created`, {
+      next: { revalidate: 3600 }
+    })
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    return data.data || []
+  } catch (error) {
+    console.error(`Error fetching certifications by level ${level}:`, error)
+    return []
+  }
+}
+
+// Directus client object with GraphQL query support
+export const directus = {
+  async query(queryString: string, variables?: Record<string, any>) {
+    try {
+      const response = await fetch(`${DIRECTUS_URL}/graphql`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: queryString,
+          variables: variables || {}
+        }),
+        cache: 'no-store' // Disable cache during development
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const result = await response.json()
+      
+      if (result.errors) {
+        console.error('GraphQL errors:', result.errors)
+        throw new Error(result.errors[0]?.message || 'GraphQL query failed')
+      }
+
+      return result.data
+    } catch (error) {
+      console.error('Error executing GraphQL query:', error)
+      throw error
+    }
+  }
+}

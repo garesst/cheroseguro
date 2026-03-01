@@ -149,15 +149,15 @@ export function SettingsConfigurationPractice({
         <CardHeader>
           <div className="flex items-center gap-3 mb-2">
             <Shield className="h-5 w-5 text-blue-600" />
-            <CardTitle className="text-xl">Security Settings Configuration</CardTitle>
+            <CardTitle className="text-xl">Configuración de ajustes</CardTitle>
           </div>
           <CardDescription>
-            Learn to configure privacy and security settings across different platforms
+            Aprenderas a confugurar ajustes de seguridad y privacidad en diferentes plataformas a través de escenarios prácticos. Cada escenario te presentará una situación realista donde deberás decidir qué configuraciones habilitar o deshabilitar para proteger tu seguridad y privacidad en línea.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">What you'll learn:</h3>
+            <h3 className="font-semibold text-lg">Qué aprenderás:</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {practice.learning_objectives?.map((objective: any, index: number) => (
                 <li key={index} className="flex items-start gap-2">
@@ -172,21 +172,21 @@ export function SettingsConfigurationPractice({
             <div className="flex items-center gap-3 p-3 bg-muted rounded-lg">
               <Clock className="h-5 w-5 text-blue-600" />
               <div>
-                <p className="font-medium text-sm">Estimated Time</p>
-                <p className="text-xs text-muted-foreground">{practice.estimated_time} minutes</p>
+                <p className="font-medium text-sm">Tiempo estimado</p>
+                <p className="text-xs text-muted-foreground">{practice.estimated_time} minutos</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-3 bg-muted rounded-lg">
               <Target className="h-5 w-5 text-green-600" />
               <div>
-                <p className="font-medium text-sm">Configuration Scenarios</p>
-                <p className="text-xs text-muted-foreground">{scenarios.length} platform{scenarios.length > 1 ? 's' : ''}</p>
+                <p className="font-medium text-sm">Escenarios de configuración</p>
+                <p className="text-xs text-muted-foreground">{scenarios.length} plataforma{scenarios.length > 1 ? 's' : ''}</p>
               </div>
             </div>
           </div>
           
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Configuration Scenarios:</h3>
+            <h3 className="font-semibold text-lg">Escenarios de configuración:</h3>
             <div className="grid grid-cols-1 gap-3 text-sm">
               {scenarios.map((scenario: any, index: number) => (
                 <div key={index} className="flex items-center gap-3 p-3 bg-muted rounded-lg">
@@ -206,7 +206,7 @@ export function SettingsConfigurationPractice({
               className="w-full"
               onClick={handleStartPractice}
             >
-              Start Configuration Practice
+              Iniciar práctica de configuración
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -231,16 +231,16 @@ export function SettingsConfigurationPractice({
               )}
             </div>
             <CardTitle className="text-2xl">
-              {passed ? "Configuration Complete!" : "Review and Try Again"}
+              {passed ? "¡Configuración Completa!" : "Revisar e Intentar de Nuevo"}
             </CardTitle>
             <CardDescription>
-              You correctly configured {overallScore.correct} out of {overallScore.total} settings ({overallScore.percentage.toFixed(0)}%)
+              Configuraste correctamente {overallScore.correct} de {overallScore.total} ajustes ({overallScore.percentage.toFixed(0)}%)
             </CardDescription>
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-4">
-            <h3 className="font-semibold">Scenario Results:</h3>
+            <h3 className="font-semibold">Resultados del escenario:</h3>
             {scenarios.map((scenario: any, index: number) => {
               const scenarioSettings = submittedSettings[index] || {}
               const score = calculateScenarioScore(scenarioSettings, scenario)
@@ -259,7 +259,7 @@ export function SettingsConfigurationPractice({
                         <p className="font-medium text-sm">{scenario.title}</p>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        {score.correct} of {score.total} settings configured correctly
+                        {score.correct} de {score.total} ajustes configurados correctamente
                       </p>
                     </div>
                   </div>
@@ -278,13 +278,13 @@ export function SettingsConfigurationPractice({
               onClick={handleTryAgain}
             >
               <RotateCcw className="mr-2 h-4 w-4" />
-              Try Again
+              Intentar de Nuevo
             </Button>
             <Button 
               className="flex-1"
               onClick={() => router.push('/practice')}
             >
-              Continue Learning
+              Continuar con otras prácticas
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -297,7 +297,7 @@ export function SettingsConfigurationPractice({
     return (
       <Card>
         <CardContent className="text-center py-8">
-          <p>No scenario data available for this configuration practice.</p>
+          <p>No hay datos de escenario disponibles para esta práctica de configuración.</p>
         </CardContent>
       </Card>
     )
@@ -312,10 +312,10 @@ export function SettingsConfigurationPractice({
       <CardHeader>
         <div className="flex justify-between items-start mb-4">
           <CardTitle className="text-xl">
-            Scenario {currentScenarioIndex + 1} of {scenarios.length}
+            Escenario {currentScenarioIndex + 1} de {scenarios.length}
           </CardTitle>
           <Badge variant="outline">
-            {Math.round(progress)}% Complete
+            {Math.round(progress)}% Completado
           </Badge>
         </div>
         <Progress value={progress} className="w-full" />
@@ -333,7 +333,7 @@ export function SettingsConfigurationPractice({
           {!showScenarioFeedback && (
             <div className="space-y-4">
               <p className="text-muted-foreground mb-4">
-                Configure the following settings. Enable or disable each option based on security best practices:
+                Configure los siguientes ajustes. Habilite o deshabilite cada opción basándose en las mejores prácticas de seguridad:
               </p>
               
               <div className="space-y-4">
@@ -362,7 +362,7 @@ export function SettingsConfigurationPractice({
                           htmlFor={setting.id}
                           className="text-sm font-medium cursor-pointer"
                         >
-                          Enable
+                          Habilitar
                         </label>
                       </div>
                     </div>
@@ -377,7 +377,7 @@ export function SettingsConfigurationPractice({
                   userSettings.hasOwnProperty(setting.id)
                 )}
               >
-                Submit Configuration
+                Enviar configuración
               </Button>
             </div>
           )}
@@ -393,7 +393,7 @@ export function SettingsConfigurationPractice({
                   <XCircle className="h-5 w-5 text-yellow-600" />
                 )}
                 <span className="font-semibold">
-                  Scenario Result: {currentScenarioScore.correct}/{currentScenarioScore.total} ({currentScenarioScore.percentage.toFixed(0)}%)
+                  Resultado del escenario: {currentScenarioScore.correct}/{currentScenarioScore.total} ({currentScenarioScore.percentage.toFixed(0)}%)
                 </span>
               </div>
               
@@ -416,10 +416,10 @@ export function SettingsConfigurationPractice({
                           <div className="flex items-center gap-2 mb-1">
                             <span className="font-medium text-sm">{setting.name}</span>
                             <Badge variant="outline" className="text-xs">
-                              {userChoice ? 'Enabled' : 'Disabled'}
+                              {userChoice ? 'Habilitado' : 'Deshabilitado'}
                             </Badge>
                             <Badge variant="outline" className="text-xs">
-                              Should be: {setting.should_enable ? 'Enabled' : 'Disabled'}
+                              Podria ser: {setting.should_enable ? 'Habilitado' : 'Deshabilitado'}
                             </Badge>
                           </div>
                           <p className="text-xs">{setting.explanation}</p>
@@ -434,7 +434,7 @@ export function SettingsConfigurationPractice({
                 className="w-full mt-4"
                 onClick={handleNextScenario}
               >
-                {currentScenarioIndex < scenarios.length - 1 ? "Next Scenario" : "Complete Practice"}
+                {currentScenarioIndex < scenarios.length - 1 ? "siguiente escenario" : "Completar práctica"}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>

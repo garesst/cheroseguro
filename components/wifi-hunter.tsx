@@ -112,23 +112,23 @@ export function WifiHunter({ onGameOver }: WifiHunterProps) {
           <div className="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
             <Star className="h-8 w-8 text-primary" />
           </div>
-          <CardTitle className="text-3xl">Game Over!</CardTitle>
+          <CardTitle className="text-3xl">¡Fin del Juego!</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <Card className="bg-muted/50">
             <CardContent className="pt-6">
               <div className="text-4xl font-bold text-primary">{score}</div>
-              <div className="text-sm text-muted-foreground">Points Earned</div>
+              <div className="text-sm text-muted-foreground">Puntos Obtenidos</div>
             </CardContent>
           </Card>
           <p className="text-sm text-muted-foreground">
             {score >= 150
-              ? "Expert WiFi hunter! You avoided all traps!"
+              ? "¡Experto cazador de WiFi! ¡Evitaste todas las trampas!"
               : score >= 100
-                ? "Great job! You caught most unsafe networks."
+                ? "¡Buen trabajo! Detectaste la mayoría de redes inseguras."
                 : score >= 50
-                  ? "Good start! Learn to spot those tricks."
-                  : "Keep practicing your WiFi safety skills!"}
+                  ? "¡Buen comienzo! Aprende a detectar esos trucos."
+                  : "¡Sigue practicando tus habilidades de seguridad WiFi!"}
           </p>
         </CardContent>
       </Card>
@@ -147,7 +147,7 @@ export function WifiHunter({ onGameOver }: WifiHunterProps) {
           {score}
         </Badge>
         <Badge className={`text-lg px-4 py-2 justify-center ${health <= 30 ? "bg-red-600" : "bg-green-600"}`}>
-          Health {health}%
+          Salud {health}%
         </Badge>
       </div>
 
@@ -155,10 +155,10 @@ export function WifiHunter({ onGameOver }: WifiHunterProps) {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Wifi className="h-5 w-5" />
-            Available Networks
+            Redes Disponibles
           </CardTitle>
           <p className="text-xs text-muted-foreground font-normal mt-2">
-            Select safe networks. Avoid traps to earn points!
+            Selecciona redes seguras. ¡Evita las trampas para ganar puntos!
           </p>
         </CardHeader>
         <CardContent>

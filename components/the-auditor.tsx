@@ -96,7 +96,7 @@ export function TheAuditor() {
         <CardContent className="space-y-4">
           <p className="text-muted-foreground">An unprotected node was breached. Better luck next time!</p>
           <Button onClick={handleReset} size="lg">
-            Try Again
+            Intentar de Nuevo
           </Button>
         </CardContent>
       </Card>

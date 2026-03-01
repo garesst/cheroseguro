@@ -1,0 +1,422 @@
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "status": "published",
+    "title": "Certificación en Introducción a la Ciberseguridad",
+    "slug": "intro-ciberseguridad",
+    "certification_code": "CCS-INTRO",
+    "certification_level": "level_1",
+    "description": "<p>Esta certificación valida tus conocimientos fundamentales en ciberseguridad. Aprenderás a identificar amenazas comunes, proteger tu información personal y responder adecuadamente ante situaciones de riesgo.</p><p><strong>Temas cubiertos:</strong></p><ul><li>Detección de correos de phishing</li><li>Fundamentos de contraseñas seguras</li><li>Ingeniería social</li><li>Mejores prácticas de seguridad</li></ul>",
+    "passing_score": 75,
+    "time_limit_minutes": 45,
+    "featured": true,
+    "validity_months": 12,
+    "renewal_required": true,
+    "certificate_template": "ccs_intro_template.pdf",
+    "prerequisites": {
+      "required_practices": [],
+      "required_certifications": [],
+      "description": "No se requieren conocimientos previos. Ideal para principiantes."
+    },
+    "exercises": [
+      {
+        "id": 1,
+        "exercise_type": "email_analysis",
+        "title": "Detección de Phishing - Correo Bancario",
+        "weight": 15,
+        "description": "Analiza este correo electrónico y determina si es legítimo o un intento de phishing",
+        "email": {
+          "from": "seguridad@banc0nacional.com",
+          "from_display": "Banco Nacional - Depto. Seguridad",
+          "subject": "URGENTE: Verificación de Cuenta Requerida",
+          "timestamp": "2026-02-24 08:45 AM",
+          "body": "Estimado cliente,\n\nHemos detectado actividad inusual en su cuenta bancaria. Para garantizar la seguridad de sus fondos, debe verificar su identidad inmediatamente.\n\nHaga clic en el siguiente enlace para completar la verificación:\nhttps://banc0nacional.com/verificar-cuenta\n\nSi no completa este proceso en las próximas 24 horas, su cuenta será suspendida temporalmente.\n\nAtentamente,\nEquipo de Seguridad\nBanco Nacional",
+          "correct_classification": "phishing",
+          "feedback_responses": {
+            "legitimate": {
+              "is_correct": false,
+              "message": "Incorrecto",
+              "explanation": "Este correo tiene múltiples señales de phishing: dominio sospechoso (banc0nacional.com con cero en lugar de 'o'), lenguaje urgente, solicitud de verificación inmediata y amenaza de suspensión de cuenta."
+            },
+            "phishing": {
+              "is_correct": true,
+              "message": "¡Correcto!",
+              "explanation": "Identificaste correctamente este intento de phishing. Las señales clave son: dominio falso (banc0nacional.com usa '0' en lugar de 'o'), lenguaje alarmista, urgencia artificial y solicitud de verificación a través de un enlace sospechoso. Los bancos legítimos nunca solicitan verificación de esta manera."
+            },
+            "spam": {
+              "is_correct": false,
+              "message": "Incorrecto",
+              "explanation": "Este correo es más peligroso que spam común. Es un intento activo de phishing diseñado para robar credenciales bancarias. El dominio falso y la solicitud de verificación son señales claras de un ataque dirigido."
+            }
+          }
+        }
+      },
+      {
+        "id": 2,
+        "exercise_type": "quiz_knowledge",
+        "title": "Fundamentos de Contraseñas Seguras",
+        "weight": 20,
+        "description": "Responde estas preguntas sobre mejores prácticas de contraseñas",
+        "questions": [
+          {
+            "id": "q1",
+            "text": "¿Cuál de las siguientes contraseñas es más segura?",
+            "correct_answer": "opt_d",
+            "points": 5,
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Password123"
+              },
+              {
+                "id": "opt_b",
+                "text": "MiNombre2024"
+              },
+              {
+                "id": "opt_c",
+                "text": "qwerty12345"
+              },
+              {
+                "id": "opt_d",
+                "text": "T8$mK@9pL#vN2x"
+              }
+            ],
+            "explanation": "T8$mK@9pL#vN2x es la más segura porque combina letras mayúsculas y minúsculas, números y símbolos especiales en un patrón aleatorio de al menos 14 caracteres."
+          },
+          {
+            "id": "q2",
+            "text": "¿Con qué frecuencia deberías cambiar tus contraseñas importantes?",
+            "correct_answer": "opt_b",
+            "points": 5,
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Cada semana"
+              },
+              {
+                "id": "opt_b",
+                "text": "Cuando hay sospecha de compromiso o cada 3-6 meses"
+              },
+              {
+                "id": "opt_c",
+                "text": "Nunca, si es lo suficientemente fuerte"
+              },
+              {
+                "id": "opt_d",
+                "text": "Cada día para máxima seguridad"
+              }
+            ],
+            "explanation": "Lo ideal es cambiar contraseñas cada 3-6 meses o inmediatamente si sospechas de un compromiso. Cambiarlas muy frecuentemente puede llevar a usar contraseñas más débiles."
+          },
+          {
+            "id": "q3",
+            "text": "¿Qué es la autenticación de dos factores (2FA)?",
+            "correct_answer": "opt_c",
+            "points": 5,
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Usar dos contraseñas diferentes"
+              },
+              {
+                "id": "opt_b",
+                "text": "Tener dos cuentas de correo"
+              },
+              {
+                "id": "opt_c",
+                "text": "Requerir dos formas diferentes de verificación (ej: contraseña + código SMS)"
+              },
+              {
+                "id": "opt_d",
+                "text": "Iniciar sesión dos veces seguidas"
+              }
+            ],
+            "explanation": "2FA requiere dos métodos diferentes de verificación: algo que sabes (contraseña) y algo que tienes (código de SMS, app autenticadora) o algo que eres (huella digital)."
+          },
+          {
+            "id": "q4",
+            "text": "¿Es seguro usar la misma contraseña para múltiples sitios web?",
+            "correct_answer": "opt_a",
+            "points": 5,
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "No, si un sitio es comprometido, todas tus cuentas estarán en riesgo"
+              },
+              {
+                "id": "opt_b",
+                "text": "Sí, si la contraseña es muy fuerte"
+              },
+              {
+                "id": "opt_c",
+                "text": "Solo es seguro para sitios poco importantes"
+              },
+              {
+                "id": "opt_d",
+                "text": "Sí, es más conveniente y no hay problema"
+              }
+            ],
+            "explanation": "Nunca uses la misma contraseña en múltiples sitios. Si un sitio sufre una brecha de seguridad, los atacantes probarán esas credenciales en otros sitios."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "exercise_type": "email_analysis",
+        "title": "Detección de Phishing - Correo Corporativo",
+        "weight": 15,
+        "description": "Analiza este correo que simula ser de tu departamento de IT",
+        "email": {
+          "from": "it.soporte@empresa-temp-mail.com",
+          "from_display": "Soporte TI",
+          "subject": "Actualización Obligatoria de Sistema",
+          "timestamp": "2026-02-24 03:15 PM",
+          "body": "Hola,\n\nEl departamento de TI necesita que todos los empleados actualicen sus credenciales de acceso debido a una nueva política de seguridad.\n\nPor favor descarga e instala el siguiente certificado de seguridad:\nhttps://bit.ly/empresa-cert-update\n\nEsta actualización es obligatoria y debe completarse antes de las 6:00 PM de hoy.\n\nSi tienes problemas, responde a este correo.\n\nSoporte TI",
+          "correct_classification": "phishing",
+          "feedback_responses": {
+            "legitimate": {
+              "is_correct": false,
+              "message": "Incorrecto",
+              "explanation": "Este correo tiene varias señales de phishing: dominio sospechoso (empresa-temp-mail.com), uso de acortador de URL (bit.ly), lenguaje urgente con deadline artificial, y solicitud de descargar/instalar algo. Los departamentos de TI legítimos usan canales oficiales y sistemas internos."
+            },
+            "phishing": {
+              "is_correct": true,
+              "message": "¡Excelente!",
+              "explanation": "Identificaste correctamente este ataque de phishing dirigido (spear phishing). Las señales clave: dominio externo no corporativo, URL acortada sospechosa, solicitud de instalar software, y presión temporal. Siempre verifica solicitudes de TI por canales oficiales."
+            },
+            "unsure": {
+              "is_correct": true,
+              "message": "¡Buena decisión!",
+              "explanation": "Cuando tienes dudas sobre un correo corporativo, lo correcto es verificar por otro canal. Llamar directamente al departamento de TI usando números de contacto oficiales (no los del correo sospechoso) es la mejor práctica. En este caso, el correo es definitivamente phishing."
+            }
+          }
+        }
+      },
+      {
+        "id": 4,
+        "exercise_type": "social_engineering",
+        "title": "Reconocimiento de Ingeniería Social",
+        "weight": 20,
+        "description": "Identifica las técnicas de manipulación usadas en esta conversación telefónica",
+        "scenario": {
+          "type": "phone_call",
+          "title": "Llamada de 'Soporte Técnico'",
+          "conversation": [
+            {
+              "speaker": "Llamante",
+              "message": "Buenos días, le hablo del soporte técnico de Microsoft. Hemos detectado que su computadora está enviando alertas de virus a nuestros servidores."
+            },
+            {
+              "speaker": "Usuario",
+              "message": "¿En serio? No he notado nada extraño..."
+            },
+            {
+              "speaker": "Llamante",
+              "message": "Sí, es urgente. El virus puede estar robando sus datos bancarios ahora mismo. Necesito que abra su computadora y me permita acceso remoto para limpiarlo. Solo tomará 5 minutos."
+            },
+            {
+              "speaker": "Usuario",
+              "message": "Hmm, no estoy seguro..."
+            },
+            {
+              "speaker": "Llamante",
+              "message": "Señor/a, si no actuamos rápido, perderá toda su información y podría ser responsable de daños a otros usuarios. Esto es muy serio. ¿Puede ver en su pantalla abajo a la izquierda el botón de Windows?"
+            }
+          ]
+        },
+        "available_techniques": [
+          {
+            "id": "authority",
+            "name": "Autoridad",
+            "description": "Se hace pasar por una figura de autoridad (Microsoft, policía, banco)"
+          },
+          {
+            "id": "urgency",
+            "name": "Urgencia",
+            "description": "Crea sensación de urgencia para que actúes sin pensar"
+          },
+          {
+            "id": "fear",
+            "name": "Miedo",
+            "description": "Usa amenazas o consecuencias negativas para presionarte"
+          },
+          {
+            "id": "trust",
+            "name": "Ganarse la confianza",
+            "description": "Se presenta como alguien que te quiere ayudar"
+          },
+          {
+            "id": "technical",
+            "name": "Jerga técnica",
+            "description": "Usa términos técnicos para sonar legítimo"
+          }
+        ],
+        "correct_techniques": ["authority", "urgency", "fear", "trust"],
+        "explanation": "Esta llamada usa múltiples técnicas de ingeniería social: se hace pasar por Microsoft (autoridad), crea urgencia artificial ('ahora mismo', '5 minutos'), genera miedo ('perderá toda su información'), y pretende ayudar. Microsoft NUNCA llama proactivamente sobre problemas de virus. Si recibes una llamada así, cuelga inmediatamente.",
+        "correct_response": "Colgar inmediatamente y reportar el intento de estafa. Las empresas tecnológicas legítimas NUNCA llaman sin previo aviso para ofrecer soporte técnico."
+      },
+      {
+        "id": 5,
+        "exercise_type": "quiz_knowledge",
+        "title": "Mejores Prácticas de Seguridad en Internet",
+        "weight": 15,
+        "description": "Demuestra tu conocimiento sobre navegación segura",
+        "questions": [
+          {
+            "id": "q1",
+            "text": "¿Qué indica el candado 🔒 en la barra de direcciones del navegador?",
+            "correct_answer": "opt_b",
+            "points": 5,
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Que el sitio web es 100% seguro y confiable"
+              },
+              {
+                "id": "opt_b",
+                "text": "Que la conexión está cifrada (HTTPS), pero no garantiza que el sitio sea legítimo"
+              },
+              {
+                "id": "opt_c",
+                "text": "Que el sitio ha sido verificado por Google"
+              },
+              {
+                "id": "opt_d",
+                "text": "Que el sitio no contiene virus"
+              }
+            ],
+            "explanation": "El candado solo indica que la conexión está cifrada con HTTPS, protegiendo los datos en tránsito. Sin embargo, los sitios de phishing también pueden usar HTTPS. Siempre verifica el dominio completo."
+          },
+          {
+            "id": "q2",
+            "text": "¿Qué deberías hacer antes de conectarte a una red Wi-Fi pública?",
+            "correct_answer": "opt_c",
+            "points": 5,
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Nada, son completamente seguras"
+              },
+              {
+                "id": "opt_b",
+                "text": "Cambiar todas mis contraseñas primero"
+              },
+              {
+                "id": "opt_c",
+                "text": "Usar una VPN y evitar transacciones sensibles"
+              },
+              {
+                "id": "opt_d",
+                "text": "Apagar el firewall para mejor conexión"
+              }
+            ],
+            "explanation": "Las redes Wi-Fi públicas son inseguras. Usa una VPN para cifrar tu tráfico y evita realizar operaciones bancarias o ingresar contraseñas importantes. Nunca desactives tu firewall."
+          },
+          {
+            "id": "q3",
+            "text": "¿Qué es el phishing?",
+            "correct_answer": "opt_a",
+            "points": 5,
+            "options": [
+              {
+                "id": "opt_a",
+                "text": "Intentos fraudulentos de obtener información confidencial haciéndose pasar por entidades legítimas"
+              },
+              {
+                "id": "opt_b",
+                "text": "Un tipo de virus que infecta tu computadora"
+              },
+              {
+                "id": "opt_c",
+                "text": "Software de pesca en línea"
+              },
+              {
+                "id": "opt_d",
+                "text": "Una técnica para mejorar la seguridad de tu red"
+              }
+            ],
+            "explanation": "Phishing es cuando los atacantes se hacen pasar por empresas u organizaciones legítimas (bancos, servicios online) para engañarte y robar información confidencial como contraseñas o datos bancarios."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "exercise_type": "incident_response",
+        "title": "Respuesta ante Incidente - Cuenta Comprometida",
+        "weight": 15,
+        "description": "Toma las decisiones correctas ante una posible brecha de seguridad",
+        "scenario": {
+          "title": "Alerta: Actividad Sospechosa en tu Cuenta",
+          "description": "Recibes una notificación de tu proveedor de correo: 'Detectamos un inicio de sesión desde una ubicación desconocida (Rusia) a las 3:00 AM. Si no fuiste tú, tu cuenta puede estar comprometida.'",
+          "severity": "high",
+          "initial_symptoms": [
+            "Inicio de sesión desde ubicación desconocida",
+            "Horario inusual (3:00 AM)",
+            "No reconoces la actividad",
+            "Algunos correos en tu bandeja de enviados que no escribiste"
+          ]
+        },
+        "decisions": [
+          {
+            "id": "change_password",
+            "title": "Cambiar la contraseña inmediatamente",
+            "impact": "correct",
+            "points": 15,
+            "explanation": "CORRECTO: Es la primera acción que debes tomar. Cambiar la contraseña inmediatamente evita que el atacante siga accediendo a tu cuenta."
+          },
+          {
+            "id": "enable_2fa",
+            "title": "Activar autenticación de dos factores",
+            "impact": "correct",
+            "points": 15,
+            "explanation": "CORRECTO: 2FA añade una capa extra de seguridad. Incluso si alguien obtiene tu contraseña, no podrá acceder sin el segundo factor."
+          },
+          {
+            "id": "check_other_accounts",
+            "title": "Verificar otras cuentas donde usas la misma contraseña",
+            "impact": "correct",
+            "points": 10,
+            "explanation": "CORRECTO: Si reutilizaste la contraseña en otros sitios, todas esas cuentas están en riesgo. Cámbialas también."
+          },
+          {
+            "id": "review_activity",
+            "title": "Revisar actividad reciente y correos enviados",
+            "impact": "correct",
+            "points": 10,
+            "explanation": "CORRECTO: Revisa qué hizo el atacante: ¿envió correos?, ¿accedió a información sensible?, ¿cambió configuraciones?."
+          },
+          {
+            "id": "notify_contacts",
+            "title": "Avisar a tus contactos sobre posibles correos sospechosos",
+            "impact": "correct",
+            "points": 10,
+            "explanation": "CORRECTO: Si el atacante envió correos desde tu cuenta, tus contactos podrían recibir phishing. Adviérteles para que no caigan en la trampa."
+          },
+          {
+            "id": "ignore_alert",
+            "title": "Ignorar la alerta, probablemente es un error",
+            "impact": "incorrect",
+            "points": -20,
+            "explanation": "INCORRECTO: Nunca ignores alertas de seguridad. Es mejor verificar y que sea una falsa alarma, que ignorarla y sufrir un robo de identidad."
+          },
+          {
+            "id": "click_alert_link",
+            "title": "Hacer clic en el enlace de la notificación para 'verificar'",
+            "impact": "risky",
+            "points": -15,
+            "explanation": "RIESGOSO: La notificación misma podría ser phishing. Ve directamente al sitio web oficial escribiendo la URL manualmente, no hagas clic en enlaces."
+          },
+          {
+            "id": "wait_and_see",
+            "title": "Esperar unos días para ver si vuelve a pasar",
+            "impact": "incorrect",
+            "points": -10,
+            "explanation": "INCORRECTO: Cada minuto cuenta cuando tu cuenta está comprometida. El atacante podría estar robando datos o usándola para más ataques."
+          }
+        ]
+      }
+    ],
+    "date_created": "2026-02-25T10:00:00Z",
+    "date_updated": "2026-02-25T10:00:00Z"
+  }
+]

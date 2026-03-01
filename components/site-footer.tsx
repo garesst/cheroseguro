@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Shield } from "lucide-react"
+import { siteName } from "@/lib/config"
 
 export function SiteFooter() {
   return (
@@ -9,10 +10,10 @@ export function SiteFooter() {
           <div className="space-y-3">
             <Link href="/" className="flex items-center gap-2">
               <Shield className="h-5 w-5 text-primary" />
-              <span className="font-semibold text-foreground">CyberGuard Academy</span>
+              <span className="font-semibold text-foreground">{siteName}</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Empowering everyone to stay safe online through education and practice.
+              Capacitando a todos para mantenerse seguros en línea a través de la educación y la práctica.
             </p>
           </div>
 
@@ -81,7 +82,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-border">
-          <p className="text-sm text-muted-foreground text-center">© 2025 CyberGuard Academy. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground text-center">© 2025 {siteName}. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
