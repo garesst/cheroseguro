@@ -5,7 +5,7 @@ export const config = {
   siteName: process.env.NEXT_PUBLIC_SITE_NAME || 'Chero Seguro',
   
   // API Configuration
-  directusUrl: process.env.NEXT_PUBLIC_DIRECTUS_URL || 'http://strapi.cheroseguro.com',
+  directusUrl: process.env.NEXT_PUBLIC_DIRECTUS_URL || 'https://strapi.cheroseguro.com',
   
   // Main Navigation Menu Features
   navigation: {
@@ -46,3 +46,6 @@ export const {
 
 // Export site configuration
 export const siteName = config.siteName
+
+// Export Directus URL for server-side API routes
+export const DIRECTUS_URL =  process.env.NEXT_PUBLIC_DIRECTUS_URL

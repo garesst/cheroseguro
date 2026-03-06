@@ -2,6 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { AuthProvider } from "@/contexts/auth-context"
+import { GlobalTracker } from "@/components/tracking/global-tracker"
 import { siteName } from "@/lib/config"
 import "./globals.css"
 
@@ -23,7 +25,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`font-sans antialiased`}>
-        {children}
+        <AuthProvider>
+          <GlobalTracker />
+          {children}
+        </AuthProvider>
         <Analytics />
       </body>
     </html>

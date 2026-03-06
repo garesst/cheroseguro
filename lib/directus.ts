@@ -1,5 +1,10 @@
 // Directus API functions
-const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'http://strapi.cheroseguro.com'
+import { createDirectus, rest } from '@directus/sdk';
+
+const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'https://strapi.cheroseguro.com'
+
+// Create Directus client instance 
+export const directusClient = createDirectus(DIRECTUS_URL).with(rest());
 
 export interface Page {
   id: string
@@ -811,5 +816,10 @@ export const directus = {
       console.error('Error executing GraphQL query:', error)
       throw error
     }
-  }
+  },
+  // Add SDK methods for compatibility with auth APIs
+  request: directusClient.request.bind(directusClient)
 }
+
+// Export the Directus SDK client for direct usage
+export { directusClient };
