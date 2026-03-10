@@ -4,7 +4,7 @@ import React from 'react';
 import { useTracking } from '@/hooks/use-tracking';
 
 interface ActionTrackerProps {
-  children: React.ReactElement;
+  children: React.ReactElement<any>;
   action: string;
   category: string;
   details?: any;
