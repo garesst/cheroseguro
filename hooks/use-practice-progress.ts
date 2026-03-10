@@ -30,6 +30,11 @@ interface OverallProgress {
 
 const STORAGE_KEY = 'cyberguard_practice_progress'
 
+const sanitizeScore = (rawScore: number) => {
+  if (!Number.isFinite(rawScore)) return 0
+  return Math.max(0, Math.min(100, Math.round(rawScore)))
+}
+
 export function usePracticeProgress() {
   const { isAuthenticated, user } = useAuth()
   const syncedUserRef = useRef<string | null>(null)
@@ -188,6 +193,7 @@ export function usePracticeProgress() {
       timeSpentMinutes?: number
     }
   ) => {
+    const normalizedScore = sanitizeScore(score)
     const newProgress = { ...progress }
 
     if (!newProgress[practiceSlug]) {
@@ -213,9 +219,16 @@ export function usePracticeProgress() {
     exercise.attempts++
     exercise.lastAttempt = new Date().toISOString()
 
+    // Always persist the latest/best score for visibility, even on non-passing attempts.
+    // Completion state is still controlled by isCorrect.
+    if (exercise.score === null) {
+      exercise.score = normalizedScore
+    } else {
+      exercise.score = Math.max(exercise.score, normalizedScore)
+    }
+
     if (isCorrect && !exercise.completed) {
       exercise.completed = true
-      exercise.score = score
       exercise.completedAt = new Date().toISOString()
     }
 
@@ -224,13 +237,14 @@ export function usePracticeProgress() {
     if (exercises.length > 0 && exercises.every(ex => ex.completed)) {
       practice.completed = true
       practice.completedAt = new Date().toISOString()
-      
-      // Calculate average score for the practice
-      const scores = exercises.filter(ex => ex.score !== null).map(ex => ex.score!)
-      if (scores.length > 0) {
-        practice.totalScore = Math.round(scores.reduce((sum, s) => sum + s, 0) / scores.length)
-      }
     }
+
+    // Keep a rolling practice score even if not fully completed yet.
+    // This guarantees points are reflected for all practice types/attempts.
+    const scores = exercises.filter(ex => ex.score !== null).map(ex => ex.score!)
+    practice.totalScore = scores.length > 0
+      ? Math.round(scores.reduce((sum, s) => sum + s, 0) / scores.length)
+      : null
 
     practice.lastAttempt = new Date().toISOString()
     saveProgress(newProgress)
