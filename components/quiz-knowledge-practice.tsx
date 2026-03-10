@@ -135,32 +135,32 @@ export function QuizKnowledgePractice({
             </div>
             <div>
               <CardTitle className="text-2xl font-bold text-blue-900 mb-2">
-                🧠 Knowledge Assessment
+                🧠 Evaluacion de Conocimientos
               </CardTitle>
               <CardDescription className="text-base text-blue-700">
-                Test your cybersecurity knowledge with {quizData.total_questions} comprehensive questions
+                Pon a prueba tus conocimientos de ciberseguridad con {quizData.total_questions} preguntas completas
               </CardDescription>
             </div>
             
             <div className="grid gap-4 md:grid-cols-3 text-sm">
               <div className="flex items-center gap-2 justify-center">
                 <Clock className="h-4 w-4 text-blue-600" />
-                <span className="text-blue-700">{practice.estimated_time} minutes</span>
+                <span className="text-blue-700">{practice.estimated_time} minutos</span>
               </div>
               <div className="flex items-center gap-2 justify-center">
                 <Target className="h-4 w-4 text-blue-600" />
-                <span className="text-blue-700">{quizData.passing_score}% to pass</span>
+                <span className="text-blue-700">{quizData.passing_score}% para aprobar</span>
               </div>
               <div className="flex items-center gap-2 justify-center">
                 <Trophy className="h-4 w-4 text-blue-600" />
-                <span className="text-blue-700">Multiple difficulty levels</span>
+                <span className="text-blue-700">Multiples niveles de dificultad</span>
               </div>
             </div>
           </CardHeader>
           
           <CardContent className="space-y-6">
             <div className="bg-white p-6 rounded-lg border border-blue-200">
-              <h3 className="font-semibold text-blue-900 mb-4">Quiz Categories</h3>
+              <h3 className="font-semibold text-blue-900 mb-4">Categorias del Quiz</h3>
               <div className="grid gap-3 md:grid-cols-2">
                 {quizData.categories?.map((category: string, index: number) => {
                   const IconComponent = getCategoryIcon(category)
@@ -175,23 +175,23 @@ export function QuizKnowledgePractice({
             </div>
 
             <div className="bg-white p-6 rounded-lg border border-blue-200">
-              <h3 className="font-semibold text-blue-900 mb-3">How This Works</h3>
+              <h3 className="font-semibold text-blue-900 mb-3">Como funciona</h3>
               <ul className="space-y-2 text-sm text-blue-700">
                 <li className="flex items-start gap-2">
                   <span className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center text-xs font-bold text-blue-600 mt-0.5 flex-shrink-0">1</span>
-                  Answer {quizData.total_questions} multiple-choice and true/false questions
+                  Responde {quizData.total_questions} preguntas de opcion multiple y verdadero/falso
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center text-xs font-bold text-blue-600 mt-0.5 flex-shrink-0">2</span>
-                  Get immediate feedback after each question with explanations
+                  Recibe retroalimentacion inmediata despues de cada pregunta con explicaciones
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center text-xs font-bold text-blue-600 mt-0.5 flex-shrink-0">3</span>
-                  Questions vary in difficulty and point value (1-3 points each)
+                  Las preguntas varian en dificultad y valor de puntos (1-3 puntos cada una)
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center text-xs font-bold text-blue-600 mt-0.5 flex-shrink-0">4</span>
-                  Score {quizData.passing_score}% or higher to pass the assessment
+                  Obtiene {quizData.passing_score}% o mas para aprobar la evaluacion
                 </li>
               </ul>
             </div>
@@ -202,7 +202,7 @@ export function QuizKnowledgePractice({
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
                 size="lg"
               >
-                Start Assessment
+                Iniciar Evaluacion
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -222,10 +222,10 @@ export function QuizKnowledgePractice({
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium">
-              Question {currentQuestionIndex + 1} of {questions.length}
+              Pregunta {currentQuestionIndex + 1} de {questions.length}
             </span>
             <span className="text-sm text-muted-foreground">
-              {Math.round(progress)}% Complete
+              {Math.round(progress)}% completado
             </span>
           </div>
           <Progress value={progress} className="h-2" />
@@ -250,7 +250,7 @@ export function QuizKnowledgePractice({
                   {currentQuestion.difficulty}
                 </Badge>
                 <Badge variant="secondary">
-                  {currentQuestion.points} {currentQuestion.points === 1 ? 'point' : 'points'}
+                  {currentQuestion.points} {currentQuestion.points === 1 ? 'punto' : 'puntos'}
                 </Badge>
               </div>
             </div>
@@ -285,7 +285,7 @@ export function QuizKnowledgePractice({
                 disabled={!currentAnswer}
                 className="w-full"
               >
-                Submit Answer
+                Enviar respuesta
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
@@ -305,10 +305,10 @@ export function QuizKnowledgePractice({
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium">
-              Question {currentQuestionIndex + 1} of {questions.length}
+              Pregunta {currentQuestionIndex + 1} de {questions.length}
             </span>
             <span className="text-sm text-muted-foreground">
-              {Math.round(progress)}% Complete
+              {Math.round(progress)}% completado
             </span>
           </div>
           <Progress value={progress} className="h-2" />
@@ -325,10 +325,10 @@ export function QuizKnowledgePractice({
               )}
               <div>
                 <CardTitle className={isCorrect ? "text-green-900" : "text-red-900"}>
-                  {isCorrect ? "Correct!" : "Incorrect"}
+                  {isCorrect ? "Correcto" : "Incorrecto"}
                 </CardTitle>
                 <CardDescription>
-                  +{isCorrect ? currentQuestion.points : 0} {isCorrect && currentQuestion.points === 1 ? 'point' : 'points'}
+                  +{isCorrect ? currentQuestion.points : 0} {isCorrect && currentQuestion.points === 1 ? 'punto' : 'puntos'}
                 </CardDescription>
               </div>
             </div>
@@ -336,10 +336,10 @@ export function QuizKnowledgePractice({
           
           <CardContent className="space-y-4">
             <div className="bg-white p-4 rounded-lg border">
-              <h4 className="font-semibold mb-2">Question:</h4>
+              <h4 className="font-semibold mb-2">Pregunta:</h4>
               <p className="text-gray-700 mb-4">{currentQuestion.question}</p>
               
-              <h4 className="font-semibold mb-2">Your Answer:</h4>
+              <h4 className="font-semibold mb-2">Tu respuesta:</h4>
               <div className="flex items-center gap-2 mb-4">
                 <span className="font-medium">
                   {currentAnswer.toUpperCase()}.
@@ -356,7 +356,7 @@ export function QuizKnowledgePractice({
 
               {!isCorrect && (
                 <>
-                  <h4 className="font-semibold mb-2 text-green-700">Correct Answer:</h4>
+                  <h4 className="font-semibold mb-2 text-green-700">Respuesta correcta:</h4>
                   <div className="flex items-center gap-2 mb-4">
                     <span className="font-medium">
                       {currentQuestion.correct_answer.toUpperCase()}.
@@ -370,7 +370,7 @@ export function QuizKnowledgePractice({
               )}
               
               <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                <h4 className="font-semibold mb-2">Explanation:</h4>
+                <h4 className="font-semibold mb-2">Explicacion:</h4>
                 <div className="text-blue-800 text-sm leading-relaxed">
                   {currentQuestion.explanation}
                 </div>
@@ -379,7 +379,7 @@ export function QuizKnowledgePractice({
 
             <div className="text-center">
               <Button onClick={handleNextQuestion} size="lg">
-                {currentQuestionIndex < questions.length - 1 ? 'Next Question' : 'View Results'}
+                {currentQuestionIndex < questions.length - 1 ? 'Siguiente pregunta' : 'Ver resultados'}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
@@ -409,7 +409,7 @@ export function QuizKnowledgePractice({
           </div>
           <div>
             <CardTitle className="text-3xl font-bold mb-2">
-              {passed ? 'Assessment Passed!' : 'Assessment Complete'}
+              {passed ? 'Evaluacion superada' : 'Evaluacion completada'}
             </CardTitle>
             <CardDescription className="text-lg">
               {practice.title}
@@ -430,19 +430,19 @@ export function QuizKnowledgePractice({
           <div className="grid gap-6 md:grid-cols-4 py-6">
             <div className="text-center">
               <div className="text-2xl font-bold text-primary">{results.correctAnswers}</div>
-              <div className="text-sm text-muted-foreground">Correct Answers</div>
+              <div className="text-sm text-muted-foreground">Respuestas correctas</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-gray-600">{results.totalQuestions}</div>
-              <div className="text-sm text-muted-foreground">Total Questions</div>
+              <div className="text-sm text-muted-foreground">Total de preguntas</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">{results.points}</div>
-              <div className="text-sm text-muted-foreground">Points Earned</div>
+              <div className="text-sm text-muted-foreground">Puntos obtenidos</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-600">{results.maxPoints}</div>
-              <div className="text-sm text-muted-foreground">Points Possible</div>
+              <div className="text-sm text-muted-foreground">Puntos posibles</div>
             </div>
           </div>
 
@@ -452,7 +452,7 @@ export function QuizKnowledgePractice({
               Intentar de Nuevo
             </Button>
             <Button onClick={() => router.push('/practice')} variant="default">
-              More Practices
+              Mas practicas
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>

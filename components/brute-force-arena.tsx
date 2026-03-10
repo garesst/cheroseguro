@@ -47,23 +47,23 @@ export function BruteForceArena() {
   // Generate hacker attempt logs
   const generateHackerLog = (pwd: string): string[] => {
     const attempts = [
-      "Analyzing password structure...",
-      `Character space detected: ${new Set(pwd.split("")).size} unique chars`,
-      `Length: ${pwd.length} characters`,
+      "Analizando la estructura de la contrasena...",
+      `Espacio de caracteres detectado: ${new Set(pwd.split("")).size} caracteres unicos`,
+      `Longitud: ${pwd.length} caracteres`,
     ]
 
     // Common password attempts
     const commonAttempts = [
-      "Trying '123456'...",
-      "Trying 'password'...",
-      "Trying 'admin'...",
-      "Trying 'letmein'...",
-      "Trying 'welcome'...",
-      "Trying 'monkey'...",
-      "Trying dictionary words...",
-      "Trying common patterns...",
-      "Trying keyboard sequences...",
-      "Trying brute force (all combinations)...",
+      "Probando '123456'...",
+      "Probando 'password'...",
+      "Probando 'admin'...",
+      "Probando 'letmein'...",
+      "Probando 'welcome'...",
+      "Probando 'monkey'...",
+      "Probando palabras del diccionario...",
+      "Probando patrones comunes...",
+      "Probando secuencias del teclado...",
+      "Probando fuerza bruta (todas las combinaciones)...",
     ]
 
     attempts.push(...commonAttempts.slice(0, Math.min(pwd.length, commonAttempts.length)))
@@ -138,23 +138,23 @@ export function BruteForceArena() {
           />
 
           <h2 className="text-2xl font-bold">
-            {vaultStatus === "open" ? "Access Granted" : vaultStatus === "cracking" ? "Under Attack" : "Vault Locked"}
+            {vaultStatus === "open" ? "Acceso concedido" : vaultStatus === "cracking" ? "Bajo ataque" : "Boveda bloqueada"}
           </h2>
 
           <div className="text-4xl font-mono font-bold">
             {vaultStatus === "locked" ? (
-              <span className="text-slate-400">----- LOCKED -----</span>
+              <span className="text-slate-400">----- BLOQUEADA -----</span>
             ) : vaultStatus === "open" ? (
-              <span className="text-green-500">DOOR OPEN</span>
+              <span className="text-green-500">PUERTA ABIERTA</span>
             ) : (
-              <span className="text-red-500 animate-bounce">CRACKING...</span>
+              <span className="text-red-500 animate-bounce">DESCIFRANDO...</span>
             )}
           </div>
 
           {gameStarted && (
             <div className="text-lg font-semibold">
               <span className={timeToCrack > 100 ? "text-green-500" : "text-red-500"}>
-                Time to Crack: {timeToCrack.toLocaleString()} years
+                Tiempo para descifrar: {timeToCrack.toLocaleString()} anos
               </span>
             </div>
           )}
@@ -164,12 +164,12 @@ export function BruteForceArena() {
       {/* Password Input */}
       <Card>
         <CardHeader>
-          <CardTitle>Enter Password</CardTitle>
+          <CardTitle>Escribe una contrasena</CardTitle>
         </CardHeader>
         <CardContent>
           <Input
             type="password"
-            placeholder="Create a strong password..."
+            placeholder="Crea una contrasena segura..."
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="mb-4 text-lg p-4 h-12"
@@ -178,7 +178,7 @@ export function BruteForceArena() {
 
           <div className="flex items-center justify-between mb-4">
             <div>
-              <p className="text-sm text-muted-foreground mb-2">Password Strength</p>
+              <p className="text-sm text-muted-foreground mb-2">Fortaleza de la contrasena</p>
               <div className="flex gap-2">
                 <div className={`h-2 flex-1 rounded ${password.length >= 8 ? "bg-yellow-500" : "bg-muted"}`} />
                 <div
@@ -189,17 +189,17 @@ export function BruteForceArena() {
                 />
               </div>
             </div>
-            {gameWon && <Badge className="bg-green-500">Success!</Badge>}
+            {gameWon && <Badge className="bg-green-500">¡Exito!</Badge>}
           </div>
 
           <p className="text-sm text-muted-foreground mb-4">
-            Goal: Create a password that takes <span className="font-semibold text-green-600">&gt; 100 years</span> to
-            crack
+            Objetivo: crea una contrasena que tarde <span className="font-semibold text-green-600">&gt; 100 anos</span> en
+            descifrarse
           </p>
 
           {gameWon && (
             <Button onClick={handleReset} className="w-full">
-              Reset & Try Again
+              Restablecer e intentar otra vez
             </Button>
           )}
         </CardContent>
@@ -211,7 +211,7 @@ export function BruteForceArena() {
           <CardHeader>
             <CardTitle className="text-green-500 font-mono text-sm">
               <Zap className="inline mr-2 h-4 w-4" />
-              HACKER CONSOLE
+              CONSOLA DEL ATACANTE
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -222,11 +222,11 @@ export function BruteForceArena() {
                 </div>
               ))}
 
-              {vaultOpen && <div className="text-red-500 font-bold mt-4">ACCESS DENIED: Computation too expensive</div>}
+              {vaultOpen && <div className="text-red-500 font-bold mt-4">ACCESO DENEGADO: el costo computacional es demasiado alto</div>}
 
               {!vaultOpen && gameStarted && (
                 <div className="text-red-500 animate-pulse">
-                  $ Attempting combinations... {Math.floor(Math.random() * 999999999).toLocaleString()}/
+                  $ Probando combinaciones... {Math.floor(Math.random() * 999999999).toLocaleString()}/
                 </div>
               )}
             </div>

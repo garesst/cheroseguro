@@ -396,7 +396,7 @@ export function NetworkDefensePractice({
                   <div className="text-2xl font-bold text-green-600">
                     {tools.filter(t => t.isPlaced).length}
                   </div>
-                  <div className="text-sm text-muted-foreground">Tools Desplegadas</div>
+                  <div className="text-sm text-muted-foreground">Herramientas desplegadas</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-purple-600">{mitigatedThreats}</div>
@@ -536,7 +536,7 @@ export function NetworkDefensePractice({
                       <div className="flex justify-between items-center">
                         <Badge variant="secondary" className="text-xs">{tool.points} pts</Badge>
                         <div className="text-xs text-blue-600">
-                          {tool.capabilities.length} caps
+                          {tool.capabilities.length} capacidades
                         </div>
                       </div>
                     </CardContent>

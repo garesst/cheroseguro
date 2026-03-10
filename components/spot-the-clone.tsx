@@ -76,33 +76,33 @@ export function SpotTheClone() {
           <Card className="bg-muted/50">
             <CardContent className="pt-6">
               <AlertCircle className="h-8 w-8 text-primary mb-2" />
-              <div className="font-semibold">3 differences</div>
-              <div className="text-sm text-muted-foreground">To find</div>
+              <div className="font-semibold">3 diferencias</div>
+              <div className="text-sm text-muted-foreground">Por encontrar</div>
             </CardContent>
           </Card>
           <Card className="bg-muted/50">
             <CardContent className="pt-6">
               <Lock className="h-8 w-8 text-secondary mb-2" />
-              <div className="font-semibold">Bank Login</div>
-              <div className="text-sm text-muted-foreground">Comparison task</div>
+              <div className="font-semibold">Acceso bancario</div>
+              <div className="text-sm text-muted-foreground">Tarea de comparacion</div>
             </CardContent>
           </Card>
         </div>
 
         <Card className="bg-primary/5 border-primary/20">
           <CardContent className="pt-6">
-            <h3 className="font-semibold mb-2">How to Play</h3>
+            <h3 className="font-semibold mb-2">Como jugar</h3>
             <ul className="space-y-2 text-sm text-muted-foreground leading-relaxed">
-              <li>• Compare the Original Site (left) with the Cloned Site (right)</li>
-              <li>• Look for 3 subtle differences in the cloned version</li>
-              <li>• Click directly on each difference you spot</li>
-              <li>• Find all 3 to win the game</li>
+              <li>• Compara el sitio original (izquierda) con el sitio clonado (derecha)</li>
+              <li>• Busca 3 diferencias sutiles en la version clonada</li>
+              <li>• Haz clic directamente sobre cada diferencia que detectes</li>
+              <li>• Encuentra las 3 para ganar</li>
             </ul>
           </CardContent>
         </Card>
 
         <Button size="lg" className="w-full" onClick={startGame}>
-          Start Game
+          Iniciar juego
         </Button>
       </div>
     )
@@ -116,18 +116,18 @@ export function SpotTheClone() {
             <div className="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
               <Star className="h-8 w-8 text-primary" />
             </div>
-            <CardTitle className="text-3xl">You Won!</CardTitle>
-            <CardDescription className="text-lg">Found all 3 differences</CardDescription>
+            <CardTitle className="text-3xl">¡Ganaste!</CardTitle>
+            <CardDescription className="text-lg">Encontraste las 3 diferencias</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <Card className="bg-green-50 dark:bg-green-950/20 border-green-500">
               <CardContent className="pt-6">
                 <div className="text-center">
                   <div className="text-4xl font-bold text-green-600 mb-1">3/3</div>
-                  <div className="text-sm text-muted-foreground">Differences found</div>
+                  <div className="text-sm text-muted-foreground">Diferencias encontradas</div>
                   <p className="text-sm leading-relaxed mt-4">
-                    Great job! You've successfully identified a phishing clone. These skills will help you spot fake
-                    websites in real life.
+                    Gran trabajo. Identificaste con exito un clon de phishing. Estas habilidades te ayudaran a detectar
+                    sitios falsos en la vida real.
                   </p>
                 </div>
               </CardContent>
@@ -135,10 +135,10 @@ export function SpotTheClone() {
 
             <div className="flex flex-col sm:flex-row gap-3">
               <Button variant="outline" className="flex-1 bg-transparent" asChild>
-                <Link href="/play">Back to Games</Link>
+                <Link href="/play">Volver a juegos</Link>
               </Button>
               <Button className="flex-1" onClick={startGame}>
-                Play Again
+                Jugar de nuevo
               </Button>
             </div>
           </CardContent>
@@ -151,34 +151,34 @@ export function SpotTheClone() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <Badge variant="secondary" className="text-lg px-4 py-2">
-          Found: {found}/3
+          Encontradas: {found}/3
         </Badge>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
         {/* Original Site */}
         <div>
-          <div className="text-sm font-semibold mb-3 text-center text-muted-foreground">Original Site</div>
+          <div className="text-sm font-semibold mb-3 text-center text-muted-foreground">Sitio original</div>
           <Card className="border-2 border-green-500/30 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-900/20">
             <CardContent className="pt-8 pb-8 px-6">
               <div className="text-center mb-6">
-                <div className="text-2xl font-bold text-blue-900 dark:text-blue-100 mb-1">Bank Login</div>
+                <div className="text-2xl font-bold text-blue-900 dark:text-blue-100 mb-1">Acceso bancario</div>
                 <div className="text-xs text-blue-700 dark:text-blue-300">secure.bankexample.com</div>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">Email</label>
+                  <label className="block text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">Correo electronico</label>
                   <input
                     type="email"
                     className="w-full px-4 py-2 rounded-lg border-2 border-blue-300 dark:border-blue-600 bg-white dark:bg-blue-900/40 text-blue-900 dark:text-white"
-                    placeholder="you@example.com"
+                    placeholder="tu@ejemplo.com"
                     disabled
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">Password</label>
+                  <label className="block text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">Contrasena</label>
                   <input
                     type="password"
                     className="w-full px-4 py-2 rounded-lg border-2 border-blue-300 dark:border-blue-600 bg-white dark:bg-blue-900/40 text-blue-900 dark:text-white"
@@ -188,12 +188,12 @@ export function SpotTheClone() {
                 </div>
 
                 <button className="w-full px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
-                  Login
+                  Iniciar sesion
                 </button>
 
                 <div className="flex items-center justify-center text-xs text-blue-700 dark:text-blue-400 pt-2">
                   <Lock className="h-3 w-3 mr-1" />
-                  Secure Connection
+                  Conexion segura
                 </div>
               </div>
             </CardContent>
@@ -202,7 +202,7 @@ export function SpotTheClone() {
 
         {/* Cloned Site (Interactive) */}
         <div>
-          <div className="text-sm font-semibold mb-3 text-center text-muted-foreground">Cloned Site</div>
+          <div className="text-sm font-semibold mb-3 text-center text-muted-foreground">Sitio clonado</div>
           <Card
             className={`border-2 border-red-500/30 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-900/20 cursor-crosshair relative overflow-hidden ${
               shakeEffect ? "animate-shake" : ""
@@ -216,23 +216,23 @@ export function SpotTheClone() {
           >
             <CardContent className="pt-8 pb-8 px-6 relative">
               <div className="text-center mb-6">
-                <div className="text-2xl font-bold text-blue-900 dark:text-blue-100 mb-1">Bank Login</div>
+                <div className="text-2xl font-bold text-blue-900 dark:text-blue-100 mb-1">Acceso bancario</div>
                 <div className="text-xs text-blue-700 dark:text-blue-300">secure.bankexample.com</div>
               </div>
 
               <div className="space-y-4 relative">
                 <div>
-                  <label className="block text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">Email</label>
+                  <label className="block text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">Correo electronico</label>
                   <input
                     type="email"
                     className="w-full px-4 py-2 rounded-lg border-2 border-blue-300 dark:border-blue-600 bg-white dark:bg-blue-900/40 text-blue-900 dark:text-white"
-                    placeholder="you@example.com"
+                    placeholder="tu@ejemplo.com"
                     disabled
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">Password</label>
+                  <label className="block text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">Contrasena</label>
                   <input
                     type="password"
                     className="w-full px-4 py-2 rounded-lg border-2 border-blue-300 dark:border-blue-600 bg-white dark:bg-blue-900/40 text-blue-900 dark:text-white"
@@ -243,7 +243,7 @@ export function SpotTheClone() {
 
                 {/* DIFFERENCE 1: Button color changed to red/orange */}
                 <button className="w-full px-4 py-2 rounded-lg bg-orange-500 text-white font-semibold hover:bg-orange-600 transition">
-                  Login
+                  Iniciar sesion
                 </button>
 
                 {/* DIFFERENCE 2: Typo in text */}
@@ -254,7 +254,7 @@ export function SpotTheClone() {
                   ) : (
                     <Lock className="h-3 w-3 mr-1" />
                   )}
-                  Secure Conection
+                  Conexion segra
                 </div>
               </div>
 
@@ -294,7 +294,7 @@ export function SpotTheClone() {
             {feedback === "correct" ? (
               <div className="flex items-center justify-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-green-600" />
-                <span className="font-semibold text-green-600">Difference found!</span>
+                <span className="font-semibold text-green-600">¡Diferencia encontrada!</span>
               </div>
             ) : (
               <div className="flex items-center justify-center gap-2">

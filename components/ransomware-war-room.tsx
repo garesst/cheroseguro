@@ -24,18 +24,18 @@ interface Scenario {
 const scenarios: Scenario[] = [
   {
     id: 1,
-    title: "Data Breach Alert",
-    description: "Hackers have compromised your customer database. They're demanding $50,000 or they'll leak the data.",
+    title: "Alerta de filtracion de datos",
+    description: "Atacantes comprometieron tu base de datos de clientes. Exigen $50,000 o filtraran la informacion.",
     choices: [
       {
-        text: "Pay the ransom",
+        text: "Pagar el rescate",
         budgetChange: -50,
         reputationChange: -30,
         healthChange: 20,
         timeChange: 0,
       },
       {
-        text: "Restore from backup",
+        text: "Restaurar desde una copia de seguridad",
         budgetChange: -10,
         reputationChange: -50,
         healthChange: 40,
@@ -45,18 +45,18 @@ const scenarios: Scenario[] = [
   },
   {
     id: 2,
-    title: "Encryption Attack",
-    description: "Your HR database is encrypted. The attacker wants $100,000 to provide the decryption key.",
+    title: "Ataque de cifrado",
+    description: "La base de datos de RR. HH. esta cifrada. El atacante exige $100,000 para entregar la clave de descifrado.",
     choices: [
       {
-        text: "Contact law enforcement",
+        text: "Contactar a las autoridades",
         budgetChange: 0,
         reputationChange: 20,
         healthChange: 30,
         timeChange: -10,
       },
       {
-        text: "Negotiate price down",
+        text: "Negociar una rebaja del monto",
         budgetChange: -30,
         reputationChange: -40,
         healthChange: 50,
@@ -66,18 +66,18 @@ const scenarios: Scenario[] = [
   },
   {
     id: 3,
-    title: "System Lockdown",
-    description: "Your production servers are down. Attackers claim they'll keep them offline unless you pay $75,000.",
+    title: "Bloqueo total del sistema",
+    description: "Tus servidores de produccion estan caidos. Los atacantes afirman que seguiran fuera de linea si no pagas $75,000.",
     choices: [
       {
-        text: "Isolate and rebuild systems",
+        text: "Aislar y reconstruir los sistemas",
         budgetChange: -20,
         reputationChange: -60,
         healthChange: 60,
         timeChange: -15,
       },
       {
-        text: "Activate disaster recovery plan",
+        text: "Activar el plan de recuperacion ante desastres",
         budgetChange: -40,
         reputationChange: -10,
         healthChange: 80,
@@ -162,40 +162,40 @@ export function RansomwareWarRoom() {
           <Card className="bg-muted/50">
             <CardContent className="pt-6">
               <AlertTriangle className="h-8 w-8 text-destructive mb-2" />
-              <div className="font-semibold">3 Scenarios</div>
-              <div className="text-sm text-muted-foreground">To survive</div>
+              <div className="font-semibold">3 escenarios</div>
+              <div className="text-sm text-muted-foreground">Para sobrevivir</div>
             </CardContent>
           </Card>
           <Card className="bg-muted/50">
             <CardContent className="pt-6">
               <Shield className="h-8 w-8 text-secondary mb-2" />
-              <div className="font-semibold">Make decisions</div>
-              <div className="text-sm text-muted-foreground">Under pressure</div>
+              <div className="font-semibold">Toma decisiones</div>
+              <div className="text-sm text-muted-foreground">Bajo presion</div>
             </CardContent>
           </Card>
           <Card className="bg-muted/50">
             <CardContent className="pt-6">
               <TrendingUp className="h-8 w-8 text-primary mb-2" />
-              <div className="font-semibold">Manage resources</div>
-              <div className="text-sm text-muted-foreground">Budget & reputation</div>
+              <div className="font-semibold">Gestiona recursos</div>
+              <div className="text-sm text-muted-foreground">Presupuesto y reputacion</div>
             </CardContent>
           </Card>
         </div>
 
         <Card className="bg-primary/5 border-primary/20">
           <CardContent className="pt-6">
-            <h3 className="font-semibold mb-2">How to Play</h3>
+            <h3 className="font-semibold mb-2">Como jugar</h3>
             <ul className="space-y-2 text-sm text-muted-foreground leading-relaxed">
-              <li>• Face 3 ransomware attack scenarios</li>
-              <li>• Choose actions that balance Budget, Reputation, and System Health</li>
-              <li>• Keep all three metrics above 0 to survive</li>
-              <li>• Survive all 3 scenarios to win</li>
+              <li>• Enfrenta 3 escenarios de ataque ransomware</li>
+              <li>• Elige acciones que equilibren presupuesto, reputacion y salud del sistema</li>
+              <li>• Mantén las tres metricas por encima de 0 para sobrevivir</li>
+              <li>• Supera los 3 escenarios para ganar</li>
             </ul>
           </CardContent>
         </Card>
 
         <Button size="lg" className="w-full" onClick={startGame}>
-          Start Game
+          Iniciar juego
         </Button>
       </div>
     )
@@ -209,27 +209,27 @@ export function RansomwareWarRoom() {
             <div className="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
               <Star className="h-8 w-8 text-primary" />
             </div>
-            <CardTitle className="text-3xl">You Survived!</CardTitle>
-            <CardDescription className="text-lg">All scenarios completed</CardDescription>
+            <CardTitle className="text-3xl">¡Sobreviviste!</CardTitle>
+            <CardDescription className="text-lg">Completaste todos los escenarios</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-3 gap-4">
               <Card className="bg-muted/50">
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold text-primary mb-1">${totalCost}k</div>
-                  <div className="text-xs text-muted-foreground">Total spent</div>
+                  <div className="text-xs text-muted-foreground">Total invertido</div>
                 </CardContent>
               </Card>
               <Card className="bg-muted/50">
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold mb-1">{budget}%</div>
-                  <div className="text-xs text-muted-foreground">Budget left</div>
+                  <div className="text-xs text-muted-foreground">Presupuesto restante</div>
                 </CardContent>
               </Card>
               <Card className="bg-muted/50">
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold mb-1">{reputation}%</div>
-                  <div className="text-xs text-muted-foreground">Reputation</div>
+                  <div className="text-xs text-muted-foreground">Reputacion</div>
                 </CardContent>
               </Card>
             </div>
@@ -237,18 +237,18 @@ export function RansomwareWarRoom() {
             <Card className="bg-green-50 dark:bg-green-950/20 border-green-500">
               <CardContent className="pt-6">
                 <p className="text-sm leading-relaxed">
-                  Excellent crisis management! You navigated difficult ransomware scenarios and protected your
-                  organization's critical assets.
+                  Excelente gestion de crisis. Superaste escenarios complejos de ransomware y protegiste los activos
+                  criticos de tu organizacion.
                 </p>
               </CardContent>
             </Card>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <Button variant="outline" className="flex-1 bg-transparent" asChild>
-                <Link href="/play">Back to Games</Link>
+                <Link href="/play">Volver a juegos</Link>
               </Button>
               <Button className="flex-1" onClick={startGame}>
-                Play Again
+                Jugar de nuevo
               </Button>
             </div>
           </CardContent>
@@ -258,7 +258,7 @@ export function RansomwareWarRoom() {
   }
 
   if (gameOver) {
-    const failedMetric = budget <= 0 ? "Budget" : reputation <= 0 ? "Reputation" : "System Health"
+    const failedMetric = budget <= 0 ? "Presupuesto" : reputation <= 0 ? "Reputacion" : "Salud del sistema"
 
     return (
       <div className="space-y-6">
@@ -267,22 +267,22 @@ export function RansomwareWarRoom() {
             <div className="mx-auto h-16 w-16 rounded-full bg-destructive/10 flex items-center justify-center mb-4">
               <AlertTriangle className="h-8 w-8 text-destructive" />
             </div>
-            <CardTitle className="text-3xl">Game Over</CardTitle>
-            <CardDescription className="text-lg">{failedMetric} depleted</CardDescription>
+            <CardTitle className="text-3xl">Fin del juego</CardTitle>
+            <CardDescription className="text-lg">{failedMetric} agotado</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <Card className="bg-red-50 dark:bg-red-950/20 border-red-500">
               <CardContent className="pt-6">
                 <p className="text-sm leading-relaxed">
-                  Your organization couldn't handle the ransomware crisis. Next time, try different strategies to
-                  balance all three critical metrics.
+                  Tu organizacion no logro contener la crisis de ransomware. La proxima vez prueba estrategias distintas
+                  para equilibrar las tres metricas criticas.
                 </p>
               </CardContent>
             </Card>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <Button variant="outline" className="flex-1 bg-transparent" asChild>
-                <Link href="/play">Back to Games</Link>
+                <Link href="/play">Volver a juegos</Link>
               </Button>
               <Button className="flex-1" onClick={startGame}>
                 Intentar de Nuevo
@@ -301,10 +301,10 @@ export function RansomwareWarRoom() {
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <Badge variant="secondary" className="text-lg px-4 py-2">
-          Scenario {currentScenario + 1}/3
+          Escenario {currentScenario + 1}/3
         </Badge>
         <Badge variant="outline" className="text-lg px-4 py-2 border-red-500">
-          {timeLeft}s left
+          Quedan {timeLeft}s
         </Badge>
       </div>
 
@@ -314,7 +314,7 @@ export function RansomwareWarRoom() {
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-semibold flex items-center gap-2">
               <TrendingUp className="h-4 w-4" />
-              Budget
+              Presupuesto
             </span>
             <span className="text-sm font-semibold">{budget}%</span>
           </div>
@@ -325,7 +325,7 @@ export function RansomwareWarRoom() {
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-semibold flex items-center gap-2">
               <Shield className="h-4 w-4" />
-              Reputation
+              Reputacion
             </span>
             <span className="text-sm font-semibold">{reputation}%</span>
           </div>
@@ -336,7 +336,7 @@ export function RansomwareWarRoom() {
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-semibold flex items-center gap-2">
               <AlertTriangle className="h-4 w-4" />
-              System Health
+              Salud del sistema
             </span>
             <span className="text-sm font-semibold">{health}%</span>
           </div>
@@ -349,7 +349,7 @@ export function RansomwareWarRoom() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-destructive">
             <AlertTriangle className="h-5 w-5" />
-            INCOMING ALERT
+            ALERTA ENTRANTE
           </CardTitle>
           <CardDescription className="text-base text-foreground/80 font-medium mt-2">{scenario.title}</CardDescription>
         </CardHeader>
@@ -372,25 +372,25 @@ export function RansomwareWarRoom() {
               <div className="text-xs text-muted-foreground space-y-1">
                 {choice.budgetChange !== 0 && (
                   <div>
-                    Budget {choice.budgetChange > 0 ? "+" : ""}
+                    Presupuesto {choice.budgetChange > 0 ? "+" : ""}
                     {choice.budgetChange}%
                   </div>
                 )}
                 {choice.reputationChange !== 0 && (
                   <div>
-                    Reputation {choice.reputationChange > 0 ? "+" : ""}
+                    Reputacion {choice.reputationChange > 0 ? "+" : ""}
                     {choice.reputationChange}%
                   </div>
                 )}
                 {choice.healthChange !== 0 && (
                   <div>
-                    Health {choice.healthChange > 0 ? "+" : ""}
+                    Salud {choice.healthChange > 0 ? "+" : ""}
                     {choice.healthChange}%
                   </div>
                 )}
                 {choice.timeChange !== 0 && (
                   <div>
-                    Time {choice.timeChange > 0 ? "+" : ""}
+                    Tiempo {choice.timeChange > 0 ? "+" : ""}
                     {choice.timeChange}s
                   </div>
                 )}

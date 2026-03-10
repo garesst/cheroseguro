@@ -9,14 +9,14 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 
 const emails = [
-  { id: 1, from: "security@paypa1-verify.com", subject: "Account Suspended", isPhishing: true },
-  { id: 2, from: "notifications@amazon.com", subject: "Your Order Confirmation", isPhishing: false },
-  { id: 3, from: "admin@bankofamerica-secure.net", subject: "Urgent Security Alert", isPhishing: true },
-  { id: 4, from: "support@github.com", subject: "Password Change Request", isPhishing: false },
-  { id: 5, from: "no-reply@appIe-support.com", subject: "Your Apple ID", isPhishing: true },
-  { id: 6, from: "team@netflix.com", subject: "Payment Failed", isPhishing: false },
-  { id: 7, from: "security@microsoft-account.net", subject: "Verify Your Account", isPhishing: true },
-  { id: 8, from: "notifications@slack.com", subject: "New Message", isPhishing: false },
+  { id: 1, from: "security@paypa1-verify.com", subject: "Cuenta suspendida", isPhishing: true },
+  { id: 2, from: "notifications@amazon.com", subject: "Confirmacion de tu pedido", isPhishing: false },
+  { id: 3, from: "admin@bankofamerica-secure.net", subject: "Alerta urgente de seguridad", isPhishing: true },
+  { id: 4, from: "support@github.com", subject: "Solicitud de cambio de contrasena", isPhishing: false },
+  { id: 5, from: "no-reply@appIe-support.com", subject: "Tu Apple ID", isPhishing: true },
+  { id: 6, from: "team@netflix.com", subject: "Fallo en el pago", isPhishing: false },
+  { id: 7, from: "security@microsoft-account.net", subject: "Verifica tu cuenta", isPhishing: true },
+  { id: 8, from: "notifications@slack.com", subject: "Nuevo mensaje", isPhishing: false },
 ]
 
 export function PhishingDefender() {
@@ -79,33 +79,33 @@ export function PhishingDefender() {
             <Card className="bg-muted/50">
               <CardContent className="pt-6">
                 <Clock className="h-8 w-8 text-primary mb-2" />
-                <div className="font-semibold">60 seconds</div>
-                <div className="text-sm text-muted-foreground">Time limit</div>
+                <div className="font-semibold">60 segundos</div>
+                <div className="text-sm text-muted-foreground">Tiempo limite</div>
               </CardContent>
             </Card>
             <Card className="bg-muted/50">
               <CardContent className="pt-6">
                 <Mail className="h-8 w-8 text-secondary mb-2" />
-                <div className="font-semibold">8 emails</div>
-                <div className="text-sm text-muted-foreground">To categorize</div>
+                <div className="font-semibold">8 correos</div>
+                <div className="text-sm text-muted-foreground">Por clasificar</div>
               </CardContent>
             </Card>
           </div>
 
           <Card className="bg-primary/5 border-primary/20">
             <CardContent className="pt-6">
-              <h3 className="font-semibold mb-2">How to Play</h3>
+              <h3 className="font-semibold mb-2">Como jugar</h3>
               <ul className="space-y-2 text-sm text-muted-foreground leading-relaxed">
-                <li>• Review each email quickly</li>
-                <li>• Decide if it's legitimate or phishing</li>
-                <li>• Click the correct button before time runs out</li>
-                <li>• Earn 100 points for each correct answer</li>
+                <li>• Revisa cada correo rapidamente</li>
+                <li>• Decide si es legitimo o phishing</li>
+                <li>• Pulsa el boton correcto antes de que se acabe el tiempo</li>
+                <li>• Gana 100 puntos por cada respuesta correcta</li>
               </ul>
             </CardContent>
           </Card>
 
           <Button size="lg" className="w-full" onClick={startGame}>
-            Start Game
+            Iniciar juego
           </Button>
         </div>
       </div>
@@ -123,21 +123,21 @@ export function PhishingDefender() {
             <div className="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
               <Star className="h-8 w-8 text-primary" />
             </div>
-            <CardTitle className="text-3xl">Game Over!</CardTitle>
-            <CardDescription className="text-lg">Here's how you did</CardDescription>
+            <CardTitle className="text-3xl">¡Fin del juego!</CardTitle>
+            <CardDescription className="text-lg">Asi te fue</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
               <Card className="bg-muted/50">
                 <CardContent className="pt-6">
                   <div className="text-4xl font-bold text-primary mb-1">{score}</div>
-                  <div className="text-sm text-muted-foreground">Total Score</div>
+                  <div className="text-sm text-muted-foreground">Puntuacion total</div>
                 </CardContent>
               </Card>
               <Card className="bg-muted/50">
                 <CardContent className="pt-6">
                   <div className="text-4xl font-bold text-secondary mb-1">{percentage}%</div>
-                  <div className="text-sm text-muted-foreground">Accuracy</div>
+                  <div className="text-sm text-muted-foreground">Precision</div>
                 </CardContent>
               </Card>
             </div>
@@ -146,22 +146,22 @@ export function PhishingDefender() {
               <CardContent className="pt-6">
                 <p className="text-sm leading-relaxed">
                   {percentage === 100
-                    ? "Perfect score! You're a phishing detection master!"
+                    ? "¡Puntuacion perfecta! Eres un experto detectando phishing."
                     : percentage >= 75
-                      ? "Great job! You're getting really good at spotting phishing emails."
+                      ? "¡Muy buen trabajo! Cada vez detectas mejor los correos de phishing."
                       : percentage >= 50
-                        ? "Good effort! Keep practicing to improve your detection skills."
-                        : "Keep practicing! Review the Learn section for more tips."}
+                        ? "Buen esfuerzo. Sigue practicando para mejorar tu capacidad de deteccion."
+                        : "Sigue practicando. Revisa la seccion Aprender para obtener mas consejos."}
                 </p>
               </CardContent>
             </Card>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <Button variant="outline" className="flex-1 bg-transparent" asChild>
-                <Link href="/play">Back to Games</Link>
+                <Link href="/play">Volver a juegos</Link>
               </Button>
               <Button className="flex-1" onClick={startGame}>
-                Play Again
+                Jugar de nuevo
               </Button>
             </div>
           </CardContent>
@@ -202,7 +202,7 @@ export function PhishingDefender() {
             </div>
             <div className="flex-1 min-w-0">
               <CardTitle className="text-xl mb-1">{email.subject}</CardTitle>
-              <CardDescription className="break-all">From: {email.from}</CardDescription>
+              <CardDescription className="break-all">De: {email.from}</CardDescription>
             </div>
           </div>
         </CardHeader>
@@ -218,7 +218,7 @@ export function PhishingDefender() {
             onClick={() => handleAnswer(false)}
           >
             <CheckCircle2 className="mr-2 h-6 w-6" />
-            Safe Email
+            Correo seguro
           </Button>
           <Button
             size="lg"
@@ -242,15 +242,15 @@ export function PhishingDefender() {
             {feedback === "correct" ? (
               <>
                 <CheckCircle2 className="h-12 w-12 text-green-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-green-600">Correct!</div>
-                <div className="text-sm text-muted-foreground mt-1">+100 points</div>
+                <div className="text-2xl font-bold text-green-600">¡Correcto!</div>
+                <div className="text-sm text-muted-foreground mt-1">+100 puntos</div>
               </>
             ) : (
               <>
                 <XCircle className="h-12 w-12 text-red-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-red-600">Incorrect</div>
+                <div className="text-2xl font-bold text-red-600">Incorrecto</div>
                 <div className="text-sm text-muted-foreground mt-1">
-                  This was {email.isPhishing ? "phishing" : "safe"}
+                  Este correo era {email.isPhishing ? "phishing" : "seguro"}
                 </div>
               </>
             )}

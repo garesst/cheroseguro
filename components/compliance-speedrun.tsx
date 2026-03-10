@@ -14,14 +14,14 @@ interface ComplianceQuestion {
 }
 
 const questions: ComplianceQuestion[] = [
-  { id: 1, statement: "Sharing passwords is OK for convenience", isCompliant: false },
-  { id: 2, statement: "Lock your screen when leaving your desk", isCompliant: true },
-  { id: 3, statement: "Use the same password across all accounts", isCompliant: false },
-  { id: 4, statement: "Enable multi-factor authentication when available", isCompliant: true },
-  { id: 5, statement: "Click on links in unsolicited emails from unknown senders", isCompliant: false },
-  { id: 6, statement: "Keep your software and antivirus updated", isCompliant: true },
-  { id: 7, statement: "Share sensitive company data on public cloud storage", isCompliant: false },
-  { id: 8, statement: "Report suspicious activity to your security team immediately", isCompliant: true },
+  { id: 1, statement: "Compartir contrasenas por comodidad esta mal", isCompliant: false },
+  { id: 2, statement: "Bloquea tu pantalla al alejarte del escritorio", isCompliant: true },
+  { id: 3, statement: "Usar la misma contrasena en todas las cuentas es inseguro", isCompliant: false },
+  { id: 4, statement: "Activa la autenticacion multifactor cuando este disponible", isCompliant: true },
+  { id: 5, statement: "No debes abrir enlaces de correos no solicitados de remitentes desconocidos", isCompliant: false },
+  { id: 6, statement: "Mantener tu software y antivirus actualizados es correcto", isCompliant: true },
+  { id: 7, statement: "Compartir datos sensibles de la empresa en la nube publica es una violacion", isCompliant: false },
+  { id: 8, statement: "Reporta de inmediato cualquier actividad sospechosa al equipo de seguridad", isCompliant: true },
 ]
 
 interface ComplianceSpeedrunProps {
@@ -90,29 +90,29 @@ export function ComplianceSpeedrun({ onGameOver }: ComplianceSpeedrunProps) {
           <div className="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
             <Star className="h-8 w-8 text-primary" />
           </div>
-          <CardTitle className="text-3xl">Time's Up!</CardTitle>
+          <CardTitle className="text-3xl">¡Se acabo el tiempo!</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <Card className="bg-muted/50">
               <CardContent className="pt-6">
                 <div className="text-3xl font-bold text-primary">{score}</div>
-                <div className="text-sm text-muted-foreground">Points</div>
+                <div className="text-sm text-muted-foreground">Puntos</div>
               </CardContent>
             </Card>
             <Card className="bg-muted/50">
               <CardContent className="pt-6">
                 <div className="text-3xl font-bold text-secondary">{percentage}%</div>
-                <div className="text-sm text-muted-foreground">Accuracy</div>
+                <div className="text-sm text-muted-foreground">Precision</div>
               </CardContent>
             </Card>
           </div>
           <p className="text-sm text-muted-foreground">
             {score >= 12
-              ? "Excellent compliance knowledge!"
+              ? "¡Excelente conocimiento de cumplimiento!"
               : score >= 8
-                ? "Good understanding of compliance."
-                : "Review compliance policies to improve."}
+                ? "Buen dominio de las normas de cumplimiento."
+                : "Revisa las politicas de cumplimiento para mejorar."}
           </p>
         </CardContent>
       </Card>
@@ -141,7 +141,7 @@ export function ComplianceSpeedrun({ onGameOver }: ComplianceSpeedrunProps) {
         <CardHeader>
           <div className="text-center space-y-4">
             <div className="text-sm text-muted-foreground">
-              Question {currentQuestionIdx + 1} of {questions.length}
+              Pregunta {currentQuestionIdx + 1} de {questions.length}
             </div>
             <p className="text-xl font-semibold leading-relaxed text-balance">{question.statement}</p>
           </div>
@@ -152,12 +152,12 @@ export function ComplianceSpeedrun({ onGameOver }: ComplianceSpeedrunProps) {
               {feedback === "correct" ? (
                 <>
                   <CheckCircle2 className="h-12 w-12 text-green-600 mx-auto mb-2" />
-                  <div className="text-lg font-semibold text-green-600">Correct! +2 seconds</div>
+                  <div className="text-lg font-semibold text-green-600">¡Correcto! +2 segundos</div>
                 </>
               ) : (
                 <>
                   <XCircle className="h-12 w-12 text-red-600 mx-auto mb-2" />
-                  <div className="text-lg font-semibold text-red-600">Incorrect! -3 seconds</div>
+                  <div className="text-lg font-semibold text-red-600">¡Incorrecto! -3 segundos</div>
                 </>
               )}
             </div>
@@ -169,7 +169,7 @@ export function ComplianceSpeedrun({ onGameOver }: ComplianceSpeedrunProps) {
                 onClick={() => handleAnswer(true)}
               >
                 <CheckCircle2 className="mr-2 h-5 w-5" />
-                Compliant
+                Cumple
               </Button>
               <Button
                 size="lg"
@@ -177,7 +177,7 @@ export function ComplianceSpeedrun({ onGameOver }: ComplianceSpeedrunProps) {
                 onClick={() => handleAnswer(false)}
               >
                 <XCircle className="mr-2 h-5 w-5" />
-                Violation
+                Incumple
               </Button>
             </div>
           )}

@@ -14,14 +14,14 @@ interface BackupFile {
 }
 
 const availableFiles: BackupFile[] = [
-  { id: 1, name: "Company Database", value: 500, size: 800 },
-  { id: 2, name: "Financial Records", value: 400, size: 200 },
-  { id: 3, name: "Source Code", value: 350, size: 1200 },
-  { id: 4, name: "Customer Data", value: 300, size: 600 },
-  { id: 5, name: "Design Assets", value: 150, size: 400 },
-  { id: 6, name: "Marketing Videos", value: 100, size: 2000 },
-  { id: 7, name: "User Profiles", value: 280, size: 300 },
-  { id: 8, name: "Email Archives", value: 120, size: 1500 },
+  { id: 1, name: "Base de datos de la empresa", value: 500, size: 800 },
+  { id: 2, name: "Registros financieros", value: 400, size: 200 },
+  { id: 3, name: "Codigo fuente", value: 350, size: 1200 },
+  { id: 4, name: "Datos de clientes", value: 300, size: 600 },
+  { id: 5, name: "Recursos de diseno", value: 150, size: 400 },
+  { id: 6, name: "Videos de marketing", value: 100, size: 2000 },
+  { id: 7, name: "Perfiles de usuario", value: 280, size: 300 },
+  { id: 8, name: "Archivos de correo", value: 120, size: 1500 },
 ]
 
 const MAX_CAPACITY = 2000
@@ -69,32 +69,32 @@ export function BackupBackpack() {
           <div className="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
             <Star className="h-8 w-8 text-primary" />
           </div>
-          <CardTitle className="text-3xl">Backup Complete!</CardTitle>
+          <CardTitle className="text-3xl">¡Respaldo completado!</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <Card className="bg-muted/50">
               <CardContent className="pt-6">
                 <div className="text-3xl font-bold text-primary">{score}</div>
-                <div className="text-sm text-muted-foreground">Points</div>
+                <div className="text-sm text-muted-foreground">Puntos</div>
               </CardContent>
             </Card>
             <Card className="bg-muted/50">
               <CardContent className="pt-6">
                 <div className="text-3xl font-bold text-secondary">{efficiency}%</div>
-                <div className="text-sm text-muted-foreground">Efficiency</div>
+                <div className="text-sm text-muted-foreground">Eficiencia</div>
               </CardContent>
             </Card>
           </div>
           <p className="text-sm text-muted-foreground">
             {efficiency === 100
-              ? "Perfect priority selection! All critical data saved."
+              ? "¡Seleccionaste las prioridades perfectas! Todos los datos criticos quedaron a salvo."
               : efficiency >= 75
-                ? "Great choices! Most critical data is safe."
-                : "Good job! Review file priorities to improve next time."}
+                ? "¡Muy buena eleccion! La mayor parte de los datos criticos esta protegida."
+                : "Buen trabajo. Revisa las prioridades de los archivos para mejorar la proxima vez."}
           </p>
           <Button onClick={handleReset} size="lg">
-            Play Again
+            Jugar de nuevo
           </Button>
         </CardContent>
       </Card>
@@ -106,7 +106,7 @@ export function BackupBackpack() {
       <div className="flex items-center justify-between">
         <Badge variant="outline" className="text-lg px-4 py-2">
           <Star className="mr-2 h-4 w-4" />
-          Value: ${totalValue}
+          Valor: ${totalValue}
         </Badge>
         <div className={`text-sm font-semibold ${totalSize > MAX_CAPACITY ? "text-red-600" : "text-green-600"}`}>
           {totalSize} / {MAX_CAPACITY} MB
@@ -127,14 +127,14 @@ export function BackupBackpack() {
       <div className="grid md:grid-cols-2 gap-6">
         {/* Available Files */}
         <div>
-          <h3 className="font-semibold text-lg mb-4">Available Files</h3>
+          <h3 className="font-semibold text-lg mb-4">Archivos disponibles</h3>
           <div className="space-y-2 max-h-96 overflow-y-auto">
             {unselectedFiles.map((file) => (
               <div key={file.id} className="flex items-center justify-between bg-muted/30 rounded-lg p-3 text-sm">
                 <div className="flex-1 min-w-0">
                   <div className="font-semibold truncate">{file.name}</div>
                   <div className="text-xs text-muted-foreground">
-                    ${file.value} value • {file.size} MB
+                    ${file.value} de valor • {file.size} MB
                   </div>
                 </div>
                 <Button
@@ -153,12 +153,12 @@ export function BackupBackpack() {
 
         {/* Backup Drive */}
         <div>
-          <h3 className="font-semibold text-lg mb-4">Backup Drive</h3>
+          <h3 className="font-semibold text-lg mb-4">Unidad de respaldo</h3>
           <div className="space-y-2 max-h-96 overflow-y-auto bg-primary/5 rounded-lg p-4">
             {backupFiles.length === 0 ? (
               <div className="text-center py-12 text-muted-foreground">
                 <Download className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                <div>No files selected yet</div>
+                <div>Aun no has seleccionado archivos</div>
               </div>
             ) : (
               backupFiles.map((file) => (
@@ -189,7 +189,7 @@ export function BackupBackpack() {
 
       {/* Complete Button */}
       <Button onClick={handleComplete} disabled={selectedFiles.length === 0} size="lg" className="w-full h-14 text-lg">
-        Complete Backup
+        Completar respaldo
       </Button>
     </div>
   )

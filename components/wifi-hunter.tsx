@@ -19,14 +19,14 @@ interface WifiHunterProps {
 
 export function WifiHunter({ onGameOver }: WifiHunterProps) {
   const networkPool: Network[] = [
-    { id: "1", name: "CoffeeShop_Free", isTrap: true, signalStrength: 60 },
-    { id: "2", name: "AirportNet", isTrap: true, signalStrength: 80 },
-    { id: "3", name: "CompanyVPN", isTrap: false, signalStrength: 90 },
-    { id: "4", name: "FreeWiFi", isTrap: true, signalStrength: 70 },
-    { id: "5", name: "HomeNetwork", isTrap: false, signalStrength: 95 },
-    { id: "6", name: "PublicHotspot", isTrap: true, signalStrength: 65 },
-    { id: "7", name: "PrivateNet_Secure", isTrap: false, signalStrength: 85 },
-    { id: "8", name: "GuestWiFi_Open", isTrap: true, signalStrength: 75 },
+    { id: "1", name: "Cafeteria_Gratis", isTrap: true, signalStrength: 60 },
+    { id: "2", name: "AeropuertoNet", isTrap: true, signalStrength: 80 },
+    { id: "3", name: "EmpresaVPN", isTrap: false, signalStrength: 90 },
+    { id: "4", name: "WiFiGratis", isTrap: true, signalStrength: 70 },
+    { id: "5", name: "RedCasa", isTrap: false, signalStrength: 95 },
+    { id: "6", name: "ZonaPublica", isTrap: true, signalStrength: 65 },
+    { id: "7", name: "RedPrivada_Segura", isTrap: false, signalStrength: 85 },
+    { id: "8", name: "WiFiInvitados_Abierta", isTrap: true, signalStrength: 75 },
   ]
 
   const [timeLeft, setTimeLeft] = useState(60)
@@ -182,7 +182,7 @@ export function WifiHunter({ onGameOver }: WifiHunterProps) {
                   <div className="text-left">
                     <div className="font-medium text-sm">{network.name}</div>
                     {feedback?.id === network.id && feedback.isConnecting && (
-                      <div className="text-xs text-green-600 font-semibold">Connecting...</div>
+                      <div className="text-xs text-green-600 font-semibold">Conectando...</div>
                     )}
                   </div>
                 </div>
@@ -199,8 +199,8 @@ export function WifiHunter({ onGameOver }: WifiHunterProps) {
       <Card className="bg-primary/5 border-primary/20">
         <CardContent className="pt-6">
           <p className="text-xs text-muted-foreground">
-            <strong>Tip:</strong> Networks can be tricky! Look at the SSID names carefully. Some may seem official but
-            are honeypots!
+            <strong>Consejo:</strong> Las redes pueden ser enganadoras. Revisa con cuidado los nombres SSID: algunas
+            parecen oficiales, pero son trampas.
           </p>
         </CardContent>
       </Card>

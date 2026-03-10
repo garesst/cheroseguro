@@ -86,9 +86,9 @@ export function PracticeController({ practice }: PracticeControllerProps) {
               <div className="flex items-start gap-3">
                 <Trophy className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h4 className="font-semibold text-green-900">Already Completed!</h4>
+                  <h4 className="font-semibold text-green-900">¡Ya completaste esta práctica!</h4>
                   <p className="text-sm text-green-700">
-                    You've completed this practice. Your score: {practiceProgress.exercises[exerciseId]?.score || 0}%
+                    Tu puntuación: {practiceProgress.exercises[exerciseId]?.score || 0}%
                   </p>
                 </div>
               </div>
@@ -102,10 +102,10 @@ export function PracticeController({ practice }: PracticeControllerProps) {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-primary" />
-                <CardTitle className="text-xl">Learning Objectives</CardTitle>
+                <CardTitle className="text-xl">Objetivos de Aprendizaje</CardTitle>
               </div>
               <CardDescription>
-                What you'll learn from this practice
+                Lo que aprenderás en esta práctica
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -124,7 +124,7 @@ export function PracticeController({ practice }: PracticeControllerProps) {
                   className="w-full"
                   onClick={handleStartPractice}
                 >
-                  Start Practice
+                  Comenzar Práctica
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
@@ -143,7 +143,7 @@ export function PracticeController({ practice }: PracticeControllerProps) {
     return (
       <Card className="p-8 text-center">
         <CardContent>
-          <p className="text-muted-foreground">No email data available for this practice.</p>
+          <p className="text-muted-foreground">No hay datos de correo disponibles para esta práctica.</p>
         </CardContent>
       </Card>
     )
@@ -153,9 +153,9 @@ export function PracticeController({ practice }: PracticeControllerProps) {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Analyze this Email</CardTitle>
+          <CardTitle>Analiza este Correo</CardTitle>
           <CardDescription>
-            Carefully examine the email below and determine if it's legitimate or a phishing attempt.
+            Examina cuidadosamente el correo a continuación y determina si es legítimo o un intento de phishing.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -164,14 +164,14 @@ export function PracticeController({ practice }: PracticeControllerProps) {
             <div className="space-y-3 text-sm">
               <div className="flex justify-between">
                 <div>
-                  <strong>From:</strong> {email.from_display} &lt;{email.from}&gt;
+                  <strong>De:</strong> {email.from_display} &lt;{email.from}&gt;
                 </div>
                 <div className="text-muted-foreground">
                   {email.timestamp}
                 </div>
               </div>
               <div>
-                <strong>Subject:</strong> {email.subject}
+                <strong>Asunto:</strong> {email.subject}
               </div>
               <hr />
               <div className="whitespace-pre-wrap font-mono text-sm">
@@ -183,7 +183,7 @@ export function PracticeController({ practice }: PracticeControllerProps) {
           {/* Analysis Options */}
           {!showFeedback ? (
             <div className="space-y-4">
-              <h3 className="font-semibold">Your Analysis:</h3>
+              <h3 className="font-semibold">Tu análisis:</h3>
               <div className="grid gap-3">
                 {scenario_data.options?.map((option: any) => (
                   <Button
@@ -219,16 +219,10 @@ export function PracticeController({ practice }: PracticeControllerProps) {
                         <div className="flex items-start gap-3">
                           <AlertCircle className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
                           <div className="space-y-2">
-                            <h4 className="font-semibold text-lg">Analysis Recorded</h4>
+                            <h4 className="font-semibold text-lg">Respuesta registrada</h4>
                             <p className="text-sm leading-relaxed">
-                              You selected: "{selectedOptionData?.text || selectedOption}"
+                              Seleccionaste: "{selectedOptionData?.text || selectedOption}"
                             </p>
-                            <div className="mt-3 p-3 rounded-md bg-muted/50">
-                              <p className="text-xs text-muted-foreground">
-                                <strong>Debug Info:</strong> No specific feedback configured for option "{selectedOption}". 
-                                Available feedback keys: {Object.keys(practice.scenario_data?.feedback_responses || practice.feedback_responses || {}).join(', ') || 'none'}
-                              </p>
-                            </div>
                           </div>
                         </div>
                       </CardContent>
@@ -252,7 +246,7 @@ export function PracticeController({ practice }: PracticeControllerProps) {
                           {feedback.explanation && (
                             <div className="mt-3 p-3 rounded-md bg-muted/50">
                               <p className="text-xs text-muted-foreground">
-                                <strong>Explanation:</strong> {feedback.explanation}
+                                <strong>Explicación:</strong> {feedback.explanation}
                               </p>
                             </div>
                           )}
@@ -268,7 +262,7 @@ export function PracticeController({ practice }: PracticeControllerProps) {
                   Intentar de Nuevo
                 </Button>
                 <Button onClick={() => window.location.href = "/practice"}>
-                  Back to Practices
+                  Ver más prácticas
                 </Button>
               </div>
             </div>
@@ -277,7 +271,7 @@ export function PracticeController({ practice }: PracticeControllerProps) {
           {/* Red Flags Section */}
           {scenario_data.red_flags && (
             <div className="mt-8 space-y-4">
-              <h3 className="font-semibold">Look for these red flags:</h3>
+              <h3 className="font-semibold">Señales de alerta:</h3>
               <div className="grid gap-2">
                 {scenario_data.red_flags.map((flag: any, index: number) => (
                   <div key={index} className="flex items-start gap-2 text-sm">

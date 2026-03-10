@@ -17,31 +17,31 @@ interface MazeQuestion {
 const mazeQuestions: MazeQuestion[] = [
   {
     id: 1,
-    question: "What's the best way to protect against phishing attacks?",
-    correctAnswer: "Verify sender email addresses and don't click suspicious links",
-    option1: "Verify sender email addresses and don't click suspicious links",
-    option2: "Open all attachments to check if they're safe",
+    question: "¿Cual es la mejor forma de protegerte contra ataques de phishing?",
+    correctAnswer: "Verificar el correo del remitente y no abrir enlaces sospechosos",
+    option1: "Verificar el correo del remitente y no abrir enlaces sospechosos",
+    option2: "Abrir todos los adjuntos para comprobar si son seguros",
   },
   {
     id: 2,
-    question: "When should you update your software?",
-    correctAnswer: "Immediately when security updates are available",
-    option1: "Immediately when security updates are available",
-    option2: "Only when you have spare time, updates can wait",
+    question: "¿Cuando debes actualizar tu software?",
+    correctAnswer: "En cuanto haya actualizaciones de seguridad disponibles",
+    option1: "En cuanto haya actualizaciones de seguridad disponibles",
+    option2: "Solo cuando tengas tiempo libre; las actualizaciones pueden esperar",
   },
   {
     id: 3,
-    question: "What should you do with a USB drive you find?",
-    correctAnswer: "Don't plug it in, report it to IT security",
-    option1: "Don't plug it in, report it to IT security",
-    option2: "Plug it in to see what's on it",
+    question: "¿Que debes hacer con una memoria USB que encuentras?",
+    correctAnswer: "No la conectes y reportala al equipo de seguridad de TI",
+    option1: "No la conectes y reportala al equipo de seguridad de TI",
+    option2: "Conectarla para ver que contiene",
   },
   {
     id: 4,
-    question: "How should you store sensitive passwords?",
-    correctAnswer: "Use a password manager with strong encryption",
-    option1: "Use a password manager with strong encryption",
-    option2: "Write them down in a notebook",
+    question: "¿Como debes guardar contrasenas sensibles?",
+    correctAnswer: "Usa un gestor de contrasenas con cifrado fuerte",
+    option1: "Usa un gestor de contrasenas con cifrado fuerte",
+    option2: "Escribirlas en una libreta",
   },
 ]
 
@@ -118,26 +118,26 @@ export function PatchMaze({ onGameOver }: PatchMazeProps) {
               <AlertTriangle className="h-8 w-8 text-red-600" />
             )}
           </div>
-          <CardTitle className="text-3xl">{result === "win" ? "Escaped!" : "Virus Caught You"}</CardTitle>
+          <CardTitle className="text-3xl">{result === "win" ? "¡Escapaste!" : "El virus te alcanzo"}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {result === "win" ? (
             <>
-              <p className="text-lg font-semibold text-green-600">You reached safety!</p>
+              <p className="text-lg font-semibold text-green-600">¡Llegaste a salvo!</p>
               <Card className="bg-muted/50">
                 <CardContent className="pt-6">
                   <div className="text-3xl font-bold text-green-600">500</div>
-                  <div className="text-sm text-muted-foreground">Points Earned</div>
+                  <div className="text-sm text-muted-foreground">Puntos obtenidos</div>
                 </CardContent>
               </Card>
             </>
           ) : (
             <>
-              <p className="text-lg font-semibold text-red-600">The virus caught up with you!</p>
+              <p className="text-lg font-semibold text-red-600">¡El virus te alcanzo!</p>
               <Card className="bg-muted/50">
                 <CardContent className="pt-6">
                   <div className="text-3xl font-bold text-red-600">0</div>
-                  <div className="text-sm text-muted-foreground">Points</div>
+                  <div className="text-sm text-muted-foreground">Puntos</div>
                 </CardContent>
               </Card>
             </>
@@ -157,7 +157,7 @@ export function PatchMaze({ onGameOver }: PatchMazeProps) {
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
               <Star className="h-5 w-5 text-blue-600" />
-              <span className="font-semibold">Player</span>
+              <span className="font-semibold">Jugador</span>
             </div>
             <div className="text-xs text-muted-foreground">{progress}%</div>
           </div>
@@ -178,7 +178,7 @@ export function PatchMaze({ onGameOver }: PatchMazeProps) {
       <Card>
         <CardHeader>
           <div className="text-sm text-muted-foreground mb-3">
-            Question {currentQuestionIdx + 1} of {mazeQuestions.length}
+            Pregunta {currentQuestionIdx + 1} de {mazeQuestions.length}
           </div>
           <p className="text-xl font-semibold leading-relaxed text-balance">{question.question}</p>
         </CardHeader>
@@ -188,12 +188,12 @@ export function PatchMaze({ onGameOver }: PatchMazeProps) {
               {feedback === "correct" ? (
                 <>
                   <CheckCircle2 className="h-12 w-12 text-green-600 mx-auto mb-2" />
-                  <div className="text-lg font-semibold text-green-600">Correct Path!</div>
+                  <div className="text-lg font-semibold text-green-600">¡Camino correcto!</div>
                 </>
               ) : (
                 <>
                   <XCircle className="h-12 w-12 text-red-600 mx-auto mb-2" />
-                  <div className="text-lg font-semibold text-red-600">Wrong Way!</div>
+                  <div className="text-lg font-semibold text-red-600">¡Camino equivocado!</div>
                 </>
               )}
             </div>

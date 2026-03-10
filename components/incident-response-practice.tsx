@@ -111,48 +111,48 @@ export function IncidentResponsePractice({
             </div>
             <div>
               <CardTitle className="text-2xl font-bold text-red-900 mb-2">
-                🚨 Crisis Response Training
+                🚨 Entrenamiento de respuesta a crisis
               </CardTitle>
               <CardDescription className="text-base text-red-700">
-                You're about to face a real cybersecurity crisis. Your decisions will determine the outcome.
+                Estas a punto de enfrentar una crisis real de ciberseguridad. Tus decisiones determinaran el resultado.
               </CardDescription>
             </div>
             
             <div className="grid gap-4 md:grid-cols-3 text-sm">
               <div className="flex items-center gap-2 justify-center">
                 <Zap className="h-4 w-4 text-red-600" />
-                <span className="text-red-700">High-pressure decisions</span>
+                <span className="text-red-700">Decisiones bajo presion</span>
               </div>
               <div className="flex items-center gap-2 justify-center">
                 <Clock className="h-4 w-4 text-red-600" />
-                <span className="text-red-700">Time-critical scenarios</span>
+                <span className="text-red-700">Escenarios contrarreloj</span>
               </div>
               <div className="flex items-center gap-2 justify-center">
                 <Target className="h-4 w-4 text-red-600" />
-                <span className="text-red-700">Multiple decisions required</span>
+                <span className="text-red-700">Se requieren varias decisiones</span>
               </div>
             </div>
           </CardHeader>
           
           <CardContent className="space-y-6">
             <div className="bg-white p-6 rounded-lg border border-red-200">
-              <h3 className="font-semibold text-red-900 mb-3">How This Works</h3>
+              <h3 className="font-semibold text-red-900 mb-3">Como funciona</h3>
               <ul className="space-y-2 text-sm text-red-700">
                 <li className="flex items-start gap-2">
                   <span className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center text-xs font-bold text-red-600 mt-0.5 flex-shrink-0">1</span>
-                  You'll face a detailed crisis scenario with real-world context
+                  Te enfrentaras a un escenario de crisis detallado con contexto realista
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center text-xs font-bold text-red-600 mt-0.5 flex-shrink-0">2</span>
-                  Select all appropriate response actions from the available options
+                  Selecciona todas las acciones de respuesta adecuadas entre las opciones disponibles
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center text-xs font-bold text-red-600 mt-0.5 flex-shrink-0">3</span>
-                  Get detailed feedback on each decision with industry best practices
+                  Recibe retroalimentacion detallada sobre cada decision con buenas practicas del sector
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center text-xs font-bold text-red-600 mt-0.5 flex-shrink-0">4</span>
-                  Review your incident response score and learn from mistakes
+                  Revisa tu puntuacion de respuesta al incidente y aprende de tus errores
                 </li>
               </ul>
             </div>
@@ -163,7 +163,7 @@ export function IncidentResponsePractice({
                 className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 text-lg"
                 size="lg"
               >
-                Enter Crisis Situation
+                Entrar en la crisis
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -184,7 +184,7 @@ export function IncidentResponsePractice({
               {crisisScenario.crisis_title}
             </CardTitle>
             <div className="bg-red-600 text-white px-4 py-2 rounded-lg inline-block mt-2">
-              ⚡ ACTIVE INCIDENT - IMMEDIATE RESPONSE REQUIRED
+              ⚡ INCIDENTE ACTIVO - RESPUESTA INMEDIATA REQUERIDA
             </div>
           </CardHeader>
         </Card>
@@ -198,7 +198,7 @@ export function IncidentResponsePractice({
               </p>
               
               <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-red-500">
-                <h4 className="font-semibold text-red-900 mb-3">📋 Crisis Details</h4>
+                <h4 className="font-semibold text-red-900 mb-3">📋 Detalles de la crisis</h4>
                 <ul className="space-y-2">
                   {crisisScenario.crisis_details?.map((detail: string, index: number) => (
                     <li key={index} className="text-gray-700 bg-white p-3 rounded border">
@@ -216,10 +216,10 @@ export function IncidentResponsePractice({
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Target className="h-5 w-5 text-red-600" />
-              Select Your Response Actions
+              Selecciona tus acciones de respuesta
             </CardTitle>
             <CardDescription>
-              Choose ALL appropriate actions for this crisis. Multiple selections are allowed and often required for proper incident response.
+              Elige TODAS las acciones adecuadas para esta crisis. Se permiten varias selecciones y a menudo son necesarias para una respuesta correcta.
             </CardDescription>
           </CardHeader>
           
@@ -261,14 +261,14 @@ export function IncidentResponsePractice({
             <div className="pt-6 border-t">
               <div className="flex items-center justify-between">
                 <div className="text-sm text-gray-600">
-                  {selectedDecisions.length} action{selectedDecisions.length !== 1 ? 's' : ''} selected
+                  Acciones seleccionadas: {selectedDecisions.length}
                 </div>
                 <Button 
                   onClick={handleSubmitDecisions}
                   disabled={selectedDecisions.length === 0}
                   className="bg-red-600 hover:bg-red-700"
                 >
-                  Execute Response Plan
+                  Ejecutar plan de respuesta
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
@@ -289,10 +289,10 @@ export function IncidentResponsePractice({
         <Card className="border-blue-200 bg-blue-50">
           <CardHeader>
             <CardTitle className="text-2xl font-bold text-blue-900">
-              📊 Response Analysis
+              📊 Analisis de respuesta
             </CardTitle>
             <CardDescription className="text-blue-700">
-              Review the consequences of your incident response decisions
+              Revisa las consecuencias de tus decisiones de respuesta al incidente
             </CardDescription>
           </CardHeader>
         </Card>
@@ -303,7 +303,7 @@ export function IncidentResponsePractice({
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-green-600" />
-                Actions You Took ({selectedDecisionData.length})
+                Acciones realizadas ({selectedDecisionData.length})
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -319,7 +319,7 @@ export function IncidentResponsePractice({
                           {decision.explanation}
                         </div>
                         <Badge variant={decision.consequence === 'correct' ? 'default' : 'secondary'}>
-                          +{decision.points} points
+                          +{decision.points} puntos
                         </Badge>
                       </div>
                     </div>
@@ -336,10 +336,10 @@ export function IncidentResponsePractice({
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5 text-orange-600" />
-                Actions Not Taken ({unselectedDecisionData.length})
+                Acciones omitidas ({unselectedDecisionData.length})
               </CardTitle>
               <CardDescription>
-                These actions were available but not selected in your response plan
+                Estas acciones estaban disponibles, pero no se incluyeron en tu plan de respuesta
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -355,7 +355,7 @@ export function IncidentResponsePractice({
                           {decision.explanation}
                         </div>
                         <Badge variant="outline">
-                          {decision.points} points available
+                          {decision.points} puntos disponibles
                         </Badge>
                       </div>
                     </div>
@@ -368,7 +368,7 @@ export function IncidentResponsePractice({
 
         <div className="text-center">
           <Button onClick={handleViewResults} size="lg">
-            View Final Results
+            Ver resultados finales
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
@@ -385,11 +385,11 @@ export function IncidentResponsePractice({
   }
 
   const getScoreMessage = (score: number) => {
-    if (score >= 90) return "🏆 Excellent Response! You handled this crisis like a seasoned professional."
-    if (score >= 80) return "✅ Great Work! Your response was solid with room for minor improvements."
-    if (score >= 60) return "⚠️ Good Effort! You made some correct decisions but missed key response actions."
-    if (score >= 40) return "📚 Needs Improvement. Review incident response best practices and try again."
-    return "🚨 Critical Gaps. Your response needs significant improvement for real crisis situations."
+    if (score >= 90) return "🏆 ¡Respuesta excelente! Gestionaste la crisis como un profesional con experiencia."
+    if (score >= 80) return "✅ ¡Muy buen trabajo! Tu respuesta fue solida, con margen para pequenos ajustes."
+    if (score >= 60) return "⚠️ Buen esfuerzo. Tomaste decisiones correctas, pero omitiste acciones clave."
+    if (score >= 40) return "📚 Necesita mejorar. Revisa las buenas practicas de respuesta a incidentes e intentalo otra vez."
+    return "🚨 Hay brechas criticas. Tu respuesta necesita mejorar de forma importante para una crisis real."
   }
 
   return (
@@ -400,7 +400,7 @@ export function IncidentResponsePractice({
             <Shield className="h-10 w-10 text-primary" />
           </div>
           <div>
-            <CardTitle className="text-3xl font-bold mb-2">Crisis Response Complete</CardTitle>
+            <CardTitle className="text-3xl font-bold mb-2">Respuesta a la crisis completada</CardTitle>
             <CardDescription className="text-lg">
               {practice.title}
             </CardDescription>
@@ -420,7 +420,7 @@ export function IncidentResponsePractice({
           <div className="grid gap-6 md:grid-cols-3 py-6">
             <div className="text-center">
               <div className="text-2xl font-bold text-primary">{selectedDecisions.length}</div>
-              <div className="text-sm text-muted-foreground">Actions Taken</div>
+              <div className="text-sm text-muted-foreground">Acciones realizadas</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-600">
@@ -429,7 +429,7 @@ export function IncidentResponsePractice({
                   return decision?.consequence === 'correct'
                 }).length}
               </div>
-              <div className="text-sm text-muted-foreground">Correct Decisions</div>
+              <div className="text-sm text-muted-foreground">Decisiones correctas</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-orange-600">
@@ -437,17 +437,17 @@ export function IncidentResponsePractice({
                   d.consequence === 'correct' && !selectedDecisions.includes(d.id)
                 ).length || 0}
               </div>
-              <div className="text-sm text-muted-foreground">Missed Opportunities</div>
+              <div className="text-sm text-muted-foreground">Oportunidades perdidas</div>
             </div>
           </div>
 
           <div className="flex gap-4 justify-center pt-6">
             <Button onClick={handleTryAgain} variant="outline">
               <RotateCcw className="mr-2 h-4 w-4" />
-              Try Again
+              Intentar de nuevo
             </Button>
             <Button onClick={() => router.push('/practice')} variant="default">
-              More Practices
+              Mas practicas
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
