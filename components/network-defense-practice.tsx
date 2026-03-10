@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, XCircle, ArrowRight, RotateCcw, Clock, Target, Shield, AlertTriangle, Server } from "lucide-react"
+import { usePracticeProgress } from "@/hooks/use-practice-progress"
 
 interface NetworkDefensePracticeProps {
   practice: any
@@ -59,7 +60,9 @@ export function NetworkDefensePractice({
   const [draggedTool, setDraggedTool] = useState<SecurityTool | null>(null)
   const [feedback, setFeedback] = useState<{ [key: string]: string }>({})
   const [selectedTool, setSelectedTool] = useState<SecurityTool | null>(null)
+  const [resultSaved, setResultSaved] = useState(false)
   const router = useRouter()
+  const { completePracticeExercise } = usePracticeProgress()
 
   // Get game data from practice
   const gameConfig = practice.currentExercise?.scenario_data?.game_config || practice.scenario_data?.game_config
@@ -69,6 +72,16 @@ export function NetworkDefensePractice({
   const timeLimit = gameConfig?.time_limit || 420
   const minScoreToPass = gameConfig?.min_score_to_pass || 75
   const networkDiagram = gameConfig?.network_diagram
+  const exerciseId = `exercise_${exerciseNumber}`
+
+  const savePracticeResult = () => {
+    if (resultSaved) return
+    const finalScore = calculateFinalScore()
+    const passed = finalScore >= minScoreToPass
+
+    completePracticeExercise(practice.slug, exerciseId, finalScore, passed)
+    setResultSaved(true)
+  }
 
   const handleStartPractice = () => {
     setHasStarted(true)
@@ -90,6 +103,7 @@ export function NetworkDefensePractice({
   }
 
   const handleTimeUp = () => {
+    savePracticeResult()
     setIsCompleted(true)
     calculateFinalScore()
   }
@@ -165,6 +179,7 @@ export function NetworkDefensePractice({
     const allMitigated = updatedThreats.every(threat => threat.isMitigated)
     if (allMitigated) {
       setTimeout(() => {
+        savePracticeResult()
         setIsCompleted(true)
         calculateFinalScore()
       }, 1000)
@@ -239,6 +254,7 @@ export function NetworkDefensePractice({
     setIsCompleted(false)
     setFeedback({})
     setSelectedTool(null)
+    setResultSaved(false)
   }
 
   const formatTime = (seconds: number) => {

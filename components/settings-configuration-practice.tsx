@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, XCircle, Shield, ArrowRight, RotateCcw, Clock, Target, Monitor, Smartphone, Chrome } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
+import { usePracticeProgress } from "@/hooks/use-practice-progress"
 
 interface SettingsConfigurationPracticeProps {
   practice: any
@@ -27,11 +28,13 @@ export function SettingsConfigurationPractice({
   const [showScenarioFeedback, setShowScenarioFeedback] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const router = useRouter()
+  const { completePracticeExercise } = usePracticeProgress()
 
   // Get scenario data
   const scenarioData = practice.scenario_data
   const scenarios = scenarioData?.scenarios || []
   const currentScenario = scenarios[currentScenarioIndex]
+  const exerciseId = `exercise_${exerciseNumber}`
   
   const progress = ((currentScenarioIndex + (showScenarioFeedback ? 1 : 0)) / scenarios.length) * 100
 
@@ -72,6 +75,11 @@ export function SettingsConfigurationPractice({
       setUserSettings(initialSettings)
       setShowScenarioFeedback(false)
     } else {
+      const overallScore = calculateOverallScore()
+      const passingScore = scenarioData?.scoring?.passing_score || 70
+      const passed = overallScore.percentage >= passingScore
+
+      completePracticeExercise(practice.slug, exerciseId, Math.round(overallScore.percentage), passed)
       setIsCompleted(true)
     }
   }

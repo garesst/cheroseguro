@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, XCircle, ArrowRight, RotateCcw, AlertTriangle, Clock, Target, Zap, Shield } from "lucide-react"
+import { usePracticeProgress } from "@/hooks/use-practice-progress"
 
 interface IncidentResponsePracticeProps {
   practice: any
@@ -24,9 +25,12 @@ export function IncidentResponsePractice({
   const [showFeedback, setShowFeedback] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const router = useRouter()
+  const { completePracticeExercise } = usePracticeProgress()
 
   // Get crisis scenario data
   const crisisScenario = practice.scenario_data
+  const minScoreToPass = crisisScenario?.min_score_to_pass || 70
+  const exerciseId = `exercise_${exerciseNumber}`
 
   const handleStartPractice = () => {
     setHasStarted(true)
@@ -45,6 +49,10 @@ export function IncidentResponsePractice({
   }
 
   const handleViewResults = () => {
+    const finalScore = calculateScore()
+    const passed = finalScore >= minScoreToPass
+
+    completePracticeExercise(practice.slug, exerciseId, finalScore, passed)
     setIsCompleted(true)
   }
 

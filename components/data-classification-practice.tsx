@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, XCircle, ArrowRight, RotateCcw, Clock, Target, FolderOpen, Package } from "lucide-react"
+import { usePracticeProgress } from "@/hooks/use-practice-progress"
 
 interface DataClassificationPracticeProps {
   practice: any
@@ -44,7 +45,9 @@ export function DataClassificationPractice({
   const [isCompleted, setIsCompleted] = useState(false)
   const [draggedItem, setDraggedItem] = useState<ClassificationItem | null>(null)
   const [feedback, setFeedback] = useState<{ [key: string]: { correct: boolean, message: string } }>({})
+  const [resultSaved, setResultSaved] = useState(false)
   const router = useRouter()
+  const { completePracticeExercise } = usePracticeProgress()
 
   // Get game data from practice
   const gameConfig = practice.currentExercise?.scenario_data?.game_config || practice.scenario_data?.game_config
@@ -52,6 +55,16 @@ export function DataClassificationPractice({
   const itemsToClassify: ClassificationItem[] = gameConfig?.items_to_classify || []
   const timeLimit = gameConfig?.time_limit || 300
   const minScoreToPass = gameConfig?.min_score_to_pass || 70
+  const exerciseId = `exercise_${exerciseNumber}`
+
+  const savePracticeResult = () => {
+    if (resultSaved) return
+    const finalScore = calculateFinalScore()
+    const passed = finalScore >= minScoreToPass
+
+    completePracticeExercise(practice.slug, exerciseId, finalScore, passed)
+    setResultSaved(true)
+  }
 
   const handleStartPractice = () => {
     setHasStarted(true)
@@ -72,6 +85,7 @@ export function DataClassificationPractice({
   }
 
   const handleTimeUp = () => {
+    savePracticeResult()
     setIsCompleted(true)
     calculateFinalScore()
   }
@@ -121,6 +135,7 @@ export function DataClassificationPractice({
     const allPlaced = updatedItems.every(item => item.isPlaced)
     if (allPlaced) {
       setTimeout(() => {
+        savePracticeResult()
         setIsCompleted(true)
         calculateFinalScore()
       }, 1000)
@@ -181,6 +196,7 @@ export function DataClassificationPractice({
     setTimeLeft(0)
     setIsCompleted(false)
     setFeedback({})
+    setResultSaved(false)
   }
 
   const formatTime = (seconds: number) => {

@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, XCircle, ArrowRight, RotateCcw, Clock, Target, Brain, Trophy, BookOpen } from "lucide-react"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import { usePracticeProgress } from "@/hooks/use-practice-progress"
 
 interface QuizKnowledgePracticeProps {
   practice: any
@@ -28,11 +29,13 @@ export function QuizKnowledgePractice({
   const [showFeedback, setShowFeedback] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const router = useRouter()
+  const { completePracticeExercise } = usePracticeProgress()
 
   // Get quiz data
   const quizData = practice.scenario_data
   const questions = quizData.questions || []
   const currentQuestion = questions[currentQuestionIndex]
+  const exerciseId = `exercise_${exerciseNumber}`
   
   const progress = ((currentQuestionIndex + (showFeedback ? 1 : 0)) / questions.length) * 100
 
@@ -56,6 +59,10 @@ export function QuizKnowledgePractice({
       setCurrentAnswer("")
       setShowFeedback(false)
     } else {
+      const finalResults = calculateScore()
+      const passed = finalResults.percentage >= quizData.passing_score
+
+      completePracticeExercise(practice.slug, exerciseId, finalResults.percentage, passed)
       setIsCompleted(true)
     }
   }

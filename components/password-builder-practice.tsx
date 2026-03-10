@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, XCircle, ArrowRight, RotateCcw, Clock, Target, Key, Plus, Trash2 } from "lucide-react"
+import { usePracticeProgress } from "@/hooks/use-practice-progress"
 
 interface PasswordBuilderPracticeProps {
   practice: any
@@ -61,9 +62,11 @@ export function PasswordBuilderPractice({
   const [score, setScore] = useState(0)
   const [timeLeft, setTimeLeft] = useState(0)
   const [isCompleted, setIsCompleted] = useState(false)
+  const [resultSaved, setResultSaved] = useState(false)
   const [selectedBlock, setSelectedBlock] = useState<BuildingBlock | null>(null)
   const [selectedModifier, setSelectedModifier] = useState<Modifier | undefined>(undefined)
   const router = useRouter()
+  const { completePracticeExercise } = usePracticeProgress()
 
   // Get game data from practice
   const gameConfig = practice.currentExercise?.scenario_data?.game_config || practice.scenario_data?.game_config
@@ -71,6 +74,16 @@ export function PasswordBuilderPractice({
   const timeLimit = gameConfig?.time_limit || 240
   const minScoreToPass = gameConfig?.min_score_to_pass || 80
   const targetStrength = gameConfig?.target_strength || 100
+  const exerciseId = `exercise_${exerciseNumber}`
+
+  const savePracticeResult = () => {
+    if (resultSaved) return
+    const finalScore = calculateFinalScore()
+    const passed = finalScore >= minScoreToPass
+
+    completePracticeExercise(practice.slug, exerciseId, finalScore, passed)
+    setResultSaved(true)
+  }
 
   useEffect(() => {
     if (hasStarted) {
@@ -105,6 +118,7 @@ export function PasswordBuilderPractice({
   }
 
   const handleTimeUp = () => {
+    savePracticeResult()
     setIsCompleted(true)
     calculateFinalScore()
   }
@@ -214,6 +228,7 @@ export function PasswordBuilderPractice({
     // Check if all required requirements are met
     if (metRequiredCount === requiredRequirements && totalStrength >= targetStrength) {
       setTimeout(() => {
+        savePracticeResult()
         setIsCompleted(true)
         calculateFinalScore()
       }, 1000)
@@ -273,6 +288,7 @@ export function PasswordBuilderPractice({
     setIsCompleted(false)
     setSelectedBlock(null)
     setSelectedModifier(undefined)
+    setResultSaved(false)
   }
 
   const formatTime = (seconds: number) => {
