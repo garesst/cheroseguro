@@ -22,7 +22,7 @@ export function useTracking() {
     if (!isAuthenticated || !user) return;
 
     try {
-      await fetch('/api/tracking/activities', {
+      const response = await fetch('/api/tracking/activities', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,6 +42,11 @@ export function useTracking() {
           },
         }),
       });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.warn('trackLearningActivity failed:', response.status, errorText);
+      }
     } catch (error) {
       console.error('Error tracking learning activity:', error);
     }
@@ -90,7 +95,7 @@ export function useTracking() {
     if (!isAuthenticated || !user) return;
 
     try {
-      await fetch('/api/tracking/practice-progress', {
+      const response = await fetch('/api/tracking/practice-progress', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -102,6 +107,11 @@ export function useTracking() {
           ...progressData,
         }),
       });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.warn('trackPracticeProgress failed:', response.status, errorText);
+      }
     } catch (error) {
       console.error('Error tracking practice progress:', error);
     }

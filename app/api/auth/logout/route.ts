@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { directus } from '@/lib/directus';
-import { authentication, logout, readMe, createItem } from '@directus/sdk';
+import axios from 'axios';
+
+const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'https://strapi.cheroseguro.com';
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,39 +11,15 @@ export async function POST(request: NextRequest) {
     const token = tokenMatch?.[1];
 
     if (token) {
-      // Configurar el token para obtener info del usuario antes del logout
-      directus.setToken(token);
-      
       try {
-        // Obtener información del usuario para registrar la actividad
-        const userInfo = await directus.request(readMe());
-        
-        // Registrar la actividad de logout
-        await directus.request(
-          createItem('learning_activities', {
-            user_id: userInfo.id,
-            activity_type: 'logout',
-            content_id: 'auth',
-            content_title: 'Cierre de sesión',
-            status: 'completed',
-            score: null,
-            time_spent_minutes: 0,
-            session_data: {
-              platform: 'web',
-              user_agent: request.headers.get('user-agent') || 'unknown',
-              ip_address: request.ip || 'unknown',
-              logout_time: new Date().toISOString()
-            },
-            started_at: new Date().toISOString(),
-            completed_at: new Date().toISOString()
-          })
-        );
-
-        // Hacer logout en Directus
-        await directus.request(logout());
+        // Validar token contra Directus para evitar intentos con tokens inválidos.
+        await axios.get(`${DIRECTUS_URL}/users/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+          params: { fields: 'id' },
+        });
       } catch (error) {
         console.error('Error during logout process:', error);
-        // Continúa con el logout local incluso si hay error en Directus
+        // Continúa con el logout local incluso si hay error en Directus.
       }
     }
 

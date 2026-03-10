@@ -81,7 +81,7 @@ export interface Practice {
   title: string
   slug: string
   description: string
-  practice_type: 'email_analysis' | 'url_inspector' | 'password_strength' | 'social_engineering' | 'settings_configuration' | 'incident_response' | 'quiz_knowledge' | 'data_classification' | 'network_defense' | 'password_builder'
+  practice_type: 'email_analysis' | 'url_inspector' | 'password_strength' | 'social_engineering' | 'settings_configuration' | 'incident_response' | 'quiz_knowledge' | 'data_classification' | 'network_defense' | 'password_builder' | 'swipe_cards'
   difficulty: 'beginner' | 'intermediate' | 'advanced'
   estimated_time: number
   scenario_data?: any // Optional for backward compatibility

@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useEffect } from 'react'
+import { useRef } from 'react'
+import { useAuth } from '@/contexts/auth-context'
 
 interface ExerciseProgress {
   completed: boolean
@@ -29,6 +31,9 @@ interface OverallProgress {
 const STORAGE_KEY = 'cyberguard_practice_progress'
 
 export function usePracticeProgress() {
+  const { isAuthenticated, user } = useAuth()
+  const syncedUserRef = useRef<string | null>(null)
+  const restoredUserRef = useRef<string | null>(null)
   const [progress, setProgress] = useState<Record<string, PracticeProgress>>({})
   const [overall, setOverall] = useState<OverallProgress>({
     totalPractices: 0,
@@ -54,11 +59,88 @@ export function usePracticeProgress() {
     }
   }, [])
 
+  // Restaurar progreso desde el backend si localStorage está vacío (p.ej. fue borrado)
+  useEffect(() => {
+    if (!isAuthenticated || !user) return
+    if (restoredUserRef.current === user.id) return
+
+    const localData = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null
+    if (localData) {
+      restoredUserRef.current = user.id
+      return
+    }
+
+    restoredUserRef.current = user.id
+
+    fetch('/api/tracking/practice-progress', { credentials: 'include' })
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        const backendProgress: any[] = data?.practice_progress ?? []
+        if (backendProgress.length === 0) return
+
+        const restoredProgress: Record<string, PracticeProgress> = {}
+        for (const p of backendProgress) {
+          restoredProgress[p.practice_slug] = {
+            completed: p.status === 'completed' || p.status === 'mastered',
+            exercises: {},
+            totalScore: p.best_score ?? null,
+            completedAt: p.first_completed_at ?? undefined,
+            lastAttempt: p.last_attempt_at ?? undefined,
+          }
+        }
+        saveProgress(restoredProgress)
+      })
+      .catch(() => {})
+  }, [isAuthenticated, user])
+
   const saveProgress = (newProgress: Record<string, PracticeProgress>) => {
     if (typeof window !== 'undefined') {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newProgress))
       setProgress(newProgress)
       calculateOverallProgress(newProgress)
+    }
+  }
+
+  const syncPracticeToBackend = async (
+    practiceSlug: string,
+    practiceData: PracticeProgress,
+    options?: {
+      practiceTitle?: string
+      difficultyLevel?: string
+      totalExercises?: number
+      timeSpentMinutes?: number
+    }
+  ) => {
+    if (!isAuthenticated || !user) return
+
+    const completedExercises = Object.values(practiceData.exercises).filter(ex => ex.completed).length
+    const totalExercises = options?.totalExercises || Math.max(Object.keys(practiceData.exercises).length, 1)
+    const completionPercentage = Math.min(
+      100,
+      Math.round((completedExercises / totalExercises) * 100)
+    )
+
+    const payload = {
+      practice_slug: practiceSlug,
+      practice_title: options?.practiceTitle || practiceSlug.replace(/-/g, ' '),
+      difficulty_level: options?.difficultyLevel || 'beginner',
+      status: practiceData.completed ? 'completed' : 'in_progress',
+      completion_percentage: completionPercentage,
+      score: practiceData.totalScore ?? undefined,
+      time_spent_minutes: options?.timeSpentMinutes || 1,
+    }
+
+    try {
+      await fetch('/api/tracking/practice-progress', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(payload),
+      })
+    } catch (error) {
+      console.error('Error syncing practice progress:', error)
     }
   }
 
@@ -98,7 +180,13 @@ export function usePracticeProgress() {
     practiceSlug: string,
     exerciseId: string,
     score: number,
-    isCorrect: boolean = true
+    isCorrect: boolean = true,
+    options?: {
+      practiceTitle?: string
+      difficultyLevel?: string
+      totalExercises?: number
+      timeSpentMinutes?: number
+    }
   ) => {
     const newProgress = { ...progress }
 
@@ -146,7 +234,27 @@ export function usePracticeProgress() {
 
     practice.lastAttempt = new Date().toISOString()
     saveProgress(newProgress)
+
+    // Para usuarios autenticados, también persistimos en backend.
+    void syncPracticeToBackend(practiceSlug, practice, options)
   }
+
+  // Sincroniza una sola vez por sesión de usuario el progreso local acumulado.
+  useEffect(() => {
+    if (!isAuthenticated || !user) return
+    if (syncedUserRef.current === user.id) return
+
+    const practiceEntries = Object.entries(progress)
+    // Si progress aún no cargó desde localStorage, esperar a que tenga datos
+    if (practiceEntries.length === 0) return
+
+    void (async () => {
+      for (const [practiceSlug, practiceData] of practiceEntries) {
+        await syncPracticeToBackend(practiceSlug, practiceData)
+      }
+      syncedUserRef.current = user.id
+    })()
+  }, [isAuthenticated, user, progress])
 
   const getPracticeProgress = (practiceSlug: string): PracticeProgress => {
     return progress[practiceSlug] || {

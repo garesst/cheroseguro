@@ -3,6 +3,31 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+const PROFILE_CACHE_KEY = 'cheroseguro_profile_cache';
+
+function saveProfileCache(user: User, profile: UserProfile | null, stats: UserStats | null, recentActivities: any[], practiceProgress: any[]) {
+  try {
+    localStorage.setItem(PROFILE_CACHE_KEY, JSON.stringify({ user, profile, stats, recentActivities, practiceProgress, cachedAt: Date.now() }));
+  } catch { /* ignorar errores de localStorage */ }
+}
+
+function loadProfileCache(): { user: User; profile: UserProfile | null; stats: UserStats | null; recentActivities: any[]; practiceProgress: any[] } | null {
+  try {
+    const raw = localStorage.getItem(PROFILE_CACHE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    // Caché válido por 24 horas
+    if (Date.now() - (parsed.cachedAt || 0) > 24 * 60 * 60 * 1000) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function clearProfileCache() {
+  try { localStorage.removeItem(PROFILE_CACHE_KEY); } catch { /* ignorar */ }
+}
+
 interface User {
   id: string;
   first_name: string;
@@ -30,15 +55,22 @@ interface UserStats {
   completed_activities: number;
   average_score: number;
   practices_completed: number;
+  articles_read: number;
+  average_study_time_minutes: number;
+  certifications_completed: number;
   total_study_time: number;
   current_streak: number;
   longest_streak: number;
+  articles_by_difficulty: Record<string, { read: number; total: number }>;
+  practices_by_difficulty: Record<string, { completed: number; total: number }>;
 }
 
 interface AuthContextType {
   user: User | null;
   profile: UserProfile | null;
   stats: UserStats | null;
+  recentActivities: any[];
+  practiceProgress: any[];
   isLoading: boolean;
   isAuthenticated: boolean;
   login: (email: string, password: string, remember?: boolean) => Promise<{ success: boolean; error?: string }>;
@@ -60,6 +92,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [stats, setStats] = useState<UserStats | null>(null);
+  const [recentActivities, setRecentActivities] = useState<any[]>([]);
+  const [practiceProgress, setPracticeProgress] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
@@ -77,19 +111,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(data.user);
         setProfile(data.profile);
         setStats(data.stats);
+        setRecentActivities(data.recent_activities || []);
+        setPracticeProgress(data.practice_progress || []);
+        saveProfileCache(data.user, data.profile, data.stats, data.recent_activities || [], data.practice_progress || []);
         return true;
-      } else {
-        // Si no está autenticado, limpiar el estado
+      } else if (response.status === 401 || response.status === 403) {
+        // Solo limpiar sesión en errores de autenticación
+        clearProfileCache();
         setUser(null);
         setProfile(null);
         setStats(null);
+        setRecentActivities([]);
+        setPracticeProgress([]);
+        return false;
+      } else {
+        // En errores 5xx u otros, no cerrar sesión — mantener estado actual
+        console.error('Error fetching profile (non-auth):', response.status);
         return false;
       }
     } catch (error) {
       console.error('Error fetching user profile:', error);
-      setUser(null);
-      setProfile(null);
-      setStats(null);
+      // Error de red: no cerrar sesión
       return false;
     }
   };
@@ -120,6 +162,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(data.user);
         setProfile(data.profile);
         setStats(data.stats || null);
+        // Fetch full profile with stats (login route only returns user)
+        fetchUserProfile();
         return { success: true };
       } else {
         return { 
@@ -185,9 +229,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       console.error('Error during logout:', error);
     } finally {
       // Limpiar estado local independientemente del resultado de la API
+      clearProfileCache();
       setUser(null);
       setProfile(null);
       setStats(null);
+      setRecentActivities([]);
+      setPracticeProgress([]);
       router.push('/login');
     }
   };
@@ -203,8 +250,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const checkAuth = async () => {
       setIsLoading(true);
-      await fetchUserProfile();
-      setIsLoading(false);
+
+      // Mostrar datos en caché al instante (stale-while-revalidate)
+      const cached = loadProfileCache();
+      if (cached) {
+        setUser(cached.user);
+        setProfile(cached.profile);
+        setStats(cached.stats);
+        setRecentActivities(cached.recentActivities || []);
+        setPracticeProgress(cached.practiceProgress || []);
+        setIsLoading(false); // Mostrar UI de inmediato con datos cacheados
+      }
+
+      // Verificar token y obtener datos frescos en segundo plano
+      const ok = await fetchUserProfile();
+      if (!ok && !cached) {
+        setIsLoading(false);
+      }
     };
 
     checkAuth();
@@ -225,6 +287,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     user,
     profile,
     stats,
+    recentActivities,
+    practiceProgress,
     isLoading,
     isAuthenticated,
     login,

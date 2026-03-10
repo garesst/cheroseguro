@@ -17,6 +17,7 @@ import { QuizKnowledgePractice } from "@/components/quiz-knowledge-practice"
 import { DataClassificationPractice } from "@/components/data-classification-practice"
 import { NetworkDefensePractice } from "@/components/network-defense-practice"
 import { PasswordBuilderPractice } from "@/components/password-builder-practice"
+import { SwipeCardsPractice } from "@/components/swipe-cards-practice"
 
 interface PracticePageProps {
   params: Promise<{
@@ -117,6 +118,14 @@ function PracticeRenderer({ practice, exerciseNumber, totalExercises }: {
       return (
         <PasswordBuilderPractice 
           practice={practice} 
+          exerciseNumber={exerciseNumber}
+          totalExercises={totalExercises}
+        />
+      )
+    case 'swipe_cards':
+      return (
+        <SwipeCardsPractice
+          practice={practice}
           exerciseNumber={exerciseNumber}
           totalExercises={totalExercises}
         />

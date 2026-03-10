@@ -15,7 +15,17 @@ export function ActionTracker({ children, action, category, details = {} }: Acti
 
   const handleClick = async (originalEvent: any) => {
     // Track the interaction
-    await trackInteraction(action, category, details);
+    await trackInteraction({
+      activity_type: 'interaction',
+      content_type: 'page',
+      content_id: window.location.pathname,
+      interaction_type: 'click',
+      session_data: {
+        action,
+        category,
+        ...details,
+      },
+    });
     
     // Call original onClick if it exists
     if (children.props.onClick) {

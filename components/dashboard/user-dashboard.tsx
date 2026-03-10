@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { 
-  User, Mail, Calendar, Trophy, Star, Target, BookOpen, 
-  Gamepad2, Shield, Award, Clock, Flame, TrendingUp, 
+  Mail, Calendar, Trophy, Star, Target, BookOpen, 
+  Gamepad2, Shield, Award, Clock, Flame, 
   RefreshCw, LogOut, Settings, Eye, EyeOff 
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -44,19 +44,26 @@ interface UserStats {
   completed_activities: number;
   average_score: number;
   practices_completed: number;
+  articles_read: number;
+  average_study_time_minutes: number;
+  certifications_completed: number;
   total_study_time: number;
   current_streak: number;
   longest_streak: number;
+  articles_by_difficulty: Record<string, { read: number; total: number }>;
+  practices_by_difficulty: Record<string, { completed: number; total: number }>;
 }
 
 interface UserDashboardProps {
   user: User;
   profile: UserProfile | null;
   stats: UserStats | null;
+  recentActivities: any[];
+  practiceProgress: any[];
   onRefresh: () => Promise<void>;
 }
 
-export default function UserDashboard({ user, profile, stats, onRefresh }: UserDashboardProps) {
+export default function UserDashboard({ user, profile, stats, recentActivities, practiceProgress, onRefresh }: UserDashboardProps) {
   const { logout } = useAuth();
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [showPersonalInfo, setShowPersonalInfo] = useState(false);
@@ -80,8 +87,10 @@ export default function UserDashboard({ user, profile, stats, onRefresh }: UserD
     }
   };
 
-  const getInitials = (firstName: string, lastName: string) => {
-    return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+  const getInitials = (firstName: string | null | undefined, lastName: string | null | undefined) => {
+    const f = firstName?.charAt(0) ?? '';
+    const l = lastName?.charAt(0) ?? '';
+    return (f + l).toUpperCase() || '?';
   };
 
   const formatJoinDate = (dateString: string) => {
@@ -111,7 +120,7 @@ export default function UserDashboard({ user, profile, stats, onRefresh }: UserD
             Panel de Control
           </h1>
           <p className="text-slate-600 mt-1">
-            Bienvenido de vuelta, {user.first_name}
+            Bienvenido de vuelta, {user.first_name ?? ''}
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -149,7 +158,7 @@ export default function UserDashboard({ user, profile, stats, onRefresh }: UserD
 
             <div className="flex-1">
               <h2 className="text-2xl font-bold text-slate-900 mb-2">
-                {user.first_name} {user.last_name}
+                {user.first_name ?? ''} {user.last_name ?? ''}
               </h2>
               
               <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600 mb-3">
@@ -186,10 +195,10 @@ export default function UserDashboard({ user, profile, stats, onRefresh }: UserD
                   <Trophy className="h-3 w-3" />
                   {stats?.completed_activities || 0} Actividades
                 </Badge>
-                {profile?.current_streak_days > 0 && (
+                {(stats?.current_streak ?? 0) > 0 && (
                   <Badge variant="outline" className="gap-1 bg-orange-50 border-orange-200 text-orange-700">
                     <Flame className="h-3 w-3" />
-                    Racha: {profile.current_streak_days} días
+                    Racha: {stats!.current_streak} días
                   </Badge>
                 )}
               </div>
@@ -225,14 +234,14 @@ export default function UserDashboard({ user, profile, stats, onRefresh }: UserD
         <Card className="bg-white shadow-sm hover:shadow-md transition-shadow">
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-lg bg-blue-100 flex items-center justify-center">
-                <BookOpen className="h-6 w-6 text-blue-600" />
+              <div className="h-12 w-12 rounded-lg bg-green-100 flex items-center justify-center">
+                <BookOpen className="h-6 w-6 text-green-600" />
               </div>
               <div>
                 <div className="text-2xl font-bold text-slate-900">
-                  {stats?.completed_activities || 0}
+                  {stats?.articles_read || 0}
                 </div>
-                <div className="text-sm text-slate-600">Actividades Completadas</div>
+                <div className="text-sm text-slate-600">Artículos Leídos</div>
               </div>
             </div>
           </CardContent>
@@ -241,8 +250,8 @@ export default function UserDashboard({ user, profile, stats, onRefresh }: UserD
         <Card className="bg-white shadow-sm hover:shadow-md transition-shadow">
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-lg bg-green-100 flex items-center justify-center">
-                <Target className="h-6 w-6 text-green-600" />
+              <div className="h-12 w-12 rounded-lg bg-blue-100 flex items-center justify-center">
+                <Target className="h-6 w-6 text-blue-600" />
               </div>
               <div>
                 <div className="text-2xl font-bold text-slate-900">
@@ -262,9 +271,9 @@ export default function UserDashboard({ user, profile, stats, onRefresh }: UserD
               </div>
               <div>
                 <div className="text-2xl font-bold text-slate-900">
-                  {formatStudyTime(stats?.total_study_time || 0)}
+                  {formatStudyTime(stats?.average_study_time_minutes || 0)}
                 </div>
-                <div className="text-sm text-slate-600">Tiempo de Estudio</div>
+                <div className="text-sm text-slate-600">Tiempo Promedio de Estudio</div>
               </div>
             </div>
           </CardContent>
@@ -274,13 +283,13 @@ export default function UserDashboard({ user, profile, stats, onRefresh }: UserD
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
               <div className="h-12 w-12 rounded-lg bg-orange-100 flex items-center justify-center">
-                <TrendingUp className="h-6 w-6 text-orange-600" />
+                <Award className="h-6 w-6 text-orange-600" />
               </div>
               <div>
                 <div className="text-2xl font-bold text-slate-900">
-                  {stats?.average_score || 0}%
+                  {stats?.certifications_completed || 0}
                 </div>
-                <div className="text-sm text-slate-600">Promedio General</div>
+                <div className="text-sm text-slate-600">Certificaciones (próximamente)</div>
               </div>
             </div>
           </CardContent>
@@ -313,7 +322,7 @@ export default function UserDashboard({ user, profile, stats, onRefresh }: UserD
                           <span className="font-medium">Racha actual</span>
                         </div>
                         <span className="font-bold text-lg">
-                          {profile?.current_streak_days || 0} días
+                          {stats?.current_streak ?? 0} días
                         </span>
                       </div>
 
@@ -323,17 +332,27 @@ export default function UserDashboard({ user, profile, stats, onRefresh }: UserD
                           <span className="font-medium">Mejor racha</span>
                         </div>
                         <span className="font-bold text-lg">
-                          {profile?.longest_streak_days || 0} días
+                          {stats?.longest_streak ?? 0} días
                         </span>
                       </div>
 
                       <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50">
                         <div className="flex items-center gap-3">
-                          <Target className="h-5 w-5 text-blue-500" />
-                          <span className="font-medium">Precisión promedio</span>
+                          <Clock className="h-5 w-5 text-blue-500" />
+                          <span className="font-medium">Tiempo promedio de estudio</span>
                         </div>
                         <span className="font-bold text-lg">
-                          {stats?.average_score || 0}%
+                          {formatStudyTime(stats?.average_study_time_minutes || 0)}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50">
+                        <div className="flex items-center gap-3">
+                          <BookOpen className="h-5 w-5 text-emerald-600" />
+                          <span className="font-medium">Artículos leídos</span>
+                        </div>
+                        <span className="font-bold text-lg">
+                          {stats?.articles_read || 0}
                         </span>
                       </div>
                     </div>
@@ -394,34 +413,55 @@ export default function UserDashboard({ user, profile, stats, onRefresh }: UserD
               </TabsContent>
 
               <TabsContent value="progress" className="mt-0 space-y-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-4">
-                    Progreso por Categorías
-                  </h3>
-                  <div className="space-y-4">
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium">Conocimientos Generales</span>
-                        <span className="text-sm text-slate-500">75%</span>
-                      </div>
-                      <Progress value={75} className="h-2" />
+                {(['beginner', 'intermediate', 'advanced'] as const).map(level => {
+                  const labels: Record<string, string> = {
+                    beginner: '🌱 Principiante',
+                    intermediate: '🚀 Intermedio',
+                    advanced: '⚡ Avanzado',
+                  };
+                  const articleStats = stats?.articles_by_difficulty?.[level] ?? { read: 0, total: 0 };
+                  const practiceStats = stats?.practices_by_difficulty?.[level] ?? { completed: 0, total: 0 };
+                  const articlePct = articleStats.total > 0 ? Math.round((articleStats.read / articleStats.total) * 100) : 0;
+                  const practicePct = practiceStats.total > 0 ? Math.round((practiceStats.completed / practiceStats.total) * 100) : 0;
+
+                  if (articleStats.total === 0 && practiceStats.total === 0) return null;
+
+                  return (
+                    <div key={level} className="rounded-lg border border-slate-100 p-4 space-y-4">
+                      <h4 className="font-semibold text-slate-800">{labels[level]}</h4>
+
+                      {articleStats.total > 0 && (
+                        <div className="space-y-1.5">
+                          <div className="flex items-center justify-between text-sm">
+                            <span className="flex items-center gap-2 text-slate-600">
+                              <BookOpen className="h-4 w-4 text-emerald-500" />
+                              Artículos leídos
+                            </span>
+                            <span className="text-slate-500 tabular-nums">{articleStats.read}/{articleStats.total}</span>
+                          </div>
+                          <Progress value={articlePct} className="h-2" />
+                        </div>
+                      )}
+
+                      {practiceStats.total > 0 && (
+                        <div className="space-y-1.5">
+                          <div className="flex items-center justify-between text-sm">
+                            <span className="flex items-center gap-2 text-slate-600">
+                              <Target className="h-4 w-4 text-blue-500" />
+                              Prácticas completadas
+                            </span>
+                            <span className="text-slate-500 tabular-nums">{practiceStats.completed}/{practiceStats.total}</span>
+                          </div>
+                          <Progress value={practicePct} className="h-2" />
+                        </div>
+                      )}
                     </div>
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium">Prácticas Completadas</span>
-                        <span className="text-sm text-slate-500">60%</span>
-                      </div>
-                      <Progress value={60} className="h-2" />
-                    </div>
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium">Habilidades Avanzadas</span>
-                        <span className="text-sm text-slate-500">45%</span>
-                      </div>
-                      <Progress value={45} className="h-2" />
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
+
+                {!stats?.articles_by_difficulty && !stats?.practices_by_difficulty && (
+                  <p className="text-sm text-slate-500 py-4 text-center">Cargando progreso...</p>
+                )}
               </TabsContent>
 
               <TabsContent value="activity" className="mt-0">
@@ -429,11 +469,58 @@ export default function UserDashboard({ user, profile, stats, onRefresh }: UserD
                   <h3 className="text-lg font-semibold text-slate-900 mb-4">
                     Actividad Reciente
                   </h3>
-                  <div className="text-center py-8 text-slate-500">
-                    <BookOpen className="h-12 w-12 mx-auto mb-3 text-slate-300" />
-                    <p>Aún no hay actividad registrada</p>
-                    <p className="text-sm">Completa una práctica o lección para ver tu historial aquí</p>
-                  </div>
+                  {recentActivities.length === 0 ? (
+                    <div className="text-center py-8 text-slate-500">
+                      <BookOpen className="h-12 w-12 mx-auto mb-3 text-slate-300" />
+                      <p>Aún no hay actividad registrada</p>
+                      <p className="text-sm">Completa una práctica o lección para ver tu historial aquí</p>
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      {recentActivities.map((a: any, i: number) => {
+                        const isLearn = a.activity_type === 'learn';
+                        const isPractice = a.activity_type === 'practice';
+                        const isCert = a.activity_type === 'certification';
+                        const icon = isLearn ? (
+                          <div className="h-9 w-9 rounded-lg bg-emerald-100 flex items-center justify-center shrink-0">
+                            <BookOpen className="h-4 w-4 text-emerald-600" />
+                          </div>
+                        ) : isPractice ? (
+                          <div className="h-9 w-9 rounded-lg bg-blue-100 flex items-center justify-center shrink-0">
+                            <Target className="h-4 w-4 text-blue-600" />
+                          </div>
+                        ) : isCert ? (
+                          <div className="h-9 w-9 rounded-lg bg-yellow-100 flex items-center justify-center shrink-0">
+                            <Award className="h-4 w-4 text-yellow-600" />
+                          </div>
+                        ) : (
+                          <div className="h-9 w-9 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
+                            <Gamepad2 className="h-4 w-4 text-slate-500" />
+                          </div>
+                        );
+                        const typeLabel = isLearn ? 'Artículo' : isPractice ? 'Práctica' : isCert ? 'Certificación' : 'Actividad';
+                        return (
+                          <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+                            {icon}
+                            <div className="flex-1 min-w-0">
+                              <div className="text-sm font-medium text-slate-800 truncate">
+                                {a.content_title || a.content_id || typeLabel}
+                              </div>
+                              <div className="text-xs text-slate-500">{typeLabel}</div>
+                            </div>
+                            <div className="text-right shrink-0">
+                              <div className="text-xs text-slate-400">
+                                {new Date(a.started_at).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}
+                              </div>
+                              {a.score != null && (
+                                <div className="text-xs font-medium text-slate-600">{a.score}%</div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               </TabsContent>
             </div>

@@ -38,6 +38,8 @@ export default function ProfilePage() {
             user={auth.user} 
             profile={auth.profile} 
             stats={auth.stats}
+            recentActivities={auth.recentActivities}
+            practiceProgress={auth.practiceProgress}
             onRefresh={auth.refreshProfile} 
           />
         </main>

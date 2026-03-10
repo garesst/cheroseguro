@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { ShareButton } from "@/components/share-button"
+import { ArticleReadTracker } from "@/components/tracking/article-read-tracker"
 import { getArticleBySlug, getRelatedArticles } from "@/lib/directus"
 import { notFound } from "next/navigation"
 
@@ -288,6 +289,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <ArticleReadTracker articleId={article.slug} articleTitle={article.title} difficulty={article.difficulty} />
       <SiteHeader />
 
       <main className="flex-1">
