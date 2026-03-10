@@ -821,5 +821,4 @@ export const directus = {
   request: directusClient.request.bind(directusClient)
 }
 
-// Export the Directus SDK client for direct usage
-export { directusClient };
+

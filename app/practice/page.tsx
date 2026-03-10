@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Target, Mail, Lock, Users, Globe, Shield, AlertTriangle, Brain, ArrowRight, CheckCircle2, Search, Clock, Package, Server, Key } from "lucide-react"
+import { Target, Mail, Lock, Users, Globe, Shield, AlertTriangle, Brain, ArrowRight, CheckCircle2, Search, Clock, Package, Server, Key, Layers } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -12,7 +12,7 @@ import { PracticeProgressBar } from "@/components/practice-progress-bar"
 import { PracticeCardProgress } from "@/components/practice-card-progress"
 import { getPractices, getFeaturedPractices, getPages, getPracticeCategories, getFeaturedPracticeCategories } from "@/lib/directus"
 
-const practiceTypeIcons = {
+const practiceTypeIcons: Record<string, any> = {
   email_analysis: Mail,
   url_inspector: Globe,
   password_strength: Lock,
@@ -23,6 +23,7 @@ const practiceTypeIcons = {
   data_classification: Package,
   network_defense: Server,
   password_builder: Key,
+  swipe_cards: Layers,
 }
 
 export default async function PracticePage() {
