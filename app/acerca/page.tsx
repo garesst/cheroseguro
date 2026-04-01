@@ -193,8 +193,8 @@ export default async function AcercaPage() {
           <section className="space-y-2">
             <h2 className="text-lg font-semibold text-slate-900">Reconocimientos y Comunidad</h2>
             <p className="text-slate-700">
-              Este proyecto fue desarrollado como una iniciativa de proyección social para la Maestría en Dirección de
-              Ciberseguridad. Agradecemos el respaldo académico y el poder de la comunidad de código abierto, cuyas
+              Este proyecto fue desarrollado como una iniciativa de proyección social para la maestria en gestion de la ciberseguridad.
+              Agradecemos el respaldo académico y el poder de la comunidad de código abierto, cuyas
               tecnologías nos permiten mantener esta plataforma gratuita, segura y en constante evolución.
             </p>
             <p className="text-slate-700">
