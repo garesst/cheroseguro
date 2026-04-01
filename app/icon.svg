@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="CheroSeguro icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f766e" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#d1fae5" stop-opacity="0.9" />
+    </linearGradient>
+  </defs>
+
+  <rect width="128" height="128" rx="28" fill="url(#bg)" />
+
+  <path
+    d="M64 20 L96 32 V58 C96 83 80 99 64 108 C48 99 32 83 32 58 V32 Z"
+    fill="url(#shield)"
+    stroke="#0f766e"
+    stroke-width="2"
+  />
+
+  <rect x="49" y="58" width="30" height="24" rx="6" fill="#0f766e" />
+  <path d="M54 58 V50 C54 43 59 38 64 38 C69 38 74 43 74 50 V58" fill="none" stroke="#0f766e" stroke-width="5" stroke-linecap="round" />
+  <circle cx="64" cy="69" r="4" fill="#d1fae5" />
+  <rect x="62" y="69" width="4" height="8" rx="2" fill="#d1fae5" />
+</svg>

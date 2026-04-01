@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, XCircle, ArrowRight, RotateCcw, Clock, Target, Shield, AlertTriangle, Server } from "lucide-react"
+import { usePracticeProgress } from "@/hooks/use-practice-progress"
 
 interface NetworkDefensePracticeProps {
   practice: any
@@ -59,7 +60,9 @@ export function NetworkDefensePractice({
   const [draggedTool, setDraggedTool] = useState<SecurityTool | null>(null)
   const [feedback, setFeedback] = useState<{ [key: string]: string }>({})
   const [selectedTool, setSelectedTool] = useState<SecurityTool | null>(null)
+  const [resultSaved, setResultSaved] = useState(false)
   const router = useRouter()
+  const { completePracticeExercise } = usePracticeProgress()
 
   // Get game data from practice
   const gameConfig = practice.currentExercise?.scenario_data?.game_config || practice.scenario_data?.game_config
@@ -69,6 +72,16 @@ export function NetworkDefensePractice({
   const timeLimit = gameConfig?.time_limit || 420
   const minScoreToPass = gameConfig?.min_score_to_pass || 75
   const networkDiagram = gameConfig?.network_diagram
+  const exerciseId = `exercise_${exerciseNumber}`
+
+  const savePracticeResult = () => {
+    if (resultSaved) return
+    const finalScore = calculateFinalScore()
+    const passed = finalScore >= minScoreToPass
+
+    completePracticeExercise(practice.slug, exerciseId, finalScore, passed)
+    setResultSaved(true)
+  }
 
   const handleStartPractice = () => {
     setHasStarted(true)
@@ -90,6 +103,7 @@ export function NetworkDefensePractice({
   }
 
   const handleTimeUp = () => {
+    savePracticeResult()
     setIsCompleted(true)
     calculateFinalScore()
   }
@@ -127,7 +141,6 @@ export function NetworkDefensePractice({
     })
 
     setTools(updatedTools)
-    setScore(prev => prev + draggedTool.points)
     
     setFeedback(prev => ({
       ...prev,
@@ -152,12 +165,17 @@ export function NetworkDefensePractice({
         )
       )
 
-      if (isMitigated && !threat.isMitigated) {
-        setScore(prev => prev + threat.points)
-      }
-
       return { ...threat, isMitigated }
     })
+
+    // Recalculate score from source-of-truth state to avoid point drift.
+    const toolPoints = currentTools
+      .filter(tool => tool.isPlaced)
+      .reduce((sum, tool) => sum + tool.points, 0)
+    const threatPoints = updatedThreats
+      .filter(threat => threat.isMitigated)
+      .reduce((sum, threat) => sum + threat.points, 0)
+    setScore(toolPoints + threatPoints)
 
     setThreats(updatedThreats)
 
@@ -165,6 +183,7 @@ export function NetworkDefensePractice({
     const allMitigated = updatedThreats.every(threat => threat.isMitigated)
     if (allMitigated) {
       setTimeout(() => {
+        savePracticeResult()
         setIsCompleted(true)
         calculateFinalScore()
       }, 1000)
@@ -193,8 +212,6 @@ export function NetworkDefensePractice({
   const handleRemoveTool = (toolId: string) => {
     const updatedTools = tools.map(tool => {
       if (tool.id === toolId) {
-        const oldTool = { ...tool }
-        setScore(prev => prev - tool.points)
         return { 
           ...tool, 
           isPlaced: false, 
@@ -239,6 +256,7 @@ export function NetworkDefensePractice({
     setIsCompleted(false)
     setFeedback({})
     setSelectedTool(null)
+    setResultSaved(false)
   }
 
   const formatTime = (seconds: number) => {
@@ -396,7 +414,7 @@ export function NetworkDefensePractice({
                   <div className="text-2xl font-bold text-green-600">
                     {tools.filter(t => t.isPlaced).length}
                   </div>
-                  <div className="text-sm text-muted-foreground">Tools Desplegadas</div>
+                  <div className="text-sm text-muted-foreground">Herramientas desplegadas</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-purple-600">{mitigatedThreats}</div>
@@ -536,7 +554,7 @@ export function NetworkDefensePractice({
                       <div className="flex justify-between items-center">
                         <Badge variant="secondary" className="text-xs">{tool.points} pts</Badge>
                         <div className="text-xs text-blue-600">
-                          {tool.capabilities.length} caps
+                          {tool.capabilities.length} capacidades
                         </div>
                       </div>
                     </CardContent>

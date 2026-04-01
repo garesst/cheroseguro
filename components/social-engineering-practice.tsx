@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, XCircle, Users, ArrowRight, RotateCcw, AlertTriangle, Clock, Target, Phone, Mail, MessageSquare, User } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
+import { usePracticeProgress } from "@/hooks/use-practice-progress"
 
 interface SocialEngineeringPracticeProps {
   practice: any
@@ -27,12 +28,14 @@ export function SocialEngineeringPractice({
   const [showFeedback, setShowFeedback] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const router = useRouter()
+  const { completePracticeExercise } = usePracticeProgress()
 
   // Get conversation data from scenario_data
   const scenarioData = practice.scenario_data
   const conversations = scenarioData?.conversations || []
   const availableTechniques = scenarioData?.available_techniques || []
   const currentConversation = conversations[currentConversationIndex]
+  const exerciseId = `exercise_${exerciseNumber}`
   
   const progress = ((currentConversationIndex + (showFeedback ? 1 : 0)) / conversations.length) * 100
 
@@ -60,6 +63,11 @@ export function SocialEngineeringPractice({
       setSelectedTechniques([])
       setShowFeedback(false)
     } else {
+      const finalScore = calculateScore()
+      const passingScore = scenarioData?.scoring?.passing_score || 60
+      const passed = finalScore >= passingScore
+
+      completePracticeExercise(practice.slug, exerciseId, Math.round(finalScore), passed)
       setIsCompleted(true)
     }
   }
@@ -73,27 +81,30 @@ export function SocialEngineeringPractice({
   }
 
   const calculateScore = () => {
-    let totalCorrect = 0
-    let totalQuestions = 0
+    let totalEarnedPoints = 0
+    let totalPossiblePoints = 0
     
     userAnswers.forEach((answer, index) => {
       const conversation = conversations[index]
       if (conversation) {
         const correctTechniques = conversation.techniques_present || []
         const userTechniques = answer
-        
-        // Calculate how many correct techniques were identified
+
+        // Reward correct detections and penalize false positives.
         const correctIdentified = userTechniques.filter((technique: string) => 
           correctTechniques.includes(technique)
         ).length
-        
-        // Add to score (partial credit for each correct identification)
-        totalCorrect += correctIdentified
-        totalQuestions += correctTechniques.length
+        const falsePositives = userTechniques.filter((technique: string) => 
+          !correctTechniques.includes(technique)
+        ).length
+
+        const earnedPoints = Math.max(0, correctIdentified - falsePositives)
+        totalEarnedPoints += earnedPoints
+        totalPossiblePoints += correctTechniques.length
       }
     })
     
-    return totalQuestions > 0 ? (totalCorrect / totalQuestions) * 100 : 0
+    return totalPossiblePoints > 0 ? (totalEarnedPoints / totalPossiblePoints) * 100 : 0
   }
 
   const getCurrentFeedback = () => {

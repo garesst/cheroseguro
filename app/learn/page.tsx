@@ -20,6 +20,7 @@ export default async function LearnPage() {
   const featuredArticles = articles.filter((article) => article.featured)
   const beginnerArticles = articles.filter((article) => article.difficulty === "beginner")
   const intermediateArticles = articles.filter((article) => article.difficulty === "intermediate")
+  const advancedArticles = articles.filter((article) => article.difficulty === "advanced")
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -148,7 +149,7 @@ export default async function LearnPage() {
                             </div>
                             <Button variant="outline" size="sm" asChild>
                               <Link href={`/learn/${article.slug}`}>
-                                Read <ArrowRight className="ml-2 h-4 w-4" />
+                                Leer más <ArrowRight className="ml-2 h-4 w-4" />
                               </Link>
                             </Button>
                           </div>
@@ -177,7 +178,36 @@ export default async function LearnPage() {
                             </div>
                             <Button variant="outline" size="sm" asChild>
                               <Link href={`/learn/${article.slug}`}>
-                                Read <ArrowRight className="ml-2 h-4 w-4" />
+                                Leer más <ArrowRight className="ml-2 h-4 w-4" />
+                              </Link>
+                            </Button>
+                          </div>
+                        </div>
+                      </CardHeader>
+                    </Card>
+                  ))}
+                </TabsContent>
+
+                <TabsContent value="advanced" className="mt-6 space-y-4">
+                  {advancedArticles.map((article) => (
+                    <Card key={article.id} className="hover:border-primary/50 transition-all">
+                      <CardHeader>
+                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                          <div className="flex-1 space-y-2">
+                            <div className="flex items-center gap-2">
+                              <Badge variant="secondary">{article.category?.name || 'General'}</Badge>
+                            </div>
+                            <CardTitle className="text-xl">{article.title}</CardTitle>
+                            <CardDescription className="leading-relaxed">{article.description}</CardDescription>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground whitespace-nowrap">
+                              <Clock className="h-4 w-4" />
+                              <span>{article.reading_time} min</span>
+                            </div>
+                            <Button variant="outline" size="sm" asChild>
+                              <Link href={`/learn/${article.slug}`}>
+                                Leer más <ArrowRight className="ml-2 h-4 w-4" />
                               </Link>
                             </Button>
                           </div>

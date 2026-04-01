@@ -1,5 +1,10 @@
 // Directus API functions
-const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'http://strapi.cheroseguro.com'
+import { createDirectus, rest } from '@directus/sdk';
+
+const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'https://strapi.cheroseguro.com'
+
+// Create Directus client instance 
+export const directusClient = createDirectus(DIRECTUS_URL).with(rest());
 
 export interface Page {
   id: string
@@ -76,7 +81,7 @@ export interface Practice {
   title: string
   slug: string
   description: string
-  practice_type: 'email_analysis' | 'url_inspector' | 'password_strength' | 'social_engineering' | 'settings_configuration' | 'incident_response' | 'quiz_knowledge' | 'data_classification' | 'network_defense' | 'password_builder'
+  practice_type: 'email_analysis' | 'url_inspector' | 'password_strength' | 'social_engineering' | 'settings_configuration' | 'incident_response' | 'quiz_knowledge' | 'data_classification' | 'network_defense' | 'password_builder' | 'swipe_cards'
   difficulty: 'beginner' | 'intermediate' | 'advanced'
   estimated_time: number
   scenario_data?: any // Optional for backward compatibility
@@ -117,6 +122,43 @@ export interface ExerciseData {
     type: string
     description: string
   }>
+}
+
+export interface Creator {
+  id: number
+  Nombre: string
+  Descripcion?: string | null
+  Foto?: string | null
+  linkedin?: string | null
+  github?: string | null
+  sitioweb?: string | null
+  Linkedin?: string | null
+  Github?: string | null
+  Sitioweb?: string | null
+}
+
+export function getDirectusAssetUrl(assetId?: string | null): string | null {
+  if (!assetId) return null
+  return `${DIRECTUS_URL}/assets/${assetId}`
+}
+
+export async function getCreators(): Promise<Creator[]> {
+  try {
+    const response = await fetch(
+      `${DIRECTUS_URL}/items/creators?filter[status][_eq]=published&fields=*&sort=date_created`,
+      { cache: 'no-store' }
+    )
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    return data.data || []
+  } catch (error) {
+    console.error('Error fetching creators:', error)
+    return []
+  }
 }
 
 // Get all pages (Learn, Practice, Play)
@@ -811,5 +853,9 @@ export const directus = {
       console.error('Error executing GraphQL query:', error)
       throw error
     }
-  }
+  },
+  // Add SDK methods for compatibility with auth APIs
+  request: directusClient.request.bind(directusClient)
 }
+
+

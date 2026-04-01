@@ -270,7 +270,7 @@ export function EmailAnalysisPractice({
                     )}
                     <div>
                       <p className="font-medium text-sm">"{email.subject}"</p>
-                      <p className="text-xs text-muted-foreground">From: {email.from}</p>
+                      <p className="text-xs text-muted-foreground">De: {email.from}</p>
                       <p className="text-xs text-blue-600 mt-1">{selectedOption?.text}</p>
                     </div>
                   </div>
@@ -338,14 +338,14 @@ export function EmailAnalysisPractice({
             <div className="space-y-3 text-sm">
               <div className="flex justify-between items-start">
                 <div>
-                  <strong>From:</strong> {currentEmail.from_display || currentEmail.from} &lt;{currentEmail.from}&gt;
+                  <strong>De:</strong> {currentEmail.from_display || currentEmail.from} &lt;{currentEmail.from}&gt;
                 </div>
                 <div className="text-muted-foreground text-xs">
                   {currentEmail.timestamp}
                 </div>
               </div>
               <div>
-                <strong>Subject:</strong> {currentEmail.subject}
+                <strong>Asunto:</strong> {currentEmail.subject}
               </div>
               <hr className="border-muted" />
               <div className="whitespace-pre-wrap font-mono text-sm bg-white p-3 rounded border">
