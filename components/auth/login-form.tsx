@@ -227,6 +227,10 @@ export default function LoginForm() {
                 Al iniciar sesión, aceptas nuestros{' '}
                 <Link href="/terminos" className="text-blue-600 hover:underline">
                   términos de servicio
+                </Link>{' '}
+                y la{' '}
+                <Link href="/privacidad" className="text-blue-600 hover:underline">
+                  política de privacidad
                 </Link>
               </p>
             </div>

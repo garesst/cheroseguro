@@ -34,7 +34,7 @@ Una plataforma educativa enfocada en alfabetización en ciberseguridad a través
 
 3. **Configura las variables de entorno**:
    ```bash
-   cp .env.example .env.local
+   # Crea .env.local y copia/ajusta las variables necesarias
    ```
 
 4. **Inicia el servidor de desarrollo**:
@@ -52,7 +52,19 @@ Una plataforma educativa enfocada en alfabetización en ciberseguridad a través
 NEXT_PUBLIC_SITE_NAME=Chero Seguro
 
 # URL del CMS Directus
-NEXT_PUBLIC_DIRECTUS_URL=http://strapi.cheroseguro.com
+NEXT_PUBLIC_DIRECTUS_URL=https://tu-cms.ejemplo.com
+
+# URL base del frontend (server-side)
+APP_URL=http://localhost:3000
+
+# Contacto público del sitio
+NEXT_PUBLIC_CONTACT_EMAIL=soporte@tu-dominio.com
+
+# Repositorio público del proyecto
+NEXT_PUBLIC_REPOSITORY_URL=https://github.com/tu-org/tu-repo
+
+# Logo horizontal opcional en el footer
+NEXT_PUBLIC_SPONSOR_LOGO_URL=
 ```
 
 ### Control de Navegación
@@ -205,6 +217,7 @@ import { enablePlayMenu, enableCertificationsMenu } from '@/lib/config'
 ```env
 NEXT_PUBLIC_SITE_NAME=Chero Seguro [DEV]
 NEXT_PUBLIC_DIRECTUS_URL=http://localhost:8055
+APP_URL=http://localhost:3000
 NEXT_PUBLIC_ENABLE_PLAY_MENU=true
 NEXT_PUBLIC_ENABLE_CERTIFICATIONS_MENU=true
 ```
@@ -212,9 +225,13 @@ NEXT_PUBLIC_ENABLE_CERTIFICATIONS_MENU=true
 **Producción**:
 ```env
 NEXT_PUBLIC_SITE_NAME=Chero Seguro
-NEXT_PUBLIC_DIRECTUS_URL=https://api.cheroseguro.com
-NEXT_PUBLIC_ENABLE_PLAY_MENU=true
-NEXT_PUBLIC_ENABLE_CERTIFICATIONS_MENU=true
+NEXT_PUBLIC_DIRECTUS_URL=https://tu-cms-produccion.ejemplo.com
+APP_URL=https://tu-dominio.com
+NEXT_PUBLIC_CONTACT_EMAIL=soporte@tu-dominio.com
+NEXT_PUBLIC_REPOSITORY_URL=https://github.com/tu-org/tu-repo
+NEXT_PUBLIC_SPONSOR_LOGO_URL=https://cdn.tu-dominio.com/logo-patrocinador-horizontal.png
+NEXT_PUBLIC_ENABLE_PLAY_MENU=false
+NEXT_PUBLIC_ENABLE_CERTIFICATIONS_MENU=false
 ```
 
 **Demo/Landing** (funciones limitadas):
@@ -241,9 +258,15 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 ## 🆘 Soporte
 
 Si tienes problemas o preguntas:
-- 📧 Email: soporte@cheroseguro.com
+- 📧 Email: soporte@tu-dominio.com
 - 📖 Documentación: Consulta este README
-- 🐛 Issues: Reporta bugs en GitHub Issues
+- 🐛 Issues: Reporta bugs en el sistema de issues de tu repositorio
+
+## 🔒 Seguridad de Configuración
+
+- No subas archivos `.env`, `.env.local` o credenciales al repositorio.
+- Usa valores de ejemplo en documentación y valores reales solo en entornos seguros.
+- Rota claves y tokens si sospechas que una variable sensible fue expuesta.
 
 ---
 

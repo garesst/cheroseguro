@@ -33,23 +33,6 @@ export function PracticeController({ practice }: PracticeControllerProps) {
   }
 
   const handleOptionSelect = (optionId: string) => {
-    console.log('==== DEBUG INFO ====');
-    console.log('Selected option ID:', optionId);
-    console.log('Full practice object:', practice);
-    console.log('Scenario data:', practice.scenario_data);
-    console.log('Options available:', practice.scenario_data?.options);
-    console.log('Feedback responses structure:', practice.scenario_data?.feedback_responses);
-    
-    // Try multiple possible locations for feedback
-    const possibleFeedback = [
-      practice.scenario_data?.feedback_responses?.[optionId],
-      practice.feedback_responses?.[optionId],
-      practice.scenario_data?.feedback?.[optionId]
-    ].filter(Boolean);
-    
-    console.log('Possible feedback found:', possibleFeedback);
-    console.log('==================');
-    
     setSelectedOption(optionId);
     setShowFeedback(true);
 
@@ -60,7 +43,7 @@ export function PracticeController({ practice }: PracticeControllerProps) {
     
     if (feedback) {
       const isCorrect = feedback.is_correct
-      const score = isCorrect ? 100 : 50 // Full points for correct, partial for attempt
+      const score = isCorrect ? 100 : 0
       
       completePracticeExercise(
         practice.slug,

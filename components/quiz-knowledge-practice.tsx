@@ -36,6 +36,7 @@ export function QuizKnowledgePractice({
   const questions = quizData.questions || []
   const currentQuestion = questions[currentQuestionIndex]
   const exerciseId = `exercise_${exerciseNumber}`
+  const passingScore = quizData?.passing_score ?? 70
   
   const progress = ((currentQuestionIndex + (showFeedback ? 1 : 0)) / questions.length) * 100
 
@@ -60,7 +61,7 @@ export function QuizKnowledgePractice({
       setShowFeedback(false)
     } else {
       const finalResults = calculateScore()
-      const passed = finalResults.percentage >= quizData.passing_score
+      const passed = finalResults.percentage >= passingScore
 
       completePracticeExercise(practice.slug, exerciseId, finalResults.percentage, passed)
       setIsCompleted(true)
@@ -156,7 +157,7 @@ export function QuizKnowledgePractice({
               </div>
               <div className="flex items-center gap-2 justify-center">
                 <Target className="h-4 w-4 text-blue-600" />
-                <span className="text-blue-700">{quizData.passing_score}% para aprobar</span>
+                <span className="text-blue-700">{passingScore}% para aprobar</span>
               </div>
               <div className="flex items-center gap-2 justify-center">
                 <Trophy className="h-4 w-4 text-blue-600" />
@@ -198,7 +199,7 @@ export function QuizKnowledgePractice({
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center text-xs font-bold text-blue-600 mt-0.5 flex-shrink-0">4</span>
-                  Obtiene {quizData.passing_score}% o mas para aprobar la evaluacion
+                  Obtiene {passingScore}% o mas para aprobar la evaluacion
                 </li>
               </ul>
             </div>

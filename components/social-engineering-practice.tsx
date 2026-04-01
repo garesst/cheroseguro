@@ -81,27 +81,30 @@ export function SocialEngineeringPractice({
   }
 
   const calculateScore = () => {
-    let totalCorrect = 0
-    let totalQuestions = 0
+    let totalEarnedPoints = 0
+    let totalPossiblePoints = 0
     
     userAnswers.forEach((answer, index) => {
       const conversation = conversations[index]
       if (conversation) {
         const correctTechniques = conversation.techniques_present || []
         const userTechniques = answer
-        
-        // Calculate how many correct techniques were identified
+
+        // Reward correct detections and penalize false positives.
         const correctIdentified = userTechniques.filter((technique: string) => 
           correctTechniques.includes(technique)
         ).length
-        
-        // Add to score (partial credit for each correct identification)
-        totalCorrect += correctIdentified
-        totalQuestions += correctTechniques.length
+        const falsePositives = userTechniques.filter((technique: string) => 
+          !correctTechniques.includes(technique)
+        ).length
+
+        const earnedPoints = Math.max(0, correctIdentified - falsePositives)
+        totalEarnedPoints += earnedPoints
+        totalPossiblePoints += correctTechniques.length
       }
     })
     
-    return totalQuestions > 0 ? (totalCorrect / totalQuestions) * 100 : 0
+    return totalPossiblePoints > 0 ? (totalEarnedPoints / totalPossiblePoints) * 100 : 0
   }
 
   const getCurrentFeedback = () => {

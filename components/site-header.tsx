@@ -16,7 +16,6 @@ import { useAuth } from "@/contexts/auth-context"
 import { 
   enableLearnMenu,
   enablePracticeMenu,
-  enablePlayMenu,
   enableCertificationsMenu,
   enableLoginMenu,
   enableSignupMenu,
@@ -36,11 +35,6 @@ export function SiteHeader() {
       {enablePracticeMenu && (
         <Link href="/practice" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
           Practicar
-        </Link>
-      )}
-      {enablePlayMenu && (
-        <Link href="/play" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-          Jugar
         </Link>
       )}
       {enableCertificationsMenu && (
@@ -131,9 +125,6 @@ export function SiteHeader() {
                 )}
                 {enablePracticeMenu && (
                   <Link href="/practice" className="text-base font-medium text-foreground">Practicar</Link>
-                )}
-                {enablePlayMenu && (
-                  <Link href="/play" className="text-base font-medium text-foreground">Jugar</Link>
                 )}
                 {enableCertificationsMenu && (
                   <Link href="/certifications" className="text-base font-medium text-foreground">Certificaciones</Link>

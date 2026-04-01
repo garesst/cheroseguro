@@ -141,7 +141,6 @@ export function NetworkDefensePractice({
     })
 
     setTools(updatedTools)
-    setScore(prev => prev + draggedTool.points)
     
     setFeedback(prev => ({
       ...prev,
@@ -166,12 +165,17 @@ export function NetworkDefensePractice({
         )
       )
 
-      if (isMitigated && !threat.isMitigated) {
-        setScore(prev => prev + threat.points)
-      }
-
       return { ...threat, isMitigated }
     })
+
+    // Recalculate score from source-of-truth state to avoid point drift.
+    const toolPoints = currentTools
+      .filter(tool => tool.isPlaced)
+      .reduce((sum, tool) => sum + tool.points, 0)
+    const threatPoints = updatedThreats
+      .filter(threat => threat.isMitigated)
+      .reduce((sum, threat) => sum + threat.points, 0)
+    setScore(toolPoints + threatPoints)
 
     setThreats(updatedThreats)
 
@@ -208,8 +212,6 @@ export function NetworkDefensePractice({
   const handleRemoveTool = (toolId: string) => {
     const updatedTools = tools.map(tool => {
       if (tool.id === toolId) {
-        const oldTool = { ...tool }
-        setScore(prev => prev - tool.points)
         return { 
           ...tool, 
           isPlaced: false, 

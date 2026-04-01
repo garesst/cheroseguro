@@ -4,8 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { 
   Mail, Calendar, Trophy, Star, Target, BookOpen, 
-  Gamepad2, Shield, Award, Clock, Flame, 
-  RefreshCw, LogOut, Settings, Eye, EyeOff 
+  Shield, Award, Clock, Flame, 
+  RefreshCw, LogOut, Eye, EyeOff, AlertCircle, CheckCircle2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,6 +14,8 @@ import { Progress } from '@/components/ui/progress';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { ActionTracker } from '@/components/tracking/action-tracker';
 import { useAuth } from '@/contexts/auth-context';
 
@@ -67,6 +69,15 @@ export default function UserDashboard({ user, profile, stats, recentActivities, 
   const { logout } = useAuth();
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [showPersonalInfo, setShowPersonalInfo] = useState(false);
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+  });
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordSuccess, setPasswordSuccess] = useState('');
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
@@ -76,6 +87,60 @@ export default function UserDashboard({ user, profile, stats, recentActivities, 
 
   const handleLogout = async () => {
     await logout();
+  };
+
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPasswordError('');
+    setPasswordSuccess('');
+
+    if (!passwordForm.currentPassword || !passwordForm.newPassword || !passwordForm.confirmPassword) {
+      setPasswordError('Completa todos los campos.');
+      return;
+    }
+
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      setPasswordError('La nueva contraseña y la confirmación no coinciden.');
+      return;
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(passwordForm.newPassword)) {
+      setPasswordError('La nueva contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas y números.');
+      return;
+    }
+
+    if (passwordForm.currentPassword === passwordForm.newPassword) {
+      setPasswordError('La nueva contraseña debe ser diferente a la actual.');
+      return;
+    }
+
+    try {
+      setIsChangingPassword(true);
+      const response = await fetch('/api/user/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          current_password: passwordForm.currentPassword,
+          new_password: passwordForm.newPassword,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        setPasswordError(data.error || 'No se pudo cambiar la contraseña.');
+        return;
+      }
+
+      setPasswordSuccess('Contraseña actualizada correctamente.');
+      setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      setShowPasswordForm(false);
+    } catch {
+      setPasswordError('Error de conexión. Intenta nuevamente.');
+    } finally {
+      setIsChangingPassword(false);
+    }
   };
 
   const getExperienceLevelLabel = (level: string) => {
@@ -88,9 +153,10 @@ export default function UserDashboard({ user, profile, stats, recentActivities, 
   };
 
   const getInitials = (firstName: string | null | undefined, lastName: string | null | undefined) => {
-    const f = firstName?.charAt(0) ?? '';
-    const l = lastName?.charAt(0) ?? '';
-    return (f + l).toUpperCase() || '?';
+    const f = firstName?.trim().charAt(0) ?? '';
+    const l = lastName?.trim().charAt(0) ?? '';
+    const initials = `${f}${l}`.toUpperCase();
+    return initials || 'US';
   };
 
   const formatJoinDate = (dateString: string) => {
@@ -204,29 +270,89 @@ export default function UserDashboard({ user, profile, stats, recentActivities, 
               </div>
             </div>
 
-            <ActionTracker action="edit_profile" category="profile">
-              <Button variant="outline">
-                <Settings className="h-4 w-4 mr-2" />
-                Configuración
-              </Button>
-            </ActionTracker>
+            <Button variant="outline" onClick={() => {
+              setShowPasswordForm(prev => !prev);
+              setPasswordError('');
+              setPasswordSuccess('');
+            }}>
+              Cambiar contraseña
+            </Button>
           </div>
         </CardContent>
       </Card>
 
-      {/* Onboarding Alert */}
-      {profile && !profile.onboarding_completed && (
-        <Alert className="border-blue-200 bg-blue-50">
-          <Shield className="h-4 w-4 text-blue-600" />
-          <AlertDescription className="text-blue-700">
-            <strong>¡Completa tu configuración inicial!</strong> Responde algunas preguntas para personalizar tu experiencia de aprendizaje.
-            <ActionTracker action="start_onboarding" category="onboarding">
-              <Button size="sm" className="ml-3 bg-blue-600 hover:bg-blue-700">
-                Comenzar
-              </Button>
-            </ActionTracker>
-          </AlertDescription>
-        </Alert>
+      {showPasswordForm && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Cambiar contraseña</CardTitle>
+            <CardDescription>
+              Actualiza tu contraseña de acceso de forma segura.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleChangePassword} className="space-y-4 max-w-md">
+              {passwordError && (
+                <Alert className="border-red-200 bg-red-50">
+                  <AlertCircle className="h-4 w-4 text-red-600" />
+                  <AlertDescription className="text-red-700">{passwordError}</AlertDescription>
+                </Alert>
+              )}
+              {passwordSuccess && (
+                <Alert className="border-green-200 bg-green-50">
+                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <AlertDescription className="text-green-700">{passwordSuccess}</AlertDescription>
+                </Alert>
+              )}
+
+              <div className="space-y-2">
+                <Label htmlFor="currentPassword">Contraseña actual</Label>
+                <Input
+                  id="currentPassword"
+                  type="password"
+                  value={passwordForm.currentPassword}
+                  onChange={(e) => setPasswordForm(prev => ({ ...prev, currentPassword: e.target.value }))}
+                  disabled={isChangingPassword}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="newPassword">Nueva contraseña</Label>
+                <Input
+                  id="newPassword"
+                  type="password"
+                  value={passwordForm.newPassword}
+                  onChange={(e) => setPasswordForm(prev => ({ ...prev, newPassword: e.target.value }))}
+                  disabled={isChangingPassword}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">Confirmar nueva contraseña</Label>
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  value={passwordForm.confirmPassword}
+                  onChange={(e) => setPasswordForm(prev => ({ ...prev, confirmPassword: e.target.value }))}
+                  disabled={isChangingPassword}
+                />
+              </div>
+
+              <div className="flex gap-2 pt-2">
+                <Button type="submit" disabled={isChangingPassword}>
+                  {isChangingPassword ? 'Guardando...' : 'Guardar contraseña'}
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setShowPasswordForm(false)}
+                  disabled={isChangingPassword}
+                >
+                  Cancelar
+                </Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
       )}
 
       {/* Stats Overview */}
@@ -393,20 +519,6 @@ export default function UserDashboard({ user, profile, stats, recentActivities, 
                         </Link>
                       </ActionTracker>
 
-                      <ActionTracker action="play_games" category="navigation">
-                        <Link href="/play" className="flex items-center justify-between p-3 rounded-lg border border-slate-200 hover:border-purple-300 hover:bg-purple-50 transition-colors">
-                          <div className="flex items-center gap-3">
-                            <div className="h-10 w-10 rounded-lg bg-purple-100 flex items-center justify-center">
-                              <Gamepad2 className="h-5 w-5 text-purple-600" />
-                            </div>
-                            <div>
-                              <div className="font-medium">Juegos Didácticos</div>
-                              <div className="text-sm text-slate-500">Aprende jugando</div>
-                            </div>
-                          </div>
-                          <Button size="sm" variant="outline">Jugar</Button>
-                        </Link>
-                      </ActionTracker>
                     </div>
                   </div>
                 </div>
@@ -495,7 +607,7 @@ export default function UserDashboard({ user, profile, stats, recentActivities, 
                           </div>
                         ) : (
                           <div className="h-9 w-9 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
-                            <Gamepad2 className="h-4 w-4 text-slate-500" />
+                            <Shield className="h-4 w-4 text-slate-500" />
                           </div>
                         );
                         const typeLabel = isLearn ? 'Artículo' : isPractice ? 'Práctica' : isCert ? 'Certificación' : 'Actividad';

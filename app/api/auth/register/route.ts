@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { directus } from '@/lib/directus';
-import { readUsers, registerUser, createItem } from '@directus/sdk';
+import { createItem } from '@directus/sdk';
 
 interface RegisterRequest {
   first_name: string;
@@ -15,10 +15,31 @@ interface RegisterRequest {
   };
 }
 
+function getAppBaseUrl(): string | null {
+  const candidates = [process.env.APP_URL, process.env.NEXT_PUBLIC_APP_URL];
+
+  for (const value of candidates) {
+    if (!value) continue;
+    const normalized = String(value).trim();
+    if (!normalized || normalized === 'undefined' || normalized === 'null') continue;
+
+    try {
+      const parsed = new URL(normalized);
+      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+        return parsed.origin;
+      }
+    } catch {
+      // Continue checking candidates.
+    }
+  }
+
+  return null;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body: RegisterRequest = await request.json();
-    
+
     // Validación básica
     if (!body.email || !body.password || !body.first_name || !body.last_name) {
       return NextResponse.json(
@@ -36,50 +57,70 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validación de contraseña (mínimo 8 caracteres, al menos 1 mayúscula, 1 minúscula, 1 número)
+    // Validación de contraseña (mínimo 8 caracteres, 1 mayúscula, 1 minúscula, 1 número)
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
     if (!passwordRegex.test(body.password)) {
       return NextResponse.json(
-        { 
-          error: 'La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas y números' 
+        {
+          error: 'La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas y números'
         },
         { status: 400 }
       );
     }
 
-    // Verificar si el usuario ya existe - DESHABILITADO TEMPORALMENTE
-    /*
-    try {
-      const existingUsers = await directus.request(
-        readUsers({
-          filter: {
-            email: { _eq: body.email }
-          }
-        })
+    const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_URL;
+    if (!directusUrl) {
+      return NextResponse.json(
+        { error: 'Falta NEXT_PUBLIC_DIRECTUS_URL' },
+        { status: 500 }
       );
+    }
 
-      if (existingUsers.length > 0) {
+    const appBaseUrl = getAppBaseUrl();
+    if (!appBaseUrl) {
+      return NextResponse.json(
+        { error: 'Falta APP_URL o NEXT_PUBLIC_APP_URL con la URL pública del frontend' },
+        { status: 500 }
+      );
+    }
+
+    const verificationUrl = `${appBaseUrl}/verify-email`;
+
+    // Crear usuario en Directus y mandar verificación al dominio del sitio.
+    const registerResponse = await fetch(`${directusUrl}/users/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: body.email.toLowerCase(),
+        password: body.password,
+        first_name: body.first_name,
+        last_name: body.last_name,
+        verification_url: verificationUrl,
+      }),
+    });
+
+    if (!registerResponse.ok) {
+      const registerErrorText = await registerResponse.text();
+      console.error('Directus register error:', registerResponse.status, registerErrorText);
+
+      if (registerResponse.status === 409) {
         return NextResponse.json(
           { error: 'Ya existe una cuenta con este email' },
           { status: 409 }
         );
       }
-    } catch (error) {
-      console.error('Error checking existing user:', error);
-    }
-    */
 
-    // Crear el usuario en Directus usando registerUser
-    const registrationResult = await directus.request(
-      registerUser(body.email, body.password)
-    );
+      return NextResponse.json(
+        { error: 'No se pudo crear la cuenta en este momento' },
+        { status: 502 }
+      );
+    }
 
     // Crear un registro temporal con los datos adicionales para el primer login
-    // Esto se procesará cuando el usuario se autentique por primera vez
     const tempUserData = {
       email: body.email,
       first_name: body.first_name,
-      last_name: body.last_name, 
+      last_name: body.last_name,
       experience_level: body.experience_level || 'beginner',
       learning_preferences: body.learning_preferences || {
         preferred_difficulty: 'beginner',
@@ -90,19 +131,12 @@ export async function POST(request: NextRequest) {
       profile_setup_pending: true
     };
 
-    // Guradamos los datos temporales en una collection que el usuario público puede escribir
-    // Estos datos se usarán en el primer login para completar el perfil
-    await directus.request(
-      createItem('registration_temp_data', tempUserData)
-    );
-
-    // NOTA: El perfil completo del usuario se creará en el primer login
-    // cuando el usuario tenga los permisos adecuados
+    // Guardar datos temporales para completar perfil en primer login.
+    await directus.request(createItem('registration_temp_data', tempUserData));
 
     return NextResponse.json(
       {
-        success: true,
-        message: '¡Cuenta creada exitosamente! Por favor inicia sesión para completar tu perfil.',
+        message: '¡Cuenta creada! Te enviamos un correo para verificar tu email antes de iniciar sesión.',
         user: {
           email: body.email,
           first_name: body.first_name,
@@ -115,9 +149,8 @@ export async function POST(request: NextRequest) {
 
   } catch (error: any) {
     console.error('Registration error:', error);
-    
-    // Manejo de errores específicos de Directus
-    if (error.errors && error.errors[0]) {
+
+    if (error?.errors && error.errors[0]) {
       const directusError = error.errors[0];
       if (directusError.extensions?.code === 'RECORD_NOT_UNIQUE') {
         return NextResponse.json(
@@ -126,7 +159,7 @@ export async function POST(request: NextRequest) {
         );
       }
     }
-    
+
     return NextResponse.json(
       { error: 'Error interno del servidor. Por favor intenta más tarde.' },
       { status: 500 }

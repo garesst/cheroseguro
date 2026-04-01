@@ -11,7 +11,6 @@ export const config = {
   navigation: {
     enableLearnMenu: process.env.NEXT_PUBLIC_ENABLE_LEARN_MENU !== 'false',
     enablePracticeMenu: process.env.NEXT_PUBLIC_ENABLE_PRACTICE_MENU !== 'false',
-    enablePlayMenu: process.env.NEXT_PUBLIC_ENABLE_PLAY_MENU !== 'false',
     enableCertificationsMenu: process.env.NEXT_PUBLIC_ENABLE_CERTIFICATIONS_MENU !== 'false',
     enableLoginMenu: process.env.NEXT_PUBLIC_ENABLE_LOGIN_MENU !== 'false',
     enableSignupMenu: process.env.NEXT_PUBLIC_ENABLE_SIGNUP_MENU !== 'false',
@@ -38,7 +37,6 @@ export function isFeatureEnabled(featurePath: string): boolean {
 export const {
   enableLearnMenu,
   enablePracticeMenu,
-  enablePlayMenu,
   enableCertificationsMenu,
   enableLoginMenu,
   enableSignupMenu

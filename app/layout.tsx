@@ -15,6 +15,14 @@ export const metadata: Metadata = {
   description:
     "Una plataforma educativa enfocada en alfabetización en ciberseguridad a través de contenido interactivo, simulaciones y juegos. Aprende a protegerte en línea.",
   generator: "chero seguro",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 }
 
 export default function RootLayout({

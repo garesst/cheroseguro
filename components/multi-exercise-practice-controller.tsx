@@ -46,12 +46,6 @@ export function MultiExercisePracticeController({
   }
 
   const handleOptionSelect = (optionId: string) => {
-    console.log('==== DEBUG INFO ====');
-    console.log('Selected option ID:', optionId);
-    console.log('Current exercise:', currentExercise);
-    console.log('Feedback responses:', currentExercise?.feedback_responses);
-    console.log('==================');
-    
     setSelectedOption(optionId);
     setShowFeedback(true);
     
@@ -60,7 +54,7 @@ export function MultiExercisePracticeController({
     
     if (feedback) {
       const isCorrect = feedback.is_correct
-      const score = isCorrect ? 100 : 50 // Full points for correct, partial for attempt
+      const score = isCorrect ? 100 : 0
       
       completePracticeExercise(
         practice.slug,

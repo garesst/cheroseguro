@@ -124,6 +124,43 @@ export interface ExerciseData {
   }>
 }
 
+export interface Creator {
+  id: number
+  Nombre: string
+  Descripcion?: string | null
+  Foto?: string | null
+  linkedin?: string | null
+  github?: string | null
+  sitioweb?: string | null
+  Linkedin?: string | null
+  Github?: string | null
+  Sitioweb?: string | null
+}
+
+export function getDirectusAssetUrl(assetId?: string | null): string | null {
+  if (!assetId) return null
+  return `${DIRECTUS_URL}/assets/${assetId}`
+}
+
+export async function getCreators(): Promise<Creator[]> {
+  try {
+    const response = await fetch(
+      `${DIRECTUS_URL}/items/creators?filter[status][_eq]=published&fields=*&sort=date_created`,
+      { cache: 'no-store' }
+    )
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    return data.data || []
+  } catch (error) {
+    console.error('Error fetching creators:', error)
+    return []
+  }
+}
+
 // Get all pages (Learn, Practice, Play)
 export async function getPages(): Promise<Page[]> {
   try {
