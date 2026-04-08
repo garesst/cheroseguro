@@ -1,6 +1,5 @@
 'use client';
 
-import { useAuth } from '@/contexts/auth-context';
 import { useCallback } from 'react';
 
 export interface TrackingEvent {
@@ -15,11 +14,11 @@ export interface TrackingEvent {
 }
 
 export function useTracking() {
-  const { isAuthenticated, user } = useAuth();
+  const isTrackingEnabled = true;
 
   // Función para registrar una actividad de aprendizaje
   const trackLearningActivity = useCallback(async (event: TrackingEvent) => {
-    if (!isAuthenticated || !user) return;
+    if (!isTrackingEnabled) return;
 
     try {
       const response = await fetch('/api/tracking/activities', {
@@ -50,11 +49,11 @@ export function useTracking() {
     } catch (error) {
       console.error('Error tracking learning activity:', error);
     }
-  }, [isAuthenticated, user]);
+  }, [isTrackingEnabled]);
 
   // Función para registrar interacción con contenido
   const trackInteraction = useCallback(async (event: TrackingEvent) => {
-    if (!isAuthenticated || !user) return;
+    if (!isTrackingEnabled) return;
 
     try {
       await fetch('/api/tracking/interactions', {
@@ -79,7 +78,7 @@ export function useTracking() {
     } catch (error) {
       console.error('Error tracking interaction:', error);
     }
-  }, [isAuthenticated, user]);
+  }, [isTrackingEnabled]);
 
   // Función para actualizar progreso de práctica
   const trackPracticeProgress = useCallback(async (
@@ -92,7 +91,7 @@ export function useTracking() {
       time_spent_minutes?: number;
     }
   ) => {
-    if (!isAuthenticated || !user) return;
+    if (!isTrackingEnabled) return;
 
     try {
       const response = await fetch('/api/tracking/practice-progress', {
@@ -115,11 +114,11 @@ export function useTracking() {
     } catch (error) {
       console.error('Error tracking practice progress:', error);
     }
-  }, [isAuthenticated, user]);
+  }, [isTrackingEnabled]);
 
   // Función para rastrear tiempo en página
   const trackTimeOnPage = useCallback(() => {
-    if (!isAuthenticated || !user) return;
+    if (!isTrackingEnabled) return;
 
     const startTime = Date.now();
     const currentPath = window.location.pathname;
@@ -144,7 +143,7 @@ export function useTracking() {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [isAuthenticated, user]);
+  }, [isTrackingEnabled]);
 
   // Función automática para rastrear vista de página
   const trackPageView = useCallback(async (pageTitle?: string) => {
@@ -187,7 +186,7 @@ export function useTracking() {
       answers_data?: Record<string, any>;
     }
   ) => {
-    if (!isAuthenticated || !user) return;
+    if (!isTrackingEnabled) return;
 
     try {
       await fetch('/api/tracking/certification-progress', {
@@ -204,7 +203,7 @@ export function useTracking() {
     } catch (error) {
       console.error('Error tracking certification progress:', error);
     }
-  }, [isAuthenticated, user]);
+  }, [isTrackingEnabled]);
 
   return {
     trackLearningActivity,
@@ -214,6 +213,6 @@ export function useTracking() {
     trackPageView,
     trackClick,
     trackCertificationProgress,
-    isTrackingEnabled: isAuthenticated,
+    isTrackingEnabled,
   };
 }

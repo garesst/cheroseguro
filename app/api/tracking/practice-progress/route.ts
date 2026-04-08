@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 
 const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'https://strapi.cheroseguro.com';
+const ANONYMOUS_DIRECTUS_USER_ID =
+  process.env.DIRECTUS_ANONYMOUS_USER_ID || process.env.NEXT_PUBLIC_DIRECTUS_ANONYMOUS_USER_ID;
+const DIRECTUS_SERVICE_TOKEN = process.env.DIRECTUS_SERVICE_TOKEN || process.env.DIRECTUS_TOKEN;
 
 // GET — obtener el progreso de prácticas del usuario para restaurar en cliente
 export async function GET(request: NextRequest) {
@@ -47,21 +50,23 @@ export async function POST(request: NextRequest) {
     const cookies = request.headers.get('cookie');
     const tokenMatch = cookies?.match(/directus_token=([^;]*)/);
     const token = tokenMatch?.[1];
+    const authHeaders = token
+      ? { Authorization: `Bearer ${token}` }
+      : DIRECTUS_SERVICE_TOKEN
+        ? { Authorization: `Bearer ${DIRECTUS_SERVICE_TOKEN}` }
+        : undefined;
+    let userId: string | null = null;
 
-    if (!token) {
-      return NextResponse.json(
-        { error: 'No autorizado' },
-        { status: 401 }
-      );
+    if (token) {
+      // Obtener información del usuario autenticado
+      const userResponse = await axios.get(`${DIRECTUS_URL}/users/me`, {
+        headers: authHeaders,
+      });
+      const userInfo = userResponse.data.data ?? userResponse.data;
+      userId = userInfo.id;
+    } else if (DIRECTUS_SERVICE_TOKEN && ANONYMOUS_DIRECTUS_USER_ID) {
+      userId = ANONYMOUS_DIRECTUS_USER_ID;
     }
-
-    const authHeaders = { Authorization: `Bearer ${token}` };
-
-    // Obtener información del usuario autenticado
-    const userResponse = await axios.get(`${DIRECTUS_URL}/users/me`, {
-      headers: authHeaders,
-    });
-    const userInfo = userResponse.data.data ?? userResponse.data;
 
     // Obtener datos del request
     const body = await request.json();
@@ -74,18 +79,49 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Buscar progreso existente
+    const currentTime = new Date().toISOString();
+
+    if (!token) {
+      const anonymousProgressData = {
+        ...(userId ? { user_id: userId } : {}),
+        practice_slug: body.practice_slug,
+        practice_title: body.practice_title,
+        category: body.category || null,
+        difficulty_level: body.difficulty_level || 'beginner',
+        status: body.status || 'in_progress',
+        completion_percentage: body.completion_percentage || 0,
+        best_score: body.score || null,
+        attempts_count: 1,
+        total_time_spent_minutes: body.time_spent_minutes || 0,
+        first_completed_at: body.status === 'completed' ? currentTime : null,
+        last_attempt_at: currentTime,
+        created_at: currentTime,
+        updated_at: currentTime,
+      };
+
+      const anonymousResponse = await axios.post(
+        `${DIRECTUS_URL}/items/practice_progress`,
+        anonymousProgressData,
+        { headers: authHeaders }
+      );
+
+      const anonymousCreated = anonymousResponse.data.data ?? anonymousResponse.data;
+      return NextResponse.json(
+        { success: true, practice_progress_id: anonymousCreated.id, action: 'created' },
+        { status: 201 }
+      );
+    }
+
+    // Buscar progreso existente para usuarios autenticados
     const existingResponse = await axios.get(`${DIRECTUS_URL}/items/practice_progress`, {
       headers: authHeaders,
       params: {
-        'filter[user_id][_eq]': userInfo.id,
+        'filter[user_id][_eq]': userId,
         'filter[practice_slug][_eq]': body.practice_slug,
         limit: 1,
       },
     });
     const existingProgress = existingResponse.data.data;
-
-    const currentTime = new Date().toISOString();
 
     if (existingProgress.length > 0) {
       const existing = existingProgress[0];
@@ -123,7 +159,7 @@ export async function POST(request: NextRequest) {
 
     } else {
       const progressData = {
-        user_id: userInfo.id,
+        ...(userId ? { user_id: userId } : {}),
         practice_slug: body.practice_slug,
         practice_title: body.practice_title,
         category: body.category || null,
@@ -163,7 +199,10 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { error: 'Error interno del servidor' },
+      {
+        error: 'Error interno del servidor',
+        details: error?.response?.data || error?.message,
+      },
       { status: 500 }
     );
   }

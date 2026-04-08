@@ -116,8 +116,6 @@ export function usePracticeProgress() {
       timeSpentMinutes?: number
     }
   ) => {
-    if (!isAuthenticated || !user) return
-
     const completedExercises = Object.values(practiceData.exercises).filter(ex => ex.completed).length
     const totalExercises = options?.totalExercises || Math.max(Object.keys(practiceData.exercises).length, 1)
     const completionPercentage = Math.min(

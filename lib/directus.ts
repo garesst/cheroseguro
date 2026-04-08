@@ -52,6 +52,14 @@ export interface PracticeCategory {
   display_order: number
 }
 
+export interface PaginatedResult<T> {
+  items: T[]
+  total: number
+  page: number
+  perPage: number
+  totalPages: number
+}
+
 export interface Article {
   id: string
   title: string
@@ -256,6 +264,47 @@ export async function getArticles(): Promise<Article[]> {
   }
 }
 
+export async function getArticlesPaginated(page: number = 1, perPage: number = 12): Promise<PaginatedResult<Article>> {
+  try {
+    const safePage = Math.max(1, page)
+    const safePerPage = Math.max(1, perPage)
+    const offset = (safePage - 1) * safePerPage
+
+    const response = await fetch(
+      `${DIRECTUS_URL}/items/articles?filter[status][_eq]=published&fields=*,category.*&sort=-featured,-date_created&limit=${safePerPage}&offset=${offset}&meta=filter_count`,
+      {
+        cache: 'no-store',
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    const items: Article[] = data.data || []
+    const total = Number(data.meta?.filter_count || 0)
+    const totalPages = Math.max(1, Math.ceil(total / safePerPage))
+
+    return {
+      items,
+      total,
+      page: Math.min(safePage, totalPages),
+      perPage: safePerPage,
+      totalPages,
+    }
+  } catch (error) {
+    console.error('Error fetching paginated articles:', error)
+    return {
+      items: [],
+      total: 0,
+      page: 1,
+      perPage,
+      totalPages: 1,
+    }
+  }
+}
+
 // Get single article by slug with category data
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
   try {
@@ -367,6 +416,60 @@ export async function getPractices(): Promise<Practice[]> {
   } catch (error) {
     console.error('Error fetching practices:', error)
     return []
+  }
+}
+
+export async function getPracticesPaginated(page: number = 1, perPage: number = 12): Promise<PaginatedResult<Practice>> {
+  try {
+    const safePage = Math.max(1, page)
+    const safePerPage = Math.max(1, perPage)
+    const offset = (safePage - 1) * safePerPage
+
+    const response = await fetch(
+      `${DIRECTUS_URL}/items/practices?filter[status][_eq]=published&fields=*,practice_category.practice_categories_id.id,practice_category.practice_categories_id.name,practice_category.practice_categories_id.slug,practice_category.practice_categories_id.color&sort=-featured,-date_created&limit=${safePerPage}&offset=${offset}&meta=filter_count`,
+      {
+        cache: 'no-store',
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    const transformedPractices: Practice[] =
+      data.data?.map((practice: any) => {
+        return {
+          ...practice,
+          practice_categories:
+            practice.practice_category?.map((rel: any) => {
+              if (rel.practice_categories_id) {
+                return rel.practice_categories_id
+              }
+              return rel
+            }) || [],
+        }
+      }) || []
+
+    const total = Number(data.meta?.filter_count || 0)
+    const totalPages = Math.max(1, Math.ceil(total / safePerPage))
+
+    return {
+      items: transformedPractices,
+      total,
+      page: Math.min(safePage, totalPages),
+      perPage: safePerPage,
+      totalPages,
+    }
+  } catch (error) {
+    console.error('Error fetching paginated practices:', error)
+    return {
+      items: [],
+      total: 0,
+      page: 1,
+      perPage,
+      totalPages: 1,
+    }
   }
 }
 

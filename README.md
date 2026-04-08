@@ -57,6 +57,20 @@ NEXT_PUBLIC_DIRECTUS_URL=https://tu-cms.ejemplo.com
 # URL base del frontend (server-side)
 APP_URL=http://localhost:3000
 
+# Usuario anonimo de Directus para tracking sin login
+NEXT_PUBLIC_DIRECTUS_ANONYMOUS_USER_ID=7e85d158-eef1-402a-b980-82eaa8faad51
+
+# Variante server-only opcional (si no quieres exponer NEXT_PUBLIC)
+DIRECTUS_ANONYMOUS_USER_ID=7e85d158-eef1-402a-b980-82eaa8faad51
+
+# Token de servicio para que la API del servidor pueda escribir tracking anonimo
+# (si la collection exige user_id o el rol public no puede asignarlo)
+DIRECTUS_SERVICE_TOKEN=
+
+# Tamaño de página por defecto para listados (paginación server-side)
+LEARN_PAGE_SIZE=12
+PRACTICE_PAGE_SIZE=12
+
 # Contacto público del sitio
 NEXT_PUBLIC_CONTACT_EMAIL=soporte@tu-dominio.com
 

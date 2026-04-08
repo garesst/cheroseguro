@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 
 const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'https://strapi.cheroseguro.com';
+const ANONYMOUS_DIRECTUS_USER_ID =
+  process.env.DIRECTUS_ANONYMOUS_USER_ID || process.env.NEXT_PUBLIC_DIRECTUS_ANONYMOUS_USER_ID;
+const DIRECTUS_SERVICE_TOKEN = process.env.DIRECTUS_SERVICE_TOKEN || process.env.DIRECTUS_TOKEN;
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,21 +12,23 @@ export async function POST(request: NextRequest) {
     const cookies = request.headers.get('cookie');
     const tokenMatch = cookies?.match(/directus_token=([^;]*)/);
     const token = tokenMatch?.[1];
+    const authHeaders = token
+      ? { Authorization: `Bearer ${token}` }
+      : DIRECTUS_SERVICE_TOKEN
+        ? { Authorization: `Bearer ${DIRECTUS_SERVICE_TOKEN}` }
+        : undefined;
+    let userId: string | null = null;
 
-    if (!token) {
-      return NextResponse.json(
-        { error: 'No autorizado' },
-        { status: 401 }
-      );
+    if (token) {
+      // Obtener información del usuario autenticado
+      const userResponse = await axios.get(`${DIRECTUS_URL}/users/me`, {
+        headers: authHeaders,
+      });
+      const userInfo = userResponse.data.data ?? userResponse.data;
+      userId = userInfo.id;
+    } else if (DIRECTUS_SERVICE_TOKEN && ANONYMOUS_DIRECTUS_USER_ID) {
+      userId = ANONYMOUS_DIRECTUS_USER_ID;
     }
-
-    const authHeaders = { Authorization: `Bearer ${token}` };
-
-    // Obtener información del usuario autenticado
-    const userResponse = await axios.get(`${DIRECTUS_URL}/users/me`, {
-      headers: authHeaders,
-    });
-    const userInfo = userResponse.data.data ?? userResponse.data;
 
     // Obtener datos del request
     const body = await request.json();
@@ -38,7 +43,7 @@ export async function POST(request: NextRequest) {
 
     // Crear la interacción
     const interactionData = {
-      user_id: userInfo.id,
+      ...(userId ? { user_id: userId } : {}),
       content_type: body.content_type,
       content_id: body.content_id || 'unknown',
       interaction_type: body.interaction_type,
@@ -78,7 +83,10 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { error: 'Error interno del servidor' },
+      {
+        error: 'Error interno del servidor',
+        details: error?.response?.data || error?.message,
+      },
       { status: 500 }
     );
   }

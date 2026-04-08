@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 
 const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'https://strapi.cheroseguro.com';
+const ANONYMOUS_DIRECTUS_USER_ID =
+  process.env.DIRECTUS_ANONYMOUS_USER_ID || process.env.NEXT_PUBLIC_DIRECTUS_ANONYMOUS_USER_ID;
+const DIRECTUS_SERVICE_TOKEN = process.env.DIRECTUS_SERVICE_TOKEN || process.env.DIRECTUS_TOKEN;
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,21 +12,24 @@ export async function POST(request: NextRequest) {
     const cookies = request.headers.get('cookie');
     const tokenMatch = cookies?.match(/directus_token=([^;]*)/);
     const token = tokenMatch?.[1];
+    const authHeaders = token
+      ? { Authorization: `Bearer ${token}` }
+      : DIRECTUS_SERVICE_TOKEN
+        ? { Authorization: `Bearer ${DIRECTUS_SERVICE_TOKEN}` }
+        : undefined;
+    let userId: string | null = null;
 
-    if (!token) {
-      return NextResponse.json(
-        { error: 'No autorizado' },
-        { status: 401 }
-      );
+    if (token) {
+      // Obtener información del usuario autenticado
+      const userResponse = await axios.get(`${DIRECTUS_URL}/users/me`, {
+        headers: authHeaders,
+      });
+      const userInfo = userResponse.data.data ?? userResponse.data;
+      userId = userInfo.id;
+    } else if (DIRECTUS_SERVICE_TOKEN && ANONYMOUS_DIRECTUS_USER_ID) {
+      // En modo anónimo con token de servicio, sí podemos asignar user_id fijo.
+      userId = ANONYMOUS_DIRECTUS_USER_ID;
     }
-
-    const authHeaders = { Authorization: `Bearer ${token}` };
-
-    // Obtener información del usuario autenticado
-    const userResponse = await axios.get(`${DIRECTUS_URL}/users/me`, {
-      headers: authHeaders,
-    });
-    const userInfo = userResponse.data.data ?? userResponse.data;
 
     // Obtener datos del request
     const body = await request.json();
@@ -36,13 +42,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const resolvedStatus = body.status || 'completed';
+
     // Crear la actividad de aprendizaje
     const activityData = {
-      user_id: userInfo.id,
+      ...(userId ? { user_id: userId } : {}),
       activity_type: body.activity_type,
       content_id: body.content_id || null,
       content_title: body.content_title || null,
-      status: body.status || 'completed',
+      status: resolvedStatus,
       score: body.score || null,
       time_spent_minutes: body.time_spent_minutes || 0,
       session_data: {
@@ -51,13 +59,15 @@ export async function POST(request: NextRequest) {
         timestamp: new Date().toISOString(),
       },
       started_at: body.started_at || new Date().toISOString(),
-      completed_at: body.status === 'completed' ? new Date().toISOString() : null,
+      completed_at: resolvedStatus === 'completed' ? new Date().toISOString() : null,
     };
+
+    const requestConfig = authHeaders ? { headers: authHeaders } : undefined;
 
     const activityResponse = await axios.post(
       `${DIRECTUS_URL}/items/learning_activities`,
       activityData,
-      { headers: authHeaders }
+      requestConfig
     );
 
     const created = activityResponse.data.data ?? activityResponse.data;
@@ -81,7 +91,10 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { error: 'Error interno del servidor' },
+      {
+        error: 'Error interno del servidor',
+        details: error?.response?.data || error?.message,
+      },
       { status: 500 }
     );
   }

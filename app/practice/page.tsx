@@ -1,35 +1,31 @@
-import Link from "next/link"
-import { Target, Mail, Lock, Users, Globe, Shield, AlertTriangle, Brain, ArrowRight, CheckCircle2, Search, Clock, Package, Server, Key, Layers } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Input } from "@/components/ui/input"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { PracticeProgressBar } from "@/components/practice-progress-bar"
-import { PracticeCardProgress } from "@/components/practice-card-progress"
-import { getPractices, getFeaturedPractices, getPages, getPracticeCategories, getFeaturedPracticeCategories } from "@/lib/directus"
+import { PracticePageContent } from "@/components/practice/practice-page-content"
+import { getPracticesPaginated, getFeaturedPractices, getPages, getPracticeCategories, getFeaturedPracticeCategories } from "@/lib/directus"
 
-const practiceTypeIcons: Record<string, any> = {
-  email_analysis: Mail,
-  url_inspector: Globe,
-  password_strength: Lock,
-  social_engineering: Users,
-  settings_configuration: Shield,
-  incident_response: AlertTriangle,
-  quiz_knowledge: Brain,
-  data_classification: Package,
-  network_defense: Server,
-  password_builder: Key,
-  swipe_cards: Layers,
+interface PracticePageProps {
+  searchParams: Promise<{ page?: string; perPage?: string }>
 }
 
-export default async function PracticePage() {
+const DEFAULT_PRACTICE_PER_PAGE = Number(process.env.PRACTICE_PAGE_SIZE || 12)
+const PRACTICE_PER_PAGE_OPTIONS = [6, 12, 24, 48]
+
+function parsePositiveInt(value: string | undefined, fallback: number): number {
+  if (!value) return fallback
+  const parsed = Number(value)
+  if (!Number.isFinite(parsed) || parsed < 1) return fallback
+  return Math.floor(parsed)
+}
+
+export default async function PracticePage({ searchParams }: PracticePageProps) {
+  const params = await searchParams
+  const perPageFromUrl = parsePositiveInt(params.perPage, DEFAULT_PRACTICE_PER_PAGE)
+  const perPage = PRACTICE_PER_PAGE_OPTIONS.includes(perPageFromUrl) ? perPageFromUrl : DEFAULT_PRACTICE_PER_PAGE
+  const page = parsePositiveInt(params.page, 1)
+
   // Get dynamic data from Directus
-  const [practices, featuredPractices, pages, practiceCategories, featuredCategories] = await Promise.all([
-    getPractices(),
+  const [practicesResult, featuredPractices, pages, _practiceCategories, featuredCategories] = await Promise.all([
+    getPracticesPaginated(page, perPage),
     getFeaturedPractices(3),
     getPages(),
     getPracticeCategories(),
@@ -41,330 +37,17 @@ export default async function PracticePage() {
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
-
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="py-12 md:py-16">
-          <div className="container mx-auto">
-            <div className="mx-auto max-w-4xl">
-              <div className="space-y-4 mb-8">
-                <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-balance">
-                  {practicePage?.title}
-                </h1>
-                <p className="text-lg text-muted-foreground leading-relaxed text-balance">
-                  {practicePage?.description}
-                </p>
-              </div>
-
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input placeholder="Buscar prácticas..." className="pl-9" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Progress Bar Section */}
-        <section className="pb-12">
-          <div className="container mx-auto">
-            <div className="mx-auto max-w-4xl">
-              <PracticeProgressBar 
-                availablePractices={practices.length}
-                showDetailedStats={true}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Practices */}
-        {featuredPractices.length > 0 && (
-          <section className="pb-12">
-            <div className="container mx-auto">
-              <div className="mx-auto max-w-6xl">
-                <div className="mb-8">
-                  <h2 className="text-2xl font-bold mb-2">Prácticas destacadas</h2>
-                  <p className="text-muted-foreground">
-                    Inicia tu aprendizaje con estas prácticas seleccionadas por su relevancia y calidad. Perfectas para empezar o para profundizar en temas específicos.
-                  </p>
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {featuredPractices.map((practice) => {
-                    const IconComponent = practiceTypeIcons[practice.practice_type] || Target
-                    const hasMultipleExercises = practice.exercises && Array.isArray(practice.exercises) && practice.exercises.length > 1
-                    const exerciseCount = hasMultipleExercises ? practice.exercises?.length || 1 : 1
-
-                    return (
-                      <Card key={practice.id} className="hover:border-primary/50 transition-all group">
-                        <CardHeader>
-                          <div className="flex items-start justify-between mb-3">
-                            <div className="flex items-center gap-3">
-                              <div className="p-2 rounded-lg bg-primary/10">
-                                <IconComponent className="h-5 w-5 text-primary" />
-                              </div>
-                            </div>
-                            <div className="flex flex-wrap items-center gap-2">
-                              <Badge variant="outline" className="text-xs capitalize">
-                                {practice.difficulty}
-                              </Badge>
-                              {hasMultipleExercises && (
-                                <Badge variant="secondary" className="text-xs">
-                                  {exerciseCount} ejercicios
-                                </Badge>
-                              )}
-                              {/* Show category badges */}
-                              {practice.practice_categories?.slice(0, 2).map((category) => (
-                                <Badge 
-                                  key={category.id} 
-                                  variant="secondary" 
-                                  className="text-xs"
-                                  style={{ backgroundColor: `${category.color}20`, color: category.color, borderColor: `${category.color}40` }}
-                                >
-                                  {category.icon} {category.name}
-                                </Badge>
-                              ))}
-                            </div>
-                          </div>
-                          <CardTitle className="text-lg group-hover:text-primary transition-colors mb-2">
-                            {practice.title}
-                          </CardTitle>
-                          <CardDescription className="line-clamp-2 mb-4">
-                            {practice.description}
-                          </CardDescription>
-                          
-                          {/* Progress indicator */}
-                          <PracticeCardProgress 
-                            practiceSlug={practice.slug}
-                            totalExercises={exerciseCount}
-                            className="mb-3"
-                          />
-                          
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                              <div className="flex items-center gap-1">
-                                <Clock className="h-3 w-3" />
-                                {practice.estimated_time}m
-                              </div>
-                            </div>
-                            <Button variant="outline" size="sm" asChild>
-                              <Link href={`/practice/${practice.slug}`}>
-                                Empezar
-                                <ArrowRight className="ml-1 h-3 w-3" />
-                              </Link>
-                            </Button>
-                          </div>
-                        </CardHeader>
-                      </Card>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* All Practices with Tabs */}
-        <section className="py-12">
-          <div className="container mx-auto">
-            <div className="mx-auto max-w-6xl">
-              <div className="mb-8">
-                <h2 className="text-2xl font-bold mb-2">Todas las prácticas</h2>
-                <p className="text-muted-foreground">
-                  Elige entre diferentes tipos de simulaciones de ciberseguridad
-                </p>
-              </div>
-
-              <Tabs defaultValue="all" className="space-y-6">
-                <TabsList className="grid w-full grid-cols-6">
-                  <TabsTrigger value="all">Todas</TabsTrigger>
-                  {featuredCategories.slice(0, 5).map((category) => (
-                    <TabsTrigger key={category.id} value={category.id} className="flex items-center gap-1">
-                      <span>{category.icon}</span>
-                      <span className="hidden sm:inline">{category.name}</span>
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-
-                <TabsContent value="all">
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {practices.map((practice) => {
-                      const IconComponent = practiceTypeIcons[practice.practice_type] || Target
-                      const hasMultipleExercises = practice.exercises && Array.isArray(practice.exercises) && practice.exercises.length > 1
-                      const exerciseCount = hasMultipleExercises ? practice.exercises?.length || 1 : 1
-                      
-                      return (
-                        <Card key={practice.id} className="hover:border-primary/50 transition-all">
-                          <CardHeader>
-                            <div className="flex items-start justify-between mb-3">
-                              <div className="flex items-center gap-3">
-                                <div className="p-2 rounded-lg bg-muted">
-                                  <IconComponent className="h-5 w-5" />
-                                </div>
-                              </div>
-                              <div className="flex flex-wrap items-center gap-2">
-                                <Badge variant="outline" className="text-xs capitalize">
-                                  {practice.difficulty}
-                                </Badge>
-                                {hasMultipleExercises && (
-                                  <Badge variant="secondary" className="text-xs">
-                                    {exerciseCount} ejercicios
-                                  </Badge>
-                                )}
-                                {/* Show category badges */}
-                                {practice.practice_categories?.slice(0, 2).map((category) => (
-                                  <Badge 
-                                    key={category.id} 
-                                    variant="secondary" 
-                                    className="text-xs"
-                                    style={{ backgroundColor: `${category.color}15`, color: category.color, borderColor: `${category.color}30` }}
-                                  >
-                                    {category.icon} {category.name}
-                                  </Badge>
-                                ))}
-                              </div>
-                            </div>
-                            <CardTitle className="text-lg mb-2">{practice.title}</CardTitle>
-                            <CardDescription className="line-clamp-3 mb-4">
-                              {practice.description}
-                            </CardDescription>
-                            
-                            {/* Progress indicator */}
-                            <PracticeCardProgress 
-                              practiceSlug={practice.slug}
-                              totalExercises={exerciseCount}
-                              className="mb-3"
-                            />
-                            
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-3">
-                                <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                                  <Clock className="h-3 w-3" />
-                                  {practice.estimated_time}m
-                                </div>
-                                {/* Show first category as type badge */}
-                                {practice.practice_categories?.[0] && (
-                                  <Badge 
-                                    variant="secondary" 
-                                    className="text-xs"
-                                    style={{ backgroundColor: `${practice.practice_categories[0].color}15`, color: practice.practice_categories[0].color }}
-                                  >
-                                    {practice.practice_categories[0].icon} {practice.practice_categories[0].name}
-                                  </Badge>
-                                )}
-                              </div>
-                              <Button variant="outline" size="sm" asChild>
-                                <Link href={`/practice/${practice.slug}`}>
-                                  Empezar
-                                </Link>
-                              </Button>
-                            </div>
-                          </CardHeader>
-                        </Card>
-                      )
-                    })}
-                  </div>
-                </TabsContent>
-
-                {featuredCategories.map((category) => (
-                  <TabsContent key={category.id} value={category.id}>
-                    <div className="mb-4">
-                      <h3 className="text-lg font-semibold flex items-center gap-2">
-                        <span style={{ color: category.color }}>{category.icon}</span>
-                        {category.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mt-1">{category.description}</p>
-                    </div>
-                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                      {(() => {
-                        // Debug: Log practices and filtering logic
-                        const filteredPractices = practices.filter((practice) => {
-                          const hasCategory = practice.practice_categories?.some(cat => {
-                            // Handle both object and string ID cases
-                            const categoryId = typeof cat === 'object' ? cat.id : cat
-                            return categoryId === category.id
-                          })
-                          
-                          if (hasCategory) {
-                            console.log(`Practice "${practice.title}" matches category "${category.name}"`)
-                          }
-                          
-                          return hasCategory
-                        })
-                        
-                        console.log(`Category "${category.name}" has ${filteredPractices.length} practices`)
-                        
-                        if (filteredPractices.length === 0) {
-                          return (
-                            <div className="col-span-full text-center py-8 text-muted-foreground">
-                              <p>No hay prácticas disponibles para esta categoría aún.</p>
-                              <p className="text-sm mt-2">Vuelve pronto para contenido nuevo!</p>
-                            </div>
-                          )
-                        }
-                        
-                        return filteredPractices.map((practice) => {
-                          const IconComponent = practiceTypeIcons[practice.practice_type] || Target
-                          const hasMultipleExercises = practice.exercises && Array.isArray(practice.exercises) && practice.exercises.length > 1
-                          const exerciseCount = hasMultipleExercises ? practice.exercises?.length || 1 : 1
-                          
-                          return (
-                            <Card key={practice.id} className="hover:border-primary/50 transition-all">
-                              <CardHeader>
-                                <div className="flex items-start justify-between mb-3">
-                                  <div className="flex items-center gap-3">
-                                    <div className="p-2 rounded-lg bg-muted">
-                                      <IconComponent className="h-5 w-5" />
-                                    </div>
-                                  </div>
-                                  <div className="flex flex-wrap items-center gap-2">
-                                    <Badge variant="outline" className="text-xs capitalize">
-                                      {practice.difficulty}
-                                    </Badge>
-                                    {hasMultipleExercises && (
-                                      <Badge variant="secondary" className="text-xs">
-                                        {exerciseCount} ejercicios
-                                      </Badge>
-                                    )}
-                                  </div>
-                                </div>
-                                <CardTitle className="text-lg mb-2">{practice.title}</CardTitle>
-                                <CardDescription className="line-clamp-3 mb-4">
-                                  {practice.description}
-                                </CardDescription>
-                                
-                                {/* Progress indicator */}
-                                <PracticeCardProgress 
-                                  practiceSlug={practice.slug}
-                                  totalExercises={exerciseCount}
-                                  className="mb-3"
-                                />
-                                
-                                <div className="flex items-center justify-between mb-4">
-                                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                                    <Clock className="h-3 w-3" />
-                                    {practice.estimated_time}m
-                                  </div>
-                                </div>
-                                <Button className="w-full" asChild>
-                                  <Link href={`/practice/${practice.slug}`}>
-                                    Empezar prácticas
-                                    <ArrowRight className="ml-2 h-4 w-4" />
-                                  </Link>
-                                </Button>
-                              </CardHeader>
-                            </Card>
-                          )
-                        })
-                      })()
-                      }
-                    </div>
-                  </TabsContent>
-                ))}
-              </Tabs>
-            </div>
-          </div>
-        </section>
-      </main>
+      <PracticePageContent
+        practices={practicesResult.items}
+        featuredPractices={featuredPractices}
+        featuredCategories={featuredCategories}
+        practicePage={practicePage}
+        page={practicesResult.page}
+        perPage={practicesResult.perPage}
+        total={practicesResult.total}
+        totalPages={practicesResult.totalPages}
+        perPageOptions={PRACTICE_PER_PAGE_OPTIONS}
+      />
 
       <SiteFooter />
     </div>

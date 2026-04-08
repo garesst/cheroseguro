@@ -1,226 +1,47 @@
-import Link from "next/link"
-import { Clock, ArrowRight, Search } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { getArticles, getPages } from "@/lib/directus"
+import { LearnPageContent } from "@/components/learn/learn-page-content"
+import { getArticlesPaginated, getPages } from "@/lib/directus"
 
-export default async function LearnPage() {
+interface LearnPageProps {
+  searchParams: Promise<{ page?: string; perPage?: string }>
+}
+
+const DEFAULT_LEARN_PER_PAGE = Number(process.env.LEARN_PAGE_SIZE || 12)
+const LEARN_PER_PAGE_OPTIONS = [6, 12, 24, 48]
+
+function parsePositiveInt(value: string | undefined, fallback: number): number {
+  if (!value) return fallback
+  const parsed = Number(value)
+  if (!Number.isFinite(parsed) || parsed < 1) return fallback
+  return Math.floor(parsed)
+}
+
+export default async function LearnPage({ searchParams }: LearnPageProps) {
+  const params = await searchParams
+  const perPageFromUrl = parsePositiveInt(params.perPage, DEFAULT_LEARN_PER_PAGE)
+  const perPage = LEARN_PER_PAGE_OPTIONS.includes(perPageFromUrl) ? perPageFromUrl : DEFAULT_LEARN_PER_PAGE
+  const page = parsePositiveInt(params.page, 1)
+
   // Get dynamic content from Directus
-  const [articles, pages] = await Promise.all([
-    getArticles(),
+  const [articlesResult, pages] = await Promise.all([
+    getArticlesPaginated(page, perPage),
     getPages()
   ])
 
   const learnPage = pages.find(page => page.slug === 'learn')
-  const featuredArticles = articles.filter((article) => article.featured)
-  const beginnerArticles = articles.filter((article) => article.difficulty === "beginner")
-  const intermediateArticles = articles.filter((article) => article.difficulty === "intermediate")
-  const advancedArticles = articles.filter((article) => article.difficulty === "advanced")
-
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
-
-      <main className="flex-1">
-        {/* Header Section */}
-        <section className="py-12 md:py-16">
-          <div className="container mx-auto">
-            <div className="mx-auto max-w-4xl">
-              <div className="space-y-4 mb-8">
-                <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-balance">
-                  {learnPage?.title}
-                </h1>
-                <p className="text-lg text-muted-foreground leading-relaxed text-balance">
-                  {learnPage?.description}
-                </p>
-              </div>
-
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input placeholder="Buscar artículos..." className="pl-9" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Articles */}
-        <section className="pb-12">
-          <div className="container mx-auto">
-            <div className="mx-auto max-w-4xl">
-              <h2 className="text-2xl font-bold mb-6">Artículos destacados</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {featuredArticles.map((article) => (
-                  <Card key={article.id} className="hover:border-primary/50 transition-all hover:shadow-md">
-                    <CardHeader>
-                      <div className="flex items-center gap-2 mb-2">
-                        <Badge variant="secondary">{article.category?.name || 'General'}</Badge>
-                        <Badge variant="outline" className="capitalize">
-                          {article.difficulty}
-                        </Badge>
-                      </div>
-                      <CardTitle className="text-xl">{article.title}</CardTitle>
-                      <CardDescription className="leading-relaxed">{article.description}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Clock className="h-4 w-4" />
-                          <span>{article.reading_time} min</span>
-                        </div>
-                        <Button variant="ghost" size="sm" asChild>
-                          <Link href={`/learn/${article.slug}`}>
-                            Leer más <ArrowRight className="ml-2 h-4 w-4" />
-                          </Link>
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* All Articles by Difficulty */}
-        <section className="pb-16">
-          <div className="container mx-auto">
-            <div className="mx-auto max-w-4xl">
-              <Tabs defaultValue="all" className="w-full">
-                <TabsList className="grid w-full max-w-md grid-cols-4">
-                  <TabsTrigger value="all">Todos</TabsTrigger>
-                  <TabsTrigger value="beginner">Principiante</TabsTrigger>
-                  <TabsTrigger value="intermediate">Intermedio</TabsTrigger>
-                  <TabsTrigger value="advanced">Avanzado</TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="all" className="mt-6 space-y-4">
-                  {articles.map((article) => (
-                    <Card key={article.id} className="hover:border-primary/50 transition-all">
-                      <CardHeader>
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                          <div className="flex-1 space-y-2">
-                            <div className="flex items-center gap-2">
-                              <Badge variant="secondary">{article.category?.name || 'General'}</Badge>
-                              <Badge variant="outline" className="capitalize">
-                                {article.difficulty}
-                              </Badge>
-                            </div>
-                            <CardTitle className="text-xl">{article.title}</CardTitle>
-                            <CardDescription className="leading-relaxed">{article.description}</CardDescription>
-                          </div>
-                          <div className="flex items-center gap-4">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground whitespace-nowrap">
-                              <Clock className="h-4 w-4" />
-                              <span>{article.reading_time} min</span>
-                            </div>
-                            <Button variant="outline" size="sm" asChild>
-                              <Link href={`/learn/${article.slug}`}>
-                                Leer más <ArrowRight className="ml-2 h-4 w-4" />
-                              </Link>
-                            </Button>
-                          </div>
-                        </div>
-                      </CardHeader>
-                    </Card>
-                  ))}
-                </TabsContent>
-
-                <TabsContent value="beginner" className="mt-6 space-y-4">
-                  {beginnerArticles.map((article) => (
-                    <Card key={article.id} className="hover:border-primary/50 transition-all">
-                      <CardHeader>
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                          <div className="flex-1 space-y-2">
-                            <div className="flex items-center gap-2">
-                              <Badge variant="secondary">{article.category?.name || 'General'}</Badge>
-                            </div>
-                            <CardTitle className="text-xl">{article.title}</CardTitle>
-                            <CardDescription className="leading-relaxed">{article.description}</CardDescription>
-                          </div>
-                          <div className="flex items-center gap-4">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground whitespace-nowrap">
-                              <Clock className="h-4 w-4" />
-                              <span>{article.reading_time} min</span>
-                            </div>
-                            <Button variant="outline" size="sm" asChild>
-                              <Link href={`/learn/${article.slug}`}>
-                                Leer más <ArrowRight className="ml-2 h-4 w-4" />
-                              </Link>
-                            </Button>
-                          </div>
-                        </div>
-                      </CardHeader>
-                    </Card>
-                  ))}
-                </TabsContent>
-
-                <TabsContent value="intermediate" className="mt-6 space-y-4">
-                  {intermediateArticles.map((article) => (
-                    <Card key={article.id} className="hover:border-primary/50 transition-all">
-                      <CardHeader>
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                          <div className="flex-1 space-y-2">
-                            <div className="flex items-center gap-2">
-                              <Badge variant="secondary">{article.category?.name || 'General'}</Badge>
-                            </div>
-                            <CardTitle className="text-xl">{article.title}</CardTitle>
-                            <CardDescription className="leading-relaxed">{article.description}</CardDescription>
-                          </div>
-                          <div className="flex items-center gap-4">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground whitespace-nowrap">
-                              <Clock className="h-4 w-4" />
-                              <span>{article.reading_time} min</span>
-                            </div>
-                            <Button variant="outline" size="sm" asChild>
-                              <Link href={`/learn/${article.slug}`}>
-                                Leer más <ArrowRight className="ml-2 h-4 w-4" />
-                              </Link>
-                            </Button>
-                          </div>
-                        </div>
-                      </CardHeader>
-                    </Card>
-                  ))}
-                </TabsContent>
-
-                <TabsContent value="advanced" className="mt-6 space-y-4">
-                  {advancedArticles.map((article) => (
-                    <Card key={article.id} className="hover:border-primary/50 transition-all">
-                      <CardHeader>
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                          <div className="flex-1 space-y-2">
-                            <div className="flex items-center gap-2">
-                              <Badge variant="secondary">{article.category?.name || 'General'}</Badge>
-                            </div>
-                            <CardTitle className="text-xl">{article.title}</CardTitle>
-                            <CardDescription className="leading-relaxed">{article.description}</CardDescription>
-                          </div>
-                          <div className="flex items-center gap-4">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground whitespace-nowrap">
-                              <Clock className="h-4 w-4" />
-                              <span>{article.reading_time} min</span>
-                            </div>
-                            <Button variant="outline" size="sm" asChild>
-                              <Link href={`/learn/${article.slug}`}>
-                                Leer más <ArrowRight className="ml-2 h-4 w-4" />
-                              </Link>
-                            </Button>
-                          </div>
-                        </div>
-                      </CardHeader>
-                    </Card>
-                  ))}
-                </TabsContent>
-              </Tabs>
-            </div>
-          </div>
-        </section>
-      </main>
+      <LearnPageContent
+        articles={articlesResult.items}
+        learnPage={learnPage}
+        page={articlesResult.page}
+        perPage={articlesResult.perPage}
+        total={articlesResult.total}
+        totalPages={articlesResult.totalPages}
+        perPageOptions={LEARN_PER_PAGE_OPTIONS}
+      />
 
       <SiteFooter />
     </div>
